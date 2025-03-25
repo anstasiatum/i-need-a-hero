@@ -45,14 +45,5 @@ public class Sorcerer extends DndClass {
 
         dndCharacter.setSpellsKnownPerLevel(0, 4);
         dndCharacter.setSpellsKnownPerLevel(1, 2);
-        // Choose Sorcerous Origin
-        //dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + """
-//
-//                """);
-
-        //• (a) a light crossbow and 20 bolts or (b) any simple weapon
-        //• (a) a component pouch or (b) an arcane focus
-        //• (a) a dungeoneer's pack or (b) an explorer's pack
-        //• Two daggers
     }
 }

@@ -196,7 +196,7 @@ public class CreateNewHero {
                 break;
             case SET_INTELLIGENCE:
                 try {
-                    state.getDndCharacter().setWisdom(Integer.parseInt(userAnswer));
+                    state.getDndCharacter().setIntelligence(Integer.parseInt(userAnswer));
                 } catch (NumberFormatException e) {
                     newState = new State(CREATE_HERO, SET_INTELLIGENCE, state.getDndCharacter());
                     response = new Response(newState, notANumberInput);
@@ -207,7 +207,7 @@ public class CreateNewHero {
                 break;
             case SET_WISDOM:
                 try {
-                    state.getDndCharacter().setIntelligence(Integer.parseInt(userAnswer));
+                    state.getDndCharacter().setWisdom(Integer.parseInt(userAnswer));
                 } catch (NumberFormatException e) {
                     newState = new State(CREATE_HERO, SET_WISDOM, state.getDndCharacter());
                     response = new Response(newState, notANumberInput);

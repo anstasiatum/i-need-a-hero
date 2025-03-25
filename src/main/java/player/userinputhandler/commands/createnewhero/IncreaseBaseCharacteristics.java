@@ -199,6 +199,6 @@ public class IncreaseBaseCharacteristics {
                 response = new Response(newState, "Wrong step");
                 break;
         }
-    return response;
+        return response;
     }
 }

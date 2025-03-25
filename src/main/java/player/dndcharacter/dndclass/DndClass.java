@@ -1,10 +1,14 @@
 package player.dndcharacter.dndclass;
 
+import lombok.Getter;
+import lombok.Setter;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Skills;
 
 import java.util.Set;
 
+@Getter
+@Setter
 public abstract class DndClass {
 
     Set<Skills> availableSkills;
@@ -20,21 +24,6 @@ public abstract class DndClass {
         dndCharacter.setHitPoints(dndCharacter.getHitDice() + dndCharacter.getConstitutionModifier());
         dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier());
         dndCharacter.getLanguages().add("Common");
-    }
-    public Set<Skills> getAvailableSkills() {
-        return availableSkills;
-    }
-
-    public void setAvailableSkills(Set<Skills> availableSkills) {
-        this.availableSkills = availableSkills;
-    }
-
-    public int getNumberOfAvailableSkills() {
-        return numberOfAvailableSkills;
-    }
-
-    public void setNumberOfAvailableSkills(int numberOfAvailableSkills) {
-        this.numberOfAvailableSkills = numberOfAvailableSkills;
     }
 }
 

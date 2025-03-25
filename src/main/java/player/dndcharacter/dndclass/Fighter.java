@@ -55,20 +55,5 @@ public class Fighter extends DndClass {
                 You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.                
                 Once you use this feature, you must finish a short or long rest before you can use it again.
                 """);
-
-        //You adopt a particular style of fighting as your specialty. Choose a fighting style from the list of optional features. You can't take the same Fighting Style option more than once, even if you get to choose again.
-        //Archery
-        //You gain a +2 bonus to attack rolls you make with ranged weapons.
-        //
-        //Defense
-        //While you are wearing armor, you gain a +1 bonus to AC.
-        //
-        //Dueling
-        //When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.
-
-//• (a) Chain Mail or (b) leather armor, longbow, and 20 arrows
-//• (a) a martial weapon and a shield or (b) two martial weapons
-//• (a) a light crossbow and 20 bolts or (b) two handaxes
-//• (a) a dungeoneer's pack or (b) an explorer's pack
     }
 }

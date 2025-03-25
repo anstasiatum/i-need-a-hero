@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import player.userinputhandler.BotAnswer;
 
 import static player.userinputhandler.UserInputHandler.handleUserInput;
+
 public class Bot {
     public static void telegramBotListener(String botToken) {
         TelegramBot bot = new TelegramBot(botToken);

@@ -5,59 +5,60 @@ import player.dndcharacter.dndcharacterenums.Skills;
 
 public class AddSkillProficiency {
     public static void addSkillProficiency(DndCharacter dndCharacter, String userAnswer) {
-        switch (userAnswer) {
-            case "Survival":
+
+        switch (userAnswer.toLowerCase()) {
+            case "survival":
                 dndCharacter.getSkillsWithProficiency().add(Skills.SURVIVAL);
                 break;
-            case "Stealth":
+            case "ttealth":
                 dndCharacter.getSkillsWithProficiency().add(Skills.STEALTH);
                 break;
-            case "Sleight of hand":
+            case "sleight of hand", "sleight_of_hand":
                 dndCharacter.getSkillsWithProficiency().add(Skills.SLEIGHT_OF_HAND);
                 break;
-            case "Religion":
+            case "religion":
                 dndCharacter.getSkillsWithProficiency().add(Skills.RELIGION);
                 break;
-            case "Persuasion":
+            case "persuasion":
                 dndCharacter.getSkillsWithProficiency().add(Skills.PERSUASION);
                 break;
-            case "Performance":
+            case "performance":
                 dndCharacter.getSkillsWithProficiency().add(Skills.PERFORMANCE);
                 break;
-            case "Perception":
+            case "perception":
                 dndCharacter.getSkillsWithProficiency().add(Skills.PERCEPTION);
                 break;
-            case "Nature":
+            case "nature":
                 dndCharacter.getSkillsWithProficiency().add(Skills.NATURE);
                 break;
-            case "Medicine":
+            case "medicine":
                 dndCharacter.getSkillsWithProficiency().add(Skills.MEDICINE);
                 break;
-            case "Investigation":
+            case "investigation":
                 dndCharacter.getSkillsWithProficiency().add(Skills.INVESTIGATION);
                 break;
-            case "Intimidation":
+            case "intimidation":
                 dndCharacter.getSkillsWithProficiency().add(Skills.INTIMIDATION);
                 break;
-            case "Insight":
+            case "insight":
                 dndCharacter.getSkillsWithProficiency().add(Skills.INSIGHT);
                 break;
-            case "History":
+            case "history":
                 dndCharacter.getSkillsWithProficiency().add(Skills.HISTORY);
                 break;
-            case "Deception":
+            case "deception":
                 dndCharacter.getSkillsWithProficiency().add(Skills.DECEPTION);
                 break;
-            case "Athletics":
+            case "athletics":
                 dndCharacter.getSkillsWithProficiency().add(Skills.ATHLETICS);
                 break;
-            case "Arcana":
+            case "arcana":
                 dndCharacter.getSkillsWithProficiency().add(Skills.ARCANA);
                 break;
-            case "Animal handling":
+            case "animal handling", "animal_handling":
                 dndCharacter.getSkillsWithProficiency().add(Skills.ANIMAL_HANDLING);
                 break;
-            case "Acrobatics":
+            case "acrobatics":
                 dndCharacter.getSkillsWithProficiency().add(Skills.ACROBATICS);
                 break;
             default:

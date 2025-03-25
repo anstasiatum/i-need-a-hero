@@ -51,9 +51,5 @@ public class Monk extends DndClass {
                 Unarmoured Defence
                 Beginning at 1st level, while you are wearing no armour and not wielding a shield, your AC equals %s
                 """.formatted(dndCharacter.getArmourClass()));
-
-//• (a) a shortsword or (b) any simple weapon
-//• (a) a dungeoneer's pack or (b) an explorer's pack
-//• 10 darts
     }
 }

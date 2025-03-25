@@ -48,22 +48,5 @@ public class Cleric extends DndClass {
                 Ritual Casting
                 You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.
                 """);
-
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A mace, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A warhammer, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A scale Mail, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A leather Armour, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A chain Mail (if proficient), ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A light crossbow and 20 bolts, ")
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "An explorer's pack, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Any simple weapon, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A priest's pack, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A shield and a holy symbol, ");
-
-// (a) a mace or (b) a warhammer (if proficient)
-// (a) Scale Mail, (b) Leather Armor, or (c) Chain Mail (if proficient)
-// (a) a light crossbow and 20 bolts or (b) any simple weapon
-// (a) a priest's pack or (b) an explorer's pack
-// A shield and a holy symbol
     }
 }

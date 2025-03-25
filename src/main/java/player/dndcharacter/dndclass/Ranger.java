@@ -56,11 +56,5 @@ public class Ranger extends DndClass {
                 When you forage, you find twice as much food as you normally would.
                 While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.
                 """);
-
-
-//• (a) Scale Mail or (b) leather armor
-//• (a) two shortswords or (b) two simple melee weapons
-//• (a) a dungeoneer's pack or (b) an explorer's pack
-//• A longbow and a quiver of 20 arrows
     }
 }

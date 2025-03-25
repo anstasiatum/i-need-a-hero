@@ -53,23 +53,6 @@ public class Bard extends DndClass {
                 Spellcasting Focus
                 You can use a musical instrument as a spellcasting focus for your bard spells.
                 """);
-
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Leather Armor, and a dagger, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A lute, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Any musical instrument, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "An entertainer's pack, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Any simple weapon. ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A diplomat's pack, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A longsword, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A rapier, ");
-
-//(a) a rapier, (b) a longsword, or (c) any simple weapon
-//(a) a diplomat's pack or (b) an entertainer's pack
-//(a) a lute or (b) any other musical instrument
-//Leather Armor, and a dagger
-
-        // bardic inspiration die = d6
-
     }
 }
 

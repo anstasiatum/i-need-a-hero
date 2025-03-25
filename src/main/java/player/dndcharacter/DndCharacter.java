@@ -87,7 +87,7 @@ public class DndCharacter {
     private Set<String> toolProficiency = new HashSet<>();
 
     @JsonIgnore
-    public int getSpellcastingAbilityModifier(SpellcastingAbility spellcastingAbility) {
+    public Integer getSpellcastingAbilityModifier(SpellcastingAbility spellcastingAbility) {
         return switch (spellcastingAbility) {
             case STRENGTH -> getStrengthModifier() + getProficiencyBonus();
             case DEXTERITY -> getDexterityModifier() + getProficiencyBonus();
@@ -95,56 +95,69 @@ public class DndCharacter {
             case INTELLIGENCE -> getIntelligenceModifier() + getProficiencyBonus();
             case WISDOM -> getWisdomModifier() + getProficiencyBonus();
             case CHARISMA -> getCharismaModifier() + getProficiencyBonus();
+            case null -> null;
         };
     }
+
     @JsonIgnore
-    public int getSpellAttackBonus() {
+    public Integer getSpellAttackBonus() {
         return getSpellcastingAbilityModifier(spellcastingAbility);
     }
+
     @JsonIgnore
-    public int getSpellSaveDC() {
-        return 8 + getSpellcastingAbilityModifier(spellcastingAbility) + proficiencyBonus;
+    public Integer getSpellSaveDC() {
+        if (getSpellcastingAbilityModifier(spellcastingAbility) != null) {
+            return 8 + getSpellcastingAbilityModifier(spellcastingAbility) + proficiencyBonus;
+        } else {
+            return null;
+        }
     }
+
     @JsonIgnore
     public int getInitiative() {
         return getDexterityModifier();
     }
+
     @JsonIgnore
     public int getArmourClass() {
         return 10 + getDexterityModifier();
     }
+
     @JsonIgnore
     public int getPassivePerception() {
-        if (getSkillsWithProficiency().contains(Skills.PERCEPTION)) {
-            return 10 + getWisdomModifier() + proficiencyBonus;
-        } else {
-            return 10 + getWisdomModifier();
-        }
+        return getSkillsWithProficiency().contains(Skills.PERCEPTION) ? 10 + getWisdomModifier() + proficiencyBonus : 10 + getWisdomModifier();
     }
+
     @JsonIgnore
     public int getCharismaModifier() {
         return (charisma - 10) / 2;
     }
+
     @JsonIgnore
     public int getWisdomModifier() {
         return (wisdom - 10) / 2;
     }
+
     @JsonIgnore
     public int getIntelligenceModifier() {
         return (intelligence - 10) / 2;
     }
+
     @JsonIgnore
     public int getConstitutionModifier() {
         return (constitution - 10) / 2;
     }
+
     @JsonIgnore
     public int getDexterityModifier() {
         return (dexterity - 10) / 2;
     }
+
     @JsonIgnore
     public int getStrengthModifier() {
         return (strength - 10) / 2;
     }
+
     @JsonIgnore
     public int getSavingThrowModifier(Characteristics characteristics) {
         int baseSavingThrowModifier = switch (characteristics) {
@@ -155,12 +168,9 @@ public class DndCharacter {
             case WISDOM -> getWisdomModifier();
             case CHARISMA -> getCharismaModifier();
         };
-        if (getSavingThrowsWithProficiency().contains(characteristics)) {
-            return baseSavingThrowModifier + getProficiencyBonus();
-        } else {
-            return baseSavingThrowModifier;
-        }
+        return getSavingThrowsWithProficiency().contains(characteristics) ? baseSavingThrowModifier + getProficiencyBonus() : baseSavingThrowModifier;
     }
+
     @JsonIgnore
     public int getSkillModifier(Skills skill) {
         int baseSkillModifier = switch (skill) {
@@ -170,16 +180,14 @@ public class DndCharacter {
             case ATHLETICS -> getStrengthModifier();
             case DECEPTION, INTIMIDATION, PERFORMANCE, PERSUASION -> getCharismaModifier();
         };
-        if (getSkillsWithProficiency().contains(skill)) {
-            return baseSkillModifier + getProficiencyBonus();
-        } else {
-            return baseSkillModifier;
-        }
+        return getSkillsWithProficiency().contains(skill) ? baseSkillModifier + getProficiencyBonus() : baseSkillModifier;
     }
+
     @JsonIgnore
     public int getHitPoints() {
         return getHitDice() + getConstitutionModifier();
     }
+
     @JsonIgnore
     public void setSpellsKnownPerLevel(int index, int numberOfSpells) {
         this.spellsKnownPerLevel.set(index, numberOfSpells);

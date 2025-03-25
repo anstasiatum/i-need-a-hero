@@ -36,4 +36,6 @@ public class Character {
     @Column(name = "character")
     @JdbcTypeCode(SqlTypes.JSON)
     private DndCharacter dndCharacter;
+
+
 }

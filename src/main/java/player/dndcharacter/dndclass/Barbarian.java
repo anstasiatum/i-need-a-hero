@@ -24,7 +24,6 @@ public class Barbarian extends DndClass {
     }
 
     @Override
-
     public void modifyByClass(DndCharacter dndCharacter) {
         super.modifyByClass(dndCharacter);
         dndCharacter.setHitDice(12);
@@ -55,16 +54,5 @@ public class Barbarian extends DndClass {
                 Unarmoured Defense
                 While you are not wearing any armor, your Armor Class equals %s. You can use a shield and still gain this benefit.
                 """.formatted(dndCharacter.getArmourClass()));
-
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "An explorer’s pack and four javelins. ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A greataxe. ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Any martial melee weapon. ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Two handaxes. ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Any simple weapon. ");
-
-// (a) a greataxe or (b) any martial melee weapon
-// (a) two handaxes or (b) any simple weapon
-//  An explorer’s pack and four javelins.
-
     }
 }

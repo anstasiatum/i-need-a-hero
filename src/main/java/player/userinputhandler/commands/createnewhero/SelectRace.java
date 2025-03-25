@@ -177,8 +177,8 @@ public class SelectRace {
             default:
                 newState = new State(CREATE_HERO, CHOOSE_RACE, dndCharacter);
                 response = new Response(newState, """
-                                                                Sorry, I don't understand your input. Here is the list of available races:
-                                """ + allRaces);
+                                                        Sorry, I don't understand your input. Here is the list of available races:
+                        """ + allRaces);
                 break;
         }
         return response;

@@ -68,17 +68,5 @@ public class Druid extends DndClass {
                 You can use a druidic focus as a spellcasting focus for your druid spells.
                 """);
         dndCharacter.getLanguages().add("Druidic");
-
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A wooden shield, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "Any simple weapon, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A scale Mail, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A scimitar, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A leather armour, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "An explorer's pack, ");
-//        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A druidic focus, ");
-
-// (a) a wooden shield or (b) any simple weapon
-// (a) a scimitar or (b) any simple melee weapon
-// Leather Armor, an explorer's pack, and a druidic focus
     }
 }

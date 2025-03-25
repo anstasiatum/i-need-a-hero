@@ -43,10 +43,5 @@ public class Warlock extends DndClass {
         dndCharacter.setSpellcastingAbility(SpellcastingAbility.CHARISMA);
         dndCharacter.setSpellsKnownPerLevel(0, 2);
         dndCharacter.setSpellsKnownPerLevel(1, 2);
-
-        //• (a) a light crossbow and 20 bolts or (b) any simple weapon
-        //• (a) a component pouch or (b) an arcane focus
-        //• (a) a scholar's pack or (b) a dungeoneer's pack
-        //• Leather Armor, any simple weapon, and two daggers
     }
 }

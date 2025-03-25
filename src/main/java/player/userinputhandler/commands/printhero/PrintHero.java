@@ -54,8 +54,12 @@ public class PrintHero {
     public static Response printHero(Long chatId) {
         try {
             List<Character> userCharacters = characterJpaDao.findByChatId(chatId);
+            List<String> outputList = userCharacters.stream()
+                    .map(character -> String.format("Character ID: %d, Name: %s \n", character.getId(), character.getDndCharacter().getCharacterName()))
+                    .toList();
+
             State newState = new State(PRINT_HERO, PRINT_PDF, null);
-            return new Response(newState, "Ok, let's print your hero. First, enter the ID of the character you want to get a PDF version of\n" + userCharacters);
+            return new Response(newState, "Ok, let's print your hero. First, enter the ID of the character you want to get a PDF version of\n" + outputList);
         } catch (Exception e) {
             State newState = new State(PRINT_HERO, null, null);
             return new Response(newState, "Something went wrong when I was getting the list of your characters");
@@ -395,14 +399,19 @@ public class PrintHero {
         spellcastingClass.setValue(String.valueOf(dndCharacter.getCharacterClass()));
 
         PDField spellcastingAbility = acroForm.getField("SpellcastingAbility 2");
-        spellcastingAbility.setValue(String.valueOf(dndCharacter.getSpellcastingAbility()));
+        if (dndCharacter.getSpellcastingAbility() != null) {
+            spellcastingAbility.setValue(String.valueOf(dndCharacter.getSpellcastingAbility()));
+        }
 
         PDField spellSaveDc = acroForm.getField("SpellSaveDC  2");
-        spellSaveDc.setValue(String.valueOf(dndCharacter.getSpellSaveDC()));
+        if (dndCharacter.getSpellSaveDC() != null) {
+            spellSaveDc.setValue(String.valueOf(dndCharacter.getSpellSaveDC()));
+        }
 
         PDField spellAttackBonus = acroForm.getField("SpellAtkBonus 2");
-        spellAttackBonus.setValue(String.valueOf(dndCharacter.getSpellAttackBonus()));
-
+        if (dndCharacter.getSpellAttackBonus() != null) {
+            spellAttackBonus.setValue(String.valueOf(dndCharacter.getSpellAttackBonus()));
+        }
     }
 }
 
