@@ -7,7 +7,7 @@ public interface CharacterDao {
 
     List<Character> findByChatId(Long chatId);
 
-    void delete(Integer characterId);
+    void deleteByCharacterId(Integer characterId, Long chatId);
 
-    Character findById(Integer characterId);
+    Character findByCharacterId(Integer characterId, Long chatId);
 }

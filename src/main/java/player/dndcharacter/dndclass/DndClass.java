@@ -20,7 +20,6 @@ public abstract class DndClass {
     }
 
     public void modifyByClass(DndCharacter dndCharacter) {
-
         dndCharacter.setHitPoints(dndCharacter.getHitDice() + dndCharacter.getConstitutionModifier());
         dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier());
         dndCharacter.getLanguages().add("Common");

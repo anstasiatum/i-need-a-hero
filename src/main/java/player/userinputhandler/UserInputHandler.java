@@ -62,7 +62,7 @@ public class UserInputHandler {
                     statesByChatId.put(chatId, response.getState());
                     break;
                 case PRINT_HERO:
-                    response = heroPrintingAnswer(chatState, update.message().text());
+                    response = heroPrintingAnswer(chatState, update.message().text(), chatId);
                     file = response.getFile();
                     textAnswer = response.getTextAnswer();
                     statesByChatId.put(chatId, response.getState());

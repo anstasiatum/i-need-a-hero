@@ -66,15 +66,15 @@ public class PrintHero {
         }
     }
 
-    public static Response heroPrintingAnswer(State state, String userAnswer) {
+    public static Response heroPrintingAnswer(State state, String userAnswer, Long chatId) {
         Response response;
         State newState;
 
         if (state.getStepId() == PRINT_PDF) {
             try {
-                File file = printHeroPdf(Integer.valueOf(userAnswer));
+                File file = printHeroPdf(Integer.valueOf(userAnswer), chatId);
                 response = new Response(null, "Here is your PDF. Good luck in your games and may the dice spirits favour you!", file);
-            } catch (IllegalArgumentException ex) {
+            } catch (Exception ex) {
                 newState = new State(PRINT_HERO, PRINT_PDF, state.getDndCharacter());
                 response = new Response(newState, "Couldn't find a hero with this ID. Please enter an available one.");
             }
@@ -85,7 +85,7 @@ public class PrintHero {
         return response;
     }
 
-    public static File printHeroPdf(Integer characterId) {
+    public static File printHeroPdf(Integer characterId, Long chatId) {
         Path resourcePath;
         try {
             resourcePath = Paths.get(PrintHero.class.getResource("/DnD_5E_CharacterSheet_FormFillable.pdf").toURI());
@@ -96,14 +96,13 @@ public class PrintHero {
         try (PDDocument document = Loader.loadPDF(new RandomAccessReadBufferedFile(resourcePath))) {
             PDDocumentCatalog docCatalog = document.getDocumentCatalog();
             PDAcroForm acroForm = docCatalog.getAcroForm();
-            DndCharacter dndCharacter = characterJpaDao.findById(characterId).getDndCharacter();
+            DndCharacter dndCharacter = characterJpaDao.findByCharacterId(characterId, chatId).getDndCharacter();
             fillForm(dndCharacter, acroForm);
             File tempFile = File.createTempFile("DndCharacter-", ".pdf");
             document.save(tempFile);
             System.out.println(tempFile.getAbsolutePath());
             return tempFile;
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -358,7 +357,11 @@ public class PrintHero {
         passivePerception.setValue(String.valueOf(dndCharacter.getPassivePerception()));
 
         PDField proficienciesAndLanguages = acroForm.getField("ProficienciesLang");
-        proficienciesAndLanguages.setValue(dndCharacter.getLanguages().toString() + "\n" + dndCharacter.getToolProficiency());
+        if (dndCharacter.getToolProficiency().isEmpty()) {
+            proficienciesAndLanguages.setValue(dndCharacter.getLanguages().toString());
+        } else {
+            proficienciesAndLanguages.setValue(dndCharacter.getLanguages().toString() + "\n" + dndCharacter.getToolProficiency().toString());
+        }
 
         PDField armorClass = acroForm.getField("AC");
         armorClass.setValue(String.valueOf(dndCharacter.getArmourClass()));
@@ -377,6 +380,9 @@ public class PrintHero {
 
         PDField hitDice = acroForm.getField("HD");
         hitDice.setValue(String.valueOf(dndCharacter.getHitDice()));
+
+        PDField traits = acroForm.getField("PersonalityTraits ");
+        traits.setValue(dndCharacter.getIdeals());
 
         PDField ideals = acroForm.getField("Ideals");
         ideals.setValue(dndCharacter.getIdeals());

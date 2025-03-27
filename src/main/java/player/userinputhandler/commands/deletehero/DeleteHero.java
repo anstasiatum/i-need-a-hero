@@ -46,9 +46,9 @@ public class DeleteHero {
                 break;
             case SELECT_A_HERO_TO_BE_DELETED:
                 try {
-                    characterJpaDao.delete(Integer.valueOf(userAnswer));
+                    characterJpaDao.deleteByCharacterId(Integer.valueOf(userAnswer), chatId);
                     response = new Response(null, "Alright, your hero has been dismissed");
-                } catch (IllegalArgumentException ex) {
+                } catch (Exception ex) {
                     newState = new State(DELETE_HERO, SELECT_A_HERO_TO_BE_DELETED, state.getDndCharacter());
                     response = new Response(newState, "Couldn't find a hero with this ID. Please enter an available one.");
                 }

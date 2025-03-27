@@ -10,7 +10,7 @@ public class AddSkillProficiency {
             case "survival":
                 dndCharacter.getSkillsWithProficiency().add(Skills.SURVIVAL);
                 break;
-            case "ttealth":
+            case "stealth":
                 dndCharacter.getSkillsWithProficiency().add(Skills.STEALTH);
                 break;
             case "sleight of hand", "sleight_of_hand":

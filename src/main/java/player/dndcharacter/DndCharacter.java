@@ -119,11 +119,6 @@ public class DndCharacter {
     }
 
     @JsonIgnore
-    public int getArmourClass() {
-        return 10 + getDexterityModifier();
-    }
-
-    @JsonIgnore
     public int getPassivePerception() {
         return getSkillsWithProficiency().contains(Skills.PERCEPTION) ? 10 + getWisdomModifier() + proficiencyBonus : 10 + getWisdomModifier();
     }

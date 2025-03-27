@@ -17,11 +17,17 @@ public class CharacterDaoImpl implements CharacterDao {
         });
     }
 
-    public void delete(Integer characterId) {
+    public void deleteByCharacterId(Integer characterId, Long chatId) {
+
         HibernateHelper.runInTransaction(session -> {
-            session.createNativeQuery("delete from characters where id = :id")
+            int updatedEntity = session.createNativeQuery("delete from characters where id = :id AND chat_id = :chatId")
                     .setParameter("id", characterId)
+                    .setParameter("chatId", chatId)
                     .executeUpdate();
+
+            if (updatedEntity == 0) {
+                throw new RuntimeException();
+            }
         });
     }
 
@@ -31,15 +37,15 @@ public class CharacterDaoImpl implements CharacterDao {
             return entityManager.createQuery("select character from Character character where character.chatId = :chatId")
                     .setParameter("chatId", chatId)
                     .getResultList();
-
         });
     }
 
     @Override
-    public Character findById(Integer characterId) {
+    public Character findByCharacterId(Integer characterId, Long chatId) {
         return (Character) HibernateHelper.runInTransaction(entityManager -> {
-            return entityManager.createQuery("select character from Character character where character.id = :id")
+            return entityManager.createQuery("select character from Character character where character.id = :id AND character.chatId = :chatId")
                     .setParameter("id", characterId)
+                    .setParameter("chatId", chatId)
                     .getSingleResult();
         });
     }
