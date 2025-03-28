@@ -13,12 +13,12 @@ public class ChooseCharacteristicsSettingMethod {
     public static Response chooseCharacteristicsSettingMethod(String userAnswer, DndCharacter dndCharacter) {
         Response response = null;
         State newState;
-        response = switch (userAnswer) {
-            case "A" -> {
+        response = switch (userAnswer.toLowerCase().trim()) {
+            case "a" -> {
                 newState = new State(CREATE_HERO, SET_STRENGTH, dndCharacter);
                 yield new Response(newState, "Set strength:");
             }
-            case "B" -> {
+            case "b" -> {
                 newState = new State(CREATE_HERO, SET_STRENGTH, dndCharacter);
                 yield new Response(newState, "Here is your result: \n" + generateCharacteristics() + "\n Set strength:");
             }

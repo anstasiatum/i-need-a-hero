@@ -40,36 +40,43 @@ public class IncreaseBaseCharacteristics {
                 Animal handling
                 Acrobatics
                 """;
+        final String strength = "strength";
+        final String dexterity = "dexterity";
+        final String constitution = "constitution";
+        final String intelligence = "intelligence";
+        final String wisdom = "wisdom";
+        final String charisma = "charisma";
+
         String chooseSkillProficiency = "Enter a skill that your character will be proficient in: " + allSkills;
         switch (currentStep) {
             case CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF:
-                switch (userAnswer) {
-                    case "Strength":
+                switch (userAnswer.toLowerCase().trim()) {
+                    case strength:
                         dndCharacter.setStrength(dndCharacter.getStrength() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Dexterity":
+                    case dexterity:
                         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Constitution":
+                    case constitution:
                         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Intelligence":
+                    case intelligence:
                         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Wisdom":
+                    case wisdom:
                         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Charisma":
+                    case charisma:
                         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
@@ -81,33 +88,33 @@ public class IncreaseBaseCharacteristics {
                 }
                 break;
             case CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN:
-                switch (userAnswer) {
-                    case "Strength":
+                switch (userAnswer.toLowerCase().trim()) {
+                    case strength:
                         dndCharacter.setStrength(dndCharacter.getStrength() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Dexterity":
+                    case dexterity:
                         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Constitution":
+                    case constitution:
                         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Intelligence":
+                    case intelligence:
                         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Wisdom":
+                    case wisdom:
                         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
                         break;
-                    case "Charisma":
+                    case charisma:
                         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSecondAbilityScore);
@@ -119,33 +126,33 @@ public class IncreaseBaseCharacteristics {
                 }
                 break;
             case CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF:
-                switch (userAnswer) {
-                    case "Strength":
+                switch (userAnswer.toLowerCase().trim()) {
+                    case strength:
                         dndCharacter.setStrength(dndCharacter.getStrength() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Dexterity":
+                    case dexterity:
                         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Constitution":
+                    case constitution:
                         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Intelligence":
+                    case intelligence:
                         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Wisdom":
+                    case wisdom:
                         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Charisma":
+                    case charisma:
                         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
@@ -157,33 +164,33 @@ public class IncreaseBaseCharacteristics {
                 }
                 break;
             case CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN:
-                switch (userAnswer) {
-                    case "Strength":
+                switch (userAnswer.toLowerCase().trim()) {
+                    case strength:
                         dndCharacter.setStrength(dndCharacter.getStrength() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Dexterity":
+                    case dexterity:
                         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Constitution":
+                    case constitution:
                         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Intelligence":
+                    case intelligence:
                         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Wisdom":
+                    case wisdom:
                         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);
                         break;
-                    case "Charisma":
+                    case charisma:
                         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
                         response = new Response(newState, chooseSkillProficiency);

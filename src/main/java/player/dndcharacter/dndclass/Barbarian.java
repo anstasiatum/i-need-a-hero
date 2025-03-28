@@ -19,6 +19,7 @@ public class Barbarian extends DndClass {
                 Skills.SURVIVAL
         );
     }
+
     public Barbarian() {
         super(buildAvailableProficiencySkills(), 2);
     }

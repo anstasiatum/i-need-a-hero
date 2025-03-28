@@ -2,8 +2,8 @@ package player.dndcharacter.race.dwarf;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.abilities.Abilities;
-import player.dndcharacter.race.Race;
 import player.dndcharacter.dndcharacterenums.Size;
+import player.dndcharacter.race.Race;
 
 public abstract class DwarfRace extends Race {
     @Override

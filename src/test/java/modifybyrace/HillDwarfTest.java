@@ -120,6 +120,7 @@ public class HillDwarfTest {
 
         assertEquals(expectedResult, dndCharacter.getToolProficiency());
     }
+
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForHillDwarf() {

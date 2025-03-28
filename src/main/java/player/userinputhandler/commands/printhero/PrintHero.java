@@ -382,7 +382,7 @@ public class PrintHero {
         hitDice.setValue(String.valueOf(dndCharacter.getHitDice()));
 
         PDField traits = acroForm.getField("PersonalityTraits ");
-        traits.setValue(dndCharacter.getIdeals());
+        traits.setValue(dndCharacter.getPersonalityTraits());
 
         PDField ideals = acroForm.getField("Ideals");
         ideals.setValue(dndCharacter.getIdeals());

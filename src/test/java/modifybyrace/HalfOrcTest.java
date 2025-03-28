@@ -94,6 +94,7 @@ public class HalfOrcTest {
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }
+
     @Test
     @DisplayName("Set proficiency in Intimidation")
     void setProficiencyInIntimidationForHalfOrc() {

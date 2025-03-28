@@ -6,7 +6,7 @@ import player.dndcharacter.dndcharacterenums.Skills;
 public class AddSkillProficiency {
     public static void addSkillProficiency(DndCharacter dndCharacter, String userAnswer) {
 
-        switch (userAnswer.toLowerCase()) {
+        switch (userAnswer.toLowerCase().trim()) {
             case "survival":
                 dndCharacter.getSkillsWithProficiency().add(Skills.SURVIVAL);
                 break;

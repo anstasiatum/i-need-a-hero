@@ -24,6 +24,7 @@ public class Ranger extends DndClass {
     public Ranger() {
         super(buildAvailableProficiencySkills(), 3);
     }
+
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
         super.modifyByClass(dndCharacter);

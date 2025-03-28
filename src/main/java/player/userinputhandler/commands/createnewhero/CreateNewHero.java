@@ -15,15 +15,15 @@ import player.dndcharacter.dndclass.Warlock;
 import player.dndcharacter.dndclass.Wizard;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
+import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
-import player.userinputhandler.commands.db.Character;
 
-import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
+import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
@@ -77,6 +77,7 @@ import static player.userinputhandler.enums.Steps.SET_WISDOM;
 
 public class CreateNewHero {
     final static CharacterDao characterJpaDao = new CharacterDaoImpl();
+
     public static Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());
         return new Response(newState, "Alright, let's name your future hero!");

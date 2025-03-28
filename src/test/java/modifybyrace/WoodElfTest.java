@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skills;
-import player.dndcharacter.race.elf.HighElf;
 import player.dndcharacter.race.elf.WoodElf;
 
 import java.util.HashSet;

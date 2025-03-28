@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.dragonborn.Dragonborn;
 import player.dndcharacter.race.teifling.Tiefling;
 
 import java.util.Set;
@@ -86,9 +85,9 @@ public class TieflingTest {
         tiefling.modifyByRace(dndCharacter);
 
         String expectedResult = """
-                        Hellish Resistance. You have resistance to fire damage.
-                        Infernal Legacy. You know the thaumaturgy cantrip.
-                        You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
+                Hellish Resistance. You have resistance to fire damage.
+                Infernal Legacy. You know the thaumaturgy cantrip.
+                You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

@@ -67,7 +67,7 @@ public class SelectRace {
                 Tiefling
                 """;
         String chooseFirstAbilityScore = "Enter an ability that will be increased by 1 (Dexterity, Intelligence etc)";
-        switch (userAnswer.toLowerCase()) {
+        switch (userAnswer.toLowerCase().trim()) {
             case "dragonborn":
                 dndCharacter.setRace(Race.DRAGONBORN);
                 Dragonborn dragonborn = new Dragonborn();
@@ -177,7 +177,7 @@ public class SelectRace {
             default:
                 newState = new State(CREATE_HERO, CHOOSE_RACE, dndCharacter);
                 response = new Response(newState, """
-                                                        Sorry, I don't understand your input. Here is the list of available races:
+                        Sorry, I don't understand your input. Here is the list of available races:
                         """ + allRaces);
                 break;
         }

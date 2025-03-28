@@ -20,9 +20,9 @@ public class Monk extends DndClass {
     }
 
     public Monk() {
-
         super(buildAvailableProficiencySkills(), 2);
     }
+
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
         super.modifyByClass(dndCharacter);

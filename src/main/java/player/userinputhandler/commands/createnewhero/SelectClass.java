@@ -50,7 +50,7 @@ public class SelectClass {
                 Sorcerer
                 Warlock
                 Wizard""";
-        switch (userAnswer.toLowerCase()) {
+        switch (userAnswer.toLowerCase().trim()) {
             case "barbarian" -> {
                 dndCharacter.setCharacterClass(CharacterClass.BARBARIAN);
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARBARIAN, dndCharacter);

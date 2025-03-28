@@ -2,9 +2,9 @@ package player.userinputhandler.commands.deletehero;
 
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
+import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
-import player.userinputhandler.commands.db.Character;
 
 import java.util.List;
 
