@@ -49,7 +49,6 @@ public class Monk extends DndClass {
                 • When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.
                 Certain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon.
                 Unarmoured Defence
-                Beginning at 1st level, while you are wearing no armour and not wielding a shield, your AC equals %s
-                """.formatted(dndCharacter.getArmourClass()));
+                Beginning at 1st level, while you are wearing no armour and not wielding a shield, your AC equals %s""".formatted(dndCharacter.getArmourClass()));
     }
 }
