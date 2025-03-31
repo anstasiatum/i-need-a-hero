@@ -41,6 +41,7 @@ public class Warlock extends DndClass {
         dndCharacter.getSavingThrowsWithProficiency().add(Characteristics.CHARISMA);
 
         dndCharacter.setSpellcastingAbility(SpellcastingAbility.CHARISMA);
+        dndCharacter.setSpellsKnown(2);
         dndCharacter.setSpellsKnownPerLevel(0, 2);
         dndCharacter.setSpellsKnownPerLevel(1, 2);
     }
