@@ -25,8 +25,8 @@ public class DeleteHero {
         State newState;
         switch (state.getStepId()) {
             case CONFIRMATION:
-                switch (userAnswer) {
-                    case "Yes":
+                switch (userAnswer.toLowerCase().trim()) {
+                    case "yes":
                         List<Character> userCharacters = characterJpaDao.findByChatId(chatId);
                         List<String> outputList = userCharacters.stream()
                                 .map(character -> String.format("Character ID: %d, Name: %s \n", character.getId(), character.getDndCharacter().getCharacterName()))
@@ -35,7 +35,7 @@ public class DeleteHero {
                         newState = new State(DELETE_HERO, SELECT_A_HERO_TO_BE_DELETED, state.getDndCharacter());
                         response = new Response(newState, "Enter the ID of the character you want to delete: \n" + outputList);
                         break;
-                    case "No":
+                    case "no":
                         response = new Response(null, "Alright, dismissal has been cancelled");
                         break;
                     default:

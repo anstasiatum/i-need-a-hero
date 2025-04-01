@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>dnd-character-generator</artifactId>
+  <artifactId>i-need-a-hero</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>dnd-character-generator</name>
+  <name>i-need-a-hero</name>
   <url>http://www.example.com</url>
 
   <properties>

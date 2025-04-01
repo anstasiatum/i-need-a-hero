@@ -324,7 +324,7 @@ public class PrintHero {
         }
 
         PDField performanceCheckBox = acroForm.getField("Check Box 35");
-        if (dndCharacter.getSkillsWithProficiency().contains(PERCEPTION)) {
+        if (dndCharacter.getSkillsWithProficiency().contains(PERFORMANCE)) {
             performanceCheckBox.setValue("Yes");
         }
 

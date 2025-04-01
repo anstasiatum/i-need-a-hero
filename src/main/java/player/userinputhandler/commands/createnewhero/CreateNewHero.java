@@ -1,5 +1,6 @@
 package player.userinputhandler.commands.createnewhero;
 
+import com.pengrad.telegrambot.model.request.Keyboard;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
@@ -22,6 +23,14 @@ import player.userinputhandler.commands.db.CharacterDaoImpl;
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.allSkills;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseAlignment;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseClass;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondSkill;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseThirdSkill;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.notANumberInput;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
@@ -86,74 +95,6 @@ public class CreateNewHero {
     public static Response heroCreationAnswer(State state, Long chatId, String userAnswer) {
         Response response;
         State newState;
-        String notANumberInput = "Please enter a number";
-        String allClasses = """
-                Barbarian
-                Bard
-                Cleric
-                Druid
-                Fighter
-                Monk
-                Paladin
-                Ranger
-                Rogue
-                Sorcerer
-                Warlock
-                Wizard""";
-        String chooseClass = "Choose your class:\n" + allClasses;
-        String allRaces = """
-                Dragonborn
-                Hill Dwarf
-                Mountain Dwarf
-                Dark Elf
-                High Elf
-                Wood Elf
-                Forest Gnome
-                Rock Gnome
-                Half Elf
-                Lightfoot Halfling
-                Stout Halfling
-                Half Orc
-                Base Human
-                Variant Human
-                Tiefling
-                """;
-        String allSkills = """
-                Survival
-                Stealth
-                Sleight of hand
-                Religion
-                Persuasion
-                Performance
-                Perception
-                Nature
-                Medicine
-                Investigation
-                Intimidation
-                Insight
-                History
-                Deception
-                Athletics
-                Arcana
-                Animal handling
-                Acrobatics
-                """;
-
-        String chooseSecondSkill = "Enter the second skill your hero will be proficient in. Available ones:\n";
-        String chooseThirdSkill = "Enter the third skill your hero will be proficient in. Available ones:\n";
-        String wrongSkill = "Cannot understand your input. Please enter a skill\n" + allSkills;
-        String chooseAlignment = """
-                Set your hero's alignment:
-                Lawful good
-                Neutral good
-                Chaotic good
-                Lawful neutral
-                True neutral
-                Chaotic neutral
-                Lawful evil
-                Neutral evil
-                Chaotic evil
-                """;
 
         switch (state.getStepId()) {
             case ENTER_NAME:
