@@ -1,4 +1,4 @@
-package player.dndcharacter.chooseEquipment;
+package player.dndcharacter.chooseequipment;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.CharacterClass;

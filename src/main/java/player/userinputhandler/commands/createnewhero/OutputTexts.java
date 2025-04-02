@@ -1,7 +1,6 @@
 package player.userinputhandler.commands.createnewhero;
 
 public class OutputTexts {
-    // Create a new hero
     public static String notANumberInput = "Please enter a number";
     public static String allClasses = """
             Barbarian
