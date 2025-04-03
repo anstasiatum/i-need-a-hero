@@ -1,6 +1,5 @@
 package player.userinputhandler.commands.createnewhero;
 
-import com.pengrad.telegrambot.model.request.Keyboard;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
@@ -23,26 +22,36 @@ import player.userinputhandler.commands.db.CharacterDaoImpl;
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.allBackgrounds;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allSkills;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseAlignment;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseClass;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseThirdSkill;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.notANumberInput;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
+import static player.userinputhandler.enums.Steps.CHOOSE_BACKGROUND;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
+import static player.userinputhandler.enums.Steps.CHOOSE_ENTERTAINER_OR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_SKILL_FOR_HALF_ELF;
+import static player.userinputhandler.enums.Steps.CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER;
 import static player.userinputhandler.enums.Steps.CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_RACE;
 import static player.userinputhandler.enums.Steps.CHOOSE_ROLLING_CHARACTERISTICS_METHOD;
+import static player.userinputhandler.enums.Steps.CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN;
+import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE;
+import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_SAGE;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_SKILL_FOR_HALF_ELF;
+import static player.userinputhandler.enums.Steps.CHOOSE_WEAPON_FOR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.ENTER_ALIGNMENT;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARD;
@@ -544,8 +553,82 @@ public class CreateNewHero {
                 break;
             case ENTER_ALIGNMENT:
                 state.getDndCharacter().setAlignment(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_BACKGROUND, state.getDndCharacter());
+                response = new Response(newState, "Choose the background of your hero\n" + allBackgrounds);
+                break;
+            case CHOOSE_BACKGROUND:
+                state.getDndCharacter().setBackground(userAnswer);
+                response = SetBackground.setBackground(state.getDndCharacter(), userAnswer);
+                break;
+            case CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE:
+                state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE, state.getDndCharacter());
+                response = new Response(newState, "Choose the second language for your acolyte");
+                break;
+            case CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE, CHOOSE_LANGUAGE_FOR_OUTLANDER, CHOOSE_SECOND_LANGUAGE_FOR_SAGE:
+                state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
-                response = new Response(newState, "Type any personality traits you'd like to mention");
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_CON_FOR_CHARLATAN, CHOOSE_WEAPON_FOR_GLADIATOR,
+                 CHOOSE_MUSICAL_INSTRUMENT_YOU_POSSESS_FOR_ENTERTAINER:
+                state.getDndCharacter().setEquipment(state.getDndCharacter() + userAnswer);
+                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_ENTERTAINER_OR_GLADIATOR:
+                switch (userAnswer.toLowerCase().trim()) {
+                    case "entertainer":
+                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You can perform at inns, theaters, circuses, or any place with a stage. While you’re performing there each night, you receive free modest or comfortable lodging and food. This can allow you to take long rests for free as you travel with your party across the land. In addition, your performance makes you famous wherever you perform. When strangers recognize you in the town, they usually like you more. This may make it easier to persuade them to do things for you.\n");
+                        newState = new State(CREATE_HERO, CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER, state.getDndCharacter());
+                        response = new Response(newState, "Choose one musical instrument your character is proficient with");
+                        break;
+                    case "gladiator":
+                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You can find a place to perform in any place that features combat for entertainment-perhaps a gladiatorial arena or secret pit fighting club.\n");
+                        state.getDndCharacter().setBackground(userAnswer);
+                        newState = new State(CREATE_HERO, CHOOSE_WEAPON_FOR_GLADIATOR, state.getDndCharacter());
+                        response = new Response(newState, "Enter an inexpensive, but unusual weapon (such as a trident or net) your hero will possess");
+                        break;
+                    default:
+                        newState = new State(CREATE_HERO, CHOOSE_ENTERTAINER_OR_GLADIATOR, state.getDndCharacter());
+                        response = new Response(newState, wrongInput);
+                        break;
+                }
+                break;
+            case CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_ARTISANS_TOOL_FOR_FOLK_HERO:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
+                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_FIRST_LANGUAGE_FOR_SAGE:
+                state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_SAGE, state.getDndCharacter());
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR:
+                switch (userAnswer.toLowerCase().trim()) {
+                    case "sailor", "common sailor":
+                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "Ship's Passage When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.\n");
+                        newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
+                        response = new Response(newState, chooseTraits);
+                        break;
+                    case "pirate":
+                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "Pirate Variant Feature: No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.\n");
+                        state.getDndCharacter().setBackground(userAnswer);
+                        newState = new State(CREATE_HERO, CHOOSE_WEAPON_FOR_GLADIATOR, state.getDndCharacter());
+                        response = new Response(newState, chooseTraits);
+                        break;
+                    default:
+                        newState = new State(CREATE_HERO, CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR, state.getDndCharacter());
+                        response = new Response(newState, wrongInput);
+                        break;
+                }
                 break;
             case SET_PERSONALITY_TRAITS:
                 state.getDndCharacter().setPersonalityTraits(userAnswer);

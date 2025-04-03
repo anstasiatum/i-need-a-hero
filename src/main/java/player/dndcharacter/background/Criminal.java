@@ -11,7 +11,7 @@ public class Criminal extends Background {
         dndCharacter.getSkillsWithProficiency().add(DECEPTION);
         dndCharacter.getSkillsWithProficiency().add(STEALTH);
 
-        dndCharacter.getToolProficiency().add("One type of gaming set");
+        dndCharacter.getToolProficiency().add("A gaming set");
         dndCharacter.getToolProficiency().add("Thieves' tools");
 
         dndCharacter.setEquipment(dndCharacter.getEquipment() + "A crowbar, a set of dark common clothes including a hood, and a pouch containing 15 gp");
