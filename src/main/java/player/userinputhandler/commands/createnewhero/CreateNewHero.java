@@ -577,7 +577,7 @@ public class CreateNewHero {
                 break;
             case CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, CHOOSE_ARTISANS_TOOL_POSESSION_FOR_FOLK_HERO,
                  CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER:
-                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                 response = new Response(newState, chooseTraits);
                 break;
@@ -657,7 +657,7 @@ public class CreateNewHero {
                 response = new Response(newState, "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner)");
                 break;
             case CHOOSE_TROPHY_FOR_SOLDIER:
-                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER , state.getDndCharacter());
                 response = new Response(newState, "Will your character possess a set of bone dice or a deck of cards?");
                 break;

@@ -116,6 +116,9 @@ public class PrintHero {
         PDField classLevel = acroForm.getField("ClassLevel");
         classLevel.setValue(String.valueOf(dndCharacter.getCharacterClass()));
 
+        PDField background = acroForm.getField("Background");
+        background.setValue(String.valueOf(dndCharacter.getBackground()));
+
         PDField race = acroForm.getField("Race ");
         race.setValue(String.valueOf(dndCharacter.getRace()));
 
@@ -380,6 +383,9 @@ public class PrintHero {
 
         PDField hitDice = acroForm.getField("HD");
         hitDice.setValue(String.valueOf(dndCharacter.getHitDice()));
+
+        PDField equipment = acroForm.getField("Equipment");
+        equipment.setValue(String.valueOf(dndCharacter.getEquipment()));
 
         PDField traits = acroForm.getField("PersonalityTraits ");
         traits.setValue(dndCharacter.getPersonalityTraits());
