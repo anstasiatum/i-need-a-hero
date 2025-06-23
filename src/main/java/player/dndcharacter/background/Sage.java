@@ -8,6 +8,8 @@ import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
 public class Sage extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Sage");
+
         dndCharacter.getSkillsWithProficiency().add(ARCANA);
         dndCharacter.getSkillsWithProficiency().add(HISTORY);
 

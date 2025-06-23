@@ -8,6 +8,8 @@ import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 public class Outlander extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Outlander");
+
         dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
         dndCharacter.getSkillsWithProficiency().add(SURVIVAL);
 

@@ -8,6 +8,8 @@ import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 public class FolkHero extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Folk Hero");
+
         dndCharacter.getSkillsWithProficiency().add(ANIMAL_HANDLING);
         dndCharacter.getSkillsWithProficiency().add(SURVIVAL);
 

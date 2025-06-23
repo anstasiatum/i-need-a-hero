@@ -8,6 +8,8 @@ import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
 public class Urchin extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Urchin");
+
         dndCharacter.getSkillsWithProficiency().add(SLEIGHT_OF_HAND);
         dndCharacter.getSkillsWithProficiency().add(STEALTH);
 

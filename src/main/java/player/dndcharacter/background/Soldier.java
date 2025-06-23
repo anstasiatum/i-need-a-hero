@@ -8,10 +8,11 @@ import static player.dndcharacter.dndcharacterenums.Skills.INTIMIDATION;
 public class Soldier extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Soldier");
+
         dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
         dndCharacter.getSkillsWithProficiency().add(INTIMIDATION);
 
-        dndCharacter.getToolProficiency().add("Gaming set");
         dndCharacter.getToolProficiency().add("Vehicles (land)");
 
         dndCharacter.setEquipment(dndCharacter.getEquipment() + "An insignia of rank, a trophy taken from a fallen enemy (a dagger, broken blade, or piece of a banner), a set of bone dice or deck of cards, a set of common clothes, and a pouch containing 10 gp");

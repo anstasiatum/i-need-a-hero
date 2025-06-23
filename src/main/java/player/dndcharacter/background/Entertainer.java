@@ -8,6 +8,8 @@ import static player.dndcharacter.dndcharacterenums.Skills.PERFORMANCE;
 public class Entertainer extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Entertainer");
+
         dndCharacter.getSkillsWithProficiency().add(ACROBATICS);
         dndCharacter.getSkillsWithProficiency().add(PERFORMANCE);
 

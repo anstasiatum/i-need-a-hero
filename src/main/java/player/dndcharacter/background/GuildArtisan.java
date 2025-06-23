@@ -8,6 +8,8 @@ import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
 public class GuildArtisan extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Guild Artisan");
+
         dndCharacter.getSkillsWithProficiency().add(INSIGHT);
         dndCharacter.getSkillsWithProficiency().add(PERSUASION);
 

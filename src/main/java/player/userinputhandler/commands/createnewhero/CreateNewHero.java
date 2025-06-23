@@ -35,14 +35,18 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongIn
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
+import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSESSION_FOR_FOLK_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_BACKGROUND;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
 import static player.userinputhandler.enums.Steps.CHOOSE_ENTERTAINER_OR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_SKILL_FOR_HALF_ELF;
+import static player.userinputhandler.enums.Steps.CHOOSE_GAMING_SET_FOR_NOBLE;
+import static player.userinputhandler.enums.Steps.CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER;
 import static player.userinputhandler.enums.Steps.CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER;
 import static player.userinputhandler.enums.Steps.CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN;
+import static player.userinputhandler.enums.Steps.CHOOSE_PRAYER_ITEM_FOR_ACOLYTE;
 import static player.userinputhandler.enums.Steps.CHOOSE_RACE;
 import static player.userinputhandler.enums.Steps.CHOOSE_ROLLING_CHARACTERISTICS_METHOD;
 import static player.userinputhandler.enums.Steps.CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR;
@@ -51,6 +55,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_ABILITY_SCORE_FO
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_SAGE;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_SKILL_FOR_HALF_ELF;
+import static player.userinputhandler.enums.Steps.CHOOSE_TROPHY_FOR_SOLDIER;
 import static player.userinputhandler.enums.Steps.CHOOSE_WEAPON_FOR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.ENTER_ALIGNMENT;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
@@ -565,7 +570,29 @@ public class CreateNewHero {
                 newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE, state.getDndCharacter());
                 response = new Response(newState, "Choose the second language for your acolyte");
                 break;
-            case CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE, CHOOSE_LANGUAGE_FOR_OUTLANDER, CHOOSE_SECOND_LANGUAGE_FOR_SAGE:
+            case CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE:
+                state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, state.getDndCharacter());
+                response = new Response(newState, "Enter your prayer item (a book, a wheel, etc.)");
+                break;
+            case CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, CHOOSE_ARTISANS_TOOL_POSESSION_FOR_FOLK_HERO,
+                 CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER:
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
+                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_GAMING_SET_FOR_CRIMINAL, CHOOSE_GAMING_SET_FOR_NOBLE,
+                 CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
+                response = new Response(newState, chooseTraits);
+                break;
+            case CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_FOLK_HERO:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_POSESSION_FOR_FOLK_HERO, state.getDndCharacter());
+                response = new Response(newState, "Choose a set of artisan's tools your hero will have. Might be the same as in the previous step");
+                break;
+            case CHOOSE_LANGUAGE_FOR_OUTLANDER, CHOOSE_SECOND_LANGUAGE_FOR_SAGE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                 response = new Response(newState, chooseTraits);
@@ -585,7 +612,6 @@ public class CreateNewHero {
                         break;
                     case "gladiator":
                         state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You can find a place to perform in any place that features combat for entertainment-perhaps a gladiatorial arena or secret pit fighting club.\n");
-                        state.getDndCharacter().setBackground(userAnswer);
                         newState = new State(CREATE_HERO, CHOOSE_WEAPON_FOR_GLADIATOR, state.getDndCharacter());
                         response = new Response(newState, "Enter an inexpensive, but unusual weapon (such as a trident or net) your hero will possess");
                         break;
@@ -595,16 +621,10 @@ public class CreateNewHero {
                         break;
                 }
                 break;
-            case CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER:
-                state.getDndCharacter().getToolProficiency().add(userAnswer);
-                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
-                response = new Response(newState, chooseTraits);
-                break;
-            case CHOOSE_ARTISANS_TOOL_FOR_FOLK_HERO:
-                state.getDndCharacter().getToolProficiency().add(userAnswer);
-                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
-                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
-                response = new Response(newState, chooseTraits);
+            case CHOOSE_LANGUAGE_FOR_NOBLE:
+                state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_FOR_NOBLE, state.getDndCharacter());
+                response = new Response(newState, "Enter a gaming set your hero will be proficient with");
                 break;
             case CHOOSE_FIRST_LANGUAGE_FOR_SAGE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
@@ -615,13 +635,14 @@ public class CreateNewHero {
                 switch (userAnswer.toLowerCase().trim()) {
                     case "sailor", "common sailor":
                         state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "Ship's Passage When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.\n");
+                        state.getDndCharacter().setBackground(userAnswer);
                         newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                         response = new Response(newState, chooseTraits);
                         break;
                     case "pirate":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "Pirate Variant Feature: No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.\n");
+                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.\n");
                         state.getDndCharacter().setBackground(userAnswer);
-                        newState = new State(CREATE_HERO, CHOOSE_WEAPON_FOR_GLADIATOR, state.getDndCharacter());
+                        newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                         response = new Response(newState, chooseTraits);
                         break;
                     default:
@@ -629,6 +650,16 @@ public class CreateNewHero {
                         response = new Response(newState, wrongInput);
                         break;
                 }
+                break;
+            case CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_TROPHY_FOR_SOLDIER, state.getDndCharacter());
+                response = new Response(newState, "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner)");
+                break;
+            case CHOOSE_TROPHY_FOR_SOLDIER:
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER , state.getDndCharacter());
+                response = new Response(newState, "Will your character possess a set of bone dice or a deck of cards?");
                 break;
             case SET_PERSONALITY_TRAITS:
                 state.getDndCharacter().setPersonalityTraits(userAnswer);

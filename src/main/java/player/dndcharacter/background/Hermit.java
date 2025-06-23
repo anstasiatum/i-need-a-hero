@@ -9,6 +9,8 @@ public class Hermit extends Background {
 
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
+        dndCharacter.setBackground("Hermit");
+
         dndCharacter.getSkillsWithProficiency().add(MEDICINE);
         dndCharacter.getSkillsWithProficiency().add(RELIGION);
 
