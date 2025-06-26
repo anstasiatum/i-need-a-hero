@@ -65,7 +65,7 @@ public class DndCharacter {
     private SpellcastingAbility spellcastingAbility;
 
     private String featuresAndTraits = "";
-    private String equipment;
+    private String equipment = "";
     private String alliesAndOrganizations;
     private String treasure;
     private Set<String> languages = new HashSet<>();

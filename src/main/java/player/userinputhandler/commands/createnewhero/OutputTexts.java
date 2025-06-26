@@ -75,7 +75,6 @@ public class OutputTexts {
             Entertainer,
             Folk Hero,
             Guild Artisan,
-            Guild Merchant,
             Hermit,
             Noble,
             Outlander,
@@ -108,4 +107,9 @@ public class OutputTexts {
             Weaver's tools
             Woodcarver's tools
             """;
+    public static String chooseArtisanTools = "Choose any artisan's tools your hero will be proficient with\n" + allArtisansTools;
+    public static String chooseArtisanToolPossessionWithPreviousStep = "Choose a set of artisan's tools your hero will have. Might be the same as in the previous step";
+    public static String chooseLuckyCharmForSailor = "Choose your lucky charm (a rabbit foot, a small stone with a hole in the center, or any other trinket)";
+    public static String chooseMusicalInstrumentProficiency = "Choose a musical instrument your hero will be proficient with";
+    public static String choosePossessionsForGuildMerchant = "Would you like to start with artisan's tools of your choice or with a mule and a cart?";
 }

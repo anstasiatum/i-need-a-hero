@@ -13,7 +13,6 @@ public class Entertainer extends Background {
         dndCharacter.getSkillsWithProficiency().add(ACROBATICS);
         dndCharacter.getSkillsWithProficiency().add(PERFORMANCE);
 
-        dndCharacter.getToolProficiency().add("One type of musical instrument");
         dndCharacter.getToolProficiency().add("Disguise Kit");
 
         dndCharacter.setEquipment(dndCharacter.getEquipment() + "An admirer’s favor, a costume, and a pouch with 15 gp.");
