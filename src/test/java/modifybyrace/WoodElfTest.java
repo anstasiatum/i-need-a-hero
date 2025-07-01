@@ -27,13 +27,14 @@ public class WoodElfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        WoodElf woodElf = new WoodElf();
+        woodElf.modifyByRace(dndCharacter);
+
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(13, dndCharacter.getDexterity());
@@ -46,8 +47,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set size")
     void setSizeForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -55,8 +54,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
 
         assertEquals(35, dndCharacter.getSpeed());
     }
@@ -64,9 +61,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Elvish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -75,8 +69,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -84,8 +76,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
 
         String expectedResult = """
                 Trance: Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.
@@ -98,9 +88,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set Perception Proficiency")
     void setArmourProficiencyForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
-
         Set<Skills> expectedResult = new HashSet<>(1);
         expectedResult.add(PERCEPTION);
 
@@ -110,9 +97,6 @@ public class WoodElfTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForWoodElf() {
-        WoodElf woodElf = new WoodElf();
-        woodElf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("Longsword");
         expectedResult.add("Shortsword");

@@ -31,13 +31,14 @@ public class WizardTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Wizard wizard = new Wizard();
+        wizard.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
 
         assertEquals(7, dndCharacter.getHitPoints());
     }
@@ -45,8 +46,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -54,9 +53,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -67,8 +63,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
 
         assertEquals(6, dndCharacter.getHitDice());
     }
@@ -76,8 +70,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
 
         assertEquals(4, dndCharacter.getStartGoldModifier());
     }
@@ -85,9 +77,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(6);
         expectedResult.add("test weapon");
         expectedResult.add("Daggers");
@@ -102,9 +91,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.WISDOM);
         expectedResult.add(Characteristics.INTELLIGENCE);
@@ -115,8 +101,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Spellcasting Ability")
     void setSpellcastingAbilityForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
 
         assertEquals(SpellcastingAbility.INTELLIGENCE, dndCharacter.getSpellcastingAbility());
     }
@@ -124,9 +108,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Spells Known Per Level")
     void setSpellsKnownPerLevelForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
-
         List<Integer> expectedResult = new ArrayList<>(Collections.nCopies(8, 0));
         expectedResult.add(0, 3);
         expectedResult.add(1, 2);
@@ -137,9 +118,6 @@ public class WizardTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForWizard() {
-        Wizard wizard = new Wizard();
-        wizard.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Ritual Casting

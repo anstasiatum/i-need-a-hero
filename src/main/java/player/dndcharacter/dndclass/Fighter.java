@@ -28,7 +28,6 @@ public class Fighter extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setStartGoldModifier(5);
 
         dndCharacter.setHitDice(10);
@@ -55,5 +54,6 @@ public class Fighter extends DndClass {
                 You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.                
                 Once you use this feature, you must finish a short or long rest before you can use it again.
                 """);
+        super.modifyByClass(dndCharacter);
     }
 }

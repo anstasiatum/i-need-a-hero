@@ -31,13 +31,14 @@ public class WarlockTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Warlock warlock = new Warlock();
+        warlock.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
 
         assertEquals(9, dndCharacter.getHitPoints());
     }
@@ -45,8 +46,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -54,9 +53,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -67,8 +63,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
 
         assertEquals(8, dndCharacter.getHitDice());
     }
@@ -76,8 +70,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
 
         assertEquals(4, dndCharacter.getStartGoldModifier());
     }
@@ -85,9 +77,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -98,9 +87,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -111,9 +97,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.WISDOM);
         expectedResult.add(Characteristics.CHARISMA);
@@ -124,8 +107,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Spellcasting Ability")
     void setSpellcastingAbilityForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
 
         assertEquals(SpellcastingAbility.CHARISMA, dndCharacter.getSpellcastingAbility());
     }
@@ -133,8 +114,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Spells Known")
     void setSpellsKnownForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
 
         assertEquals(2, dndCharacter.getSpellsKnown());
     }
@@ -142,9 +121,6 @@ public class WarlockTest {
     @Test
     @DisplayName("Set Spells Known Per Level")
     void setSpellsKnownPerLevelForWarlock() {
-        Warlock warlock = new Warlock();
-        warlock.modifyByClass(dndCharacter);
-
         List<Integer> expectedResult = new ArrayList<>(Collections.nCopies(8, 0));
         expectedResult.add(0, 2);
         expectedResult.add(1, 2);

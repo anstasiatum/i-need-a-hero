@@ -24,13 +24,14 @@ class ForestGnomeTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        ForestGnome forestGnome = new ForestGnome();
+        forestGnome.modifyByRace(dndCharacter);
+
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForForestGnome() {
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(12, dndCharacter.getDexterity());
@@ -43,8 +44,6 @@ class ForestGnomeTest {
     @Test
     @DisplayName("Set size")
     void setSizeForForestGnome() {
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
 
         assertEquals(Size.SMALL, dndCharacter.getSize());
     }
@@ -52,8 +51,6 @@ class ForestGnomeTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForForestGnome() {
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
 
         assertEquals(25, dndCharacter.getSpeed());
     }
@@ -61,9 +58,6 @@ class ForestGnomeTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForForestGnome() {
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Gnomish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -72,8 +66,6 @@ class ForestGnomeTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForForestGnome() {
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -81,9 +73,6 @@ class ForestGnomeTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForForestGnome() {
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
-
         String expectedResult =
                 """
                         You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.

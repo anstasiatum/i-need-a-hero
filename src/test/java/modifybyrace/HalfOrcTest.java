@@ -26,13 +26,13 @@ public class HalfOrcTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        HalfOrc halfOrc = new HalfOrc();
+        halfOrc.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
 
         assertEquals(12, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
@@ -45,8 +45,6 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set size")
     void setSizeForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -54,8 +52,6 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
 
         assertEquals(30, dndCharacter.getSpeed());
     }
@@ -63,9 +59,6 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Orc");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -74,8 +67,6 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -83,9 +74,6 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
-
         String expectedResult =
                 """
                         Relentless Endurance. When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.
@@ -98,11 +86,9 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set proficiency in Intimidation")
     void setProficiencyInIntimidationForHalfOrc() {
-        HalfOrc halfOrc = new HalfOrc();
-        halfOrc.modifyByRace(dndCharacter);
-
         Set<Skills> expectedResult = new HashSet<>(1);
         expectedResult.add(Skills.INTIMIDATION);
+
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 }

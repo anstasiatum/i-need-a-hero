@@ -24,13 +24,13 @@ class RockGnomeTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        RockGnome rockGnome = new RockGnome();
+        rockGnome.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForRockGnome() {
-        RockGnome rockGnome = new RockGnome();
-        rockGnome.modifyByRace(dndCharacter);
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
@@ -43,8 +43,6 @@ class RockGnomeTest {
     @Test
     @DisplayName("Set size")
     void setSizeForRockGnome() {
-        RockGnome rockGnome = new RockGnome();
-        rockGnome.modifyByRace(dndCharacter);
 
         assertEquals(Size.SMALL, dndCharacter.getSize());
     }
@@ -52,8 +50,6 @@ class RockGnomeTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForRockGnome() {
-        RockGnome rockGnome = new RockGnome();
-        rockGnome.modifyByRace(dndCharacter);
 
         assertEquals(25, dndCharacter.getSpeed());
     }
@@ -61,9 +57,6 @@ class RockGnomeTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForRockGnome() {
-        RockGnome rockGnome = new RockGnome();
-        rockGnome.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Gnomish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -72,8 +65,6 @@ class RockGnomeTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForRockGnome() {
-        RockGnome rockGnome = new RockGnome();
-        rockGnome.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -81,9 +72,6 @@ class RockGnomeTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForRockGnome() {
-        RockGnome rockGnome = new RockGnome();
-        rockGnome.modifyByRace(dndCharacter);
-
         String expectedResult =
                 """
                         Artificer’s Lore

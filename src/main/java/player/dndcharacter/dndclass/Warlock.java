@@ -44,5 +44,6 @@ public class Warlock extends DndClass {
         dndCharacter.setSpellsKnown(2);
         dndCharacter.setSpellsKnownPerLevel(0, 2);
         dndCharacter.setSpellsKnownPerLevel(1, 2);
+        super.modifyByClass(dndCharacter);
     }
 }

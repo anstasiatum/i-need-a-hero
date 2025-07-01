@@ -24,13 +24,13 @@ public class HalfElfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        HalfElf halfElf = new HalfElf();
+        halfElf.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForRockGnome() {
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
@@ -43,8 +43,6 @@ public class HalfElfTest {
     @Test
     @DisplayName("Set size")
     void setSizeForRockGnome() {
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -52,8 +50,6 @@ public class HalfElfTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForRockGnome() {
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
 
         assertEquals(30, dndCharacter.getSpeed());
     }
@@ -61,9 +57,6 @@ public class HalfElfTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForRockGnome() {
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Elvish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -72,8 +65,6 @@ public class HalfElfTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForRockGnome() {
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -81,9 +72,6 @@ public class HalfElfTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForRockGnome() {
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
-
         String expectedResult =
                 """
                         Fey Ancestry. You have advantage on saving throws against being charmed, and magic can’t put you to sleep

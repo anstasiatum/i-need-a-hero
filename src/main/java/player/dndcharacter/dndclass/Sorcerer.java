@@ -26,7 +26,6 @@ public class Sorcerer extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setStartGoldModifier(3);
 
         dndCharacter.setHitDice(6);
@@ -45,5 +44,6 @@ public class Sorcerer extends DndClass {
 
         dndCharacter.setSpellsKnownPerLevel(0, 4);
         dndCharacter.setSpellsKnownPerLevel(1, 2);
+        super.modifyByClass(dndCharacter);
     }
 }

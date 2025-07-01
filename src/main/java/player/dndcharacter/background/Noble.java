@@ -13,6 +13,8 @@ public class Noble extends Background {
         dndCharacter.getSkillsWithProficiency().add(HISTORY);
         dndCharacter.getSkillsWithProficiency().add(PERSUASION);
 
-        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A set of fine clothes, a signet ring, a scroll of pedigree, and a purse containing 25 gp");
+        dndCharacter.setGold(dndCharacter.getGold() + 25);
+
+        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A set of fine clothes, a signet ring, a scroll of pedigree. ");
     }
 }

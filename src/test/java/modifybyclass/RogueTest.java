@@ -27,13 +27,14 @@ public class RogueTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Rogue rogue = new Rogue();
+        rogue.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
 
         assertEquals(9, dndCharacter.getHitPoints());
     }
@@ -41,8 +42,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -50,9 +49,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -63,8 +59,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
 
         assertEquals(8, dndCharacter.getHitDice());
     }
@@ -72,8 +66,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
 
         assertEquals(4, dndCharacter.getStartGoldModifier());
     }
@@ -81,9 +73,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -94,9 +83,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(5);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -110,9 +96,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Tool Proficiency")
     void setToolProficiencyForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(1);
         expectedResult.add("Thieves' tools");
 
@@ -122,9 +105,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.DEXTERITY);
         expectedResult.add(Characteristics.INTELLIGENCE);
@@ -135,9 +115,6 @@ public class RogueTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForRogue() {
-        Rogue rogue = new Rogue();
-        rogue.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.

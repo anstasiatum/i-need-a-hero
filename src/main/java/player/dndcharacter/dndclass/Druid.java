@@ -28,7 +28,6 @@ public class Druid extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setStartGoldModifier(2);
 
         dndCharacter.setHitDice(8);
@@ -68,5 +67,6 @@ public class Druid extends DndClass {
                 You can use a druidic focus as a spellcasting focus for your druid spells.
                 """);
         dndCharacter.getLanguages().add("Druidic");
+        super.modifyByClass(dndCharacter);
     }
 }

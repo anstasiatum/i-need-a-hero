@@ -31,13 +31,14 @@ public class DruidTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Druid druid = new Druid();
+        druid.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
 
         assertEquals(9, dndCharacter.getHitPoints());
     }
@@ -45,8 +46,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -54,9 +53,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -68,8 +64,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
 
         assertEquals(8, dndCharacter.getHitDice());
     }
@@ -77,8 +71,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
 
         assertEquals(2, dndCharacter.getStartGoldModifier());
     }
@@ -86,9 +78,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -101,9 +90,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(11);
         expectedResult.add("test weapon");
         expectedResult.add("Clubs");
@@ -123,9 +109,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Tool Proficiency")
     void setToolProficiencyForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(1);
         expectedResult.add("Herbalism kit");
 
@@ -135,9 +118,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.INTELLIGENCE);
         expectedResult.add(Characteristics.WISDOM);
@@ -148,9 +128,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Druidic
@@ -167,8 +144,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Spellcasting Ability")
     void setSpellcastingAbilityForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
 
         assertEquals(SpellcastingAbility.WISDOM, dndCharacter.getSpellcastingAbility());
     }
@@ -176,8 +151,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Spells Known")
     void setSpellsKnownForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
 
         assertEquals(3, dndCharacter.getSpellsKnown());
     }
@@ -185,9 +158,6 @@ public class DruidTest {
     @Test
     @DisplayName("Set Spells Known Per Level")
     void setSpellsKnownPerLevelForDruid() {
-        Druid druid = new Druid();
-        druid.modifyByClass(dndCharacter);
-
         List<Integer> expectedResult = new ArrayList<>(Collections.nCopies(8, 0));
         expectedResult.add(0, 2);
         expectedResult.add(1, 2);

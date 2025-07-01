@@ -602,7 +602,8 @@ public class CreateNewHero {
                 break;
             case CHOOSE_GAMING_SET_FOR_CRIMINAL, CHOOSE_GAMING_SET_FOR_NOBLE,
                  CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER,
-                 CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_OUTLANDER:
+                 CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_OUTLANDER,
+                 CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_SAGE:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                 response = new Response(newState, chooseTraits);
@@ -617,7 +618,7 @@ public class CreateNewHero {
                 newState = new State(CREATE_HERO, CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_OUTLANDER, state.getDndCharacter());
                 response = new Response(newState, chooseMusicalInstrumentProficiency);
                 break;
-            case CHOOSE_SECOND_LANGUAGE_FOR_SAGE, CHOOSE_LANGUAGE_FOR_HERMIT:
+            case CHOOSE_LANGUAGE_FOR_HERMIT:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                 response = new Response(newState, chooseTraits);
@@ -671,13 +672,13 @@ public class CreateNewHero {
                 break;
             case CHOOSE_FIRST_LANGUAGE_FOR_SAGE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_SAGE, state.getDndCharacter());
+                response = new Response(newState, "Enter the second language your sage will know");
+                break;
+            case CHOOSE_SECOND_LANGUAGE_FOR_SAGE:
+                state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_SAGE, state.getDndCharacter());
                 response = new Response(newState, chooseMusicalInstrumentProficiency);
-                break;
-            case CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_SAGE:
-                state.getDndCharacter().getToolProficiency().add(userAnswer);
-                newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_SAGE, state.getDndCharacter());
-                response = new Response(newState, chooseTraits);
                 break;
             case CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR:
                 switch (userAnswer.toLowerCase().trim()) {

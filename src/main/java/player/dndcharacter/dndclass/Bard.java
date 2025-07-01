@@ -19,7 +19,6 @@ public class Bard extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setHitDice(8);
 
         dndCharacter.getArmourProficiency().add("Light Armour");
@@ -53,6 +52,7 @@ public class Bard extends DndClass {
                 Spellcasting Focus
                 You can use a musical instrument as a spellcasting focus for your bard spells.
                 """);
+        super.modifyByClass(dndCharacter);
     }
 }
 

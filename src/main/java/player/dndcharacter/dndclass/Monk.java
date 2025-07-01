@@ -25,12 +25,9 @@ public class Monk extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
-
         dndCharacter.setStartGoldModifier(5);
 
         dndCharacter.setHitDice(8);
-        dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier() + dndCharacter.getWisdomModifier());
 
         dndCharacter.getWeaponProficiency().add("Simple Weapons");
         dndCharacter.getWeaponProficiency().add("Shortswords");
@@ -39,6 +36,9 @@ public class Monk extends DndClass {
 
         dndCharacter.getSavingThrowsWithProficiency().add(Characteristics.STRENGTH);
         dndCharacter.getSavingThrowsWithProficiency().add(Characteristics.DEXTERITY);
+
+        super.modifyByClass(dndCharacter);
+        dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier() + dndCharacter.getWisdomModifier());
 
         dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + """
                 Martial Arts

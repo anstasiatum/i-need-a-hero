@@ -26,9 +26,7 @@ public class Barbarian extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setHitDice(12);
-        dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier() + dndCharacter.getConstitutionModifier());
         dndCharacter.setStartGoldModifier(2);
 
         dndCharacter.getArmourProficiency().add("Light Armour");
@@ -41,6 +39,8 @@ public class Barbarian extends DndClass {
         dndCharacter.getSavingThrowsWithProficiency().add(Characteristics.STRENGTH);
         dndCharacter.getSavingThrowsWithProficiency().add(Characteristics.CONSTITUTION);
 
+        super.modifyByClass(dndCharacter);
+        dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier() + dndCharacter.getConstitutionModifier());
 
         dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + """
                 Rage

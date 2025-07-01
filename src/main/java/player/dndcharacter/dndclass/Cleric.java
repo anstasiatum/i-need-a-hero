@@ -25,7 +25,6 @@ public class Cleric extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setStartGoldModifier(5);
 
         dndCharacter.setHitDice(8);
@@ -48,5 +47,6 @@ public class Cleric extends DndClass {
                 Ritual Casting
                 You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.
                 """);
+        super.modifyByClass(dndCharacter);
     }
 }

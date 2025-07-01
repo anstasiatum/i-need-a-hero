@@ -27,13 +27,14 @@ public class BarbarianTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Barbarian barbarian = new Barbarian();
+        barbarian.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
 
         assertEquals(13, dndCharacter.getHitPoints());
     }
@@ -41,8 +42,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
 
         assertEquals(12, dndCharacter.getArmourClass());
     }
@@ -50,9 +49,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -63,8 +59,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
 
         assertEquals(12, dndCharacter.getHitDice());
     }
@@ -72,8 +66,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
 
         assertEquals(2, dndCharacter.getStartGoldModifier());
     }
@@ -81,9 +73,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("test armour");
         expectedResult.add("Shields");
@@ -96,9 +85,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapon");
@@ -110,9 +96,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.STRENGTH);
         expectedResult.add(Characteristics.CONSTITUTION);
@@ -123,9 +106,6 @@ public class BarbarianTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForBarbarian() {
-        Barbarian barbarian = new Barbarian();
-        barbarian.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Rage

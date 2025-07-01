@@ -25,14 +25,13 @@ public class HillDwarfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        HillDwarf hillDwarf = new HillDwarf();
+        hillDwarf.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
-
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
         assertEquals(14, dndCharacter.getConstitution());
@@ -44,8 +43,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set size")
     void setSizeForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -53,8 +50,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
 
         assertEquals(25, dndCharacter.getSpeed());
     }
@@ -62,10 +57,7 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
-
-        Set<String> expectedResult = Set.of("Dwarfish");
+Set<String> expectedResult = Set.of("Dwarfish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
@@ -73,8 +65,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -82,9 +72,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
-
         String expectedResult = """
                 Your speed is not reduced by wearing heavy armor.
                 Dwarven Resilience. You have advantage on saving throws against poison, and you have resistance against poison damage.
@@ -97,9 +84,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("Battleaxe");
         expectedResult.add("Handaxe");
@@ -112,9 +96,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set Tool Proficiency")
     void setToolProficiencyHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("Artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.");
 
@@ -124,8 +105,6 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForHillDwarf() {
-        HillDwarf hillDwarf = new HillDwarf();
-        hillDwarf.modifyByRace(dndCharacter);
 
         assertEquals(2, dndCharacter.getHitPoints());
     }

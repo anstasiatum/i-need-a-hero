@@ -15,6 +15,8 @@ public class Entertainer extends Background {
 
         dndCharacter.getToolProficiency().add("Disguise Kit");
 
-        dndCharacter.setEquipment(dndCharacter.getEquipment() + "An admirer’s favor, a costume, and a pouch with 15 gp.");
+        dndCharacter.setGold(dndCharacter.getGold() + 15);
+
+        dndCharacter.setEquipment(dndCharacter.getEquipment() + "An admirer’s favor, a costume. ");
     }
 }

@@ -25,13 +25,13 @@ public class MountainDwarfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        MountainDwarf mountainDwarf = new MountainDwarf();
+        mountainDwarf.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
 
         assertEquals(12, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
@@ -44,8 +44,6 @@ public class MountainDwarfTest {
     @Test
     @DisplayName("Set size")
     void setSizeForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -53,8 +51,6 @@ public class MountainDwarfTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
 
         assertEquals(25, dndCharacter.getSpeed());
     }
@@ -62,9 +58,6 @@ public class MountainDwarfTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Dwarfish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -73,8 +66,6 @@ public class MountainDwarfTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -82,9 +73,6 @@ public class MountainDwarfTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
-
         String expectedResult = """
                 Your speed is not reduced by wearing heavy armor.
                 Dwarven Resilience. You have advantage on saving throws against poison, and you have resistance against poison damage.
@@ -97,9 +85,6 @@ public class MountainDwarfTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForMountainDwarf() {
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Light armour");
         expectedResult.add("Medium armour");

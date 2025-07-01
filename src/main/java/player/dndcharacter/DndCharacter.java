@@ -73,12 +73,12 @@ public class DndCharacter {
 
     private Integer draconicAncestryDamage = null;
 
-    private int startGold;
+    private int gold;
     private int startGoldModifier;
-    private int startCopper;
-    private int startSilver;
-    private int startElectrum;
-    private int startPlatinum;
+    private int copper;
+    private int silver;
+    private int electrum;
+    private int platinum;
 
     private int armourClass;
 

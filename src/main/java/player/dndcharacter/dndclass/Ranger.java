@@ -27,7 +27,6 @@ public class Ranger extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
-        super.modifyByClass(dndCharacter);
         dndCharacter.setStartGoldModifier(5);
         dndCharacter.setHitDice(10);
 
@@ -57,5 +56,6 @@ public class Ranger extends DndClass {
                 When you forage, you find twice as much food as you normally would.
                 While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.
                 """);
+        super.modifyByClass(dndCharacter);
     }
 }

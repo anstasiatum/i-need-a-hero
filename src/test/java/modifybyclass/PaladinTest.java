@@ -27,13 +27,14 @@ public class PaladinTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Paladin paladin = new Paladin();
+        paladin.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getHitPoints());
     }
@@ -41,8 +42,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -50,9 +49,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -63,8 +59,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
 
         assertEquals(10, dndCharacter.getHitDice());
     }
@@ -72,8 +66,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
 
         assertEquals(5, dndCharacter.getStartGoldModifier());
     }
@@ -81,9 +73,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(5);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -97,9 +86,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -111,9 +97,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.WISDOM);
         expectedResult.add(Characteristics.CHARISMA);
@@ -124,9 +107,6 @@ public class PaladinTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForPaladin() {
-        Paladin paladin = new Paladin();
-        paladin.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Divine Sense

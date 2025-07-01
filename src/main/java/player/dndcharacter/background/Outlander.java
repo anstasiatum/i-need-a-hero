@@ -13,7 +13,9 @@ public class Outlander extends Background {
         dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
         dndCharacter.getSkillsWithProficiency().add(SURVIVAL);
 
-        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A staff, a hunting trap, a trophy from an animal you killed, a set of traveler's clothes, and a belt pouch containing 10gp");
+        dndCharacter.setGold(dndCharacter.getGold() + 10);
+
+        dndCharacter.setEquipment(dndCharacter.getEquipment() + "A staff, a hunting trap, a trophy from an animal you killed, a set of traveler's clothes. ");
         dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + "Feature: Wanderer\nYou have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you. In addition, you can find food and fresh water for yourself and up to five other people each day, provided that the land offers berries, small game, water, and so forth.");
     }
 }

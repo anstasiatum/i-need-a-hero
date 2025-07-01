@@ -27,13 +27,14 @@ public class FighterTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Fighter fighter = new Fighter();
+        fighter.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getHitPoints());
     }
@@ -41,8 +42,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -50,9 +49,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -63,8 +59,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
 
         assertEquals(10, dndCharacter.getHitDice());
     }
@@ -72,8 +66,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
 
         assertEquals(5, dndCharacter.getStartGoldModifier());
     }
@@ -81,9 +73,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(5);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -97,9 +86,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -111,9 +97,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.STRENGTH);
         expectedResult.add(Characteristics.CONSTITUTION);
@@ -124,9 +107,6 @@ public class FighterTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForFighter() {
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Great Weapon Fighting

@@ -31,13 +31,14 @@ public class SorcererTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Sorcerer sorcerer = new Sorcerer();
+        sorcerer.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         assertEquals(7, dndCharacter.getHitPoints());
     }
@@ -45,8 +46,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -54,8 +53,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
@@ -67,8 +64,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         assertEquals(6, dndCharacter.getHitDice());
     }
@@ -76,8 +71,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         assertEquals(3, dndCharacter.getStartGoldModifier());
     }
@@ -85,9 +78,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(1);
         expectedResult.add("test armour");
 
@@ -97,9 +87,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(6);
         expectedResult.add("test weapon");
         expectedResult.add("Daggers");
@@ -114,9 +101,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.CONSTITUTION);
         expectedResult.add(Characteristics.CHARISMA);
@@ -127,8 +111,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Spellcasting Ability")
     void setSpellcastingAbilityForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         assertEquals(SpellcastingAbility.CHARISMA, dndCharacter.getSpellcastingAbility());
     }
@@ -136,8 +118,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Spells Known")
     void setSpellsKnownForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
 
         assertEquals(2, dndCharacter.getSpellsKnown());
     }
@@ -145,9 +125,6 @@ public class SorcererTest {
     @Test
     @DisplayName("Set Spells Known Per Level")
     void setSpellsKnownPerLevelForSorcerer() {
-        Sorcerer sorcerer = new Sorcerer();
-        sorcerer.modifyByClass(dndCharacter);
-
         List<Integer> expectedResult = new ArrayList<>(Collections.nCopies(8, 0));
         expectedResult.add(0, 4);
         expectedResult.add(1, 2);

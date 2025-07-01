@@ -31,13 +31,14 @@ public class BardTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Bard bard = new Bard();
+        bard.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
 
         assertEquals(9, dndCharacter.getHitPoints());
     }
@@ -45,8 +46,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -54,9 +53,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -67,8 +63,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
 
         assertEquals(8, dndCharacter.getHitDice());
     }
@@ -76,8 +70,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
 
         assertEquals(5, dndCharacter.getStartGoldModifier());
     }
@@ -85,9 +77,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -98,9 +87,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(6);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -115,9 +101,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Tool Proficiency")
     void setToolProficiencyForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(1);
         expectedResult.add("Three musical instruments");
 
@@ -127,9 +110,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.DEXTERITY);
         expectedResult.add(Characteristics.CHARISMA);
@@ -140,9 +120,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Ritual Casting
@@ -161,8 +138,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Spellcasting Ability")
     void setSpellcastingAbilityForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
 
         assertEquals(SpellcastingAbility.CHARISMA, dndCharacter.getSpellcastingAbility());
     }
@@ -170,8 +145,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Spells Known")
     void setSpellsKnownForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
 
         assertEquals(4, dndCharacter.getSpellsKnown());
     }
@@ -179,9 +152,6 @@ public class BardTest {
     @Test
     @DisplayName("Set Spells Known Per Level")
     void setSpellsKnownPerLevelForBard() {
-        Bard bard = new Bard();
-        bard.modifyByClass(dndCharacter);
-
         List<Integer> expectedResult = new ArrayList<>(Collections.nCopies(8, 0));
         expectedResult.add(0, 2);
         expectedResult.add(1, 2);

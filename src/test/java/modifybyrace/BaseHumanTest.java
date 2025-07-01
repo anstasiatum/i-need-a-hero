@@ -21,13 +21,13 @@ public class BaseHumanTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        BaseHuman baseHuman = new BaseHuman();
+        baseHuman.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForBaseHuman() {
-        BaseHuman baseHuman = new BaseHuman();
-        baseHuman.modifyByRace(dndCharacter);
 
         assertEquals(11, dndCharacter.getStrength());
         assertEquals(12, dndCharacter.getDexterity());
@@ -40,8 +40,6 @@ public class BaseHumanTest {
     @Test
     @DisplayName("Set size")
     void setSizeForBaseHuman() {
-        BaseHuman baseHuman = new BaseHuman();
-        baseHuman.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -49,8 +47,6 @@ public class BaseHumanTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForBaseHuman() {
-        BaseHuman baseHuman = new BaseHuman();
-        baseHuman.modifyByRace(dndCharacter);
 
         assertEquals(30, dndCharacter.getSpeed());
     }

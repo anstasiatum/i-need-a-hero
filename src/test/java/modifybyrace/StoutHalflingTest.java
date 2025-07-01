@@ -24,13 +24,13 @@ public class StoutHalflingTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        Stout stout = new Stout();
+        stout.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForLightfootHalfling() {
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(13, dndCharacter.getDexterity());
@@ -43,8 +43,6 @@ public class StoutHalflingTest {
     @Test
     @DisplayName("Set size")
     void setSizeForStoutHalfling() {
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
 
         assertEquals(Size.SMALL, dndCharacter.getSize());
     }
@@ -52,8 +50,6 @@ public class StoutHalflingTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForStoutHalfling() {
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
 
         assertEquals(25, dndCharacter.getSpeed());
     }
@@ -61,8 +57,6 @@ public class StoutHalflingTest {
     @Test
     @DisplayName("Set language")
     void setLanguageStoutHalfling() {
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
 
         Set<String> expectedResult = Set.of("Halfling");
 
@@ -72,8 +66,6 @@ public class StoutHalflingTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForStoutHalfling() {
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -81,9 +73,6 @@ public class StoutHalflingTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForStoutHalfling() {
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
-
         String expectedResult = """
                 Lucky. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.
                 Brave. You have advantage on saving throws against being frightened.

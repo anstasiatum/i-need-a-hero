@@ -23,14 +23,13 @@ class DragonbornTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        Dragonborn dragonborn = new Dragonborn();
+        dragonborn.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForDragonborn() {
-        Dragonborn dragonborn = new Dragonborn();
-        dragonborn.modifyByRace(dndCharacter);
-
         assertEquals(12, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
         assertEquals(12, dndCharacter.getConstitution());
@@ -42,8 +41,6 @@ class DragonbornTest {
     @Test
     @DisplayName("Set size")
     void setSizeForDragonborn() {
-        Dragonborn dragonborn = new Dragonborn();
-        dragonborn.modifyByRace(dndCharacter);
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
@@ -51,8 +48,6 @@ class DragonbornTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForDragonborn() {
-        Dragonborn dragonborn = new Dragonborn();
-        dragonborn.modifyByRace(dndCharacter);
 
         assertEquals(30, dndCharacter.getSpeed());
     }
@@ -60,9 +55,6 @@ class DragonbornTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForDragonborn() {
-        Dragonborn dragonborn = new Dragonborn();
-        dragonborn.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Draconic");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -71,8 +63,6 @@ class DragonbornTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForDragonborn() {
-        Dragonborn dragonborn = new Dragonborn();
-        dragonborn.modifyByRace(dndCharacter);
 
         assertEquals(2, dndCharacter.getDraconicAncestryDamage());
     }
@@ -80,8 +70,6 @@ class DragonbornTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForDragonborn() {
-        Dragonborn dragonborn = new Dragonborn();
-        dragonborn.modifyByRace(dndCharacter);
 
         String expectedResult = """
                         Draconic Ancestry

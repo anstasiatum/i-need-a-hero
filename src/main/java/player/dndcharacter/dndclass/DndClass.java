@@ -23,6 +23,9 @@ public abstract class DndClass {
         dndCharacter.setHitPoints(dndCharacter.getHitDice() + dndCharacter.getConstitutionModifier());
         dndCharacter.setArmourClass(10 + dndCharacter.getDexterityModifier());
         dndCharacter.getLanguages().add("Common");
+
+        ModifyStartGold modifyStartGold = new ModifyStartGold();
+        modifyStartGold.generateStartGold(dndCharacter);
     }
 }
 

@@ -24,13 +24,13 @@ public class LightfootHalflingTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
+        Lightfoot lightfoot = new Lightfoot();
+        lightfoot.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
     void changeBaseCharacteristicsForLightfootHalfling() {
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(13, dndCharacter.getDexterity());
@@ -43,8 +43,6 @@ public class LightfootHalflingTest {
     @Test
     @DisplayName("Set size")
     void setSizeForLightfootHalfling() {
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
 
         assertEquals(Size.SMALL, dndCharacter.getSize());
     }
@@ -52,8 +50,6 @@ public class LightfootHalflingTest {
     @Test
     @DisplayName("Set speed")
     void setSpeedForLightfootHalfling() {
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
 
         assertEquals(25, dndCharacter.getSpeed());
     }
@@ -61,9 +57,6 @@ public class LightfootHalflingTest {
     @Test
     @DisplayName("Set language")
     void setLanguageLightfootHalfling() {
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
-
         Set<String> expectedResult = Set.of("Halfling");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -72,8 +65,6 @@ public class LightfootHalflingTest {
     @Test
     @DisplayName("Set draconic ancestry damage")
     void setDraconicAncestryDamageForLightfootHalfling() {
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
@@ -81,9 +72,6 @@ public class LightfootHalflingTest {
     @Test
     @DisplayName("Set features and traits")
     void setFeaturesAndTraitsForLightfootHalfling() {
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
-
         String expectedResult = """
                 Lucky. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.
                 Brave. You have advantage on saving throws against being frightened.

@@ -27,13 +27,14 @@ public class RangerTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Ranger ranger = new Ranger();
+        ranger.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getHitPoints());
     }
@@ -41,8 +42,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -50,9 +49,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -63,8 +59,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
 
         assertEquals(10, dndCharacter.getHitDice());
     }
@@ -72,8 +66,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
 
         assertEquals(5, dndCharacter.getStartGoldModifier());
     }
@@ -81,9 +73,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -96,9 +85,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -110,9 +96,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.STRENGTH);
         expectedResult.add(Characteristics.DEXTERITY);
@@ -123,9 +106,6 @@ public class RangerTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForRanger() {
-        Ranger ranger = new Ranger();
-        ranger.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Favoured Enemy

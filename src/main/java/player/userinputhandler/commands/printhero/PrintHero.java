@@ -384,6 +384,9 @@ public class PrintHero {
         PDField hitDice = acroForm.getField("HD");
         hitDice.setValue(String.valueOf(dndCharacter.getHitDice()));
 
+        PDField gold = acroForm.getField("GP");
+        gold.setValue(String.valueOf(dndCharacter.getGold()));
+
         PDField equipment = acroForm.getField("Equipment");
         equipment.setValue(String.valueOf(dndCharacter.getEquipment()));
 

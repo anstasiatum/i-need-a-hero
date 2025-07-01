@@ -31,13 +31,14 @@ public class ClericTest {
         dndCharacter.getArmourProficiency().add("test armour");
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
+
+        Cleric cleric = new Cleric();
+        cleric.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
 
         assertEquals(9, dndCharacter.getHitPoints());
     }
@@ -45,8 +46,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Armour Class")
     void setArmourClassForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
@@ -54,9 +53,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Languages")
     void setLanguagesForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -67,8 +63,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Hit Dice")
     void setHitDiceForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
 
         assertEquals(8, dndCharacter.getHitDice());
     }
@@ -76,8 +70,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Gold Modifier")
     void setStartGoldModifierForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
 
         assertEquals(5, dndCharacter.getStartGoldModifier());
     }
@@ -85,9 +77,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Armour Proficiency")
     void setArmourProficiencyForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(4);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -100,9 +89,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Weapon Proficiency")
     void setWeaponProficiencyForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
-
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -113,9 +99,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
-
         Set<Characteristics> expectedResult = new HashSet<>(2);
         expectedResult.add(Characteristics.WISDOM);
         expectedResult.add(Characteristics.CHARISMA);
@@ -126,9 +109,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Features And Proficiencies")
     void setFeaturesAndTraitsForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
-
         String expectedResult = """
                 test feature
                 Ritual Casting
@@ -141,8 +121,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Spellcasting Ability")
     void setSpellcastingAbilityForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
 
         assertEquals(SpellcastingAbility.WISDOM, dndCharacter.getSpellcastingAbility());
     }
@@ -150,8 +128,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Spells Known")
     void setSpellsKnownForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
 
         assertEquals(3, dndCharacter.getSpellsKnown());
     }
@@ -159,9 +135,6 @@ public class ClericTest {
     @Test
     @DisplayName("Set Spells Known Per Level")
     void setSpellsKnownPerLevelForCleric() {
-        Cleric cleric = new Cleric();
-        cleric.modifyByClass(dndCharacter);
-
         List<Integer> expectedResult = new ArrayList<>(Collections.nCopies(8, 0));
         expectedResult.add(0, 3);
         expectedResult.add(1, 2);
