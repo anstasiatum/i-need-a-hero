@@ -7,7 +7,9 @@ import player.userinputhandler.BotAnswer;
 import static player.userinputhandler.UserInputHandler.handleUserInput;
 
 public class Bot {
+
     public static void telegramBotListener(String botToken) {
+
         TelegramBot bot = new TelegramBot(botToken);
         bot.setUpdatesListener(updates -> {
             updates.forEach(update -> {
@@ -18,7 +20,8 @@ public class Bot {
                 if (botAnswer.getFile() != null) {
                     bot.execute(new SendDocument(chatId, botAnswer.getFile()));
                 } else {
-                    bot.execute(new SendMessage(chatId, botAnswer.getAnswer()));
+                    SendMessage request = new SendMessage(chatId, botAnswer.getAnswer());
+                    bot.execute(request);
                 }
             });
             return UpdatesListener.CONFIRMED_UPDATES_ALL;

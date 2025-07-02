@@ -24,8 +24,14 @@ public class DndCharacter {
     private String characterName;
 
     private String background;
+    private String backstory;
 
-    private Appearance appearance;
+    private String age;
+    private String height;
+    private String weight;
+    private String eyes;
+    private String skin;
+    private String hair;
 
     private Size size;
 

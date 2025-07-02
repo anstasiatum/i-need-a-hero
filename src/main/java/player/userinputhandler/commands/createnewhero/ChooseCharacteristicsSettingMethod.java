@@ -11,7 +11,7 @@ import static player.userinputhandler.enums.Steps.SET_STRENGTH;
 
 public class ChooseCharacteristicsSettingMethod {
     public static Response chooseCharacteristicsSettingMethod(String userAnswer, DndCharacter dndCharacter) {
-        Response response = null;
+        Response response;
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {
             case "a" -> {

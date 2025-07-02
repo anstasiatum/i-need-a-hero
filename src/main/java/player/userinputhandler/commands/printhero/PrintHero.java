@@ -98,7 +98,7 @@ public class PrintHero {
             PDAcroForm acroForm = docCatalog.getAcroForm();
             DndCharacter dndCharacter = characterJpaDao.findByCharacterId(characterId, chatId).getDndCharacter();
             fillForm(dndCharacter, acroForm);
-            File tempFile = File.createTempFile("DndCharacter-", ".pdf");
+            File tempFile = File.createTempFile("DndCharacter-" + dndCharacter.getCharacterName(), ".pdf");
             document.save(tempFile);
             System.out.println(tempFile.getAbsolutePath());
             return tempFile;
@@ -408,6 +408,33 @@ public class PrintHero {
         // Second page
         PDField characterNameTwo = acroForm.getField("CharacterName 2");
         characterNameTwo.setValue(dndCharacter.getCharacterName());
+
+        PDField age = acroForm.getField("Age");
+        age.setValue(dndCharacter.getAge());
+
+        PDField height = acroForm.getField("Height");
+        height.setValue(dndCharacter.getHeight());
+
+        PDField weight = acroForm.getField("Weight");
+        weight.setValue(dndCharacter.getWeight());
+
+        PDField eyes = acroForm.getField("Eyes");
+        eyes.setValue(dndCharacter.getEyes());
+
+        PDField skin = acroForm.getField("Skin");
+        skin.setValue(dndCharacter.getSkin());
+
+        PDField hair = acroForm.getField("Hair");
+        hair.setValue(dndCharacter.getHair());
+
+        PDField alliesAndOrganizations = acroForm.getField("Allies");
+        alliesAndOrganizations.setValue(dndCharacter.getAlliesAndOrganizations());
+
+        PDField backstory = acroForm.getField("Backstory");
+        backstory.setValue(dndCharacter.getBackstory());
+
+        PDField treasure = acroForm.getField("Treasure");
+        treasure.setValue(dndCharacter.getTreasure());
 
         // Third page
         PDField spellcastingClass = acroForm.getField("Spellcasting Class 2");

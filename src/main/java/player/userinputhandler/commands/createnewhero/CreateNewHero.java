@@ -75,7 +75,12 @@ import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_SAG
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_SKILL_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_TROPHY_FOR_SOLDIER;
 import static player.userinputhandler.enums.Steps.CHOOSE_WEAPON_FOR_GLADIATOR;
+import static player.userinputhandler.enums.Steps.DESCRIBE_EYES;
+import static player.userinputhandler.enums.Steps.DESCRIBE_HAIR;
+import static player.userinputhandler.enums.Steps.DESCRIBE_SKIN;
 import static player.userinputhandler.enums.Steps.ENTER_ALIGNMENT;
+import static player.userinputhandler.enums.Steps.ENTER_ALLIES_AND_ORGANIZATIONS;
+import static player.userinputhandler.enums.Steps.ENTER_CHARACTER_BACKSTORY;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_CLERIC;
@@ -105,15 +110,19 @@ import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_WIZARD;
 import static player.userinputhandler.enums.Steps.ENTER_THIRD_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_THIRD_SKILL_FOR_RANGER;
 import static player.userinputhandler.enums.Steps.ENTER_THIRD_SKILL_FOR_ROGUE;
-import static player.userinputhandler.enums.Steps.SET_BONDS_AND_FINISH;
+import static player.userinputhandler.enums.Steps.ENTER_TREASURE_AND_FINISH;
+import static player.userinputhandler.enums.Steps.SET_AGE;
+import static player.userinputhandler.enums.Steps.SET_BONDS;
 import static player.userinputhandler.enums.Steps.SET_CHARISMA;
 import static player.userinputhandler.enums.Steps.SET_CONSTITUTION;
 import static player.userinputhandler.enums.Steps.SET_DEXTERITY;
 import static player.userinputhandler.enums.Steps.SET_FLAWS;
+import static player.userinputhandler.enums.Steps.SET_HEIGHT;
 import static player.userinputhandler.enums.Steps.SET_IDEALS;
 import static player.userinputhandler.enums.Steps.SET_INTELLIGENCE;
 import static player.userinputhandler.enums.Steps.SET_PERSONALITY_TRAITS;
 import static player.userinputhandler.enums.Steps.SET_STRENGTH;
+import static player.userinputhandler.enums.Steps.SET_WEIGHT;
 import static player.userinputhandler.enums.Steps.SET_WISDOM;
 
 public class CreateNewHero {
@@ -132,7 +141,7 @@ public class CreateNewHero {
             case ENTER_NAME:
                 state.getDndCharacter().setCharacterName(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, state.getDndCharacter());
-                response = new Response(newState, "Now, let's get your base characteristics. A.You can roll them yourself or B. I will roll them for you. Enter A or B");
+                response = new Response(newState, "Now let's get your base characteristics. A.You can roll them yourself or B. I will roll them for you. Enter A or B");
                 break;
             case CHOOSE_ROLLING_CHARACTERISTICS_METHOD:
                 response = chooseCharacteristicsSettingMethod(userAnswer, state.getDndCharacter());
@@ -790,11 +799,56 @@ public class CreateNewHero {
                 break;
             case SET_FLAWS:
                 state.getDndCharacter().setFlaws(userAnswer);
-                newState = new State(CREATE_HERO, SET_BONDS_AND_FINISH, state.getDndCharacter());
+                newState = new State(CREATE_HERO, SET_BONDS, state.getDndCharacter());
                 response = new Response(newState, "Set your character's bonds");
                 break;
-            case SET_BONDS_AND_FINISH:
+            case SET_BONDS:
                 state.getDndCharacter().setBonds(userAnswer);
+                newState = new State(CREATE_HERO, SET_AGE, state.getDndCharacter());
+                response = new Response(newState, "Time to describe your character's appearance. What is their age?");
+                break;
+            case SET_AGE:
+                state.getDndCharacter().setAge(userAnswer);
+                newState = new State(CREATE_HERO, SET_HEIGHT, state.getDndCharacter());
+                response = new Response(newState, "What is their height?");
+                break;
+            case SET_HEIGHT:
+                state.getDndCharacter().setHeight(userAnswer);
+                newState = new State(CREATE_HERO, SET_WEIGHT, state.getDndCharacter());
+                response = new Response(newState, "What is their weight?");
+                break;
+            case SET_WEIGHT:
+                state.getDndCharacter().setWeight(userAnswer);
+                newState = new State(CREATE_HERO, DESCRIBE_EYES, state.getDndCharacter());
+                response = new Response(newState, "What about eyes?");
+                break;
+            case DESCRIBE_EYES:
+                state.getDndCharacter().setEyes(userAnswer);
+                newState = new State(CREATE_HERO, DESCRIBE_SKIN, state.getDndCharacter());
+                response = new Response(newState, "Skin?");
+                break;
+            case DESCRIBE_SKIN:
+                state.getDndCharacter().setSkin(userAnswer);
+                newState = new State(CREATE_HERO, DESCRIBE_HAIR, state.getDndCharacter());
+                response = new Response(newState, "Hair?");
+                break;
+            case DESCRIBE_HAIR:
+                state.getDndCharacter().setHair(userAnswer);
+                newState = new State(CREATE_HERO, ENTER_ALLIES_AND_ORGANIZATIONS, state.getDndCharacter());
+                response = new Response(newState, "Mention any allies and organizations your hero is familiar with");
+                break;
+            case ENTER_ALLIES_AND_ORGANIZATIONS:
+                state.getDndCharacter().setAlliesAndOrganizations(userAnswer);
+                newState = new State(CREATE_HERO, ENTER_CHARACTER_BACKSTORY, state.getDndCharacter());
+                response = new Response(newState, "What is your character's backstory?");
+                break;
+            case ENTER_CHARACTER_BACKSTORY:
+                state.getDndCharacter().setBackstory(userAnswer);
+                newState = new State(CREATE_HERO, ENTER_TREASURE_AND_FINISH, state.getDndCharacter());
+                response = new Response(newState, "Mention any treasure your hero might possess");
+                break;
+            case ENTER_TREASURE_AND_FINISH:
+                state.getDndCharacter().setTreasure(userAnswer);
                 try {
                     Character character = new Character(null, chatId, state.getDndCharacter());
                     characterJpaDao.save(character);
