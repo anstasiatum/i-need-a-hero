@@ -4,24 +4,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.FolkHero;
+import player.dndcharacter.background.Soldier;
 import player.dndcharacter.dndcharacterenums.Skills;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
+import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
+import static player.dndcharacter.dndcharacterenums.Skills.INTIMIDATION;
 
-public class FolkHeroTest {
+public class SoldierTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {
         Set<Skills> skills = new HashSet<>(1);
-        skills.add(ATHLETICS);
+        skills.add(INSIGHT);
         dndCharacter.setSkillsWithProficiency(skills);
 
         dndCharacter.setGold(10);
@@ -30,31 +30,31 @@ public class FolkHeroTest {
         dndCharacter.setFeaturesAndTraits("test feature. ");
         dndCharacter.getToolProficiency().add("Test tool");
 
-        FolkHero folkHero = new FolkHero();
-        folkHero.modifyByBackground(dndCharacter);
+        Soldier soldier = new Soldier();
+        soldier.modifyByBackground(dndCharacter);
     }
 
     @Test
     @DisplayName("Set background")
-    void setBackgroundForFolkHero() {
+    void setBackgroundForSoldier() {
 
-        assertEquals("Noble", dndCharacter.getBackground());
+        assertEquals("Soldier", dndCharacter.getBackground());
     }
 
     @Test
     @DisplayName("Set skills with proficiency")
-    void setSkillsWithProficiencyForFolkHero() {
+    void setSkillsWithProficiencyForSoldier() {
         Set<Skills> expectedResult = new HashSet<>(3);
+        expectedResult.add(INSIGHT);
         expectedResult.add(ATHLETICS);
-        expectedResult.add(ANIMAL_HANDLING);
-        expectedResult.add(SURVIVAL);
+        expectedResult.add(INTIMIDATION);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
     @Test
     @DisplayName("Set tool proficiency")
-    void setToolProficiencyForFolkHero() {
+    void setToolProficiencyForSoldier() {
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Vehicles (land)");
         expectedResult.add("Test tool");
@@ -64,23 +64,23 @@ public class FolkHeroTest {
 
     @Test
     @DisplayName("Set gold")
-    void setGoldForFolkHero() {
+    void setGoldForSoldier() {
 
         assertEquals(20, dndCharacter.getGold());
     }
 
     @Test
     @DisplayName("Set equipment")
-    void setEquipmentForFolkHero() {
-        String expectedResult = "test equipment. A shovel, an iron pot, a set of common clothes. ";
+    void setEquipmentForSoldier() {
+        String expectedResult = "test equipment. An insignia of rank, a set of common clothes. ";
 
         assertEquals(expectedResult, dndCharacter.getEquipment());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForFolkHero() {
-        String expectedResult = "test feature. Rustic Hospitality\nSince you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you. ";
+    void setFeaturesAndTraitsForSoldier() {
+        String expectedResult = "test feature. Military Rank\nYou have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses for temporary use. You can also usually gain access to friendly military encampments and fortresses where your rank is recognized. ";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

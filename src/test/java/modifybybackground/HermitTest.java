@@ -4,18 +4,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.FolkHero;
+import player.dndcharacter.background.Hermit;
 import player.dndcharacter.dndcharacterenums.Skills;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
+import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
+import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
 
-public class FolkHeroTest {
+public class HermitTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -30,33 +30,33 @@ public class FolkHeroTest {
         dndCharacter.setFeaturesAndTraits("test feature. ");
         dndCharacter.getToolProficiency().add("Test tool");
 
-        FolkHero folkHero = new FolkHero();
-        folkHero.modifyByBackground(dndCharacter);
+        Hermit hermit = new Hermit();
+        hermit.modifyByBackground(dndCharacter);
     }
 
     @Test
     @DisplayName("Set background")
-    void setBackgroundForFolkHero() {
+    void setBackgroundForHermit() {
 
-        assertEquals("Noble", dndCharacter.getBackground());
+        assertEquals("Hermit", dndCharacter.getBackground());
     }
 
     @Test
     @DisplayName("Set skills with proficiency")
-    void setSkillsWithProficiencyForFolkHero() {
+    void setSkillsWithProficiencyForHermit() {
         Set<Skills> expectedResult = new HashSet<>(3);
         expectedResult.add(ATHLETICS);
-        expectedResult.add(ANIMAL_HANDLING);
-        expectedResult.add(SURVIVAL);
+        expectedResult.add(MEDICINE);
+        expectedResult.add(RELIGION);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
     @Test
     @DisplayName("Set tool proficiency")
-    void setToolProficiencyForFolkHero() {
+    void setToolProficiencyForHermit() {
         Set<String> expectedResult = new HashSet<>(2);
-        expectedResult.add("Vehicles (land)");
+        expectedResult.add("Herbalism Kit");
         expectedResult.add("Test tool");
 
         assertEquals(expectedResult, dndCharacter.getToolProficiency());
@@ -64,23 +64,23 @@ public class FolkHeroTest {
 
     @Test
     @DisplayName("Set gold")
-    void setGoldForFolkHero() {
+    void setGoldForHermit() {
 
-        assertEquals(20, dndCharacter.getGold());
+        assertEquals(15, dndCharacter.getGold());
     }
 
     @Test
     @DisplayName("Set equipment")
-    void setEquipmentForFolkHero() {
-        String expectedResult = "test equipment. A shovel, an iron pot, a set of common clothes. ";
+    void setEquipmentForHermit() {
+        String expectedResult = "test equipment. A scroll case stuffed full of notes from your studies or prayers, a winter blanket, a set of common clothes, an herbalism kit. ";
 
         assertEquals(expectedResult, dndCharacter.getEquipment());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForFolkHero() {
-        String expectedResult = "test feature. Rustic Hospitality\nSince you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you. ";
+    void setFeaturesAndTraitsForHermit() {
+        String expectedResult = "test feature. Discovery\n The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society. ";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }
