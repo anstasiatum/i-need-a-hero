@@ -38,7 +38,7 @@ public class FolkHeroTest {
     @DisplayName("Set background")
     void setBackgroundForFolkHero() {
 
-        assertEquals("Noble", dndCharacter.getBackground());
+        assertEquals("Folk Hero", dndCharacter.getBackground());
     }
 
     @Test
