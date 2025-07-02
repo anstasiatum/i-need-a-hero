@@ -14,17 +14,17 @@ public class ChooseCharacteristicsSettingMethod {
         Response response;
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {
-            case "a" -> {
+            case "i'll roll myself" -> {
                 newState = new State(CREATE_HERO, SET_STRENGTH, dndCharacter);
                 yield new Response(newState, "Set strength:");
             }
-            case "b" -> {
+            case "roll for me, bot" -> {
                 newState = new State(CREATE_HERO, SET_STRENGTH, dndCharacter);
                 yield new Response(newState, "Here is your result: \n" + generateCharacteristics() + "\n Set strength:");
             }
             default -> {
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, dndCharacter);
-                yield new Response(newState, "Choose A or B");
+                yield new Response(newState, "Choose \"Roll for me\" and the bot will roll the dice or \"I'll roll myself\" to roll the dice yourself");
             }
         };
         return response;

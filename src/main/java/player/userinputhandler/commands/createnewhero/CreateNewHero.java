@@ -141,7 +141,7 @@ public class CreateNewHero {
             case ENTER_NAME:
                 state.getDndCharacter().setCharacterName(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, state.getDndCharacter());
-                response = new Response(newState, "Now let's get your base characteristics. A.You can roll them yourself or B. I will roll them for you. Enter A or B");
+                response = new Response(newState, "Now let's get your base characteristics. You can roll them yourself or I will roll them for you");
                 break;
             case CHOOSE_ROLLING_CHARACTERISTICS_METHOD:
                 response = chooseCharacteristicsSettingMethod(userAnswer, state.getDndCharacter());
