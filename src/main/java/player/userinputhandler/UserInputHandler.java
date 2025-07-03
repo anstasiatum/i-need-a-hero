@@ -42,7 +42,7 @@ public class UserInputHandler {
                     break;
                 default:
                     textAnswer = """
-                            Sorry, I can't understand your request. Here is my list of commands:
+                            Sorry, I don't understand your request. Here is my list of commands:
                              /newhero
                              /printhero
                              /dismisshero

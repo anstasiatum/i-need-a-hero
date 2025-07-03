@@ -6,7 +6,6 @@ import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 
 public class Buttons {
     public static Keyboard sendReplyKeyboard() {
-
         // Create keyboard buttons
 
         // CHOOSE_ROLLING_CHARACTERISTICS_METHOD
@@ -118,7 +117,7 @@ public class Buttons {
         KeyboardButton weaverTools = new KeyboardButton("Weaver's tools");
         KeyboardButton woodcarverTools = new KeyboardButton("Woodcarver's tools");
 
-        // CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT
+        // CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT
         KeyboardButton artisanTools = new KeyboardButton("Artisan's tools");
         KeyboardButton muleAndCart = new KeyboardButton("A mule and a cart");
 
@@ -128,7 +127,7 @@ public class Buttons {
         // CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE
         KeyboardButton knight = new KeyboardButton("Knight");
 
-        // CHOOSE_TROPHY_FOR_SOLDIER
+        // CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER
         KeyboardButton dice = new KeyboardButton("Bone dice");
         KeyboardButton cards = new KeyboardButton("Deck of cards");
 
@@ -152,12 +151,113 @@ public class Buttons {
         KeyboardButton white = new KeyboardButton("White");
 
         // Create the reply keyboard markup
+
+        // Keyboard for rolling characteristics method
         ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(
                 rollCharacteristicsByUser, rollCharacteristicsByBot)
                 .resizeKeyboard(true)  // Make keyboard smaller
                 .oneTimeKeyboard(true); // Hide after use
 
+        // Keyboard for choosing races
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{dragonborn, hillDwarf, mountainDwarf, darkElf, highElf},
+                new KeyboardButton[]{woodElf, forestGnome, rockGnome, halfElf, lightfootHalfling},
+                new KeyboardButton[]{stoutHalfling, halfOrc, baseHuman, variantHuman, tiefling})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Keyboard for choosing classes
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{barbarian, bard, cleric, druid},
+                new KeyboardButton[]{fighter, paladin, ranger, rogue},
+                new KeyboardButton[]{monk, sorcerer, warlock, wizard})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Keyboard for choosing alignments
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{lawfulGood, neutralGood, chaoticGood},
+                new KeyboardButton[]{lawfulNeutral, trueNeutral, chaoticNeutral},
+                new KeyboardButton[]{lawfulEvil, neutralEvil, chaoticEvil})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Keyboard for choosing backgrounds
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{acolyte, charlatan, criminal, entertainer, folkHero},
+                new KeyboardButton[]{guildArtisan, hermit, noble, outlander},
+                new KeyboardButton[]{sage, sailor, soldier, urchin, custom})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Keyboard for choosing abilities
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{strength, dexterity, constitution},
+                new KeyboardButton[]{intelligence, wisdom, charisma})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Keyboard for artisan's tools
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{alchemistSupplies, brewerSupplies, calligrapherSupplies, carpenterTools},
+                new KeyboardButton[]{cartographerTools, cobblerTools, cookUtensils, glassblowerTools},
+                new KeyboardButton[]{jewelerTools, leatherworkerTools, masonTools, painterSupplies},
+                new KeyboardButton[]{potterTools, smithTools, tinkerTools, weaverTools, woodcarverTools})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Keyboard for artisan's tools
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{alchemistSupplies, brewerSupplies, calligrapherSupplies, carpenterTools},
+                new KeyboardButton[]{cartographerTools, cobblerTools, cookUtensils, glassblowerTools},
+                new KeyboardButton[]{jewelerTools, leatherworkerTools, masonTools, painterSupplies},
+                new KeyboardButton[]{potterTools, smithTools, tinkerTools, weaverTools, woodcarverTools})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{artisanTools, muleAndCart})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // CHOOSE_ENTERTAINER_OR_GLADIATOR
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{entertainer, gladiator})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{noble, knight})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{dice, cards})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{guildArtisan, guildMerchant})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{additionalLanguage, navigatorTools, artisanTools})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
+
+        // Draconic ancestry
+        new ReplyKeyboardMarkup(
+                new KeyboardButton[]{black, blue, brass, bronze},
+                new KeyboardButton[]{copper, gold, green},
+                new KeyboardButton[]{red, silver, white})
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true);
         return keyboard;
     }
 }
-

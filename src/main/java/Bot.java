@@ -3,9 +3,9 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 import player.userinputhandler.BotAnswer;
-import player.userinputhandler.commands.createnewhero.Buttons;
 
 import static player.userinputhandler.UserInputHandler.handleUserInput;
+import static player.userinputhandler.commands.createnewhero.Buttons.sendReplyKeyboard;
 
 public class Bot {
 
@@ -22,7 +22,7 @@ public class Bot {
                     bot.execute(new SendDocument(chatId, botAnswer.getFile()));
                 } else {
                     SendMessage request = new SendMessage(chatId, botAnswer.getAnswer());
-                    request.replyMarkup(Buttons.sendReplyKeyboard());
+                    request.replyMarkup(sendReplyKeyboard());
                     bot.execute(request);
                 }
             });

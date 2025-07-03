@@ -724,7 +724,7 @@ public class CreateNewHero {
                     case "guild merchant":
                         state.getDndCharacter().setBackground(userAnswer);
                         newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or one type of artisan's tools");
+                        response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?");
                         break;
                     case "guild artisan":
                         state.getDndCharacter().setBackground(userAnswer);
