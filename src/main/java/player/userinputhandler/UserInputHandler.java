@@ -18,60 +18,36 @@ public class UserInputHandler {
     private static final Map<Long, State> statesByChatId = new HashMap<>();
 
     public static BotAnswer handleUserInput(Update update) {
-        String textAnswer;
-        File file = null;
         Long chatId = update.message().chat().id();
         State chatState = statesByChatId.get(chatId);
-        Response response;
+        Response response = null;
         if (chatState == null) {
-            switch (update.message().text()) {
-                case "/newhero":
-                    response = createNewHero();
-                    statesByChatId.put(chatId, response.getState());
-                    textAnswer = response.getTextAnswer();
-                    break;
-                case "/dismisshero":
-                    response = deleteHero();
-                    statesByChatId.put(chatId, response.getState());
-                    textAnswer = response.getTextAnswer();
-                    break;
-                case "/printhero":
-                    response = printHero(chatId);
-                    statesByChatId.put(chatId, response.getState());
-                    textAnswer = response.getTextAnswer();
-                    break;
-                default:
-                    textAnswer = """
+            response = switch (update.message().text()) {
+                case "/newhero" -> createNewHero();
+                case "/dismisshero" -> deleteHero();
+                case "/printhero" -> printHero(chatId);
+                default -> {
+                    String textAnswer = """
                             Sorry, I don't understand your request. Here is my list of commands:
                              /newhero
                              /printhero
                              /dismisshero
                             """;
-                    break;
-            }
+                    yield new Response(textAnswer);
+                }
+            };
         } else {
-            switch (chatState.getProcess()) {
-                case CREATE_HERO:
-                    response = heroCreationAnswer(chatState, chatId, update.message().text());
-                    textAnswer = response.getTextAnswer();
-                    statesByChatId.put(chatId, response.getState());
-                    break;
-                case DELETE_HERO:
-                    response = heroDeletionAnswer(chatState, chatId, update.message().text());
-                    textAnswer = response.getTextAnswer();
-                    statesByChatId.put(chatId, response.getState());
-                    break;
-                case PRINT_HERO:
-                    response = heroPrintingAnswer(chatState, update.message().text(), chatId);
-                    file = response.getFile();
-                    textAnswer = response.getTextAnswer();
-                    statesByChatId.put(chatId, response.getState());
-                    break;
-                default:
-                    textAnswer = "Wrong process type";
-                    break;
-            }
+            response = switch (chatState.getProcess()) {
+                case CREATE_HERO -> heroCreationAnswer(chatState, chatId, update.message().text());
+                case DELETE_HERO -> heroDeletionAnswer(chatState, chatId, update.message().text());
+                case PRINT_HERO -> heroPrintingAnswer(chatState, update.message().text(), chatId);
+            };
         }
-        return new BotAnswer(textAnswer, file);
+
+        if (response.getState() != null) {
+            statesByChatId.put(chatId, response.getState());
+        }
+
+        return new BotAnswer(response.getTextAnswer(), response.getFile(), response.isHasFixedOptions(), response.getOptionTexts());
     }
 }

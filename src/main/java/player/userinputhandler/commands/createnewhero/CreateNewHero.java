@@ -19,6 +19,9 @@ import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
@@ -137,12 +140,15 @@ public class CreateNewHero {
     public static Response heroCreationAnswer(State state, Long chatId, String userAnswer) {
         Response response;
         State newState;
+        List<String> options = new ArrayList<>();
 
         switch (state.getStepId()) {
             case ENTER_NAME:
                 state.getDndCharacter().setCharacterName(userAnswer);
+                options.add("Roll for me, bot");
+                options.add("I'll roll myself");
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, state.getDndCharacter());
-                response = new Response(newState, "Now let's get your base characteristics. You can roll them yourself or I will roll them for you");
+                response = new Response(newState, "Now let's get your base characteristics. You can roll them yourself or I will roll them for you", options);
                 break;
             case CHOOSE_ROLLING_CHARACTERISTICS_METHOD:
                 response = chooseCharacteristicsSettingMethod(userAnswer, state.getDndCharacter());

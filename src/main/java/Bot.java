@@ -1,5 +1,7 @@
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
+import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 import player.userinputhandler.BotAnswer;
@@ -36,6 +38,22 @@ public class Bot {
             }
         });
     }
+
+//    public static BaseRequest buildRequest(BotAnswer botAnswer, Long chatId) {
+//        if (botAnswer.getFile() != null) {
+//            new SendDocument(chatId, botAnswer.getFile());
+//        } else if (botAnswer.isHasOptions()) {
+//            ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(
+//                    String.valueOf(botAnswer.getOptionTexts()))
+//                    .resizeKeyboard(true)  // Make keyboard smaller
+//                    .oneTimeKeyboard(true); // Hide after use
+//
+//        } else {
+//            SendMessage request = new SendMessage(chatId, botAnswer.getAnswer());
+//            request.replyMarkup(sendReplyKeyboard());
+//        }
+//        return;
+//    }
 
     public static void main(String[] args) {
         telegramBotListener(args[0]);
