@@ -13,7 +13,7 @@ public class Buttons {
         KeyboardButton rollCharacteristicsByUser = new KeyboardButton("Roll for me, bot");
         KeyboardButton rollCharacteristicsByBot = new KeyboardButton("I'll roll myself");
 
-        // CHOOSE_RACE
+        // Races
         KeyboardButton dragonborn = new KeyboardButton("Dragonborn");
         KeyboardButton hillDwarf = new KeyboardButton("Hill Dwarf");
         KeyboardButton mountainDwarf = new KeyboardButton("Mountain Dwarf");
@@ -30,7 +30,7 @@ public class Buttons {
         KeyboardButton variantHuman = new KeyboardButton("Variant Human");
         KeyboardButton tiefling = new KeyboardButton("Tiefling");
 
-        // CHOOSE_CLASS
+        // Classes
         KeyboardButton barbarian = new KeyboardButton("Barbarian");
         KeyboardButton bard = new KeyboardButton("Bard");
         KeyboardButton cleric = new KeyboardButton("Cleric");
@@ -139,6 +139,17 @@ public class Buttons {
         KeyboardButton additionalLanguage = new KeyboardButton("Additional language");
         KeyboardButton navigatorTools = new KeyboardButton("Navigator's tools");
 
+        // Draconic ancestry
+        KeyboardButton black = new KeyboardButton("Black");
+        KeyboardButton blue = new KeyboardButton("Blue");
+        KeyboardButton brass = new KeyboardButton("Brass");
+        KeyboardButton bronze = new KeyboardButton("Bronze");
+        KeyboardButton copper = new KeyboardButton("Copper");
+        KeyboardButton gold = new KeyboardButton("Gold");
+        KeyboardButton green = new KeyboardButton("Green");
+        KeyboardButton red = new KeyboardButton("Red");
+        KeyboardButton silver = new KeyboardButton("Silver");
+        KeyboardButton white = new KeyboardButton("White");
 
         // Create the reply keyboard markup
         ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(

@@ -40,6 +40,7 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.notANum
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
+import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_GUILD_ARTISAN;
@@ -220,7 +221,7 @@ public class CreateNewHero {
                 response = SelectRace.selectRace(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_DRACONIC_ANCESTRY:
-                state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "Your Draconic Ancestry is" + userAnswer);
+                state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + setDraconicAncestry(userAnswer, state.getDndCharacter()));
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
                 response = new Response(newState, chooseClass);
                 break;

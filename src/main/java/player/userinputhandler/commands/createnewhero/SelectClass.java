@@ -34,7 +34,7 @@ import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WIZARD;
 
 public class SelectClass {
     public static Response selectClass(String userAnswer, DndCharacter dndCharacter) {
-        Response response = null;
+        Response response;
         State newState;
         String chooseSkill = "Enter a skill your hero will be proficient in (Arcana, Intimidation etc.). Here is the list of available ones:\n";
         String allClasses = """
