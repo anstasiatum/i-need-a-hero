@@ -206,15 +206,6 @@ public class Buttons {
                 .resizeKeyboard(true)
                 .oneTimeKeyboard(true);
 
-        // Keyboard for artisan's tools
-        new ReplyKeyboardMarkup(
-                new KeyboardButton[]{alchemistSupplies, brewerSupplies, calligrapherSupplies, carpenterTools},
-                new KeyboardButton[]{cartographerTools, cobblerTools, cookUtensils, glassblowerTools},
-                new KeyboardButton[]{jewelerTools, leatherworkerTools, masonTools, painterSupplies},
-                new KeyboardButton[]{potterTools, smithTools, tinkerTools, weaverTools, woodcarverTools})
-                .resizeKeyboard(true)
-                .oneTimeKeyboard(true);
-
         // CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT
         new ReplyKeyboardMarkup(
                 new KeyboardButton[]{artisanTools, muleAndCart})

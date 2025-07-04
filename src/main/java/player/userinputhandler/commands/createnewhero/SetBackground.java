@@ -49,7 +49,8 @@ public class SetBackground {
                 Charlatan charlatan = new Charlatan();
                 charlatan.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CON_FOR_CHARLATAN, dndCharacter);
-                response = new Response(newState, "Choose your con item: ten stoppered bottles filled with colored liquid, a set o f weighted dice, a deck of marked cards, or a signet ring of an imaginary duke");
+                response = new Response(newState, "Choose your con item: ten stoppered bottles filled with colored liquid, a set of weighted dice, a deck of marked cards, or a signet ring of an imaginary duke");
+                // TODO: Options for this choice
                 break;
             case "criminal":
                 Criminal criminal = new Criminal();

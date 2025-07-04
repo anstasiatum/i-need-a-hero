@@ -19,12 +19,23 @@ import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
+import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getBackgroundOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getEntertainerOrGladiatorOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getGuildMerchantOrArtisanOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getKnightOrNobleOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getSailorOrPirateOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allArtisansTools;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allBackgrounds;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
@@ -43,6 +54,8 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.notANum
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
+import static player.userinputhandler.commands.createnewhero.SelectRace.selectRace;
+import static player.userinputhandler.commands.createnewhero.SetBackground.setBackground;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO;
@@ -140,15 +153,12 @@ public class CreateNewHero {
     public static Response heroCreationAnswer(State state, Long chatId, String userAnswer) {
         Response response;
         State newState;
-        List<String> options = new ArrayList<>();
 
         switch (state.getStepId()) {
             case ENTER_NAME:
                 state.getDndCharacter().setCharacterName(userAnswer);
-                options.add("Roll for me, bot");
-                options.add("I'll roll myself");
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, state.getDndCharacter());
-                response = new Response(newState, "Now let's get your base characteristics. You can roll them yourself or I will roll them for you", options);
+                response = new Response(newState, "Now let's get your base characteristics. You can roll them yourself or I will roll them for you", getCharacteristicsRollingMethodOptions());
                 break;
             case CHOOSE_ROLLING_CHARACTERISTICS_METHOD:
                 response = chooseCharacteristicsSettingMethod(userAnswer, state.getDndCharacter());
@@ -220,21 +230,21 @@ public class CreateNewHero {
                 response = new Response(newState, """
                         We have finished setting the base characteristics.
                         
-                        Now, pick the race:
-                        """ + allRaces);
+                        Now pick the race:
+                        """ + allRaces, getRaceOptions());
                 break;
             case CHOOSE_RACE:
-                response = SelectRace.selectRace(userAnswer, state.getDndCharacter());
+                response = selectRace(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_DRACONIC_ANCESTRY:
                 state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + setDraconicAncestry(userAnswer, state.getDndCharacter()));
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
-                response = new Response(newState, chooseClass);
+                response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case CHOOSE_LANGUAGE_FOR_HIGH_ELF, CHOOSE_LANGUAGE_FOR_BASE_HUMAN:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
-                response = new Response(newState, chooseClass);
+                response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF:
                 response = increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF, userAnswer);
@@ -252,36 +262,36 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + allSkills);
+                    response = new Response(newState, chooseSecondSkill + allSkills, getAllSkillOptions());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getAllSkillOptions());
                 }
                 break;
             case CHOOSE_SECOND_SKILL_FOR_HALF_ELF:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
-                    response = new Response(newState, chooseClass);
+                    response = new Response(newState, chooseClass, getClassOptions());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getAllSkillOptions());
                 }
                 break;
             case CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
-                    response = new Response(newState, chooseClass);
+                    response = new Response(newState, chooseClass, getClassOptions());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getAllSkillOptions());
                 }
                 break;
             case ENTER_FEAT_FOR_VARIANT_HUMAN:
                 state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
-                response = new Response(newState, chooseClass);
+                response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case CHOOSE_CLASS:
                 response = selectClass(userAnswer, state.getDndCharacter());
@@ -516,7 +526,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Rogue rogue = new Rogue();
                     rogue.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -538,7 +548,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Sorcerer sorcerer = new Sorcerer();
                     sorcerer.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -560,7 +570,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Warlock warlock = new Warlock();
                     warlock.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -582,7 +592,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Wizard wizard = new Wizard();
                     wizard.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -593,11 +603,11 @@ public class CreateNewHero {
             case ENTER_ALIGNMENT:
                 state.getDndCharacter().setAlignment(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_BACKGROUND, state.getDndCharacter());
-                response = new Response(newState, "Choose the background of your hero\n" + allBackgrounds);
+                response = new Response(newState, "Choose the background of your hero\n" + allBackgrounds, getBackgroundOptions());
                 break;
             case CHOOSE_BACKGROUND:
                 state.getDndCharacter().setBackground(userAnswer);
-                response = SetBackground.setBackground(state.getDndCharacter(), userAnswer);
+                response = setBackground(state.getDndCharacter(), userAnswer);
                 break;
             case CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
@@ -627,7 +637,7 @@ public class CreateNewHero {
             case CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_FOLK_HERO:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO, state.getDndCharacter());
-                response = new Response(newState, chooseArtisanToolPossessionWithPreviousStep);
+                response = new Response(newState, chooseArtisanToolPossessionWithPreviousStep, getArtisanToolOptions());
                 break;
             case CHOOSE_LANGUAGE_FOR_OUTLANDER:
                 state.getDndCharacter().getLanguages().add(userAnswer);
@@ -659,7 +669,7 @@ public class CreateNewHero {
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_ENTERTAINER_OR_GLADIATOR, state.getDndCharacter());
-                        response = new Response(newState, wrongInput);
+                        response = new Response(newState, wrongInput, getEntertainerOrGladiatorOptions());
                         break;
                 }
                 break;
@@ -677,7 +687,7 @@ public class CreateNewHero {
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE, state.getDndCharacter());
-                        response = new Response(newState, wrongInput);
+                        response = new Response(newState, wrongInput, getKnightOrNobleOptions());
                         break;
                 }
                 break;
@@ -710,7 +720,7 @@ public class CreateNewHero {
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR, state.getDndCharacter());
-                        response = new Response(newState, wrongInput);
+                        response = new Response(newState, wrongInput, getSailorOrPirateOptions());
                         break;
                 }
                 break;
@@ -723,14 +733,14 @@ public class CreateNewHero {
             case CHOOSE_TROPHY_FOR_SOLDIER:
                 state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER, state.getDndCharacter());
-                response = new Response(newState, "Will your character possess a set of bone dice or a deck of cards?");
+                response = new Response(newState, "Will your character possess a set of bone dice or a deck of cards?", getGamingSetOptions());
                 break;
             case CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN:
                 switch (userAnswer.toLowerCase().trim()) {
                     case "guild merchant":
                         state.getDndCharacter().setBackground(userAnswer);
                         newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?");
+                        response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
                         break;
                     case "guild artisan":
                         state.getDndCharacter().setBackground(userAnswer);
@@ -739,7 +749,7 @@ public class CreateNewHero {
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN, state.getDndCharacter());
-                        response = new Response(newState, wrongInput);
+                        response = new Response(newState, wrongInput, getGuildMerchantOrArtisanOptions());
                         break;
                 }
                 break;
@@ -751,7 +761,7 @@ public class CreateNewHero {
             case CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_GUILD_ARTISAN:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_GUILD_ARTISAN, state.getDndCharacter());
-                response = new Response(newState, chooseArtisanToolPossessionWithPreviousStep);
+                response = new Response(newState, chooseArtisanToolPossessionWithPreviousStep, getArtisanToolOptions());
                 break;
             case CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT:
                 switch (userAnswer.toLowerCase().trim()) {
@@ -771,7 +781,7 @@ public class CreateNewHero {
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, wrongInput);
+                        response = new Response(newState, wrongInput, getProficienciesForGuildMerchantOptions());
                         break;
                 }
                 break;
@@ -790,7 +800,7 @@ public class CreateNewHero {
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, wrongInput);
+                        response = new Response(newState, wrongInput, getPossessionsForGuildMerchantOptions());
                         break;
                 }
                 break;

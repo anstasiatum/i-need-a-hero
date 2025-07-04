@@ -17,6 +17,7 @@ import player.dndcharacter.dndclass.Wizard;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 
+import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
@@ -113,7 +114,7 @@ public class SelectClass {
             }
             default -> {
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
-                response = new Response(newState, "Cannot understand your input. Here is the list of available classes: \n" + allClasses);
+                response = new Response(newState, "Cannot understand your input. Here is the list of available classes: \n" + allClasses, getClassOptions());
             }
         }
         return response;
