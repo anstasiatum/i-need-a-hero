@@ -21,7 +21,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_ABILITY_SCORE_FO
 
 public class IncreaseBaseCharacteristics {
     public static Response increaseBaseCharacteristics(DndCharacter dndCharacter, Steps currentStep, String userAnswer) {
-        Response response = null;
+        Response response;
         State newState;
         final String strength = "strength";
         final String dexterity = "dexterity";

@@ -1,5 +1,7 @@
+import com.google.common.collect.Lists;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
@@ -7,7 +9,6 @@ import com.pengrad.telegrambot.request.SendMessage;
 import player.userinputhandler.BotAnswer;
 
 import static player.userinputhandler.UserInputHandler.handleUserInput;
-import static player.userinputhandler.commands.createnewhero.Buttons.sendReplyKeyboard;
 
 public class Bot {
 
@@ -20,13 +21,7 @@ public class Bot {
                 System.out.println(update);
                 long chatId = update.message().chat().id();
                 BotAnswer botAnswer = handleUserInput(update);
-                if (botAnswer.getFile() != null) {
-                    bot.execute(new SendDocument(chatId, botAnswer.getFile()));
-                } else {
-                    SendMessage request = new SendMessage(chatId, botAnswer.getAnswer());
-                    request.replyMarkup(sendReplyKeyboard());
-                    bot.execute(request);
-                }
+                bot.execute(buildRequest(botAnswer, chatId));
             });
             return UpdatesListener.CONFIRMED_UPDATES_ALL;
         }, e -> {
@@ -39,21 +34,26 @@ public class Bot {
         });
     }
 
-//    public static BaseRequest buildRequest(BotAnswer botAnswer, Long chatId) {
-//        if (botAnswer.getFile() != null) {
-//            new SendDocument(chatId, botAnswer.getFile());
-//        } else if (botAnswer.isHasOptions()) {
-//            ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(
-//                    String.valueOf(botAnswer.getOptionTexts()))
-//                    .resizeKeyboard(true)  // Make keyboard smaller
-//                    .oneTimeKeyboard(true); // Hide after use
-//
-//        } else {
-//            SendMessage request = new SendMessage(chatId, botAnswer.getAnswer());
-//            request.replyMarkup(sendReplyKeyboard());
-//        }
-//        return;
-//    }
+    public static BaseRequest<?, ?> buildRequest(BotAnswer botAnswer, Long chatId) {
+        if (botAnswer.getFile() != null) {
+            return new SendDocument(chatId, botAnswer.getFile());
+        } else if (botAnswer.isHasOptions()) {
+            ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(
+                    Lists.partition(botAnswer.getOptionTexts(), 4).stream() // making a List of Lists with Strings
+                            .map(optionList -> optionList.stream() // transforming a List of Strings into Arrays of KeyboardButtons
+                                    .map(KeyboardButton::new)
+                                    .toArray(KeyboardButton[]::new))
+                            .toArray(KeyboardButton[][]::new) // putting the results into an array
+            )
+                    .resizeKeyboard(true)
+                    .oneTimeKeyboard(true);
+            SendMessage request = new SendMessage(chatId, botAnswer.getAnswer());
+            request.replyMarkup(keyboard);
+            return request;
+        } else {
+            return new SendMessage(chatId, botAnswer.getAnswer());
+        }
+    }
 
     public static void main(String[] args) {
         telegramBotListener(args[0]);

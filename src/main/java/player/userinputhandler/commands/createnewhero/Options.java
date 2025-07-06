@@ -1,7 +1,5 @@
 package player.userinputhandler.commands.createnewhero;
 
-import com.pengrad.telegrambot.model.request.KeyboardButton;
-
 import java.util.List;
 
 public class Options {
@@ -166,7 +164,7 @@ public class Options {
 
         return List.of(
                 "Guild merchant",
-                "Guild artisange"
+                "Guild artisan"
         );
     }
 
@@ -198,23 +196,32 @@ public class Options {
     public static List<String> getAllSkillOptions() {
 
         return List.of(
-        "Survival",
-        "Stealth",
-        "Sleight of hand",
-        "Religion",
-        "Persuasion",
-        "Performance",
-        "Perception",
-        "Nature",
-        "Medicine",
-        "Investigation",
-        "Intimidation",
-        "Insight",
-        "History",
-        "Deception",
-        "Athletics",
-        "Arcana",
-        "Animal handling",
-        "Acrobatics");
+                "Survival",
+                "Stealth",
+                "Sleight of hand",
+                "Religion",
+                "Persuasion",
+                "Performance",
+                "Perception",
+                "Nature",
+                "Medicine",
+                "Investigation",
+                "Intimidation",
+                "Insight",
+                "History",
+                "Deception",
+                "Athletics",
+                "Arcana",
+                "Animal handling",
+                "Acrobatics");
+    }
+
+    public static List<String> getCharlatanConItemOptions() {
+
+        return List.of(
+                "Bottles filled with coloured liquid",
+                "Weighted dice",
+                "Marked cards",
+                "Signet ring");
     }
 }

@@ -310,7 +310,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Barbarian barbarian = new Barbarian();
                     barbarian.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -342,7 +342,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Bard bard = new Bard();
                     bard.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -364,7 +364,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Cleric cleric = new Cleric();
                     cleric.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -386,7 +386,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Druid druid = new Druid();
                     druid.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -408,7 +408,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Fighter fighter = new Fighter();
                     fighter.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -430,7 +430,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Monk monk = new Monk();
                     monk.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -452,7 +452,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Paladin paladin = new Paladin();
                     paladin.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -484,7 +484,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment);
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     Ranger ranger = new Ranger();
                     ranger.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
@@ -756,7 +756,7 @@ public class CreateNewHero {
             case CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_GUILD_ARTISAN, state.getDndCharacter());
-                response = new Response(newState, chooseArtisanTools);
+                response = new Response(newState, chooseArtisanTools, getArtisanToolOptions());
                 break;
             case CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_GUILD_ARTISAN:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
@@ -768,7 +768,7 @@ public class CreateNewHero {
                     case "additional language":
                         state.getDndCharacter().getLanguages().add(userAnswer);
                         newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, choosePossessionsForGuildMerchant);
+                        response = new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
                         break;
                     case "artisan's tools":
                         newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
@@ -777,7 +777,7 @@ public class CreateNewHero {
                     case "navigator's tools":
                         state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
                         newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, choosePossessionsForGuildMerchant);
+                        response = new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
@@ -791,9 +791,9 @@ public class CreateNewHero {
                     case "artisan's tools":
                         state.getDndCharacter().getLanguages().add(userAnswer);
                         newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, chooseArtisanTools);
+                        response = new Response(newState, chooseArtisanTools, getArtisanToolOptions());
                         break;
-                    case "a cart and a mule":
+                    case "a mule and a cart":
                         state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
                         newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                         response = new Response(newState, chooseTraits);

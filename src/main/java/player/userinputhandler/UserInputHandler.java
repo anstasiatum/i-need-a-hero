@@ -1,9 +1,7 @@
 package player.userinputhandler;
 
-
 import com.pengrad.telegrambot.model.Update;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +16,10 @@ public class UserInputHandler {
     private static final Map<Long, State> statesByChatId = new HashMap<>();
 
     public static BotAnswer handleUserInput(Update update) {
+        boolean hasOptionMismatch = false;
         Long chatId = update.message().chat().id();
         State chatState = statesByChatId.get(chatId);
-        Response response = null;
+        Response response;
         if (chatState == null) {
             response = switch (update.message().text()) {
                 case "/newhero" -> createNewHero();
@@ -33,6 +32,7 @@ public class UserInputHandler {
                              /printhero
                              /dismisshero
                             """;
+                    hasOptionMismatch = true;
                     yield new Response(textAnswer);
                 }
             };
@@ -44,7 +44,7 @@ public class UserInputHandler {
             };
         }
 
-        if (response.getState() != null) {
+        if (!hasOptionMismatch) {
             statesByChatId.put(chatId, response.getState());
         }
 
