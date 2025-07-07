@@ -1,7 +1,7 @@
 package player.dndcharacter.race.dwarf;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.abilities.Abilities;
+import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.race.Race;
 
@@ -23,7 +23,5 @@ public abstract class DwarfRace extends Race {
         dndCharacter.getWeaponProficiency().add("Handaxe");
         dndCharacter.getWeaponProficiency().add("Throwing hammer");
         dndCharacter.getWeaponProficiency().add("Warhammer");
-
-        dndCharacter.getToolProficiency().add("Artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.");
     }
 }

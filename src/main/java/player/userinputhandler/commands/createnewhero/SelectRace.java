@@ -23,8 +23,10 @@ import player.userinputhandler.State;
 import static player.userinputhandler.commands.createnewhero.Options.getBasicAbilityOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getDraconicAncestryOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getDwarfArtisanToolOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
+import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
 import static player.userinputhandler.enums.Steps.CHOOSE_DRACONIC_ANCESTRY;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
@@ -71,6 +73,7 @@ public class SelectRace {
                 Tiefling
                 """;
         String chooseFirstAbilityScore = "Enter an ability that will be increased by 1 (Dexterity, Intelligence etc)";
+        String chooseArtisanToolProficiencyForDwarf = "Which artisan tool would you like to be proficient with? Smith’s tools, brewer’s supplies, or mason’s tools.";
         switch (userAnswer.toLowerCase().trim()) {
             case "dragonborn":
                 dndCharacter.setRace(Race.DRAGONBORN);
@@ -83,15 +86,15 @@ public class SelectRace {
                 dndCharacter.setRace(Race.HILL_DWARF);
                 HillDwarf hillDwarf = new HillDwarf();
                 hillDwarf.modifyByRace(dndCharacter);
-                newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
-                response = new Response(newState, chooseClass, getClassOptions());
+                newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF, dndCharacter);
+                response = new Response(newState, chooseArtisanToolProficiencyForDwarf, getDwarfArtisanToolOptions());
                 break;
             case "mountain dwarf":
                 dndCharacter.setRace(Race.MOUNTAIN_DWARF);
                 MountainDwarf mountainDwarf = new MountainDwarf();
                 mountainDwarf.modifyByRace(dndCharacter);
-                newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
-                response = new Response(newState, chooseClass, getClassOptions());
+                newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF, dndCharacter);
+                response = new Response(newState, chooseArtisanToolProficiencyForDwarf, getDwarfArtisanToolOptions());
                 break;
             case "dark elf":
                 dndCharacter.setRace(Race.DARK_ELF);

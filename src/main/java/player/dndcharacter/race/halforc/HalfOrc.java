@@ -1,7 +1,7 @@
 package player.dndcharacter.race.halforc;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.abilities.Abilities;
+import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skills;
 import player.dndcharacter.race.Race;

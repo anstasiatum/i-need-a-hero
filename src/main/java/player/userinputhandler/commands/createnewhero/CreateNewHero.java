@@ -20,7 +20,13 @@ import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
+import static player.userinputhandler.commands.createnewhero.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
+import static player.userinputhandler.commands.createnewhero.ChooseEntertainerOrGladiator.chooseEntertainerOrGladiator;
+import static player.userinputhandler.commands.createnewhero.ChooseNobleOrKnight.chooseNobleOrKnight;
+import static player.userinputhandler.commands.createnewhero.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.ChooseSailorOrPirate.chooseSailorOrPirate;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
@@ -28,15 +34,10 @@ import static player.userinputhandler.commands.createnewhero.Options.getArtisanT
 import static player.userinputhandler.commands.createnewhero.Options.getBackgroundOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getEntertainerOrGladiatorOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getGuildMerchantOrArtisanOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getKnightOrNobleOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getSailorOrPirateOptions;
-import static player.userinputhandler.commands.createnewhero.OutputTexts.allArtisansTools;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allBackgrounds;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allSkills;
@@ -44,14 +45,12 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseA
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanToolPossessionWithPreviousStep;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanTools;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseClass;
-import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseLuckyCharmForSailor;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseMusicalInstrumentProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.choosePossessionsForGuildMerchant;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseThirdSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.notANumberInput;
-import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.commands.createnewhero.SelectRace.selectRace;
@@ -61,37 +60,28 @@ import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_GUILD_ARTISAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_GUILD_ARTISAN;
-import static player.userinputhandler.enums.Steps.CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT;
 import static player.userinputhandler.enums.Steps.CHOOSE_BACKGROUND;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
-import static player.userinputhandler.enums.Steps.CHOOSE_ENTERTAINER_OR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_SKILL_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_GAMING_SET_FOR_NOBLE;
 import static player.userinputhandler.enums.Steps.CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER;
-import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN;
-import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_NOBLE;
-import static player.userinputhandler.enums.Steps.CHOOSE_LUCKY_CHARM_FOR_SAILOR;
-import static player.userinputhandler.enums.Steps.CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER;
 import static player.userinputhandler.enums.Steps.CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_OUTLANDER;
 import static player.userinputhandler.enums.Steps.CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_SAGE;
-import static player.userinputhandler.enums.Steps.CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE;
 import static player.userinputhandler.enums.Steps.CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT;
 import static player.userinputhandler.enums.Steps.CHOOSE_PRAYER_ITEM_FOR_ACOLYTE;
 import static player.userinputhandler.enums.Steps.CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT;
 import static player.userinputhandler.enums.Steps.CHOOSE_RACE;
 import static player.userinputhandler.enums.Steps.CHOOSE_ROLLING_CHARACTERISTICS_METHOD;
-import static player.userinputhandler.enums.Steps.CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_LANGUAGE_FOR_SAGE;
 import static player.userinputhandler.enums.Steps.CHOOSE_SECOND_SKILL_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_TROPHY_FOR_SOLDIER;
-import static player.userinputhandler.enums.Steps.CHOOSE_WEAPON_FOR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.DESCRIBE_EYES;
 import static player.userinputhandler.enums.Steps.DESCRIBE_HAIR;
 import static player.userinputhandler.enums.Steps.DESCRIBE_SKIN;
@@ -238,6 +228,11 @@ public class CreateNewHero {
                 break;
             case CHOOSE_DRACONIC_ANCESTRY:
                 state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + setDraconicAncestry(userAnswer, state.getDndCharacter()));
+                newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
+                response = new Response(newState, chooseClass, getClassOptions());
+                break;
+            case CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
@@ -474,7 +469,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Ranger.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseThirdSkill + Ranger.buildAvailableProficiencySkills());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_RANGER, state.getDndCharacter());
                     response = new Response(newState, wrongSkill);
@@ -656,40 +651,10 @@ public class CreateNewHero {
                 response = new Response(newState, chooseTraits);
                 break;
             case CHOOSE_ENTERTAINER_OR_GLADIATOR:
-                switch (userAnswer.toLowerCase().trim()) {
-                    case "entertainer":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You can perform at inns, theaters, circuses, or any place with a stage. While you’re performing there each night, you receive free modest or comfortable lodging and food. This can allow you to take long rests for free as you travel with your party across the land. In addition, your performance makes you famous wherever you perform. When strangers recognize you in the town, they usually like you more. This may make it easier to persuade them to do things for you.\n");
-                        newState = new State(CREATE_HERO, CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER, state.getDndCharacter());
-                        response = new Response(newState, chooseMusicalInstrumentProficiency);
-                        break;
-                    case "gladiator":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You can find a place to perform in any place that features combat for entertainment-perhaps a gladiatorial arena or secret pit fighting club.\n");
-                        newState = new State(CREATE_HERO, CHOOSE_WEAPON_FOR_GLADIATOR, state.getDndCharacter());
-                        response = new Response(newState, "Enter an inexpensive, but unusual weapon (such as a trident or net) your hero will possess");
-                        break;
-                    default:
-                        newState = new State(CREATE_HERO, CHOOSE_ENTERTAINER_OR_GLADIATOR, state.getDndCharacter());
-                        response = new Response(newState, wrongInput, getEntertainerOrGladiatorOptions());
-                        break;
-                }
+                response = chooseEntertainerOrGladiator(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE:
-                switch (userAnswer.toLowerCase().trim()) {
-                    case "knight":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.\n");
-                        newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_NOBLE, state.getDndCharacter());
-                        response = new Response(newState, "Choose a language your knight will know");
-                        break;
-                    case "noble":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to.\n");
-                        newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_NOBLE, state.getDndCharacter());
-                        response = new Response(newState, "Choose a language your noble will know");
-                        break;
-                    default:
-                        newState = new State(CREATE_HERO, CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE, state.getDndCharacter());
-                        response = new Response(newState, wrongInput, getKnightOrNobleOptions());
-                        break;
-                }
+                response = chooseNobleOrKnight(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_LANGUAGE_FOR_NOBLE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
@@ -707,24 +672,8 @@ public class CreateNewHero {
                 response = new Response(newState, chooseMusicalInstrumentProficiency);
                 break;
             case CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR:
-                switch (userAnswer.toLowerCase().trim()) {
-                    case "sailor":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "Ship's Passage When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.\n");
-                        newState = new State(CREATE_HERO, CHOOSE_LUCKY_CHARM_FOR_SAILOR, state.getDndCharacter());
-                        response = new Response(newState, chooseLuckyCharmForSailor);
-                        break;
-                    case "pirate":
-                        state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + "No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.\n");
-                        newState = new State(CREATE_HERO, CHOOSE_LUCKY_CHARM_FOR_SAILOR, state.getDndCharacter());
-                        response = new Response(newState, chooseLuckyCharmForSailor);
-                        break;
-                    default:
-                        newState = new State(CREATE_HERO, CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR, state.getDndCharacter());
-                        response = new Response(newState, wrongInput, getSailorOrPirateOptions());
-                        break;
-                }
+                response = chooseSailorOrPirate(userAnswer, state.getDndCharacter());
                 break;
-
             case CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_TROPHY_FOR_SOLDIER, state.getDndCharacter());
@@ -736,22 +685,12 @@ public class CreateNewHero {
                 response = new Response(newState, "Will your character possess a set of bone dice or a deck of cards?", getGamingSetOptions());
                 break;
             case CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN:
-                switch (userAnswer.toLowerCase().trim()) {
-                    case "guild merchant":
-                        state.getDndCharacter().setBackground(userAnswer);
-                        newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
-                        break;
-                    case "guild artisan":
-                        state.getDndCharacter().setBackground(userAnswer);
-                        newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN, state.getDndCharacter());
-                        response = new Response(newState, "Choose a language your guild artisan will know");
-                        break;
-                    default:
-                        newState = new State(CREATE_HERO, CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN, state.getDndCharacter());
-                        response = new Response(newState, wrongInput, getGuildMerchantOrArtisanOptions());
-                        break;
-                }
+                response = chooseArtisanOrMerchant(userAnswer, state.getDndCharacter());
+                break;
+            case CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT:
+                state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
+                response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
                 break;
             case CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN:
                 state.getDndCharacter().getLanguages().add(userAnswer);
@@ -764,45 +703,20 @@ public class CreateNewHero {
                 response = new Response(newState, chooseArtisanToolPossessionWithPreviousStep, getArtisanToolOptions());
                 break;
             case CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT:
-                switch (userAnswer.toLowerCase().trim()) {
-                    case "additional language":
-                        state.getDndCharacter().getLanguages().add(userAnswer);
-                        newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
-                        break;
-                    case "artisan's tools":
-                        newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, "Choose a set of artisan's tools your hero will have \n" + allArtisansTools);
-                        break;
-                    case "navigator's tools":
-                        state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
-                        newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
-                        break;
-                    default:
-                        newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, wrongInput, getProficienciesForGuildMerchantOptions());
-                        break;
-                }
+                response = chooseProficiencyForGuildMerchant(userAnswer, state.getDndCharacter());
                 break;
-
+            case CHOOSE_ARTISAN_TOOL_PROFICIENCY_FOR_GUILD_MERCHANT:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
+                response = new Response(newState, chooseArtisanToolPossessionWithPreviousStep, getArtisanToolOptions());
+                break;
             case CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT:
-                switch (userAnswer.toLowerCase().trim()) {
-                    case "artisan's tools":
-                        state.getDndCharacter().getLanguages().add(userAnswer);
-                        newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, chooseArtisanTools, getArtisanToolOptions());
-                        break;
-                    case "a mule and a cart":
-                        state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + ", " + userAnswer);
-                        newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
-                        response = new Response(newState, chooseTraits);
-                        break;
-                    default:
-                        newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                        response = new Response(newState, wrongInput, getPossessionsForGuildMerchantOptions());
-                        break;
-                }
+                response = choosePossessionsForGuildMerchant(userAnswer, state.getDndCharacter());
+                break;
+            case CHOOSE_ADDITIONAL_LANGUAGE_FOR_GUILD_MERCHANT:
+                state.getDndCharacter().getLanguages().add(userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, state.getDndCharacter());
+                response = new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
                 break;
             case SET_PERSONALITY_TRAITS:
                 state.getDndCharacter().setPersonalityTraits(userAnswer);

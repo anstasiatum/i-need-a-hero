@@ -94,15 +94,6 @@ Set<String> expectedResult = Set.of("Dwarfish");
     }
 
     @Test
-    @DisplayName("Set Tool Proficiency")
-    void setToolProficiencyHillDwarf() {
-        Set<String> expectedResult = new HashSet<>(4);
-        expectedResult.add("Artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.");
-
-        assertEquals(expectedResult, dndCharacter.getToolProficiency());
-    }
-
-    @Test
     @DisplayName("Set Hit Points")
     void setHitPointsForHillDwarf() {
 

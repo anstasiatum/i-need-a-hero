@@ -224,4 +224,12 @@ public class Options {
                 "Marked cards",
                 "Signet ring");
     }
+
+    public static List<String> getDwarfArtisanToolOptions() {
+
+        return List.of(
+                "Smith's tools",
+                "Brewer’s supplies",
+                "Mason’s tools");
+    }
 }

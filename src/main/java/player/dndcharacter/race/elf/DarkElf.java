@@ -1,7 +1,7 @@
 package player.dndcharacter.race.elf;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.abilities.Abilities;
+import player.dndcharacter.race.Abilities;
 
 public class DarkElf extends ElfRace {
 
