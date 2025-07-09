@@ -20,13 +20,13 @@ import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
-import static player.userinputhandler.commands.createnewhero.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
-import static player.userinputhandler.commands.createnewhero.ChooseEntertainerOrGladiator.chooseEntertainerOrGladiator;
-import static player.userinputhandler.commands.createnewhero.ChooseNobleOrKnight.chooseNobleOrKnight;
-import static player.userinputhandler.commands.createnewhero.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
-import static player.userinputhandler.commands.createnewhero.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
-import static player.userinputhandler.commands.createnewhero.ChooseSailorOrPirate.chooseSailorOrPirate;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseEntertainerOrGladiator.chooseEntertainerOrGladiator;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseNobleOrKnight.chooseNobleOrKnight;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseSailorOrPirate.chooseSailorOrPirate;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
@@ -54,7 +54,7 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.notANum
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.commands.createnewhero.SelectRace.selectRace;
-import static player.userinputhandler.commands.createnewhero.SetBackground.setBackground;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.SetBackground.setBackground;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO;
@@ -646,7 +646,7 @@ public class CreateNewHero {
                 break;
             case CHOOSE_CON_FOR_CHARLATAN, CHOOSE_WEAPON_FOR_GLADIATOR,
                  CHOOSE_MUSICAL_INSTRUMENT_YOU_POSSESS_FOR_ENTERTAINER:
-                state.getDndCharacter().setEquipment(state.getDndCharacter() + userAnswer);
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + userAnswer);
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                 response = new Response(newState, chooseTraits);
                 break;
