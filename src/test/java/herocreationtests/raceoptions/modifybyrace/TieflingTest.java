@@ -1,18 +1,18 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.halfling.Stout;
+import player.dndcharacter.race.teifling.Tiefling;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class StoutHalflingTest {
+public class TieflingTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -24,60 +24,58 @@ public class StoutHalflingTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        Stout stout = new Stout();
-        stout.modifyByRace(dndCharacter);
+        Tiefling tiefling = new Tiefling();
+        tiefling.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForLightfootHalfling() {
+    void changeBaseCharacteristicsForTiefling() {
 
         assertEquals(10, dndCharacter.getStrength());
-        assertEquals(13, dndCharacter.getDexterity());
-        assertEquals(13, dndCharacter.getConstitution());
-        assertEquals(13, dndCharacter.getIntelligence());
+        assertEquals(11, dndCharacter.getDexterity());
+        assertEquals(12, dndCharacter.getConstitution());
+        assertEquals(14, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
-        assertEquals(15, dndCharacter.getCharisma());
+        assertEquals(17, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForStoutHalfling() {
+    void setSizeForTiefling() {
 
-        assertEquals(Size.SMALL, dndCharacter.getSize());
+        assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForStoutHalfling() {
+    void setSpeedForTiefling() {
 
-        assertEquals(25, dndCharacter.getSpeed());
+        assertEquals(30, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageStoutHalfling() {
-
-        Set<String> expectedResult = Set.of("Halfling");
+    void setLanguageForTiefling() {
+        Set<String> expectedResult = Set.of("Infernal");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForStoutHalfling() {
+    void setDraconicAncestryDamageForTiefling() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForStoutHalfling() {
+    void setFeaturesAndTraitsForTiefling() {
         String expectedResult = """
-                Lucky. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.
-                Brave. You have advantage on saving throws against being frightened.
-                Halfling Nimbleness. You can move through the space of any creature that is of a size larger than yours.
-                Stout Resilience. You have advantage on saving throws against poison, and you have resistance against poison damage.""";
+                Hellish Resistance. You have resistance to fire damage.
+                Infernal Legacy. You know the thaumaturgy cantrip.
+                You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

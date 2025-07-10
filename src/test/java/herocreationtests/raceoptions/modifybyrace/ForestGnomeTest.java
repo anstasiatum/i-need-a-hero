@@ -1,18 +1,18 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.halfling.Lightfoot;
+import player.dndcharacter.race.gnome.ForestGnome;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class LightfootHalflingTest {
+class ForestGnomeTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -24,59 +24,61 @@ public class LightfootHalflingTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        Lightfoot lightfoot = new Lightfoot();
-        lightfoot.modifyByRace(dndCharacter);
+        ForestGnome forestGnome = new ForestGnome();
+        forestGnome.modifyByRace(dndCharacter);
+
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForLightfootHalfling() {
+    void changeBaseCharacteristicsForForestGnome() {
 
         assertEquals(10, dndCharacter.getStrength());
-        assertEquals(13, dndCharacter.getDexterity());
+        assertEquals(12, dndCharacter.getDexterity());
         assertEquals(12, dndCharacter.getConstitution());
-        assertEquals(13, dndCharacter.getIntelligence());
+        assertEquals(15, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
-        assertEquals(16, dndCharacter.getCharisma());
+        assertEquals(15, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForLightfootHalfling() {
+    void setSizeForForestGnome() {
 
         assertEquals(Size.SMALL, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForLightfootHalfling() {
+    void setSpeedForForestGnome() {
 
         assertEquals(25, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageLightfootHalfling() {
-        Set<String> expectedResult = Set.of("Halfling");
+    void setLanguageForForestGnome() {
+        Set<String> expectedResult = Set.of("Gnomish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForLightfootHalfling() {
+    void setDraconicAncestryDamageForForestGnome() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForLightfootHalfling() {
-        String expectedResult = """
-                Lucky. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.
-                Brave. You have advantage on saving throws against being frightened.
-                Halfling Nimbleness. You can move through the space of any creature that is of a size larger than yours.
-                Naturally Stealthy. You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.""";
+    void setFeaturesAndTraitsForForestGnome() {
+        String expectedResult =
+                """
+                        You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.
+                        Natural Illusionist. You know the minor illusion cantrip. Intelligence is your spellcasting ability for it.
+                        Speak with Small Beasts. Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts. Forest gnomes love animals and often keep squirrels, badgers, rabbits, moles, woodpeckers, and other creatures as beloved pets.
+                        """;
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

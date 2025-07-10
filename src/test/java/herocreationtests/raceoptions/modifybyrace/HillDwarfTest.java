@@ -1,11 +1,11 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.dwarf.MountainDwarf;
+import player.dndcharacter.race.dwarf.HillDwarf;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class MountainDwarfTest {
+public class HillDwarfTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -25,54 +25,53 @@ public class MountainDwarfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        MountainDwarf mountainDwarf = new MountainDwarf();
-        mountainDwarf.modifyByRace(dndCharacter);
+        HillDwarf hillDwarf = new HillDwarf();
+        hillDwarf.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForMountainDwarf() {
-
-        assertEquals(12, dndCharacter.getStrength());
+    void changeBaseCharacteristicsForHillDwarf() {
+        assertEquals(10, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
         assertEquals(14, dndCharacter.getConstitution());
         assertEquals(13, dndCharacter.getIntelligence());
-        assertEquals(14, dndCharacter.getWisdom());
+        assertEquals(15, dndCharacter.getWisdom());
         assertEquals(15, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForMountainDwarf() {
+    void setSizeForHillDwarf() {
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForMountainDwarf() {
+    void setSpeedForHillDwarf() {
 
         assertEquals(25, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageForMountainDwarf() {
-        Set<String> expectedResult = Set.of("Dwarfish");
+    void setLanguageForHillDwarf() {
+Set<String> expectedResult = Set.of("Dwarfish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForMountainDwarf() {
+    void setDraconicAncestryDamageForHillDwarf() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForMountainDwarf() {
+    void setFeaturesAndTraitsForHillDwarf() {
         String expectedResult = """
                 Your speed is not reduced by wearing heavy armor.
                 Dwarven Resilience. You have advantage on saving throws against poison, and you have resistance against poison damage.
@@ -83,12 +82,21 @@ public class MountainDwarfTest {
     }
 
     @Test
-    @DisplayName("Set Armour Proficiency")
-    void setArmourProficiencyForMountainDwarf() {
-        Set<String> expectedResult = new HashSet<>(2);
-        expectedResult.add("Light armour");
-        expectedResult.add("Medium armour");
+    @DisplayName("Set Weapon Proficiency")
+    void setWeaponProficiencyForHillDwarf() {
+        Set<String> expectedResult = new HashSet<>(4);
+        expectedResult.add("Battleaxe");
+        expectedResult.add("Handaxe");
+        expectedResult.add("Throwing hammer");
+        expectedResult.add("Warhammer");
 
-        assertEquals(expectedResult, dndCharacter.getArmourProficiency());
+        assertEquals(expectedResult, dndCharacter.getWeaponProficiency());
+    }
+
+    @Test
+    @DisplayName("Set Hit Points")
+    void setHitPointsForHillDwarf() {
+
+        assertEquals(2, dndCharacter.getHitPoints());
     }
 }

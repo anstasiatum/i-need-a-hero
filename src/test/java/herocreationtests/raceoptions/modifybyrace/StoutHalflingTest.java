@@ -1,18 +1,18 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.gnome.ForestGnome;
+import player.dndcharacter.race.halfling.Stout;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class ForestGnomeTest {
+public class StoutHalflingTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -24,61 +24,60 @@ class ForestGnomeTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        ForestGnome forestGnome = new ForestGnome();
-        forestGnome.modifyByRace(dndCharacter);
-
+        Stout stout = new Stout();
+        stout.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForForestGnome() {
+    void changeBaseCharacteristicsForLightfootHalfling() {
 
         assertEquals(10, dndCharacter.getStrength());
-        assertEquals(12, dndCharacter.getDexterity());
-        assertEquals(12, dndCharacter.getConstitution());
-        assertEquals(15, dndCharacter.getIntelligence());
+        assertEquals(13, dndCharacter.getDexterity());
+        assertEquals(13, dndCharacter.getConstitution());
+        assertEquals(13, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
         assertEquals(15, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForForestGnome() {
+    void setSizeForStoutHalfling() {
 
         assertEquals(Size.SMALL, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForForestGnome() {
+    void setSpeedForStoutHalfling() {
 
         assertEquals(25, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageForForestGnome() {
-        Set<String> expectedResult = Set.of("Gnomish");
+    void setLanguageStoutHalfling() {
+
+        Set<String> expectedResult = Set.of("Halfling");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForForestGnome() {
+    void setDraconicAncestryDamageForStoutHalfling() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForForestGnome() {
-        String expectedResult =
-                """
-                        You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.
-                        Natural Illusionist. You know the minor illusion cantrip. Intelligence is your spellcasting ability for it.
-                        Speak with Small Beasts. Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts. Forest gnomes love animals and often keep squirrels, badgers, rabbits, moles, woodpeckers, and other creatures as beloved pets.
-                        """;
+    void setFeaturesAndTraitsForStoutHalfling() {
+        String expectedResult = """
+                Lucky. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.
+                Brave. You have advantage on saving throws against being frightened.
+                Halfling Nimbleness. You can move through the space of any creature that is of a size larger than yours.
+                Stout Resilience. You have advantage on saving throws against poison, and you have resistance against poison damage.""";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

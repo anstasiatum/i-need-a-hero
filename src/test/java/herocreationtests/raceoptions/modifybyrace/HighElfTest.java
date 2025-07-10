@@ -1,4 +1,4 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skills;
-import player.dndcharacter.race.elf.DarkElf;
+import player.dndcharacter.race.elf.HighElf;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
 
-public class DarkElfTest {
+public class HighElfTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -27,39 +27,41 @@ public class DarkElfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        DarkElf darkElf = new DarkElf();
-        darkElf.modifyByRace(dndCharacter);
+        HighElf highElf = new HighElf();
+        highElf.modifyByRace(dndCharacter);
+
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForDarkElf() {
+    void changeBaseCharacteristicsForHighElf() {
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(13, dndCharacter.getDexterity());
         assertEquals(12, dndCharacter.getConstitution());
-        assertEquals(13, dndCharacter.getIntelligence());
+        assertEquals(14, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
-        assertEquals(16, dndCharacter.getCharisma());
+        assertEquals(15, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForDarkElf() {
+    void setSizeForHighElf() {
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForDarkElf() {
+    void setSpeedForHighElf() {
 
         assertEquals(30, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageForDarkElf() {
+    void setLanguageForHighElf() {
+
         Set<String> expectedResult = Set.of("Elvish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -67,26 +69,26 @@ public class DarkElfTest {
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForDarkElf() {
+    void setDraconicAncestryDamageForHighElf() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForDarkElf() {
+    void setFeaturesAndTraitsForHighElf() {
         String expectedResult = """
                 Trance: Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.
                 Fey Ancestry: You have advantage on saving throws against being charmed, and magic can’t put you to sleep.
-                Cantrip. You know the dancing lights cantrip.
-                You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
+                Cantrip. You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.
+                You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }
 
     @Test
     @DisplayName("Set Perception Proficiency")
-    void setPerceptionProficiencyForDarkElf() {
+    void setArmourProficiencyForHighElf() {
         Set<Skills> expectedResult = new HashSet<>(1);
         expectedResult.add(PERCEPTION);
 
@@ -95,11 +97,12 @@ public class DarkElfTest {
 
     @Test
     @DisplayName("Set Weapon Proficiency")
-    void setWeaponProficiencyForMountainDwarf() {
-        Set<String> expectedResult = new HashSet<>(3);
-        expectedResult.add("Rapiers");
+    void setWeaponProficiencyForHighElf() {
+        Set<String> expectedResult = new HashSet<>(4);
+        expectedResult.add("Longsword");
         expectedResult.add("Shortsword");
-        expectedResult.add("Hand crossbows");
+        expectedResult.add("Shortbow");
+        expectedResult.add("Longbow");
 
         assertEquals(expectedResult, dndCharacter.getWeaponProficiency());
     }

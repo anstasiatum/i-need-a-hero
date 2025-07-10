@@ -1,18 +1,17 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.halfelf.HalfElf;
+import player.dndcharacter.race.dragonborn.Dragonborn;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class HalfElfTest {
+class DragonbornTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -24,59 +23,47 @@ public class HalfElfTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        HalfElf halfElf = new HalfElf();
-        halfElf.modifyByRace(dndCharacter);
+        Dragonborn dragonborn = new Dragonborn();
+        dragonborn.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForRockGnome() {
-
-        assertEquals(10, dndCharacter.getStrength());
+    void changeBaseCharacteristicsForDragonborn() {
+        assertEquals(12, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
         assertEquals(12, dndCharacter.getConstitution());
         assertEquals(13, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
-        assertEquals(17, dndCharacter.getCharisma());
+        assertEquals(16, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForRockGnome() {
+    void setSizeForDragonborn() {
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForRockGnome() {
+    void setSpeedForDragonborn() {
 
         assertEquals(30, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageForRockGnome() {
-        Set<String> expectedResult = Set.of("Elvish");
+    void setLanguageForDragonborn() {
+        Set<String> expectedResult = Set.of("Draconic");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForRockGnome() {
+    void setDraconicAncestryDamageForDragonborn() {
 
-        assertNull(dndCharacter.getDraconicAncestryDamage());
-    }
-
-    @Test
-    @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForRockGnome() {
-        String expectedResult =
-                """
-                        Fey Ancestry. You have advantage on saving throws against being charmed, and magic can’t put you to sleep
-                        You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
-
-        assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
+        assertEquals(2, dndCharacter.getDraconicAncestryDamage());
     }
 }

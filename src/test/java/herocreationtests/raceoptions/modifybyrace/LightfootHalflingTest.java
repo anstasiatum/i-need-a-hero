@@ -1,18 +1,18 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.teifling.Tiefling;
+import player.dndcharacter.race.halfling.Lightfoot;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class TieflingTest {
+public class LightfootHalflingTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -24,58 +24,59 @@ public class TieflingTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        Tiefling tiefling = new Tiefling();
-        tiefling.modifyByRace(dndCharacter);
+        Lightfoot lightfoot = new Lightfoot();
+        lightfoot.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForTiefling() {
+    void changeBaseCharacteristicsForLightfootHalfling() {
 
         assertEquals(10, dndCharacter.getStrength());
-        assertEquals(11, dndCharacter.getDexterity());
+        assertEquals(13, dndCharacter.getDexterity());
         assertEquals(12, dndCharacter.getConstitution());
-        assertEquals(14, dndCharacter.getIntelligence());
+        assertEquals(13, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
-        assertEquals(17, dndCharacter.getCharisma());
+        assertEquals(16, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForTiefling() {
+    void setSizeForLightfootHalfling() {
 
-        assertEquals(Size.MEDIUM, dndCharacter.getSize());
+        assertEquals(Size.SMALL, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForTiefling() {
+    void setSpeedForLightfootHalfling() {
 
-        assertEquals(30, dndCharacter.getSpeed());
+        assertEquals(25, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageForTiefling() {
-        Set<String> expectedResult = Set.of("Infernal");
+    void setLanguageLightfootHalfling() {
+        Set<String> expectedResult = Set.of("Halfling");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForTiefling() {
+    void setDraconicAncestryDamageForLightfootHalfling() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForTiefling() {
+    void setFeaturesAndTraitsForLightfootHalfling() {
         String expectedResult = """
-                Hellish Resistance. You have resistance to fire damage.
-                Infernal Legacy. You know the thaumaturgy cantrip.
-                You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.""";
+                Lucky. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.
+                Brave. You have advantage on saving throws against being frightened.
+                Halfling Nimbleness. You can move through the space of any creature that is of a size larger than yours.
+                Naturally Stealthy. You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.""";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

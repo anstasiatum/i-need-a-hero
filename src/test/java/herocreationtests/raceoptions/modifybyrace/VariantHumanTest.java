@@ -1,15 +1,15 @@
-package herocreationtests.modifybyrace;
+package herocreationtests.raceoptions.modifybyrace;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.human.BaseHuman;
+import player.dndcharacter.race.human.VariantHuman;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BaseHumanTest {
+public class VariantHumanTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -21,32 +21,32 @@ public class BaseHumanTest {
         dndCharacter.setWisdom(14);
         dndCharacter.setCharisma(15);
 
-        BaseHuman baseHuman = new BaseHuman();
-        baseHuman.modifyByRace(dndCharacter);
+        VariantHuman variantHuman = new VariantHuman();
+        variantHuman.modifyByRace(dndCharacter);
     }
 
     @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForBaseHuman() {
+    void changeBaseCharacteristicsForVariantHuman() {
 
-        assertEquals(11, dndCharacter.getStrength());
-        assertEquals(12, dndCharacter.getDexterity());
-        assertEquals(13, dndCharacter.getConstitution());
-        assertEquals(14, dndCharacter.getIntelligence());
-        assertEquals(15, dndCharacter.getWisdom());
-        assertEquals(16, dndCharacter.getCharisma());
+        assertEquals(10, dndCharacter.getStrength());
+        assertEquals(11, dndCharacter.getDexterity());
+        assertEquals(12, dndCharacter.getConstitution());
+        assertEquals(13, dndCharacter.getIntelligence());
+        assertEquals(14, dndCharacter.getWisdom());
+        assertEquals(15, dndCharacter.getCharisma());
     }
 
     @Test
     @DisplayName("Set size")
-    void setSizeForBaseHuman() {
+    void setSizeForVariantHuman() {
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForBaseHuman() {
+    void setSpeedForVariantHuman() {
 
         assertEquals(30, dndCharacter.getSpeed());
     }
