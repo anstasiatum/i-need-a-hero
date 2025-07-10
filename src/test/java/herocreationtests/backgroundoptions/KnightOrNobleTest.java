@@ -40,7 +40,7 @@ public class KnightOrNobleTest {
     void setKnightBackground() {
         chooseNobleOrKnight("knight", dndCharacter);
 
-        assertEquals("knight", dndCharacter.getBackground());
+        assertEquals("Knight", dndCharacter.getBackground());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class KnightOrNobleTest {
     void setNobleBackground() {
         chooseNobleOrKnight("noble", dndCharacter);
 
-        assertEquals("noble", dndCharacter.getBackground());
+        assertEquals("Noble", dndCharacter.getBackground());
     }
 
 
@@ -67,5 +67,13 @@ public class KnightOrNobleTest {
         chooseNobleOrKnight("test", dndCharacter);
 
         assertNull(dndCharacter.getBackground());
+    }
+
+    @Test
+    @DisplayName("Set noble background: trim test")
+    void setNobleBackgroundWithTrim() {
+        chooseNobleOrKnight("Noble ", dndCharacter);
+
+        assertEquals("Noble", dndCharacter.getBackground());
     }
 }

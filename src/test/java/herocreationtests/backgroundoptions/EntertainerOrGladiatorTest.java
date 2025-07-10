@@ -40,7 +40,7 @@ public class EntertainerOrGladiatorTest {
     void setGladiatorBackground() {
         chooseEntertainerOrGladiator("gladiator", dndCharacter);
 
-        assertEquals("gladiator", dndCharacter.getBackground());
+        assertEquals("Gladiator", dndCharacter.getBackground());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class EntertainerOrGladiatorTest {
     void setEntertainerBackground() {
         chooseEntertainerOrGladiator("entertainer", dndCharacter);
 
-        assertEquals("entertainer", dndCharacter.getBackground());
+        assertEquals("Entertainer", dndCharacter.getBackground());
     }
 
 
@@ -67,5 +67,13 @@ public class EntertainerOrGladiatorTest {
         chooseEntertainerOrGladiator("test", dndCharacter);
 
         assertNull(dndCharacter.getBackground());
+    }
+
+    @Test
+    @DisplayName("Set entertainer background: trim test")
+    void setEntertainerBackgroundWithTrim() {
+        chooseEntertainerOrGladiator("Entertainer ", dndCharacter);
+
+        assertEquals("Entertainer", dndCharacter.getBackground());
     }
 }

@@ -16,15 +16,15 @@ public class ArtisanOrMerchantTest {
     void setGuildMerchantBackground() {
         chooseArtisanOrMerchant("guild merchant", dndCharacter);
 
-        assertEquals("guild merchant", dndCharacter.getBackground());
+        assertEquals("Guild merchant", dndCharacter.getBackground());
     }
 
     @Test
     @DisplayName("Set guild artisan background")
-    void setGuildABackground() {
+    void setGuildArtisanBackground() {
         chooseArtisanOrMerchant("guild artisan", dndCharacter);
 
-        assertEquals("guild artisan", dndCharacter.getBackground());
+        assertEquals("Guild artisan", dndCharacter.getBackground());
     }
 
     @Test
@@ -33,5 +33,13 @@ public class ArtisanOrMerchantTest {
         chooseArtisanOrMerchant("test", dndCharacter);
 
         assertNull(dndCharacter.getBackground());
+    }
+
+    @Test
+    @DisplayName("Set guild artisan background: trim test")
+    void setBackgroundWithTrim() {
+        chooseArtisanOrMerchant("Guild artisan ", dndCharacter);
+
+        assertEquals("Guild artisan", dndCharacter.getBackground());
     }
 }

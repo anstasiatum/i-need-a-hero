@@ -28,7 +28,7 @@ public class ChooseProficiencyForGuildMerchant {
                 newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_PROFICIENCY_FOR_GUILD_MERCHANT, dndCharacter);
                 yield new Response(newState, chooseArtisanTools, getArtisanToolOptions());
             case "navigator's tools":
-                dndCharacter.setEquipment(dndCharacter.getEquipment() + ", " + userAnswer);
+                dndCharacter.getToolProficiency().add("Navigator's tools");
                 newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, dndCharacter);
                 yield new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
             default:

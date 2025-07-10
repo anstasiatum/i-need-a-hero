@@ -23,7 +23,7 @@ public class ChoosePossessionsForGuildMerchant {
                 newState = new State(CREATE_HERO, CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT, dndCharacter);
                 yield new Response(newState, "Choose a set of artisan's tools your hero will be proficient with \n" + allArtisansTools, getArtisanToolOptions());
             case "a mule and a cart":
-                dndCharacter.setEquipment(dndCharacter.getEquipment() + " " + userAnswer);
+                dndCharacter.setEquipment(dndCharacter.getEquipment()  + " A mule and a cart");
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, dndCharacter);
                 yield new Response(newState, chooseTraits);
             default:

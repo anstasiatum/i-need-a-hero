@@ -17,11 +17,11 @@ public class ChooseArtisanOrMerchant {
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {
             case "guild merchant":
-                dndCharacter.setBackground(userAnswer);
+                dndCharacter.setBackground("Guild merchant");
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT, dndCharacter);
                 yield new Response(newState, "Choose a language your guild merchant will know");
             case "guild artisan":
-                dndCharacter.setBackground(userAnswer);
+                dndCharacter.setBackground("Guild artisan");
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN, dndCharacter);
                 yield new Response(newState, "Choose a language your guild artisan will know");
             default:

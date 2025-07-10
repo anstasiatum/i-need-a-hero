@@ -8,8 +8,6 @@ import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
 public class Noble extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Noble");
-
         dndCharacter.getSkillsWithProficiency().add(HISTORY);
         dndCharacter.getSkillsWithProficiency().add(PERSUASION);
 

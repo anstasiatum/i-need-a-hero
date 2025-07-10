@@ -8,8 +8,6 @@ import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
 public class Sailor extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Sailor");
-
         dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
         dndCharacter.getSkillsWithProficiency().add(PERCEPTION);
 

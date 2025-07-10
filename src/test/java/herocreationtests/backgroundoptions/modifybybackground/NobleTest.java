@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
 import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
@@ -36,7 +37,7 @@ public class NobleTest {
     @DisplayName("Set background")
     void setBackgroundForNoble() {
 
-        assertEquals("Noble", dndCharacter.getBackground());
+        assertNull(dndCharacter.getBackground());
     }
 
     @Test
