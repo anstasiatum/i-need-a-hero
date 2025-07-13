@@ -98,14 +98,16 @@ However, there are some *limitations* as to what the bot can do:
 Follow the instructions to create your Telegram bot 👉[here](https://core.telegram.org/bots/features#creating-a-new-bot). In the end, you should get your bot token (Example: `110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw`). Make sure to save it, you will need it for fututre steps. *Keep your token secure and store it safely, it can be used by anyone to control your bot*.
 
 #### 2. Database setup
+1. Run Postrgres 17
+2. Create database
 
 #### 3. Application launch
 **Terminal**
 ```bash
 java 
--DconnectionURL=urlValue
--DconnectionUsername=usernameValue
--DconnectionPassword=passwordValue
+-DconnectionURL=dbConnectionURLValue
+-DconnectionUsername=dbUsernameValue
+-DconnectionPassword=dbPasswordValue
 -jar i-need-a-hero.jar botApiToken
 ```
 Example:
@@ -123,9 +125,9 @@ java
 2. Modify options -> Add VM options
 3. Set VM Options:
 ```bash
--DconnectionURL=urlValue
--DconnectionUsername=usernameValue
--DconnectionPassword=passwordValue
+-DconnectionURL=dbConnectionURLValue
+-DconnectionUsername=dbUsernameValue
+-DconnectionPassword=dbPasswordValue
 ```
 4. Program arguments: Enter your bot token
 
