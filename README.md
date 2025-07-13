@@ -47,12 +47,12 @@
         </a>
         <br>Telegram
       </td>
-    </tr>
-    <td align="center" width="110">
+          <td align="center" width="110">
         <a href="https://junit.org/junit5/" target="_blank">
           <img src="readmemedia/junit-original.svg" width="48" height="48" alt="JUnit 5" />
         </a>
         <br>JUnit 5
       </td>
+    </tr>
   </table>
 </div>
