@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/dnd_character?currentSchema=public</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">root</property>
+        <property name="connection.url">${connectionURL}</property>
+        <property name="connection.username">${connectionUsername}</property>
+        <property name="connection.password">${connectionPassword}</property>
         <property name="connection.pool_size">10</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="current_session_context_class">thread</property>
