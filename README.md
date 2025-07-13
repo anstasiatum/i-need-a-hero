@@ -4,6 +4,7 @@
 - [About](#-about)
 - [Stack](#-stack)
 - [Functionality](#-functionality)
+- [Contribute](#-contribute)
 - [Acknowledgements](#-acknowledgements)
 
 ## 🧙‍♀️ About
@@ -68,3 +69,36 @@
     </tr>
   </table>
 </div>
+
+Additional libraries:
+◦ Lombok
+◦ Java-telegram-bot-api
+◦ Apache pdf box
+◦ Jackson Mapper
+
+## ✨Funcitonality
+
+#### Create
+To start the hero creation process use the `/newhero` command.
+The bot generates a character based on the user's answers. It can automatically roll for basic hero characteristics or use the dice values entered by the player. It also modifies the character by race, class, and backstory selected by the user.
+However, there are some *limitations* as to what the bot can do:
+
+- English only (otherwise the PDF is not generated)
+- DnD 5e 2014 only
+- No spells 
+- 1st level only
+
+#### Read
+All player's characters are stored in the DB and can be accessed anytime using the `/printhero` command. It sends the PDF charcater sheet to the user.
+
+#### Update
+Unfortunately, custom editing is not supported for now
+
+#### Delete
+Player can delete their hero anytime using the `/dismisshero` command.
+
+## ✍️ Contribute
+I would love to get your contribution, whether it's in form of bug reports, Requests for Enhancement (RFE), documentation, or code patches. Any feedback is more than welcome!
+
+## 🧙 Acknowledgements
+Big thanks to Oleg Rekin for guiding me through the proccess of building this bot!
