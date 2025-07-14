@@ -92,7 +92,8 @@ public class Options {
                 "Constitution",
                 "Intelligence",
                 "Wisdom",
-                "Charisma");
+                "Charisma"
+        );
     }
 
     public static List<String> getArtisanToolOptions() {
@@ -213,7 +214,8 @@ public class Options {
                 "Athletics",
                 "Arcana",
                 "Animal handling",
-                "Acrobatics");
+                "Acrobatics"
+        );
     }
 
     public static List<String> getCharlatanConItemOptions() {
@@ -222,7 +224,8 @@ public class Options {
                 "Bottles filled with coloured liquid",
                 "Weighted dice",
                 "Marked cards",
-                "Signet ring");
+                "Signet ring"
+        );
     }
 
     public static List<String> getDwarfArtisanToolOptions() {
@@ -230,6 +233,7 @@ public class Options {
         return List.of(
                 "Smith's tools",
                 "Brewer’s supplies",
-                "Mason’s tools");
+                "Mason’s tools"
+        );
     }
 }
