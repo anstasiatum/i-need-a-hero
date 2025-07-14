@@ -101,4 +101,4 @@ Player can delete their hero anytime using the `/dismisshero` command.
 I would love to get your contribution, whether it's in form of bug reports, Requests for Enhancement (RFE), documentation, or code patches. Any feedback is more than welcome!
 
 ## 🧙 Acknowledgements
-Big thanks to Oleg Rekin for guiding me through the proccess of building this bot!
+Big thanks to Oleg Rekin for guiding me through the process of building this bot!
