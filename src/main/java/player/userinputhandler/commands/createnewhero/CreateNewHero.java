@@ -1,5 +1,6 @@
 package player.userinputhandler.commands.createnewhero;
 
+import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
@@ -17,7 +18,6 @@ import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
-import player.userinputhandler.commands.db.CharacterDaoImpl;
 
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
@@ -132,15 +132,16 @@ import static player.userinputhandler.enums.Steps.SET_STRENGTH;
 import static player.userinputhandler.enums.Steps.SET_WEIGHT;
 import static player.userinputhandler.enums.Steps.SET_WISDOM;
 
+@AllArgsConstructor
 public class CreateNewHero {
-    final static CharacterDao characterJpaDao = new CharacterDaoImpl();
+    final CharacterDao characterJpaDao;
 
-    public static Response createNewHero() {
+    public Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());
         return new Response(newState, "Alright, let's name your future hero!");
     }
 
-    public static Response heroCreationAnswer(State state, Long chatId, String userAnswer) {
+    public Response heroCreationAnswer(State state, Long chatId, String userAnswer) {
         Response response;
         State newState;
 

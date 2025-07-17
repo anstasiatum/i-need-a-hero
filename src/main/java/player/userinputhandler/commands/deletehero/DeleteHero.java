@@ -1,5 +1,6 @@
 package player.userinputhandler.commands.deletehero;
 
+import lombok.AllArgsConstructor;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.commands.db.Character;
@@ -12,11 +13,10 @@ import static player.userinputhandler.commands.deletehero.Options.getYesOrNoOpti
 import static player.userinputhandler.enums.Processes.DELETE_HERO;
 import static player.userinputhandler.enums.Steps.CONFIRMATION;
 import static player.userinputhandler.enums.Steps.SELECT_A_HERO_TO_BE_DELETED;
-
+@AllArgsConstructor
 public class DeleteHero {
 
     final CharacterDao characterJpaDao;
-
 
     public Response deleteHero() {
         State newState = new State(DELETE_HERO, CONFIRMATION, null);
@@ -62,9 +62,5 @@ public class DeleteHero {
                 break;
         }
         return response;
-    }
-
-    public DeleteHero(CharacterDao characterJpaDao) {
-        this.characterJpaDao = characterJpaDao;
     }
 }

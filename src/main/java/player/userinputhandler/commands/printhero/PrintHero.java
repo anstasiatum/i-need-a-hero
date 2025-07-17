@@ -1,5 +1,6 @@
 package player.userinputhandler.commands.printhero;
 
+import lombok.AllArgsConstructor;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.io.RandomAccessReadBufferedFile;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -47,11 +48,11 @@ import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 import static player.userinputhandler.enums.Processes.PRINT_HERO;
 import static player.userinputhandler.enums.Steps.PRINT_PDF;
 
-
+@AllArgsConstructor
 public class PrintHero {
-    final static CharacterDao characterJpaDao = new CharacterDaoImpl();
+    final CharacterDao characterJpaDao;
 
-    public static Response printHero(Long chatId) {
+    public Response printHero(Long chatId) {
         try {
             List<Character> userCharacters = characterJpaDao.findByChatId(chatId);
             List<String> outputList = userCharacters.stream()
@@ -66,7 +67,7 @@ public class PrintHero {
         }
     }
 
-    public static Response heroPrintingAnswer(State state, String userAnswer, Long chatId) {
+    public Response heroPrintingAnswer(State state, String userAnswer, Long chatId) {
         Response response;
         State newState;
 
@@ -85,7 +86,7 @@ public class PrintHero {
         return response;
     }
 
-    public static File printHeroPdf(Integer characterId, Long chatId) {
+    public File printHeroPdf(Integer characterId, Long chatId) {
         Path resourcePath;
         try {
             resourcePath = Paths.get(PrintHero.class.getResource("/DnD_5E_CharacterSheet_FormFillable.pdf").toURI());
@@ -107,7 +108,7 @@ public class PrintHero {
         }
     }
 
-    public static void fillForm(DndCharacter dndCharacter, PDAcroForm acroForm) throws IOException {
+    public void fillForm(DndCharacter dndCharacter, PDAcroForm acroForm) throws IOException {
 
         //First page
         PDField characterName = acroForm.getField("CharacterName");
