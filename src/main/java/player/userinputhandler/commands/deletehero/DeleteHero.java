@@ -8,19 +8,22 @@ import player.userinputhandler.commands.db.CharacterDaoImpl;
 
 import java.util.List;
 
+import static player.userinputhandler.commands.deletehero.Options.getYesOrNoOptions;
 import static player.userinputhandler.enums.Processes.DELETE_HERO;
 import static player.userinputhandler.enums.Steps.CONFIRMATION;
 import static player.userinputhandler.enums.Steps.SELECT_A_HERO_TO_BE_DELETED;
 
 public class DeleteHero {
-    final static CharacterDao characterJpaDao = new CharacterDaoImpl();
 
-    public static Response deleteHero() {
+    final CharacterDao characterJpaDao;
+
+
+    public Response deleteHero() {
         State newState = new State(DELETE_HERO, CONFIRMATION, null);
-        return new Response(newState, "Are you sure you want to delete your character? Note, that once they are dismissed, they will be gone forever, no coming back\nAnswer Yes or No");
+        return new Response(newState, "Are you sure you want to delete your character? Note, that once they are dismissed, they will be gone forever, no coming back", getYesOrNoOptions());
     }
 
-    public static Response heroDeletionAnswer(State state, Long chatId, String userAnswer) {
+    public Response heroDeletionAnswer(State state, Long chatId, String userAnswer) {
         Response response;
         State newState;
         switch (state.getStepId()) {
@@ -40,7 +43,7 @@ public class DeleteHero {
                         break;
                     default:
                         newState = new State(DELETE_HERO, CONFIRMATION, state.getDndCharacter());
-                        response = new Response(newState, "Sorry, I cannot understand your input. Please, enter Yes or No");
+                        response = new Response(newState, "Sorry, I cannot understand your input. Please, enter Yes or No", getYesOrNoOptions());
                         break;
                 }
                 break;
@@ -59,5 +62,9 @@ public class DeleteHero {
                 break;
         }
         return response;
+    }
+
+    public DeleteHero(CharacterDao characterJpaDao) {
+        this.characterJpaDao = characterJpaDao;
     }
 }
