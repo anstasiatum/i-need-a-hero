@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.Background.CRIMINAL;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
@@ -37,7 +38,7 @@ public class CriminalTest {
     @DisplayName("Set background")
     void setBackgroundForCriminal() {
 
-        assertEquals("Criminal", dndCharacter.getBackground());
+        assertEquals(CRIMINAL, dndCharacter.getBackground());
     }
 
     @Test

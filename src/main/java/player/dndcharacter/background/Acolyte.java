@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.ACOLYTE;
 import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
 import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
 
 public class Acolyte extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Acolyte");
+        dndCharacter.setBackground(ACOLYTE);
 
         dndCharacter.getSkillsWithProficiency().add(INSIGHT);
         dndCharacter.getSkillsWithProficiency().add(RELIGION);

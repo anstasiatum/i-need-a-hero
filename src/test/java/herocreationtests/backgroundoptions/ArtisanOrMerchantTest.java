@@ -6,6 +6,8 @@ import player.dndcharacter.DndCharacter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Background.GUILD_ARTISAN;
+import static player.dndcharacter.dndcharacterenums.Background.GUILD_MERCHANT;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
 
 public class ArtisanOrMerchantTest {
@@ -16,7 +18,7 @@ public class ArtisanOrMerchantTest {
     void setGuildMerchantBackground() {
         chooseArtisanOrMerchant("guild merchant", dndCharacter);
 
-        assertEquals("Guild merchant", dndCharacter.getBackground());
+        assertEquals(GUILD_MERCHANT, dndCharacter.getBackground());
     }
 
     @Test
@@ -24,7 +26,7 @@ public class ArtisanOrMerchantTest {
     void setGuildArtisanBackground() {
         chooseArtisanOrMerchant("guild artisan", dndCharacter);
 
-        assertEquals("Guild artisan", dndCharacter.getBackground());
+        assertEquals(GUILD_ARTISAN, dndCharacter.getBackground());
     }
 
     @Test
@@ -40,6 +42,6 @@ public class ArtisanOrMerchantTest {
     void setBackgroundWithTrim() {
         chooseArtisanOrMerchant("Guild artisan ", dndCharacter);
 
-        assertEquals("Guild artisan", dndCharacter.getBackground());
+        assertEquals(GUILD_ARTISAN, dndCharacter.getBackground());
     }
 }

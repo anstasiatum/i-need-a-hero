@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.URCHIN;
 import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
 import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
 
 public class Urchin extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Urchin");
+        dndCharacter.setBackground(URCHIN);
 
         dndCharacter.getSkillsWithProficiency().add(SLEIGHT_OF_HAND);
         dndCharacter.getSkillsWithProficiency().add(STEALTH);

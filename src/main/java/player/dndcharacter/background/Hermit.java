@@ -2,6 +2,7 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
 import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
 import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
 
@@ -9,7 +10,7 @@ public class Hermit extends Background {
 
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Hermit");
+        dndCharacter.setBackground(HERMIT);
 
         dndCharacter.getSkillsWithProficiency().add(MEDICINE);
         dndCharacter.getSkillsWithProficiency().add(RELIGION);

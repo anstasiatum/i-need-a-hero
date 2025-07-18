@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.SOLDIER;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.INTIMIDATION;
 
 public class Soldier extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Soldier");
+        dndCharacter.setBackground(SOLDIER);
 
         dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
         dndCharacter.getSkillsWithProficiency().add(INTIMIDATION);

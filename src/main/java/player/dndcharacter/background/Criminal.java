@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.CRIMINAL;
 import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
 
 public class Criminal extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Criminal");
+        dndCharacter.setBackground(CRIMINAL);
 
         dndCharacter.getSkillsWithProficiency().add(DECEPTION);
         dndCharacter.getSkillsWithProficiency().add(STEALTH);

@@ -1,9 +1,11 @@
 package player.userinputhandler.commands.createnewhero.backgroundoptions;
 
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.dndcharacterenums.Background;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 
+import static player.dndcharacter.dndcharacterenums.Background.GUILD_ARTISAN;
 import static player.userinputhandler.commands.createnewhero.Options.getGuildMerchantOrArtisanOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
@@ -17,11 +19,11 @@ public class ChooseArtisanOrMerchant {
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {
             case "guild merchant":
-                dndCharacter.setBackground("Guild merchant");
+                dndCharacter.setBackground(Background.GUILD_MERCHANT);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT, dndCharacter);
                 yield new Response(newState, "Choose a language your guild merchant will know");
             case "guild artisan":
-                dndCharacter.setBackground("Guild artisan");
+                dndCharacter.setBackground(GUILD_ARTISAN);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN, dndCharacter);
                 yield new Response(newState, "Choose a language your guild artisan will know");
             default:

@@ -3,6 +3,7 @@ package player.dndcharacter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import player.dndcharacter.dndcharacterenums.Background;
 import player.dndcharacter.dndcharacterenums.CharacterClass;
 import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.Race;
@@ -23,7 +24,7 @@ public class DndCharacter {
     private String playerName;
     private String characterName;
 
-    private String background;
+    private Background background;
     private String backstory;
 
     private String age;

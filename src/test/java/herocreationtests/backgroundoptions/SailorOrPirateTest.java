@@ -7,6 +7,8 @@ import player.dndcharacter.DndCharacter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Background.PIRATE;
+import static player.dndcharacter.dndcharacterenums.Background.SAILOR;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseSailorOrPirate.chooseSailorOrPirate;
 
 public class SailorOrPirateTest {
@@ -41,7 +43,7 @@ public class SailorOrPirateTest {
     void setSailorBackground() {
         chooseSailorOrPirate("Sailor", dndCharacter);
 
-        assertEquals("Sailor", dndCharacter.getBackground());
+        assertEquals(SAILOR, dndCharacter.getBackground());
     }
 
     @Test
@@ -49,7 +51,7 @@ public class SailorOrPirateTest {
     void setNobleBackground() {
         chooseSailorOrPirate("Pirate", dndCharacter);
 
-        assertEquals("Pirate", dndCharacter.getBackground());
+        assertEquals(PIRATE, dndCharacter.getBackground());
     }
 
 
@@ -75,6 +77,6 @@ public class SailorOrPirateTest {
     void setNobleBackgroundWithTrim() {
         chooseSailorOrPirate("Pirate ", dndCharacter);
 
-        assertEquals("Pirate", dndCharacter.getBackground());
+        assertEquals(PIRATE, dndCharacter.getBackground());
     }
 }

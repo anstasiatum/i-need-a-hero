@@ -2,6 +2,7 @@ package player.userinputhandler.commands.createnewhero;
 
 import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.dndcharacterenums.Background;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
 import player.dndcharacter.dndclass.Cleric;
@@ -602,7 +603,7 @@ public class CreateNewHero {
                 response = new Response(newState, "Choose the background of your hero\n" + allBackgrounds, getBackgroundOptions());
                 break;
             case CHOOSE_BACKGROUND:
-                state.getDndCharacter().setBackground(userAnswer);
+                state.getDndCharacter().setBackground(Background.valueOf(userAnswer));
                 response = setBackground(state.getDndCharacter(), userAnswer);
                 break;
             case CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE:

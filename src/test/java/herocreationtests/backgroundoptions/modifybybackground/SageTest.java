@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.Background.SAGE;
 import static player.dndcharacter.dndcharacterenums.Skills.ARCANA;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
@@ -37,7 +38,7 @@ public class SageTest {
     @DisplayName("Set background")
     void setBackgroundForSage() {
 
-        assertEquals("Sage", dndCharacter.getBackground());
+        assertEquals(SAGE, dndCharacter.getBackground());
     }
 
     @Test

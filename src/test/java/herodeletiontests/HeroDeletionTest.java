@@ -11,9 +11,9 @@ import player.userinputhandler.commands.deletehero.DeleteHero;
 
 import java.util.List;
 
-import static herodeletiontests.testdata.TestData.chatID;
-import static herodeletiontests.testdata.TestData.getMockCharacterAna;
-import static herodeletiontests.testdata.TestData.getMockCharacterHanzo;
+import static testdata.TestData.chatID;
+import static testdata.TestData.getMockCharacterAna;
+import static testdata.TestData.getMockCharacterHanzo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -24,14 +24,13 @@ import static player.userinputhandler.enums.Steps.SELECT_A_HERO_TO_BE_DELETED;
 import static player.userinputhandler.enums.Steps.SET_WEIGHT;
 
 public class HeroDeletionTest {
-    static CharacterDao characterDaoMock = mock(CharacterDao.class);
-    ;
-    static DeleteHero deleteHero = new DeleteHero(characterDaoMock);
-    static DndCharacter dndCharacter = new DndCharacter();
-    static State incomingState;
-    static State expectedState;
-    static Response expectedResponse;
-    static String userAnswer;
+    private static final CharacterDao characterDaoMock = mock(CharacterDao.class);
+    private static final DeleteHero deleteHero = new DeleteHero(characterDaoMock);
+    private static final DndCharacter dndCharacter = new DndCharacter();
+    private static State incomingState;
+    private static State expectedState;
+    private static Response expectedResponse;
+    private static String userAnswer;
 
     @Test
     @DisplayName("Deletion confirmation response")
@@ -86,13 +85,25 @@ public class HeroDeletionTest {
     }
 
     @Test
-    @DisplayName("Invalid deletion user answer response")
+    @DisplayName("Invalid deletion confirmation user answer response")
     void invalidDeletionUserAnswerResponse() {
 
         userAnswer = "Test";
         incomingState = new State(DELETE_HERO, CONFIRMATION, dndCharacter);
         expectedState = new State(DELETE_HERO, CONFIRMATION, incomingState.getDndCharacter());
         expectedResponse = new Response(expectedState, "Sorry, I cannot understand your input. Please, enter Yes or No", getYesOrNoOptions());
+
+        assertEquals(expectedResponse, deleteHero.heroDeletionAnswer(incomingState, chatID, userAnswer));
+    }
+
+    @Test
+    @DisplayName("Invalid character ID response")
+    void invalidCharacterIDResponse() {
+
+        userAnswer = "Test";
+        incomingState = new State(DELETE_HERO, SELECT_A_HERO_TO_BE_DELETED, dndCharacter);
+        expectedState = new State(DELETE_HERO, SELECT_A_HERO_TO_BE_DELETED, incomingState.getDndCharacter());
+        expectedResponse = new Response(expectedState, "Couldn't find a hero with this ID. Please enter an available one.");
 
         assertEquals(expectedResponse, deleteHero.heroDeletionAnswer(incomingState, chatID, userAnswer));
     }

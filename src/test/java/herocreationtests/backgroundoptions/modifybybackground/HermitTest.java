@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
 import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
@@ -38,7 +39,7 @@ public class HermitTest {
     @DisplayName("Set background")
     void setBackgroundForHermit() {
 
-        assertEquals("Hermit", dndCharacter.getBackground());
+        assertEquals(HERMIT, dndCharacter.getBackground());
     }
 
     @Test

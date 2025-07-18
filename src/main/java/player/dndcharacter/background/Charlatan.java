@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.CHARLATAN;
 import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
 
 public class Charlatan extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Charlatan");
+        dndCharacter.setBackground(CHARLATAN);
 
         dndCharacter.getSkillsWithProficiency().add(DECEPTION);
         dndCharacter.getSkillsWithProficiency().add(SLEIGHT_OF_HAND);

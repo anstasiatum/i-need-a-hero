@@ -7,6 +7,8 @@ import player.dndcharacter.DndCharacter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Background.ENTERTAINER;
+import static player.dndcharacter.dndcharacterenums.Background.GLADIATOR;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseEntertainerOrGladiator.chooseEntertainerOrGladiator;
 
 public class EntertainerOrGladiatorTest {
@@ -40,7 +42,7 @@ public class EntertainerOrGladiatorTest {
     void setGladiatorBackground() {
         chooseEntertainerOrGladiator("gladiator", dndCharacter);
 
-        assertEquals("Gladiator", dndCharacter.getBackground());
+        assertEquals(GLADIATOR, dndCharacter.getBackground());
     }
 
     @Test
@@ -48,7 +50,7 @@ public class EntertainerOrGladiatorTest {
     void setEntertainerBackground() {
         chooseEntertainerOrGladiator("entertainer", dndCharacter);
 
-        assertEquals("Entertainer", dndCharacter.getBackground());
+        assertEquals(ENTERTAINER, dndCharacter.getBackground());
     }
 
 
@@ -74,6 +76,6 @@ public class EntertainerOrGladiatorTest {
     void setEntertainerBackgroundWithTrim() {
         chooseEntertainerOrGladiator("Entertainer ", dndCharacter);
 
-        assertEquals("Entertainer", dndCharacter.getBackground());
+        assertEquals(ENTERTAINER, dndCharacter.getBackground());
     }
 }

@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.FOLK_HERO;
 import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
 import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 
 public class FolkHero extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Folk Hero");
+        dndCharacter.setBackground(FOLK_HERO);
 
         dndCharacter.getSkillsWithProficiency().add(ANIMAL_HANDLING);
         dndCharacter.getSkillsWithProficiency().add(SURVIVAL);

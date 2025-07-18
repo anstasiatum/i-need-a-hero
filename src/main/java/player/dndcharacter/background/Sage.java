@@ -2,13 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Background.SAGE;
 import static player.dndcharacter.dndcharacterenums.Skills.ARCANA;
 import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
 
 public class Sage extends Background {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground("Sage");
+        dndCharacter.setBackground(SAGE);
 
         dndCharacter.getSkillsWithProficiency().add(ARCANA);
         dndCharacter.getSkillsWithProficiency().add(HISTORY);

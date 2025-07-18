@@ -2,8 +2,10 @@ package player.userinputhandler;
 
 import com.pengrad.telegrambot.model.Update;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 import player.userinputhandler.commands.deletehero.DeleteHero;
+import player.userinputhandler.commands.printhero.PDFCreator;
 import player.userinputhandler.commands.printhero.PrintHero;
 
 import java.util.HashMap;
@@ -11,9 +13,11 @@ import java.util.Map;
 
 public class UserInputHandler {
     private static final Map<Long, State> statesByChatId = new HashMap<>();
-    static DeleteHero deleteHero = new DeleteHero(new CharacterDaoImpl());
-    static CreateNewHero createHero = new CreateNewHero(new CharacterDaoImpl());
-    static PrintHero printHero = new PrintHero(new CharacterDaoImpl());
+    static CharacterDao characterDao = new CharacterDaoImpl();
+    static DeleteHero deleteHero = new DeleteHero(characterDao);
+    static CreateNewHero createHero = new CreateNewHero(characterDao);
+    static PDFCreator createPDF = new PDFCreator(characterDao);
+    static PrintHero printHero = new PrintHero(characterDao, createPDF);
 
     public static BotAnswer handleUserInput(Update update) {
         boolean hasOptionMismatch = false;

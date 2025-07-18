@@ -7,6 +7,8 @@ import player.dndcharacter.DndCharacter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Background.KNIGHT;
+import static player.dndcharacter.dndcharacterenums.Background.NOBLE;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseNobleOrKnight.chooseNobleOrKnight;
 
 public class KnightOrNobleTest {
@@ -40,7 +42,7 @@ public class KnightOrNobleTest {
     void setKnightBackground() {
         chooseNobleOrKnight("knight", dndCharacter);
 
-        assertEquals("Knight", dndCharacter.getBackground());
+        assertEquals(KNIGHT, dndCharacter.getBackground());
     }
 
     @Test
@@ -48,7 +50,7 @@ public class KnightOrNobleTest {
     void setNobleBackground() {
         chooseNobleOrKnight("noble", dndCharacter);
 
-        assertEquals("Noble", dndCharacter.getBackground());
+        assertEquals(NOBLE, dndCharacter.getBackground());
     }
 
 
@@ -74,6 +76,6 @@ public class KnightOrNobleTest {
     void setNobleBackgroundWithTrim() {
         chooseNobleOrKnight("Noble ", dndCharacter);
 
-        assertEquals("Noble", dndCharacter.getBackground());
+        assertEquals(NOBLE, dndCharacter.getBackground());
     }
 }
