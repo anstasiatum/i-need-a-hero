@@ -603,7 +603,6 @@ public class CreateNewHero {
                 response = new Response(newState, "Choose the background of your hero\n" + allBackgrounds, getBackgroundOptions());
                 break;
             case CHOOSE_BACKGROUND:
-                state.getDndCharacter().setBackground(Background.valueOf(userAnswer));
                 response = setBackground(state.getDndCharacter(), userAnswer);
                 break;
             case CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE:
