@@ -5,6 +5,7 @@ import player.userinputhandler.Response;
 import player.userinputhandler.State;
 
 import static player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator.generateCharacteristics;
+import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ROLLING_CHARACTERISTICS_METHOD;
 import static player.userinputhandler.enums.Steps.SET_STRENGTH;
@@ -24,7 +25,7 @@ public class ChooseCharacteristicsSettingMethod {
             }
             default -> {
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, dndCharacter);
-                yield new Response(newState, "Choose \"Roll for me\" and the bot will roll the dice or \"I'll roll myself\" to roll the dice yourself");
+                yield new Response(newState, "Choose \"Roll for me, bot\" and the bot will roll the dice or \"I'll roll myself\" to roll the dice yourself", getCharacteristicsRollingMethodOptions());
             }
         };
         return response;
