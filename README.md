@@ -87,7 +87,6 @@ Player can delete their hero anytime using the `/dismisshero` command.
 #### Limitations
 However, there are some *limitations* as to what the bot can do:
 
-- English only (otherwise the PDF is not generated)
 - DnD 5e 2014 only
 - No spells 
 - 1st level only
