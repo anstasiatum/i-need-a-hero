@@ -75,13 +75,13 @@ public class PDFCreator {
         characterName.setValue(dndCharacter.getCharacterName());
 
         PDField classLevel = acroForm.getField("ClassLevel");
-        classLevel.setValue(String.valueOf(dndCharacter.getCharacterClass()));
+        classLevel.setValue(getClassForPDF(dndCharacter));
 
         PDField background = acroForm.getField("Background");
-        background.setValue(String.valueOf(dndCharacter.getBackground()));
+        background.setValue(getBackgroundForPDF(dndCharacter));
 
         PDField race = acroForm.getField("Race ");
-        race.setValue(String.valueOf(dndCharacter.getRace()));
+        race.setValue(getRaceForPDF(dndCharacter));
 
         PDField alignment = acroForm.getField("Alignment");
         alignment.setValue(dndCharacter.getAlignment());
@@ -399,11 +399,11 @@ public class PDFCreator {
 
         // Third page
         PDField spellcastingClass = acroForm.getField("Spellcasting Class 2");
-        spellcastingClass.setValue(String.valueOf(dndCharacter.getCharacterClass()));
+        spellcastingClass.setValue(getClassForPDF(dndCharacter));
 
         PDField spellcastingAbility = acroForm.getField("SpellcastingAbility 2");
         if (dndCharacter.getSpellcastingAbility() != null) {
-            spellcastingAbility.setValue(String.valueOf(dndCharacter.getSpellcastingAbility()));
+            spellcastingAbility.setValue(getSpellcastingAbilityForPDF(dndCharacter));
         }
 
         PDField spellSaveDc = acroForm.getField("SpellSaveDC  2");
@@ -415,5 +415,75 @@ public class PDFCreator {
         if (dndCharacter.getSpellAttackBonus() != null) {
             spellAttackBonus.setValue(String.valueOf(dndCharacter.getSpellAttackBonus()));
         }
+    }
+
+    public static String getClassForPDF(DndCharacter dndCharacter) {
+        return switch (dndCharacter.getCharacterClass()) {
+            case BARBARIAN -> "Barbarian";
+            case BARD -> "Bard";
+            case CLERIC -> "Cleric";
+            case DRUID -> "Druid";
+            case FIGHTER -> "Fighter";
+            case MONK -> "Monk";
+            case PALADIN -> "Paladin";
+            case RANGER -> "Ranger";
+            case ROGUE -> "Rogue";
+            case SORCERER -> "Sorcerer";
+            case WARLOCK -> "Warlock";
+            case WIZARD -> "Wizard";
+        };
+    }
+
+    public static String getRaceForPDF(DndCharacter dndCharacter) {
+        return switch (dndCharacter.getRace()) {
+            case HILL_DWARF -> "Hill Dwarf";
+            case MOUNTAIN_DWARF -> "Mountain Dwarf";
+            case DARK_ELF -> "Dark Elf";
+            case WOOD_ELF -> "Wood Elf";
+            case HIGH_ELF -> "High Elf";
+            case LIGHTFOOT_HALFLING -> "Lightfoot Halfling";
+            case STOUT_HALFLING -> "Stout Halfling";
+            case BASE_HUMAN, VARIANT_HUMAN -> "Human";
+            case DRAGONBORN -> "Dragonborn";
+            case FOREST_GNOME -> "Forest Gnome";
+            case ROCK_GNOME -> "Rock Gnome";
+            case HALF_ELF -> "Half Elf";
+            case HALF_ORC -> "Half Orc";
+            case TIEFLING -> "Tiefling";
+        };
+    }
+
+    public static String getBackgroundForPDF(DndCharacter dndCharacter) {
+        return switch (dndCharacter.getBackground()) {
+            case ACOLYTE -> "Acolyte";
+            case CHARLATAN -> "Charlatan";
+            case CRIMINAL -> "Criminal";
+            case ENTERTAINER -> "Entertainer";
+            case GLADIATOR -> "Gladiator";
+            case FOLK_HERO -> "Folk Hero";
+            case GUILD_ARTISAN -> "Guild Artisan";
+            case GUILD_MERCHANT -> "Guild Merchant";
+            case HERMIT -> "Hermit";
+            case NOBLE -> "Noble";
+            case KNIGHT -> "Knight";
+            case OUTLANDER -> "Outlander";
+            case SAGE -> "Sage";
+            case SAILOR -> "Sailor";
+            case PIRATE -> "Pirate";
+            case SOLDIER -> "Soldier";
+            case URCHIN -> "Urchin";
+            case CUSTOM -> "Custom";
+        };
+    }
+
+    public static String getSpellcastingAbilityForPDF(DndCharacter dndCharacter) {
+        return switch (dndCharacter.getSpellcastingAbility()) {
+            case STRENGTH -> "Strength";
+            case DEXTERITY -> "Dexterity";
+            case CONSTITUTION -> "Constitution";
+            case INTELLIGENCE -> "Intelligence";
+            case WISDOM -> "Wisdom";
+            case CHARISMA -> "Charisma";
+        };
     }
 }
