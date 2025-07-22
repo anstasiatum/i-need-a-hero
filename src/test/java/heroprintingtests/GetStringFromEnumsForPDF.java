@@ -9,7 +9,6 @@ import player.dndcharacter.dndcharacterenums.Race;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.userinputhandler.commands.printhero.PDFCreator.getBackgroundForPDF;
 import static player.userinputhandler.commands.printhero.PDFCreator.getClassForPDF;
 import static player.userinputhandler.commands.printhero.PDFCreator.getRaceForPDF;
 import static player.userinputhandler.commands.printhero.PDFCreator.getSpellcastingAbilityForPDF;
@@ -44,7 +43,7 @@ public class GetStringFromEnumsForPDF {
             case CUSTOM -> "Custom";
         };
 
-        assertEquals(expectedResult, getBackgroundForPDF(dndCharacter));
+        assertEquals(expectedResult, dndCharacter.getBackground().getDisplayName());
     }
 
     @ParameterizedTest(name = "Return String alternative for {0} class")
@@ -67,7 +66,7 @@ public class GetStringFromEnumsForPDF {
             case WIZARD -> "Wizard";
         };
 
-        assertEquals(expectedResult, getClassForPDF(dndCharacter));
+        assertEquals(expectedResult, getClassForPDF(dndCharacter.getCharacterClass()));
     }
 
     @ParameterizedTest(name = "Return String alternative for {0} race")
@@ -92,7 +91,7 @@ public class GetStringFromEnumsForPDF {
             case TIEFLING -> "Tiefling";
         };
 
-        assertEquals(expectedResult, getRaceForPDF(dndCharacter));
+        assertEquals(expectedResult, getRaceForPDF(dndCharacter.getRace()));
     }
 
     @ParameterizedTest(name = "Return String alternative for {0} Spellcasting Ability")
@@ -109,7 +108,7 @@ public class GetStringFromEnumsForPDF {
             case CHARISMA -> "Charisma";
         };
 
-        assertEquals(expectedResult, getSpellcastingAbilityForPDF(dndCharacter));
+        assertEquals(expectedResult, getSpellcastingAbilityForPDF(dndCharacter.getSpellcastingAbility()));
     }
 }
 

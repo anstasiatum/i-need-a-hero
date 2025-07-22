@@ -2,10 +2,18 @@ package herocreationtests.options;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import player.dndcharacter.dndcharacterenums.Skills;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
+import static herocreationtests.options.HumanReadableSkill.humanReadable;
+import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
@@ -24,6 +32,7 @@ import static player.userinputhandler.commands.createnewhero.Options.getPossessi
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getSailorOrPirateOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
 
 public class OptionTest {
     @Test
@@ -61,20 +70,20 @@ public class OptionTest {
     @DisplayName("Get Race Options Test")
     void getRaceOptionsTest() {
         List<String> expectedResult = List.of(
-                "Dragonborn",
                 "Hill Dwarf",
                 "Mountain Dwarf",
                 "Dark Elf",
-                "High Elf",
                 "Wood Elf",
+                "High Elf",
+                "Lightfoot Halfling",
+                "Stout Halfling",
+                "Base Human",
+                "Variant Human",
+                "Dragonborn",
                 "Forest Gnome",
                 "Rock Gnome",
                 "Half Elf",
-                "Lightfoot Halfling",
-                "Stout Halfling",
                 "Half Orc",
-                "Base Human",
-                "Variant Human",
                 "Tiefling"
         );
 
@@ -107,13 +116,17 @@ public class OptionTest {
                 "Charlatan",
                 "Criminal",
                 "Entertainer",
+                "Gladiator",
                 "Folk Hero",
                 "Guild Artisan",
+                "Guild Merchant",
                 "Hermit",
                 "Noble",
+                "Knight",
                 "Outlander",
                 "Sage",
                 "Sailor",
+                "Pirate",
                 "Soldier",
                 "Urchin",
                 "Custom"
@@ -266,7 +279,7 @@ public class OptionTest {
         List<String> expectedResult = List.of(
                 "Survival",
                 "Stealth",
-                "Sleight of hand",
+                "Sleight Of Hand",
                 "Religion",
                 "Persuasion",
                 "Performance",
@@ -280,7 +293,7 @@ public class OptionTest {
                 "Deception",
                 "Athletics",
                 "Arcana",
-                "Animal handling",
+                "Animal Handling",
                 "Acrobatics"
         );
 
@@ -310,5 +323,34 @@ public class OptionTest {
         );
 
         assertEquals(expectedResult, getDwarfArtisanToolOptions());
+    }
+
+    @ParameterizedTest(name = "Get Skill Options: {0} is returned as a readable string when present in the incoming set")
+    @EnumSource(Skills.class)
+    void getSkillOptionsReturnSingleOptionTest(Skills skill) {
+        Set<Skills> availableSkills = EnumSet.of(skill);
+        List<String> expectedResult = getSkillOptions(availableSkills);
+        assertEquals(1, expectedResult.size());
+        assertEquals(humanReadable(skill), expectedResult.getFirst());
+    }
+
+    @Test
+    @DisplayName("Get Skill Options: Return all skills")
+    void getSkillOptionsReturnAllSkillsTest() {
+        Set<Skills> availableSkills = EnumSet.allOf(Skills.class);
+        List<String> expectedResult = getSkillOptions(availableSkills);
+        assertEquals(Skills.values().length, expectedResult.size());
+
+        for (Skills skill : Skills.values()) {
+            String expected = humanReadable(skill);
+            assertTrue(expectedResult.contains(expected));
+        }
+    }
+
+    @Test
+    @DisplayName("Get Skill Options: Return no skills")
+    void getSkillOptionsReturnNoSkill() {
+        List<String> result = getSkillOptions(emptySet());
+        assertTrue(result.isEmpty());
     }
 }

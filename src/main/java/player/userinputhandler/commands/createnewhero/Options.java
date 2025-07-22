@@ -1,32 +1,15 @@
 package player.userinputhandler.commands.createnewhero;
 
-import player.dndcharacter.DndCharacter;
+import player.dndcharacter.dndcharacterenums.Background;
+import player.dndcharacter.dndcharacterenums.CharacterClass;
+import player.dndcharacter.dndcharacterenums.Characteristics;
+import player.dndcharacter.dndcharacterenums.Race;
 import player.dndcharacter.dndcharacterenums.Skills;
 
-import javax.management.relation.Relation;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import static player.dndcharacter.dndcharacterenums.Skills.ACROBATICS;
-import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
-import static player.dndcharacter.dndcharacterenums.Skills.ARCANA;
-import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
-import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
-import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
-import static player.dndcharacter.dndcharacterenums.Skills.INTIMIDATION;
-import static player.dndcharacter.dndcharacterenums.Skills.INVESTIGATION;
-import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
-import static player.dndcharacter.dndcharacterenums.Skills.NATURE;
-import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
-import static player.dndcharacter.dndcharacterenums.Skills.PERFORMANCE;
-import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
-import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
-import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
-import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
-import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
+import java.util.stream.Collectors;
 
 public class Options {
     public static List<String> getCharacteristicsRollingMethodOptions() {
@@ -39,40 +22,16 @@ public class Options {
 
     public static List<String> getClassOptions() {
 
-        return List.of(
-                "Barbarian",
-                "Bard",
-                "Cleric",
-                "Druid",
-                "Fighter",
-                "Monk",
-                "Paladin",
-                "Ranger",
-                "Rogue",
-                "Sorcerer",
-                "Warlock",
-                "Wizard");
+        return Arrays.stream(CharacterClass.values())
+                .map(CharacterClass::toString)
+                .toList();
     }
 
     public static List<String> getRaceOptions() {
 
-        return List.of(
-                "Dragonborn",
-                "Hill Dwarf",
-                "Mountain Dwarf",
-                "Dark Elf",
-                "High Elf",
-                "Wood Elf",
-                "Forest Gnome",
-                "Rock Gnome",
-                "Half Elf",
-                "Lightfoot Halfling",
-                "Stout Halfling",
-                "Half Orc",
-                "Base Human",
-                "Variant Human",
-                "Tiefling"
-        );
+        return Arrays.stream(Race.values())
+                .map(Race::toString)
+                .toList();
     }
 
     public static List<String> getAlignmentOptions() {
@@ -91,35 +50,16 @@ public class Options {
     }
 
     public static List<String> getBackgroundOptions() {
-
-        return List.of(
-                "Acolyte",
-                "Charlatan",
-                "Criminal",
-                "Entertainer",
-                "Folk Hero",
-                "Guild Artisan",
-                "Hermit",
-                "Noble",
-                "Outlander",
-                "Sage",
-                "Sailor",
-                "Soldier",
-                "Urchin",
-                "Custom"
-        );
+        return Arrays.stream(Background.values())
+                .map(Background::toString)
+                .toList();
     }
 
     public static List<String> getBasicAbilityOptions() {
 
-        return List.of(
-                "Strength",
-                "Dexterity",
-                "Constitution",
-                "Intelligence",
-                "Wisdom",
-                "Charisma"
-        );
+        return Arrays.stream(Characteristics.values())
+                .map(Characteristics::toString)
+                .toList();
     }
 
     public static List<String> getArtisanToolOptions() {
@@ -221,27 +161,9 @@ public class Options {
     }
 
     public static List<String> getAllSkillOptions() {
-
-        return List.of(
-                "Survival",
-                "Stealth",
-                "Sleight of hand",
-                "Religion",
-                "Persuasion",
-                "Performance",
-                "Perception",
-                "Nature",
-                "Medicine",
-                "Investigation",
-                "Intimidation",
-                "Insight",
-                "History",
-                "Deception",
-                "Athletics",
-                "Arcana",
-                "Animal handling",
-                "Acrobatics"
-        );
+        return Arrays.stream(Skills.values())
+                .map(Skills::toString)
+                .toList();
     }
 
     public static List<String> getCharlatanConItemOptions() {
@@ -265,80 +187,9 @@ public class Options {
 
     public static List<String> getSkillOptions(Set<Skills> availableSkills) {
 
-        List<String> skillOptions = new ArrayList<>();
-
-        if (availableSkills.contains(SURVIVAL)) {
-            skillOptions.add("Survival");
-        }
-
-        if (availableSkills.contains(STEALTH)) {
-            skillOptions.add("Stealth");
-        }
-
-        if (availableSkills.contains(SLEIGHT_OF_HAND)) {
-            skillOptions.add("Sleight Of Hand");
-        }
-
-        if (availableSkills.contains(RELIGION)) {
-            skillOptions.add("Religion");
-        }
-
-        if (availableSkills.contains(PERSUASION)) {
-            skillOptions.add("Persuasion");
-        }
-
-        if (availableSkills.contains(PERFORMANCE)) {
-            skillOptions.add("Performance");
-        }
-
-        if (availableSkills.contains(PERCEPTION)) {
-            skillOptions.add("Perception");
-        }
-
-        if (availableSkills.contains(NATURE)) {
-            skillOptions.add("Nature");
-        }
-
-        if (availableSkills.contains(MEDICINE)) {
-            skillOptions.add("Medicine");
-        }
-
-        if (availableSkills.contains(INVESTIGATION)) {
-            skillOptions.add("Investigation");
-        }
-
-        if (availableSkills.contains(INTIMIDATION)) {
-            skillOptions.add("Intimidation");
-        }
-
-        if (availableSkills.contains(INSIGHT)) {
-            skillOptions.add("Insight");
-        }
-
-        if (availableSkills.contains(HISTORY)) {
-            skillOptions.add("History");
-        }
-
-        if (availableSkills.contains(DECEPTION)) {
-            skillOptions.add("Deception");
-        }
-
-        if (availableSkills.contains(ATHLETICS)) {
-            skillOptions.add("Athletics");
-        }
-
-        if (availableSkills.contains(ARCANA)) {
-            skillOptions.add("Arcana");
-        }
-
-        if (availableSkills.contains(ANIMAL_HANDLING)) {
-            skillOptions.add("Animal handling");
-        }
-
-        if (availableSkills.contains(ACROBATICS)) {
-            skillOptions.add("Acrobatics");
-        }
-
-        return skillOptions;
+        return availableSkills.stream()
+                .map(Skills::getDisplayName)  // custom string representation
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

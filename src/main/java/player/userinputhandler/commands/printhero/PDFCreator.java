@@ -8,6 +8,10 @@ import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.dndcharacterenums.Background;
+import player.dndcharacter.dndcharacterenums.CharacterClass;
+import player.dndcharacter.dndcharacterenums.Race;
+import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 import player.userinputhandler.commands.db.CharacterDao;
 
 import java.io.File;
@@ -75,13 +79,13 @@ public class PDFCreator {
         characterName.setValue(dndCharacter.getCharacterName());
 
         PDField classLevel = acroForm.getField("ClassLevel");
-        classLevel.setValue(getClassForPDF(dndCharacter));
+        classLevel.setValue(getClassForPDF(dndCharacter.getCharacterClass()));
 
         PDField background = acroForm.getField("Background");
-        background.setValue(getBackgroundForPDF(dndCharacter));
+        background.setValue(dndCharacter.getBackground().getDisplayName());
 
         PDField race = acroForm.getField("Race ");
-        race.setValue(getRaceForPDF(dndCharacter));
+        race.setValue(getRaceForPDF(dndCharacter.getRace()));
 
         PDField alignment = acroForm.getField("Alignment");
         alignment.setValue(dndCharacter.getAlignment());
@@ -399,11 +403,11 @@ public class PDFCreator {
 
         // Third page
         PDField spellcastingClass = acroForm.getField("Spellcasting Class 2");
-        spellcastingClass.setValue(getClassForPDF(dndCharacter));
+        spellcastingClass.setValue(getClassForPDF(dndCharacter.getCharacterClass()));
 
         PDField spellcastingAbility = acroForm.getField("SpellcastingAbility 2");
         if (dndCharacter.getSpellcastingAbility() != null) {
-            spellcastingAbility.setValue(getSpellcastingAbilityForPDF(dndCharacter));
+            spellcastingAbility.setValue(getSpellcastingAbilityForPDF(dndCharacter.getSpellcastingAbility()));
         }
 
         PDField spellSaveDc = acroForm.getField("SpellSaveDC  2");
@@ -417,8 +421,8 @@ public class PDFCreator {
         }
     }
 
-    public static String getClassForPDF(DndCharacter dndCharacter) {
-        return switch (dndCharacter.getCharacterClass()) {
+    public static String getClassForPDF(CharacterClass characterClass) {
+        return switch (characterClass) {
             case BARBARIAN -> "Barbarian";
             case BARD -> "Bard";
             case CLERIC -> "Cleric";
@@ -434,8 +438,8 @@ public class PDFCreator {
         };
     }
 
-    public static String getRaceForPDF(DndCharacter dndCharacter) {
-        return switch (dndCharacter.getRace()) {
+    public static String getRaceForPDF(Race race) {
+        return switch (race) {
             case HILL_DWARF -> "Hill Dwarf";
             case MOUNTAIN_DWARF -> "Mountain Dwarf";
             case DARK_ELF -> "Dark Elf";
@@ -453,31 +457,8 @@ public class PDFCreator {
         };
     }
 
-    public static String getBackgroundForPDF(DndCharacter dndCharacter) {
-        return switch (dndCharacter.getBackground()) {
-            case ACOLYTE -> "Acolyte";
-            case CHARLATAN -> "Charlatan";
-            case CRIMINAL -> "Criminal";
-            case ENTERTAINER -> "Entertainer";
-            case GLADIATOR -> "Gladiator";
-            case FOLK_HERO -> "Folk Hero";
-            case GUILD_ARTISAN -> "Guild Artisan";
-            case GUILD_MERCHANT -> "Guild Merchant";
-            case HERMIT -> "Hermit";
-            case NOBLE -> "Noble";
-            case KNIGHT -> "Knight";
-            case OUTLANDER -> "Outlander";
-            case SAGE -> "Sage";
-            case SAILOR -> "Sailor";
-            case PIRATE -> "Pirate";
-            case SOLDIER -> "Soldier";
-            case URCHIN -> "Urchin";
-            case CUSTOM -> "Custom";
-        };
-    }
-
-    public static String getSpellcastingAbilityForPDF(DndCharacter dndCharacter) {
-        return switch (dndCharacter.getSpellcastingAbility()) {
+    public static String getSpellcastingAbilityForPDF(SpellcastingAbility spellcastingAbility) {
+        return switch (spellcastingAbility) {
             case STRENGTH -> "Strength";
             case DEXTERITY -> "Dexterity";
             case CONSTITUTION -> "Constitution";
