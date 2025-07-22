@@ -21,6 +21,7 @@ import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
+import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseEntertainerOrGladiator.chooseEntertainerOrGladiator;
@@ -297,10 +298,10 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARBARIAN, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Barbarian.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Barbarian.buildAvailableProficiencySkills(), getSkillOptions(Barbarian.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARBARIAN, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Barbarian.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_BARBARIAN:
@@ -312,17 +313,17 @@ public class CreateNewHero {
                     barbarian.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARBARIAN, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Barbarian.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_BARD:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Bard.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Bard.buildAvailableProficiencySkills(), getSkillOptions(Bard.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARD, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Bard.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_BARD:
@@ -332,7 +333,7 @@ public class CreateNewHero {
                     response = new Response(newState, chooseThirdSkill + Bard.buildAvailableProficiencySkills());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Bard.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_THIRD_SKILL_FOR_BARD:
@@ -344,17 +345,17 @@ public class CreateNewHero {
                     bard.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Bard.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_CLERIC:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_CLERIC, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Cleric.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Cleric.buildAvailableProficiencySkills(), getSkillOptions(Cleric.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_CLERIC, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Cleric.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_CLERIC:
@@ -366,17 +367,17 @@ public class CreateNewHero {
                     cleric.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_CLERIC, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Cleric.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_DRUID:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Druid.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Druid.buildAvailableProficiencySkills(), getSkillOptions(Druid.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_DRUID, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Druid.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_DRUID:
@@ -388,17 +389,17 @@ public class CreateNewHero {
                     druid.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Druid.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_FIGHTER:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Fighter.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Fighter.buildAvailableProficiencySkills(), getSkillOptions(Fighter.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_FIGHTER, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Fighter.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_FIGHTER:
@@ -410,17 +411,17 @@ public class CreateNewHero {
                     fighter.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Fighter.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_MONK:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Monk.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Monk.buildAvailableProficiencySkills(), getSkillOptions(Monk.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_MONK, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Monk.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_MONK:
@@ -432,17 +433,17 @@ public class CreateNewHero {
                     monk.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_MONK, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Monk.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_PALADIN:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_PALADIN, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Paladin.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Paladin.buildAvailableProficiencySkills(), getSkillOptions(Paladin.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_PALADIN, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Paladin.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_PALADIN:
@@ -454,27 +455,27 @@ public class CreateNewHero {
                     paladin.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_PALADIN, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Paladin.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_RANGER:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_RANGER, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Ranger.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Ranger.buildAvailableProficiencySkills(), getSkillOptions(Ranger.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_RANGER, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Ranger.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_RANGER:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, state.getDndCharacter());
-                    response = new Response(newState, chooseThirdSkill + Ranger.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseThirdSkill + Ranger.buildAvailableProficiencySkills(), getSkillOptions(Ranger.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_RANGER, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Ranger.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_THIRD_SKILL_FOR_RANGER:
@@ -486,37 +487,37 @@ public class CreateNewHero {
                     ranger.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Ranger.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_ROGUE:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Rogue.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Rogue.buildAvailableProficiencySkills(), getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_ROGUE:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, chooseThirdSkill + Rogue.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseThirdSkill + Rogue.buildAvailableProficiencySkills(), getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_THIRD_SKILL_FOR_ROGUE:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, "Choose the fourth skill your rogue will be proficient in \n" + Rogue.buildAvailableProficiencySkills());
+                    response = new Response(newState, "Choose the fourth skill your rogue will be proficient in \n" + Rogue.buildAvailableProficiencySkills(), getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FOURTH_SKILL_FOR_ROGUE:
@@ -528,17 +529,17 @@ public class CreateNewHero {
                     rogue.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Rogue.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_SORCERER:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_SORCERER, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Sorcerer.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Sorcerer.buildAvailableProficiencySkills(), getSkillOptions(Sorcerer.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_SORCERER, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Sorcerer.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_SORCERER:
@@ -550,17 +551,17 @@ public class CreateNewHero {
                     sorcerer.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_SORCERER, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Sorcerer.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_WARLOCK:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WARLOCK, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Warlock.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Warlock.buildAvailableProficiencySkills(), getSkillOptions(Warlock.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WARLOCK, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Warlock.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_WARLOCK:
@@ -572,17 +573,17 @@ public class CreateNewHero {
                     warlock.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WARLOCK, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Warlock.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_WIZARD:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WIZARD, state.getDndCharacter());
-                    response = new Response(newState, chooseSecondSkill + Wizard.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseSecondSkill + Wizard.buildAvailableProficiencySkills(), getSkillOptions(Wizard.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WIZARD, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Wizard.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_SECOND_SKILL_FOR_WIZARD:
@@ -594,7 +595,7 @@ public class CreateNewHero {
                     wizard.modifyByClass(state.getDndCharacter());
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WIZARD, state.getDndCharacter());
-                    response = new Response(newState, wrongSkill);
+                    response = new Response(newState, wrongSkill, getSkillOptions(Wizard.buildAvailableProficiencySkills()));
                 }
                 break;
             case ENTER_ALIGNMENT:

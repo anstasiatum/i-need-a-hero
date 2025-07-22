@@ -55,7 +55,7 @@ public class OutputTexts {
             """;
     public static String chooseSecondSkill = "Enter the second skill your hero will be proficient in. Available ones:\n";
     public static String chooseThirdSkill = "Enter the third skill your hero will be proficient in. Available ones:\n";
-    public static String wrongSkill = "Cannot understand your input. Please enter a skill\n" + allSkills;
+    public static String wrongSkill = "Cannot understand your input. Please enter a skill";
     public static String chooseAlignment = """
             Set your hero's alignment:
             Lawful good

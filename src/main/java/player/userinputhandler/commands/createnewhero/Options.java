@@ -1,6 +1,32 @@
 package player.userinputhandler.commands.createnewhero;
 
+import player.dndcharacter.DndCharacter;
+import player.dndcharacter.dndcharacterenums.Skills;
+
+import javax.management.relation.Relation;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static player.dndcharacter.dndcharacterenums.Skills.ACROBATICS;
+import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
+import static player.dndcharacter.dndcharacterenums.Skills.ARCANA;
+import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
+import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
+import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
+import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
+import static player.dndcharacter.dndcharacterenums.Skills.INTIMIDATION;
+import static player.dndcharacter.dndcharacterenums.Skills.INVESTIGATION;
+import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
+import static player.dndcharacter.dndcharacterenums.Skills.NATURE;
+import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
+import static player.dndcharacter.dndcharacterenums.Skills.PERFORMANCE;
+import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
+import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
+import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
+import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
+import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 
 public class Options {
     public static List<String> getCharacteristicsRollingMethodOptions() {
@@ -235,5 +261,84 @@ public class Options {
                 "Brewer’s supplies",
                 "Mason’s tools"
         );
+    }
+
+    public static List<String> getSkillOptions(Set<Skills> availableSkills) {
+
+        List<String> skillOptions = new ArrayList<>();
+
+        if (availableSkills.contains(SURVIVAL)) {
+            skillOptions.add("Survival");
+        }
+
+        if (availableSkills.contains(STEALTH)) {
+            skillOptions.add("Stealth");
+        }
+
+        if (availableSkills.contains(SLEIGHT_OF_HAND)) {
+            skillOptions.add("Sleight Of Hand");
+        }
+
+        if (availableSkills.contains(RELIGION)) {
+            skillOptions.add("Religion");
+        }
+
+        if (availableSkills.contains(PERSUASION)) {
+            skillOptions.add("Persuasion");
+        }
+
+        if (availableSkills.contains(PERFORMANCE)) {
+            skillOptions.add("Performance");
+        }
+
+        if (availableSkills.contains(PERCEPTION)) {
+            skillOptions.add("Perception");
+        }
+
+        if (availableSkills.contains(NATURE)) {
+            skillOptions.add("Nature");
+        }
+
+        if (availableSkills.contains(MEDICINE)) {
+            skillOptions.add("Medicine");
+        }
+
+        if (availableSkills.contains(INVESTIGATION)) {
+            skillOptions.add("Investigation");
+        }
+
+        if (availableSkills.contains(INTIMIDATION)) {
+            skillOptions.add("Intimidation");
+        }
+
+        if (availableSkills.contains(INSIGHT)) {
+            skillOptions.add("Insight");
+        }
+
+        if (availableSkills.contains(HISTORY)) {
+            skillOptions.add("History");
+        }
+
+        if (availableSkills.contains(DECEPTION)) {
+            skillOptions.add("Deception");
+        }
+
+        if (availableSkills.contains(ATHLETICS)) {
+            skillOptions.add("Athletics");
+        }
+
+        if (availableSkills.contains(ARCANA)) {
+            skillOptions.add("Arcana");
+        }
+
+        if (availableSkills.contains(ANIMAL_HANDLING)) {
+            skillOptions.add("Animal handling");
+        }
+
+        if (availableSkills.contains(ACROBATICS)) {
+            skillOptions.add("Acrobatics");
+        }
+
+        return skillOptions;
     }
 }
