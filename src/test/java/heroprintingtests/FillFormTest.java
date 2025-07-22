@@ -33,10 +33,12 @@ import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
 import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 import static testdata.TestData.getMockCharacterAna;
 import static testdata.TestData.getMockCharacterHanzo;
+import static testdata.TestData.getMockCharacterZarya;
 
 public class FillFormTest {
     DndCharacter mockAnaAmari = getMockCharacterAna().getDndCharacter();
     DndCharacter mockHanzoShimada = getMockCharacterHanzo().getDndCharacter();
+    DndCharacter mockZarya = getMockCharacterZarya().getDndCharacter();
 
     @Test
     @DisplayName("PDF filling: Character name")
@@ -49,14 +51,14 @@ public class FillFormTest {
     @DisplayName("PDF filling: Character class")
     void PDFFillingCharacterClass() {
         PDAcroForm acroForm = returnAcroForm(getMockCharacterAna());
-        assertEquals(mockAnaAmari.getCharacterClass().toString(), acroForm.getField("ClassLevel").getValueAsString());
+        assertEquals("Bard", acroForm.getField("ClassLevel").getValueAsString());
     }
 
     @Test
     @DisplayName("PDF filling: Character race")
     void PDFFillingCharacterRace() {
         PDAcroForm acroForm = returnAcroForm(getMockCharacterAna());
-        assertEquals(mockAnaAmari.getRace().toString(), acroForm.getField("Race ").getValueAsString());
+        assertEquals("Tiefling", acroForm.getField("Race ").getValueAsString());
     }
 
     @Test
@@ -850,14 +852,14 @@ public class FillFormTest {
     @DisplayName("PDF filling: Character spellcasting class")
     void PDFFillingCharacterSpellcastingClass() {
         PDAcroForm acroForm = returnAcroForm(getMockCharacterAna());
-        assertEquals(mockAnaAmari.getCharacterClass().toString(), acroForm.getField("Spellcasting Class 2").getValueAsString());
+        assertEquals("Bard", acroForm.getField("Spellcasting Class 2").getValueAsString());
     }
 
     @Test
     @DisplayName("PDF filling: Character spellcasting ability when set")
     void PDFFillingCharacterSpellcastingAbilitySet() {
         PDAcroForm acroForm = returnAcroForm(getMockCharacterAna());
-        assertEquals(mockAnaAmari.getSpellcastingAbility().toString(), acroForm.getField("SpellcastingAbility 2").getValueAsString());
+        assertEquals("Wisdom", acroForm.getField("SpellcastingAbility 2").getValueAsString());
     }
 
 
@@ -872,7 +874,7 @@ public class FillFormTest {
     @DisplayName("PDF filling: Character spell save DC set")
     void PDFFillingCharacterSpellSaveDCSet() {
         PDAcroForm acroForm = returnAcroForm(getMockCharacterAna());
-        assertEquals(mockAnaAmari.getSpellcastingAbility().toString(), acroForm.getField("SpellcastingAbility 2").getValueAsString());
+        assertEquals("Wisdom", acroForm.getField("SpellcastingAbility 2").getValueAsString());
     }
 
     @Test
@@ -894,5 +896,12 @@ public class FillFormTest {
     void PDFFillingCharacterSpellAttackBonusNotSet() {
         PDAcroForm acroForm = returnAcroForm(getMockCharacterHanzo());
         assertEquals("", acroForm.getField("SpellAtkBonus 2").getValueAsString());
+    }
+
+    @Test
+    @DisplayName("PDF filling: Cyrillic characters")
+    void PDFFillingCyrillicCharacters() {
+        PDAcroForm acroForm = returnAcroForm(getMockCharacterZarya());
+        assertEquals(mockZarya.getCharacterName(), acroForm.getField("CharacterName").getValueAsString());
     }
 }

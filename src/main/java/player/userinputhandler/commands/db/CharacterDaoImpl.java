@@ -18,7 +18,6 @@ public class CharacterDaoImpl implements CharacterDao {
     }
 
     public void deleteByCharacterId(Integer characterId, Long chatId) {
-
         HibernateHelper.runInTransaction(session -> {
             int updatedEntity = session.createNativeQuery("delete from characters where id = :id AND chat_id = :chatId")
                     .setParameter("id", characterId)

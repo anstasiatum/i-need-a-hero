@@ -2,23 +2,22 @@ package testdata;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
-import player.userinputhandler.Response;
-import player.userinputhandler.State;
 import player.userinputhandler.commands.db.Character;
-import player.userinputhandler.commands.db.CharacterDao;
-import player.userinputhandler.commands.db.CharacterDaoImpl;
-import player.userinputhandler.commands.printhero.PDFCreator;
-import player.userinputhandler.commands.printhero.PrintHero;
 
-import static org.mockito.Mockito.mock;
 import static player.dndcharacter.dndcharacterenums.Background.ACOLYTE;
+import static player.dndcharacter.dndcharacterenums.Background.GUILD_ARTISAN;
+import static player.dndcharacter.dndcharacterenums.Background.SOLDIER;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.BARD;
+import static player.dndcharacter.dndcharacterenums.CharacterClass.WARLOCK;
+import static player.dndcharacter.dndcharacterenums.CharacterClass.WIZARD;
 import static player.dndcharacter.dndcharacterenums.Characteristics.CHARISMA;
 import static player.dndcharacter.dndcharacterenums.Characteristics.CONSTITUTION;
 import static player.dndcharacter.dndcharacterenums.Characteristics.DEXTERITY;
 import static player.dndcharacter.dndcharacterenums.Characteristics.INTELLIGENCE;
 import static player.dndcharacter.dndcharacterenums.Characteristics.STRENGTH;
 import static player.dndcharacter.dndcharacterenums.Characteristics.WISDOM;
+import static player.dndcharacter.dndcharacterenums.Race.DARK_ELF;
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
 import static player.dndcharacter.dndcharacterenums.Race.TIEFLING;
 import static player.dndcharacter.dndcharacterenums.Skills.ACROBATICS;
 import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
@@ -47,7 +46,6 @@ public class TestData {
     public static Character getMockCharacterAna() {
 
         //Doesn't have proficiencies
-
         DndCharacter mockDNDCharacterAna = new DndCharacter();
 
         mockDNDCharacterAna.setCharacterName("Ana Amari");
@@ -91,11 +89,14 @@ public class TestData {
         return new Character(31, chatID, mockDNDCharacterAna);
     }
 
-    public static final Character getMockCharacterHanzo() {
+    public static Character getMockCharacterHanzo() {
 
         //Proficient in everything
         DndCharacter mockDNDCharacterHanzo = new DndCharacter();
         mockDNDCharacterHanzo.setCharacterName("Hanzo Shimada");
+        mockDNDCharacterHanzo.setCharacterClass(WARLOCK);
+        mockDNDCharacterHanzo.setBackground(GUILD_ARTISAN);
+        mockDNDCharacterHanzo.setRace(HALF_ELF);
 
         mockDNDCharacterHanzo.setStrength(10);
         mockDNDCharacterHanzo.setDexterity(12);
@@ -137,5 +138,16 @@ public class TestData {
         mockDNDCharacterHanzo.getToolProficiency().add("Tool2");
 
         return new Character(32, chatID, mockDNDCharacterHanzo);
+    }
+
+    public static Character getMockCharacterZarya() {
+        //Has name in Cyrillic
+        DndCharacter mockDNDCharacterZarya = new DndCharacter();
+        mockDNDCharacterZarya.setCharacterName("Заря");
+        mockDNDCharacterZarya.setCharacterClass(WIZARD);
+        mockDNDCharacterZarya.setBackground(SOLDIER);
+        mockDNDCharacterZarya.setRace(DARK_ELF);
+
+        return new Character(33, chatID, mockDNDCharacterZarya);
     }
 }
