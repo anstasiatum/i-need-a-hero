@@ -21,9 +21,12 @@ import player.dndcharacter.background.Urchin;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 
+import static java.lang.String.format;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getCharlatanConItemOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanTools;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseFirstLanguage;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseLanguage;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseLuckyCharm;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseMusicalInstrumentProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
@@ -54,7 +57,7 @@ public class SetBackground {
                 Acolyte acolyte = new Acolyte();
                 acolyte.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE, dndCharacter);
-                response = new Response(newState, "Enter the first language for your acolyte");
+                response = new Response(newState, format(chooseFirstLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "charlatan":
                 Charlatan charlatan = new Charlatan();
@@ -90,25 +93,25 @@ public class SetBackground {
                 Noble noble = new Noble();
                 noble.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_NOBLE, dndCharacter);
-                response = new Response(newState, "Choose a language your noble will know");
+                response = new Response(newState,  format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "knight":
                 Knight knight = new Knight();
                 knight.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_NOBLE, dndCharacter);
-                response = new Response(newState, "Choose a language your knight will know");
+                response = new Response(newState,  format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "outlander":
                 Outlander outlander = new Outlander();
                 outlander.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_OUTLANDER, dndCharacter);
-                response = new Response(newState, "Choose a language your outlander will know");
+                response = new Response(newState,  format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "sage":
                 Sage sage = new Sage();
                 sage.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_FIRST_LANGUAGE_FOR_SAGE, dndCharacter);
-                response = new Response(newState, "Choose the first language your sage will know");
+                response = new Response(newState, format(chooseFirstLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "sailor":
                 Sailor sailor = new Sailor();
@@ -138,19 +141,19 @@ public class SetBackground {
                 Hermit hermit = new Hermit();
                 hermit.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_HERMIT, dndCharacter);
-                response = new Response(newState, "Choose a language your hermit will know");
+                response = new Response(newState,  format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "guild artisan":
                 GuildArtisan guildArtisan = new GuildArtisan();
                 guildArtisan.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN, dndCharacter);
-                response = new Response(newState, "Choose a language your guild artisan will know");
+                response = new Response(newState,  format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             case "guild merchant":
                 GuildMerchant guildMerchant = new GuildMerchant();
                 guildMerchant.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT, dndCharacter);
-                response = new Response(newState, "Choose a language your guild merchant will know");
+                response = new Response(newState, format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             default:
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, dndCharacter);

@@ -19,6 +19,7 @@ import player.userinputhandler.State;
 import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 
+import static java.lang.String.format;
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
@@ -44,6 +45,7 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseC
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseFeatureForPirate;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseMusicalInstrumentProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.choosePossessionsForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondLanguage;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseThirdSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
@@ -608,7 +610,7 @@ public class CreateNewHero {
             case CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE, state.getDndCharacter());
-                response = new Response(newState, "Choose the second language for your acolyte");
+                response = new Response(newState, format(chooseSecondLanguage, state.getDndCharacter().getBackground().getDisplayName().toLowerCase()));
                 break;
             case CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
@@ -659,7 +661,7 @@ public class CreateNewHero {
             case CHOOSE_FIRST_LANGUAGE_FOR_SAGE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_SAGE, state.getDndCharacter());
-                response = new Response(newState, "Enter the second language your sage will know");
+                response = new Response(newState, format(chooseSecondLanguage, state.getDndCharacter().getBackground().getDisplayName().toLowerCase()));
                 break;
             case CHOOSE_SECOND_LANGUAGE_FOR_SAGE:
                 state.getDndCharacter().getLanguages().add(userAnswer);

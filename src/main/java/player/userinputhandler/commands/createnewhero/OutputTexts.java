@@ -89,6 +89,9 @@ public class OutputTexts {
             Custom (custom editing is not supported yet, but you will be able to edit your character in the exported PDF file)
             """;
     public static final String chooseSecondAbilityScore = "Enter another ability that will be increased by 1 (Strength, Wisdom etc)";
+    public static final String chooseLanguage = "Choose a language your %s will know";
+    public static final String chooseFirstLanguage = "Choose the first language your %s will know";
+    public static final String chooseSecondLanguage = "Enter the second language your %s will know";
     public static final String wrongInput = "Sorry, I don't understand. Maybe there is a typo?";
     public static final String chooseSkillProficiency = "Enter a skill that your character will be proficient in: " + allSkills;
     public static final String chooseTraits = "Type any personality traits you'd like to mention";
