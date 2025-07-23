@@ -123,6 +123,6 @@ public class OutputTexts {
     public static final String choosePossessionsForGuildMerchant = "Would you like to start with artisan's tools of your choice or with a mule and a cart?";
     public static final String chooseFeatureForPirate = format("""
             You can choose between two features:
-            1. %s2.%sWhich one do you prefer?
+            1. %s2. %sWhich one do you prefer?
             """, shipsPassageText, badReputationText);
 }
