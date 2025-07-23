@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
+import static player.dndcharacter.dndcharacterenums.CharacterClass.PALADIN;
 
 public class PaladinTest {
     DndCharacter dndCharacter = new DndCharacter();
@@ -30,6 +32,13 @@ public class PaladinTest {
 
         Paladin paladin = new Paladin();
         paladin.modifyByClass(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set Class Name")
+    void setClassNameForPaladin() {
+
+        assertEquals(PALADIN, dndCharacter.getCharacterClass());
     }
 
     @Test

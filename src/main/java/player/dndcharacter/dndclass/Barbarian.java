@@ -7,6 +7,8 @@ import player.dndcharacter.dndcharacterenums.Skills;
 import java.util.EnumSet;
 import java.util.Set;
 
+import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
+
 public class Barbarian extends DndClass {
 
     public static Set<Skills> buildAvailableProficiencySkills() {
@@ -26,6 +28,7 @@ public class Barbarian extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
+        dndCharacter.setCharacterClass(BARBARIAN);
         dndCharacter.setHitDice(12);
         dndCharacter.setStartGoldModifier(2);
 

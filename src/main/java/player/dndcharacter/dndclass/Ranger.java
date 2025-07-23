@@ -7,6 +7,8 @@ import player.dndcharacter.dndcharacterenums.Skills;
 import java.util.EnumSet;
 import java.util.Set;
 
+import static player.dndcharacter.dndcharacterenums.CharacterClass.RANGER;
+
 public class Ranger extends DndClass {
     public static Set<Skills> buildAvailableProficiencySkills() {
         return EnumSet.of(
@@ -27,6 +29,7 @@ public class Ranger extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
+        dndCharacter.setCharacterClass(RANGER);
         dndCharacter.setStartGoldModifier(5);
         dndCharacter.setHitDice(10);
 

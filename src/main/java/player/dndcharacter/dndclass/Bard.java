@@ -8,6 +8,8 @@ import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 import java.util.EnumSet;
 import java.util.Set;
 
+import static player.dndcharacter.dndcharacterenums.CharacterClass.BARD;
+
 public class Bard extends DndClass {
     public static Set<Skills> buildAvailableProficiencySkills() {
         return EnumSet.allOf(Skills.class);
@@ -19,6 +21,7 @@ public class Bard extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
+        dndCharacter.setCharacterClass(BARD);
         dndCharacter.setHitDice(8);
 
         dndCharacter.getArmourProficiency().add("Light Armour");

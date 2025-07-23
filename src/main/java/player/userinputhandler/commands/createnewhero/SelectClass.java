@@ -1,7 +1,7 @@
 package player.userinputhandler.commands.createnewhero;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.dndcharacterenums.CharacterClass;
+import player.dndcharacter.dndcharacterenums.Skills;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
 import player.dndcharacter.dndclass.Cleric;
@@ -17,18 +17,8 @@ import player.dndcharacter.dndclass.Wizard;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 
-import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.BARD;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.CLERIC;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.DRUID;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.FIGHTER;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.MONK;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.PALADIN;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.RANGER;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.ROGUE;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.SORCERER;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.WARLOCK;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.WIZARD;
+import java.util.Set;
+
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
@@ -64,66 +54,92 @@ public class SelectClass {
                 Sorcerer
                 Warlock
                 Wizard""";
+        BuildAvailableProficiencySkillsWithoutApplied buildSkills = new BuildAvailableProficiencySkillsWithoutApplied();
+        Set<Skills> finalAvailableSkills;
         switch (userAnswer.toLowerCase().trim()) {
             case "barbarian" -> {
-                dndCharacter.setCharacterClass(BARBARIAN);
+                Barbarian barbarian = new Barbarian();
+                barbarian.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Barbarian.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARBARIAN, dndCharacter);
-                response = new Response(newState, chooseSkill + Barbarian.buildAvailableProficiencySkills(), getSkillOptions(Barbarian.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "bard" -> {
-                dndCharacter.setCharacterClass(BARD);
+                Bard bard = new Bard();
+                bard.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Bard.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARD, dndCharacter);
-                response = new Response(newState, chooseSkill + Bard.buildAvailableProficiencySkills(), getSkillOptions(Bard.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "cleric" -> {
-                dndCharacter.setCharacterClass(CLERIC);
+                Cleric cleric = new Cleric();
+                cleric.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Cleric.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_CLERIC, dndCharacter);
-                response = new Response(newState, chooseSkill + Cleric.buildAvailableProficiencySkills(), getSkillOptions(Cleric.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "druid" -> {
-                dndCharacter.setCharacterClass(DRUID);
+                Druid druid = new Druid();
+                druid.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Druid.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_DRUID, dndCharacter);
-                response = new Response(newState, chooseSkill + Druid.buildAvailableProficiencySkills(), getSkillOptions(Druid.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "fighter" -> {
-                dndCharacter.setCharacterClass(FIGHTER);
+                Fighter fighter = new Fighter();
+                fighter.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Fighter.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_FIGHTER, dndCharacter);
-                response = new Response(newState, chooseSkill + Fighter.buildAvailableProficiencySkills(), getSkillOptions(Fighter.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "monk" -> {
-                dndCharacter.setCharacterClass(MONK);
+                Monk monk = new Monk();
+                monk.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Monk.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_MONK, dndCharacter);
-                response = new Response(newState, chooseSkill + Monk.buildAvailableProficiencySkills(), getSkillOptions(Monk.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "paladin" -> {
-                dndCharacter.setCharacterClass(PALADIN);
+                Paladin paladin = new Paladin();
+                paladin.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Paladin.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_PALADIN, dndCharacter);
-                response = new Response(newState, chooseSkill + Paladin.buildAvailableProficiencySkills(), getSkillOptions(Paladin.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "ranger" -> {
-                dndCharacter.setCharacterClass(RANGER);
+                Ranger ranger = new Ranger();
+                ranger.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Ranger.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_RANGER, dndCharacter);
-                response = new Response(newState, chooseSkill + Ranger.buildAvailableProficiencySkills(), getSkillOptions(Ranger.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "rogue" -> {
-                dndCharacter.setCharacterClass(ROGUE);
+                Rogue rogue = new Rogue();
+                rogue.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Rogue.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_ROGUE, dndCharacter);
-                response = new Response(newState, chooseSkill + Rogue.buildAvailableProficiencySkills(), getSkillOptions(Rogue.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "sorcerer" -> {
-                dndCharacter.setCharacterClass(SORCERER);
+                Sorcerer sorcerer = new Sorcerer();
+                sorcerer.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Sorcerer.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_SORCERER, dndCharacter);
-                response = new Response(newState, chooseSkill + Sorcerer.buildAvailableProficiencySkills(), getSkillOptions(Sorcerer.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "warlock" -> {
-                dndCharacter.setCharacterClass(WARLOCK);
+                Warlock warlock = new Warlock();
+                warlock.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Warlock.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WARLOCK, dndCharacter);
-                response = new Response(newState, chooseSkill + Warlock.buildAvailableProficiencySkills(), getSkillOptions(Warlock.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             case "wizard" -> {
-                dndCharacter.setCharacterClass(WIZARD);
+                Wizard wizard = new Wizard();
+                wizard.modifyByClass(dndCharacter);
+                finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(dndCharacter.getSkillsWithProficiency(), Wizard.buildAvailableProficiencySkills());
                 newState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WIZARD, dndCharacter);
-                response = new Response(newState, chooseSkill + Wizard.buildAvailableProficiencySkills(), getSkillOptions(Wizard.buildAvailableProficiencySkills()));
+                response = new Response(newState, chooseSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
             }
             default -> {
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);

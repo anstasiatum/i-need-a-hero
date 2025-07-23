@@ -8,6 +8,8 @@ import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 import java.util.EnumSet;
 import java.util.Set;
 
+import static player.dndcharacter.dndcharacterenums.CharacterClass.DRUID;
+
 public class Druid extends DndClass {
     public static Set<Skills> buildAvailableProficiencySkills() {
         return EnumSet.of(
@@ -28,6 +30,7 @@ public class Druid extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
+        dndCharacter.setCharacterClass(DRUID);
         dndCharacter.setStartGoldModifier(2);
 
         dndCharacter.setHitDice(8);

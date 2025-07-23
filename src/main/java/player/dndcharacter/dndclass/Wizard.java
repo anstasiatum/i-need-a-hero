@@ -8,6 +8,8 @@ import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 import java.util.EnumSet;
 import java.util.Set;
 
+import static player.dndcharacter.dndcharacterenums.CharacterClass.WIZARD;
+
 public class Wizard extends DndClass {
 
     public static Set<Skills> buildAvailableProficiencySkills() {
@@ -27,6 +29,7 @@ public class Wizard extends DndClass {
 
     @Override
     public void modifyByClass(DndCharacter dndCharacter) {
+        dndCharacter.setCharacterClass(WIZARD);
         super.modifyByClass(dndCharacter);
         dndCharacter.setStartGoldModifier(4);
 
