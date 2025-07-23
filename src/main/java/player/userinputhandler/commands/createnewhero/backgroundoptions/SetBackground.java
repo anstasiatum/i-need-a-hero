@@ -25,13 +25,16 @@ import static java.lang.String.format;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getCharlatanConItemOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanTools;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseBackground;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseFirstLanguage;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseGamingSet;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseLanguage;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseLuckyCharm;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseMusicalInstrumentProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_FOLK_HERO;
+import static player.userinputhandler.enums.Steps.CHOOSE_BACKGROUND;
 import static player.userinputhandler.enums.Steps.CHOOSE_CON_FOR_CHARLATAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_LANGUAGE_FOR_SAGE;
@@ -69,7 +72,7 @@ public class SetBackground {
                 Criminal criminal = new Criminal();
                 criminal.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_FOR_CRIMINAL, dndCharacter);
-                response = new Response(newState, "Choose the gaming set your character will be proficient with");
+                response = new Response(newState, chooseGamingSet);
                 break;
             case "entertainer":
                 Entertainer entertainer = new Entertainer();
@@ -129,7 +132,7 @@ public class SetBackground {
                 Soldier soldier = new Soldier();
                 soldier.modifyByBackground(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER, dndCharacter);
-                response = new Response(newState, "Enter a gaming set your hero will be proficient with");
+                response = new Response(newState, chooseGamingSet);
                 break;
             case "urchin":
                 Urchin urchin = new Urchin();
@@ -156,8 +159,8 @@ public class SetBackground {
                 response = new Response(newState, format(chooseLanguage, dndCharacter.getBackground().getDisplayName().toLowerCase()));
                 break;
             default:
-                newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, dndCharacter);
-                response = new Response(newState, chooseTraits);
+                newState = new State(CREATE_HERO, CHOOSE_BACKGROUND, dndCharacter);
+                response = new Response(newState, chooseBackground);
                 break;
         }
         return response;

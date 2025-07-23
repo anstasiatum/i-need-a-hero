@@ -88,6 +88,8 @@ public class OutputTexts {
             Urchin,
             Custom (custom editing is not supported yet, but you will be able to edit your character in the exported PDF file)
             """;
+    public static final String chooseBackground = "Choose background from the following options:\n" + allBackgrounds;
+    public static final String chooseGamingSet = "Enter a gaming set your hero will be proficient with";
     public static final String chooseSecondAbilityScore = "Enter another ability that will be increased by 1 (Strength, Wisdom etc)";
     public static final String chooseLanguage = "Choose a language your %s will know";
     public static final String chooseFirstLanguage = "Choose the first language your %s will know";
