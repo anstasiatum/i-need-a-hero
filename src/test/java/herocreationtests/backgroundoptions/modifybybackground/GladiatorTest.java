@@ -4,19 +4,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.Entertainer;
+import player.dndcharacter.background.Gladiator;
 import player.dndcharacter.dndcharacterenums.Skills;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.Background.ENTERTAINER;
+import static player.dndcharacter.dndcharacterenums.Background.GLADIATOR;
 import static player.dndcharacter.dndcharacterenums.Skills.ACROBATICS;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.PERFORMANCE;
 
-public class EntertainerTest {
+public class GladiatorTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -31,20 +31,20 @@ public class EntertainerTest {
         dndCharacter.getToolProficiency().add("Test tool");
         dndCharacter.setFeaturesAndTraits("test feature. ");
 
-        Entertainer entertainer = new Entertainer();
-        entertainer.modifyByBackground(dndCharacter);
+        Gladiator gladiator = new Gladiator();
+        gladiator.modifyByBackground(dndCharacter);
     }
 
     @Test
     @DisplayName("Set background")
-    void setBackgroundForEntertainer() {
+    void setBackgroundForGladiator() {
 
-        assertEquals(ENTERTAINER, dndCharacter.getBackground());
+        assertEquals(GLADIATOR, dndCharacter.getBackground());
     }
 
     @Test
     @DisplayName("Set skills with proficiency")
-    void setSkillsWithProficiencyForEntertainer() {
+    void setSkillsWithProficiencyForGladiator() {
         Set<Skills> expectedResult = new HashSet<>(3);
         expectedResult.add(ATHLETICS);
         expectedResult.add(ACROBATICS);
@@ -55,7 +55,7 @@ public class EntertainerTest {
 
     @Test
     @DisplayName("Set tool proficiency")
-    void setToolProficiencyForEntertainer() {
+    void setToolProficiencyForGladiator() {
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Disguise Kit");
         expectedResult.add("Test tool");
@@ -65,14 +65,14 @@ public class EntertainerTest {
 
     @Test
     @DisplayName("Set gold")
-    void setGoldForEntertainer() {
+    void setGoldForGladiator() {
 
         assertEquals(25, dndCharacter.getGold());
     }
 
     @Test
     @DisplayName("Set equipment")
-    void setEquipmentForEntertainer() {
+    void setEquipmentForGladiator() {
         String expectedResult = "test equipment. An admirer’s favor, a costume. ";
 
         assertEquals(expectedResult, dndCharacter.getEquipment());
@@ -80,8 +80,8 @@ public class EntertainerTest {
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForEntertainer() {
-        String expectedResult = "test feature. By Popular Demand\n You can perform at inns, theaters, circuses, or any place with a stage. While you’re performing there each night, you receive free modest or comfortable lodging and food. This can allow you to take long rests for free as you travel with your party across the land. In addition, your performance makes you famous wherever you perform. When strangers recognize you in the town, they usually like you more. This may make it easier to persuade them to do things for you.\n";
+    void setFeaturesAndTraitsForGladiator() {
+        String expectedResult = "test feature. By Popular Demand\n You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you. You can find a place to perform in any place that features combat for entertainment-perhaps a gladiatorial arena or secret pit fighting club.\n";
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }

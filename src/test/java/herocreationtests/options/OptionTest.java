@@ -24,14 +24,10 @@ import static player.userinputhandler.commands.createnewhero.Options.getCharlata
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getDraconicAncestryOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getDwarfArtisanToolOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getEntertainerOrGladiatorOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getGuildMerchantOrArtisanOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getKnightOrNobleOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getSailorOrPirateOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
 
 public class OptionTest {
@@ -177,39 +173,6 @@ public class OptionTest {
     }
 
     @Test
-    @DisplayName("Get Knight or Noble Options Test")
-    void getKnightOrNobleOptionsTest() {
-        List<String> expectedResult = List.of(
-                "Knight",
-                "Noble"
-        );
-
-        assertEquals(expectedResult, getKnightOrNobleOptions());
-    }
-
-    @Test
-    @DisplayName("Get Sailor or Pirate Options Test")
-    void getSailorOrPirateOptionsTest() {
-        List<String> expectedResult = List.of(
-                "Sailor",
-                "Pirate"
-        );
-
-        assertEquals(expectedResult, getSailorOrPirateOptions());
-    }
-
-    @Test
-    @DisplayName("Get Entertainer or Gladiator Options Test")
-    void getEntertainerOrGladiatorOptionsTest() {
-        List<String> expectedResult = List.of(
-                "Entertainer",
-                "Gladiator"
-        );
-
-        assertEquals(expectedResult, getEntertainerOrGladiatorOptions());
-    }
-
-    @Test
     @DisplayName("Get Possessions for Guild Merchant Options Test")
     void getPossessionsForGuildMerchantOptionsTest() {
         List<String> expectedResult = List.of(
@@ -230,17 +193,6 @@ public class OptionTest {
         );
 
         assertEquals(expectedResult, getProficienciesForGuildMerchantOptions());
-    }
-
-    @Test
-    @DisplayName("Get Guild Merchant or Artisan Options Test")
-    void getGuildMerchantOrArtisanOptionsTest() {
-        List<String> expectedResult = List.of(
-                "Guild merchant",
-                "Guild artisan"
-        );
-
-        assertEquals(expectedResult, getGuildMerchantOrArtisanOptions());
     }
 
     @Test

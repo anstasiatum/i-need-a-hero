@@ -2,7 +2,6 @@ package player.userinputhandler.commands.createnewhero;
 
 import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.dndcharacterenums.Background;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
 import player.dndcharacter.dndclass.Cleric;
@@ -21,14 +20,7 @@ import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
-import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseArtisanOrMerchant.chooseArtisanOrMerchant;
 import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseEntertainerOrGladiator.chooseEntertainerOrGladiator;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseNobleOrKnight.chooseNobleOrKnight;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseSailorOrPirate.chooseSailorOrPirate;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
@@ -37,9 +29,11 @@ import static player.userinputhandler.commands.createnewhero.Options.getBackgrou
 import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getPirateFeatureOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allBackgrounds;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allSkills;
@@ -47,6 +41,7 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseA
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanToolPossessionWithPreviousStep;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanTools;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseClass;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseFeatureForPirate;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseMusicalInstrumentProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.choosePossessionsForGuildMerchant;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondSkill;
@@ -56,8 +51,11 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.notANum
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.commands.createnewhero.SelectRace.selectRace;
-import static player.userinputhandler.commands.createnewhero.backgroundoptions.SetBackground.setBackground;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.SetBackground.setBackground;
+import static player.userinputhandler.commands.createnewhero.backgroundoptions.SetPirateFeature.setPirateFeature;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_GUILD_ARTISAN;
@@ -65,6 +63,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_PROFICIEN
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT;
 import static player.userinputhandler.enums.Steps.CHOOSE_BACKGROUND;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
+import static player.userinputhandler.enums.Steps.CHOOSE_FEATURE_FOR_PIRATE;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_SKILL_FOR_HALF_ELF;
@@ -330,7 +329,7 @@ public class CreateNewHero {
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_BARD, state.getDndCharacter());
-                    response = new Response(newState, chooseThirdSkill + Bard.buildAvailableProficiencySkills());
+                    response = new Response(newState, chooseThirdSkill + Bard.buildAvailableProficiencySkills(), getSkillOptions(Bard.buildAvailableProficiencySkills()));
                 } catch (IllegalArgumentException ex) {
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(Bard.buildAvailableProficiencySkills()));
@@ -652,12 +651,6 @@ public class CreateNewHero {
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, state.getDndCharacter());
                 response = new Response(newState, chooseTraits);
                 break;
-            case CHOOSE_ENTERTAINER_OR_GLADIATOR:
-                response = chooseEntertainerOrGladiator(userAnswer, state.getDndCharacter());
-                break;
-            case CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE:
-                response = chooseNobleOrKnight(userAnswer, state.getDndCharacter());
-                break;
             case CHOOSE_LANGUAGE_FOR_NOBLE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_FOR_NOBLE, state.getDndCharacter());
@@ -673,21 +666,23 @@ public class CreateNewHero {
                 newState = new State(CREATE_HERO, CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_SAGE, state.getDndCharacter());
                 response = new Response(newState, chooseMusicalInstrumentProficiency);
                 break;
-            case CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR:
-                response = chooseSailorOrPirate(userAnswer, state.getDndCharacter());
-                break;
             case CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_TROPHY_FOR_SOLDIER, state.getDndCharacter());
                 response = new Response(newState, "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner)");
                 break;
+            case CHOOSE_LUCKY_CHARM_FOR_PIRATE:
+                state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + " " + userAnswer);
+                newState = new State(CREATE_HERO, CHOOSE_FEATURE_FOR_PIRATE, state.getDndCharacter());
+                response = new Response(newState, chooseFeatureForPirate, getPirateFeatureOptions());
+                break;
+            case CHOOSE_FEATURE_FOR_PIRATE:
+                response = setPirateFeature(userAnswer, state.getDndCharacter());
+                break;
             case CHOOSE_TROPHY_FOR_SOLDIER:
                 state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + " " + userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER, state.getDndCharacter());
                 response = new Response(newState, "Will your character possess a set of bone dice or a deck of cards?", getGamingSetOptions());
-                break;
-            case CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN:
-                response = chooseArtisanOrMerchant(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT:
                 state.getDndCharacter().getLanguages().add(userAnswer);

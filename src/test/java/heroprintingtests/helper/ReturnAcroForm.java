@@ -13,7 +13,7 @@ import java.io.File;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static testdata.TestData.*;
+import static testdata.TestData.chatID;
 
 public class ReturnAcroForm {
     private static final CharacterDao characterDaoMock = mock(CharacterDao.class);

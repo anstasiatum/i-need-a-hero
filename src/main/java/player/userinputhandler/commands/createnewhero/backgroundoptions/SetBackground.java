@@ -6,10 +6,14 @@ import player.dndcharacter.background.Charlatan;
 import player.dndcharacter.background.Criminal;
 import player.dndcharacter.background.Entertainer;
 import player.dndcharacter.background.FolkHero;
+import player.dndcharacter.background.Gladiator;
 import player.dndcharacter.background.GuildArtisan;
+import player.dndcharacter.background.GuildMerchant;
 import player.dndcharacter.background.Hermit;
+import player.dndcharacter.background.Knight;
 import player.dndcharacter.background.Noble;
 import player.dndcharacter.background.Outlander;
+import player.dndcharacter.background.Pirate;
 import player.dndcharacter.background.Sage;
 import player.dndcharacter.background.Sailor;
 import player.dndcharacter.background.Soldier;
@@ -19,25 +23,26 @@ import player.userinputhandler.State;
 
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getCharlatanConItemOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getEntertainerOrGladiatorOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getGuildMerchantOrArtisanOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getKnightOrNobleOptions;
-import static player.userinputhandler.commands.createnewhero.Options.getSailorOrPirateOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanTools;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseLuckyCharm;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseMusicalInstrumentProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_FOLK_HERO;
-import static player.userinputhandler.enums.Steps.CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_CON_FOR_CHARLATAN;
-import static player.userinputhandler.enums.Steps.CHOOSE_ENTERTAINER_OR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_LANGUAGE_FOR_ACOLYTE;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_LANGUAGE_FOR_SAGE;
 import static player.userinputhandler.enums.Steps.CHOOSE_GAMING_SET_FOR_CRIMINAL;
 import static player.userinputhandler.enums.Steps.CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER;
+import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN;
+import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT;
 import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_HERMIT;
+import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_NOBLE;
 import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_OUTLANDER;
-import static player.userinputhandler.enums.Steps.CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE;
-import static player.userinputhandler.enums.Steps.CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR;
+import static player.userinputhandler.enums.Steps.CHOOSE_LUCKY_CHARM_FOR_PIRATE;
+import static player.userinputhandler.enums.Steps.CHOOSE_LUCKY_CHARM_FOR_SAILOR;
+import static player.userinputhandler.enums.Steps.CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER;
+import static player.userinputhandler.enums.Steps.CHOOSE_WEAPON_FOR_GLADIATOR;
 import static player.userinputhandler.enums.Steps.SET_PERSONALITY_TRAITS;
 
 public class SetBackground {
@@ -66,8 +71,14 @@ public class SetBackground {
             case "entertainer":
                 Entertainer entertainer = new Entertainer();
                 entertainer.modifyByBackground(dndCharacter);
-                newState = new State(CREATE_HERO, CHOOSE_ENTERTAINER_OR_GLADIATOR, dndCharacter);
-                response = new Response(newState, "Are you a common entertainer or a gladiator?", getEntertainerOrGladiatorOptions());
+                newState = new State(CREATE_HERO, CHOOSE_MUSICAL_INSTRUMENT_YOU_ARE_PROFICIENT_WITH_FOR_ENTERTAINER, dndCharacter);
+                response = new Response(newState, chooseMusicalInstrumentProficiency);
+                break;
+            case "gladiator":
+                Gladiator gladiator = new Gladiator();
+                gladiator.modifyByBackground(dndCharacter);
+                newState = new State(CREATE_HERO, CHOOSE_WEAPON_FOR_GLADIATOR, dndCharacter);
+                response = new Response(newState, "Enter an inexpensive, but unusual weapon (such as a trident or net) your hero will possess");
                 break;
             case "folk hero":
                 FolkHero folkHero = new FolkHero();
@@ -78,8 +89,14 @@ public class SetBackground {
             case "noble":
                 Noble noble = new Noble();
                 noble.modifyByBackground(dndCharacter);
-                newState = new State(CREATE_HERO, CHOOSE_NOBLE_OR_KNIGHT_FOR_NOBLE , dndCharacter);
-                response = new Response(newState, "Is your character a common noble or a knight?", getKnightOrNobleOptions());
+                newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_NOBLE, dndCharacter);
+                response = new Response(newState, "Choose a language your noble will know");
+                break;
+            case "knight":
+                Knight knight = new Knight();
+                knight.modifyByBackground(dndCharacter);
+                newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_NOBLE, dndCharacter);
+                response = new Response(newState, "Choose a language your knight will know");
                 break;
             case "outlander":
                 Outlander outlander = new Outlander();
@@ -96,8 +113,14 @@ public class SetBackground {
             case "sailor":
                 Sailor sailor = new Sailor();
                 sailor.modifyByBackground(dndCharacter);
-                newState = new State(CREATE_HERO, CHOOSE_SAILOR_OR_PIRATE_FOR_SAILOR, dndCharacter);
-                response = new Response(newState, "Is your character a common sailor or a pirate?", getSailorOrPirateOptions());
+                newState = new State(CREATE_HERO, CHOOSE_LUCKY_CHARM_FOR_SAILOR, dndCharacter);
+                response = new Response(newState, chooseLuckyCharm);
+                break;
+            case "pirate":
+                Pirate pirate = new Pirate();
+                pirate.modifyByBackground(dndCharacter);
+                newState = new State(CREATE_HERO, CHOOSE_LUCKY_CHARM_FOR_PIRATE, dndCharacter);
+                response = new Response(newState, chooseLuckyCharm);
                 break;
             case "soldier":
                 Soldier soldier = new Soldier();
@@ -120,8 +143,14 @@ public class SetBackground {
             case "guild artisan":
                 GuildArtisan guildArtisan = new GuildArtisan();
                 guildArtisan.modifyByBackground(dndCharacter);
-                newState = new State(CREATE_HERO, CHOOSE_ARTISAN_OR_MERCHANT_FOR_GUILD_ARTISAN, dndCharacter);
-                response = new Response(newState, "Are you are merchant or an artisan?", getGuildMerchantOrArtisanOptions());
+                newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN, dndCharacter);
+                response = new Response(newState, "Choose a language your guild artisan will know");
+                break;
+            case "guild merchant":
+                GuildMerchant guildMerchant = new GuildMerchant();
+                guildMerchant.modifyByBackground(dndCharacter);
+                newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT, dndCharacter);
+                response = new Response(newState, "Choose a language your guild merchant will know");
                 break;
             default:
                 newState = new State(CREATE_HERO, SET_PERSONALITY_TRAITS, dndCharacter);

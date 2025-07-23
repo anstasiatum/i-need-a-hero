@@ -208,6 +208,7 @@ public class IncreaseBaseCharacteristicsTest {
         assertEquals(18, dndCharacter.getWisdom());
         assertEquals(20, dndCharacter.getCharisma());
     }
+
     @Test
     @DisplayName("Increase Strength second for Human")
     void increaseStrengthSecondForHuman() {

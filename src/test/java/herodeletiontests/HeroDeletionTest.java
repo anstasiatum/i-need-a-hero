@@ -11,9 +11,6 @@ import player.userinputhandler.commands.deletehero.DeleteHero;
 
 import java.util.List;
 
-import static testdata.TestData.chatID;
-import static testdata.TestData.getMockCharacterAna;
-import static testdata.TestData.getMockCharacterHanzo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,6 +19,9 @@ import static player.userinputhandler.enums.Processes.DELETE_HERO;
 import static player.userinputhandler.enums.Steps.CONFIRMATION;
 import static player.userinputhandler.enums.Steps.SELECT_A_HERO_TO_BE_DELETED;
 import static player.userinputhandler.enums.Steps.SET_WEIGHT;
+import static testdata.TestData.chatID;
+import static testdata.TestData.getMockCharacterAna;
+import static testdata.TestData.getMockCharacterHanzo;
 
 public class HeroDeletionTest {
     private static final CharacterDao characterDaoMock = mock(CharacterDao.class);

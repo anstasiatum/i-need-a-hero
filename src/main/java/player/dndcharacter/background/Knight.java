@@ -2,14 +2,14 @@ package player.dndcharacter.background;
 
 import player.dndcharacter.DndCharacter;
 
-import static player.dndcharacter.dndcharacterenums.Background.NOBLE;
+import static player.dndcharacter.dndcharacterenums.Background.KNIGHT;
 import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
 import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
 
-public class Noble extends Background {
+public class Knight extends Background{
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
-        dndCharacter.setBackground(NOBLE);
+        dndCharacter.setBackground(KNIGHT);
 
         dndCharacter.getSkillsWithProficiency().add(HISTORY);
         dndCharacter.getSkillsWithProficiency().add(PERSUASION);
@@ -17,6 +17,6 @@ public class Noble extends Background {
         dndCharacter.setGold(dndCharacter.getGold() + 25);
 
         dndCharacter.setEquipment(dndCharacter.getEquipment() + "A set of fine clothes, a signet ring, a scroll of pedigree. ");
-        dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + "Position of Privilege\n You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to.\n");
+        dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + "Retainers\n You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.\n");
     }
 }

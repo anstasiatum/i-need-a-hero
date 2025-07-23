@@ -85,27 +85,11 @@ public class Options {
         );
     }
 
-    public static List<String> getKnightOrNobleOptions() {
+    public static List<String> getPirateFeatureOptions() {
 
         return List.of(
-                "Knight",
-                "Noble"
-        );
-    }
-
-    public static List<String> getSailorOrPirateOptions() {
-
-        return List.of(
-                "Sailor",
-                "Pirate"
-        );
-    }
-
-    public static List<String> getEntertainerOrGladiatorOptions() {
-
-        return List.of(
-                "Entertainer",
-                "Gladiator"
+                "Ship's Passage",
+                "Bad Reputation"
         );
     }
 
@@ -126,15 +110,6 @@ public class Options {
                 "Artisan's tools"
         );
     }
-
-    public static List<String> getGuildMerchantOrArtisanOptions() {
-
-        return List.of(
-                "Guild merchant",
-                "Guild artisan"
-        );
-    }
-
 
     public static List<String> getGamingSetOptions() {
 

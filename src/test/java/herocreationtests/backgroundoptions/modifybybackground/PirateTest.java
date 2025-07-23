@@ -4,19 +4,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.Sailor;
+import player.dndcharacter.background.Pirate;
 import player.dndcharacter.dndcharacterenums.Skills;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.Background.SAILOR;
+import static player.dndcharacter.dndcharacterenums.Background.PIRATE;
 import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
 import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
 
-public class SailorTest {
+public class PirateTest {
     DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -32,20 +32,20 @@ public class SailorTest {
         dndCharacter.getToolProficiency().add("Test tool");
         dndCharacter.setFeaturesAndTraits("test feature. ");
 
-        Sailor sailor = new Sailor();
-        sailor.modifyByBackground(dndCharacter);
+        Pirate pirate = new Pirate();
+        pirate.modifyByBackground(dndCharacter);
     }
 
     @Test
     @DisplayName("Set background")
-    void setBackgroundForSailor() {
+    void setBackgroundForPirate() {
 
-        assertEquals(SAILOR, dndCharacter.getBackground());
+        assertEquals(PIRATE, dndCharacter.getBackground());
     }
 
     @Test
     @DisplayName("Set skills with proficiency")
-    void setSkillsWithProficiencyForSailor() {
+    void setSkillsWithProficiencyForPirate() {
         Set<Skills> expectedResult = new HashSet<>(3);
         expectedResult.add(INSIGHT);
         expectedResult.add(ATHLETICS);
@@ -56,7 +56,7 @@ public class SailorTest {
 
     @Test
     @DisplayName("Set tool proficiency")
-    void setToolProficiencyForSailor() {
+    void setToolProficiencyForPirate() {
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("Navigator's tools");
         expectedResult.add("Vehicles (water)");
@@ -74,17 +74,9 @@ public class SailorTest {
 
     @Test
     @DisplayName("Set equipment")
-    void setEquipmentForSailor() {
+    void setEquipmentForPirate() {
         String expectedResult = "test equipment. A belaying pin (club) or iron dagger, 50 feet of silk rope, a set of common clothes. ";
 
         assertEquals(expectedResult, dndCharacter.getEquipment());
-    }
-
-    @Test
-    @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForSailor() {
-        String expectedResult = "test feature. Ship's Passage: When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.\n";
-
-        assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());
     }
 }

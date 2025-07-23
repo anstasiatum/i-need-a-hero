@@ -57,7 +57,7 @@ public class HillDwarfTest {
     @Test
     @DisplayName("Set language")
     void setLanguageForHillDwarf() {
-Set<String> expectedResult = Set.of("Dwarfish");
+        Set<String> expectedResult = Set.of("Dwarfish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
     }
