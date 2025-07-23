@@ -7,6 +7,10 @@ import java.util.Set;
 
 public class BuildAvailableProficiencySkillsWithoutApplied {
     public Set<Skills> buildAvailableProficiencySkillsWithoutApplied(Set<Skills> proficiencySkillsAlreadyApplied, Set<Skills> allAvailableProficiencySkills) {
+        if (allAvailableProficiencySkills == null) {
+            return Set.of();
+        }
+
         Set<Skills> availableProficiencySkills = new HashSet<>(Set.copyOf(allAvailableProficiencySkills));
         availableProficiencySkills.removeAll(proficiencySkillsAlreadyApplied);
         return availableProficiencySkills;
