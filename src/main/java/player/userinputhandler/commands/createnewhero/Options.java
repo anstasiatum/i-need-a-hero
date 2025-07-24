@@ -62,6 +62,14 @@ public class Options {
                 .toList();
     }
 
+    public static List<String> getBasicAbilityOptionsWithoutSpecified(Characteristics characteristics) {
+
+        return Arrays.stream(Characteristics.values())
+                .filter(n -> n != characteristics)
+                .map(Characteristics::toString)
+                .toList();
+    }
+
     public static List<String> getArtisanToolOptions() {
 
         return List.of(

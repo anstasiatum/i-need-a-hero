@@ -9,6 +9,8 @@ import player.userinputhandler.commands.db.CharacterDaoImpl;
 
 import java.util.List;
 
+import static java.lang.String.format;
+import static player.userinputhandler.commands.CommandTexts.newHeroCommand;
 import static player.userinputhandler.commands.deletehero.Options.getYesOrNoOptions;
 import static player.userinputhandler.enums.Processes.DELETE_HERO;
 import static player.userinputhandler.enums.Steps.CONFIRMATION;
@@ -31,8 +33,12 @@ public class DeleteHero {
                 switch (userAnswer.toLowerCase().trim()) {
                     case "yes":
                         List<Character> userCharacters = characterJpaDao.findByChatId(chatId);
+                        if (userCharacters.isEmpty()) {
+                            response = new Response(null, format("You don't have any characters to delete. Create one by using %s command", newHeroCommand));
+                            break;
+                        }
                         List<String> outputList = userCharacters.stream()
-                                .map(character -> String.format("Character ID: %d, Name: %s \n", character.getId(), character.getDndCharacter().getCharacterName()))
+                                .map(character -> format("Character ID: %d, Name: %s \n", character.getId(), character.getDndCharacter().getCharacterName()))
                                 .toList();
 
                         newState = new State(DELETE_HERO, SELECT_A_HERO_TO_BE_DELETED, state.getDndCharacter());

@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static testdata.TestData.chatID;
 import static testdata.TestData.getMockCharacterAna;
 
 public class CreatePDFTest {
+    private final Long chatID = 123L;
     private final int characterID = 1;
     private final CharacterDao characterDaoMock = mock(CharacterDao.class);
     private final PDFCreator createPDF = new PDFCreator(characterDaoMock);

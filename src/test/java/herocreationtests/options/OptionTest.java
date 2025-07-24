@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.Skills;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -13,12 +15,14 @@ import java.util.Set;
 import static herocreationtests.options.HumanReadableSkill.humanReadable;
 import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getBackgroundOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getBasicAbilityOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getBasicAbilityOptionsWithoutSpecified;
 import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getCharlatanConItemOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
@@ -144,6 +148,22 @@ public class OptionTest {
         );
 
         assertEquals(expectedResult, getBasicAbilityOptions());
+    }
+
+    @Test
+    @DisplayName("Get characteristics options excluding the specified value")
+    void getCharacteristicsOptionsExcludingSpecifiedOneTest() {
+        for (Characteristics characteristics : Characteristics.values()) {
+            List<String> options = getBasicAbilityOptionsWithoutSpecified(characteristics);
+
+            assertFalse(options.contains(characteristics.toString()));
+            List<String> expected = Arrays.stream(Characteristics.values())
+                    .filter(n -> n != characteristics)
+                    .map(Characteristics::toString)
+                    .toList();
+            assertEquals(expected.size(), options.size());
+            assertTrue(options.containsAll(expected));
+        }
     }
 
     @Test

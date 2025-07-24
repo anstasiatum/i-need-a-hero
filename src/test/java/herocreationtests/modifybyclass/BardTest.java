@@ -108,15 +108,6 @@ public class BardTest {
     }
 
     @Test
-    @DisplayName("Set Tool Proficiency")
-    void setToolProficiencyForBard() {
-        Set<String> expectedResult = new HashSet<>(1);
-        expectedResult.add("Three musical instruments");
-
-        assertEquals(expectedResult, dndCharacter.getToolProficiency());
-    }
-
-    @Test
     @DisplayName("Set Saving Throws With Proficiency")
     void setSavingThrowsWithProficiencyForBard() {
         Set<Characteristics> expectedResult = new HashSet<>(2);

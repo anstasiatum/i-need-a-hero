@@ -40,8 +40,7 @@ import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
 
 public class TestData {
 
-    public static final Long chatID = 123L;
-    public DndCharacter dndCharacter = getMockCharacterAna().getDndCharacter();
+    private static final Long chatID = 123L;
 
     public static Character getMockCharacterAna() {
 

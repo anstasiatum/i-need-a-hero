@@ -32,8 +32,6 @@ public class Bard extends DndClass {
         dndCharacter.getWeaponProficiency().add("Rapiers");
         dndCharacter.getWeaponProficiency().add("Shortswords");
 
-        dndCharacter.getToolProficiency().add("Three musical instruments");
-
         dndCharacter.setStartGoldModifier(5);
 
         dndCharacter.getSavingThrowsWithProficiency().add(Characteristics.DEXTERITY);

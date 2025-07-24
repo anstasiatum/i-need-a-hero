@@ -7,12 +7,26 @@ import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 import player.userinputhandler.BotAnswer;
-
-import static player.userinputhandler.UserInputHandler.handleUserInput;
+import player.userinputhandler.StateHolder;
+import player.userinputhandler.UserInputHandler;
+import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.db.CharacterDao;
+import player.userinputhandler.commands.db.CharacterDaoImpl;
+import player.userinputhandler.commands.deletehero.DeleteHero;
+import player.userinputhandler.commands.printhero.PDFCreator;
+import player.userinputhandler.commands.printhero.PrintHero;
 
 public class Bot {
 
     public static void telegramBotListener(String botToken) {
+        final StateHolder stateHolder = new StateHolder();
+        final CharacterDao characterDao = new CharacterDaoImpl();
+        final DeleteHero deleteHero = new DeleteHero(characterDao);
+        final CreateNewHero createHero = new CreateNewHero(characterDao);
+        final PDFCreator createPDF = new PDFCreator(characterDao);
+        final PrintHero printHero = new PrintHero(characterDao, createPDF);
+
+        UserInputHandler handleUserInput = new UserInputHandler(stateHolder, deleteHero, createHero, printHero);
 
         TelegramBot bot = new TelegramBot(botToken);
         bot.setUpdatesListener(updates -> {
@@ -20,7 +34,7 @@ public class Bot {
                 System.out.println("telegramBotListener is working");
                 System.out.println(update);
                 long chatId = update.message().chat().id();
-                BotAnswer botAnswer = handleUserInput(update);
+                BotAnswer botAnswer = handleUserInput.handleUserInput(chatId, update.message().text());
                 bot.execute(buildRequest(botAnswer, chatId));
             });
             return UpdatesListener.CONFIRMED_UPDATES_ALL;

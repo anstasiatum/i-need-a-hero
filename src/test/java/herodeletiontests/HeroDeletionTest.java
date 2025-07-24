@@ -19,7 +19,6 @@ import static player.userinputhandler.enums.Processes.DELETE_HERO;
 import static player.userinputhandler.enums.Steps.CONFIRMATION;
 import static player.userinputhandler.enums.Steps.SELECT_A_HERO_TO_BE_DELETED;
 import static player.userinputhandler.enums.Steps.SET_WEIGHT;
-import static testdata.TestData.chatID;
 import static testdata.TestData.getMockCharacterAna;
 import static testdata.TestData.getMockCharacterHanzo;
 
@@ -31,6 +30,7 @@ public class HeroDeletionTest {
     private static State expectedState;
     private static Response expectedResponse;
     private static String userAnswer;
+    private static final Long chatID = 123L;
 
     @Test
     @DisplayName("Deletion confirmation response")
@@ -57,6 +57,18 @@ public class HeroDeletionTest {
         List<String> userCharacterIDAndName = List.of("Character ID: 31, Name: Ana Amari \n", "Character ID: 32, Name: Hanzo Shimada \n");
         expectedResponse = new Response(expectedState, "Enter the ID of the character you want to delete: \n" + userCharacterIDAndName, null, false, List.of());
 
+        assertEquals(expectedResponse, deleteHero.heroDeletionAnswer(incomingState, chatID, userAnswer));
+    }
+
+    @Test
+    @DisplayName("Accept deletion response when user has no heroes")
+    void acceptDeletionResponseUserCharacterListEmpty() {
+        List<Character> userCharacters = List.of();
+        when(characterDaoMock.findByChatId(chatID)).thenReturn(userCharacters);
+
+        userAnswer = "Yes";
+        incomingState = new State(DELETE_HERO, CONFIRMATION, dndCharacter);
+        expectedResponse = new Response(null, "You don't have any characters to delete. Create one by using /newhero command");
         assertEquals(expectedResponse, deleteHero.heroDeletionAnswer(incomingState, chatID, userAnswer));
     }
 

@@ -38,7 +38,7 @@ public class HeroPrintingTest {
 
     @Test
     @DisplayName("Get the list of available characters response")
-    void getTheListOfAvailableCharactersResponse() {
+    void getListOfAvailableCharactersResponse() {
         Character mockCharacterAna = getMockCharacterAna();
         Character mockCharacterHanzo = getMockCharacterHanzo();
         List<Character> userCharacters = List.of(mockCharacterAna, mockCharacterHanzo);
@@ -52,8 +52,18 @@ public class HeroPrintingTest {
     }
 
     @Test
+    @DisplayName("Get the empty list of available characters response")
+    void getEmptyListOfAvailableCharactersResponse() {
+        List<Character> userCharacters = List.of();
+        when(characterDaoMock.findByChatId(chatID)).thenReturn(userCharacters);
+
+        expectedResponse = new Response(null, "You don't have any characters to print. Create one by using /newhero command");
+        assertEquals(expectedResponse, printHero.printHero(chatID));
+    }
+
+    @Test
     @DisplayName("Get the list of available characters with exception response")
-    void getTheListOfAvailableCharactersExceptionResponse() {
+    void getListOfAvailableCharactersExceptionResponse() {
         when(characterDaoMock.findByChatId(chatID)).thenThrow(RuntimeException.class);
 
         incomingState = new State(PRINT_HERO, PRINT_PDF, dndCharacter);

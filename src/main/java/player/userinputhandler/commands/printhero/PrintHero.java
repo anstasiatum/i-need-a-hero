@@ -9,6 +9,8 @@ import player.userinputhandler.commands.db.CharacterDao;
 import java.io.File;
 import java.util.List;
 
+import static java.lang.String.format;
+import static player.userinputhandler.commands.CommandTexts.newHeroCommand;
 import static player.userinputhandler.enums.Processes.PRINT_HERO;
 import static player.userinputhandler.enums.Steps.PRINT_PDF;
 
@@ -20,6 +22,9 @@ public class PrintHero {
     public Response printHero(Long chatId) {
         try {
             List<Character> userCharacters = characterJpaDao.findByChatId(chatId);
+            if (userCharacters.isEmpty()) {
+                return new Response(null, format("You don't have any characters to print. Create one by using %s command", newHeroCommand));
+            }
             List<String> outputList = userCharacters.stream()
                     .map(character -> String.format("Character ID: %d, Name: %s \n", character.getId(), character.getDndCharacter().getCharacterName()))
                     .toList();

@@ -95,6 +95,7 @@ import static player.userinputhandler.enums.Steps.DESCRIBE_SKIN;
 import static player.userinputhandler.enums.Steps.ENTER_ALIGNMENT;
 import static player.userinputhandler.enums.Steps.ENTER_ALLIES_AND_ORGANIZATIONS;
 import static player.userinputhandler.enums.Steps.ENTER_CHARACTER_BACKSTORY;
+import static player.userinputhandler.enums.Steps.ENTER_FIRST_MUSICAL_INSTRUMENT_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_CLERIC;
@@ -109,6 +110,7 @@ import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WARLOCK;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WIZARD;
 import static player.userinputhandler.enums.Steps.ENTER_FOURTH_SKILL_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_NAME;
+import static player.userinputhandler.enums.Steps.ENTER_SECOND_MUSICAL_INSTRUMENT_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_CLERIC;
@@ -121,6 +123,7 @@ import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_SORCERER;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_WARLOCK;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_WIZARD;
+import static player.userinputhandler.enums.Steps.ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_THIRD_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_THIRD_SKILL_FOR_RANGER;
 import static player.userinputhandler.enums.Steps.ENTER_THIRD_SKILL_FOR_ROGUE;
@@ -353,13 +356,28 @@ public class CreateNewHero {
             case ENTER_THIRD_SKILL_FOR_BARD:
                 try {
                     addSkillProficiency(state.getDndCharacter(), userAnswer);
-                    newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
+                    newState = new State(CREATE_HERO, ENTER_FIRST_MUSICAL_INSTRUMENT_FOR_BARD, state.getDndCharacter());
+                    response = new Response(newState, "Enter the first musical instrument your bard will be proficient with");
                 } catch (IllegalArgumentException ex) {
                     finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Bard.buildAvailableProficiencySkills());
                     newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(finalAvailableSkills));
                 }
+                break;
+            case ENTER_FIRST_MUSICAL_INSTRUMENT_FOR_BARD:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, ENTER_SECOND_MUSICAL_INSTRUMENT_FOR_BARD, state.getDndCharacter());
+                response = new Response(newState, "Enter the second musical instrument your bard will be proficient with");
+                break;
+            case ENTER_SECOND_MUSICAL_INSTRUMENT_FOR_BARD:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD, state.getDndCharacter());
+                response = new Response(newState, "Enter the third musical instrument your bard will be proficient with");
+                break;
+            case ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD:
+                state.getDndCharacter().getToolProficiency().add(userAnswer);
+                newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
+                response = new Response(newState, chooseAlignment, getAlignmentOptions());
                 break;
             case ENTER_FIRST_SKILL_FOR_CLERIC:
                 try {
