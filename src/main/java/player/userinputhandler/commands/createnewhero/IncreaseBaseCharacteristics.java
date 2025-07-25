@@ -118,36 +118,36 @@ public class IncreaseBaseCharacteristics {
                     case strength:
                         dndCharacter.setStrength(dndCharacter.getStrength() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(STRENGTH));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case dexterity:
                         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(DEXTERITY));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case constitution:
                         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(CONSTITUTION));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case intelligence:
                         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(INTELLIGENCE));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case wisdom:
                         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(WISDOM));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case charisma:
                         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(CHARISMA));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
-                        response = new Response(newState, wrongInput, getBasicAbilityOptions());
+                        response = new Response(newState, wrongInput, getAllSkillOptions());
                         break;
                 }
                 break;
@@ -156,32 +156,32 @@ public class IncreaseBaseCharacteristics {
                     case strength:
                         dndCharacter.setStrength(dndCharacter.getStrength() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(STRENGTH));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case dexterity:
                         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(DEXTERITY));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case constitution:
                         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(CONSTITUTION));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case intelligence:
                         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(INTELLIGENCE));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case wisdom:
                         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(WISDOM));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     case charisma:
                         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
                         newState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-                        response = new Response(newState, chooseSkillProficiency, getBasicAbilityOptionsWithoutSpecified(CHARISMA));
+                        response = new Response(newState, chooseSkillProficiency, getAllSkillOptions());
                         break;
                     default:
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
