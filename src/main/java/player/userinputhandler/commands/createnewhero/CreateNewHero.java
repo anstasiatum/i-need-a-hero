@@ -2,6 +2,7 @@ package player.userinputhandler.commands.createnewhero;
 
 import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.dndcharacterenums.Skills;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
@@ -25,7 +26,6 @@ import java.util.Set;
 
 import static java.lang.String.format;
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
-import static player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod.chooseCharacteristicsSettingMethod;
 import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
@@ -41,7 +41,6 @@ import static player.userinputhandler.commands.createnewhero.Options.getRaceOpti
 import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allBackgrounds;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
-import static player.userinputhandler.commands.createnewhero.OutputTexts.allSkills;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.alreadyHaveProficiencyInThisSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseAlignment;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanToolPossessionWithPreviousStep;
@@ -145,7 +144,9 @@ import static player.userinputhandler.enums.Steps.SET_WISDOM;
 
 @AllArgsConstructor
 public class CreateNewHero {
-    final CharacterDao characterJpaDao;
+    private final CharacterDao characterJpaDao;
+    private final BaseCharacteristicsValuesGenerator characteristicsValuesGeneratorMock = new BaseCharacteristicsValuesGenerator();
+    private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod = new ChooseCharacteristicsSettingMethod(characteristicsValuesGeneratorMock);
 
     public Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());
@@ -158,6 +159,7 @@ public class CreateNewHero {
         BuildAvailableProficiencySkillsWithoutApplied buildSkills = new BuildAvailableProficiencySkillsWithoutApplied();
         Set<Skills> finalAvailableSkills;
 
+
         switch (state.getStepId()) {
             case ENTER_NAME:
                 state.getDndCharacter().setCharacterName(userAnswer);
@@ -165,7 +167,7 @@ public class CreateNewHero {
                 response = new Response(newState, "Now let's get your base characteristics. You can roll them yourself or I will roll them for you", getCharacteristicsRollingMethodOptions());
                 break;
             case CHOOSE_ROLLING_CHARACTERISTICS_METHOD:
-                response = chooseCharacteristicsSettingMethod(userAnswer, state.getDndCharacter());
+                response = characteristicsSettingMethod.chooseCharacteristicsSettingMethod(userAnswer, state.getDndCharacter());
                 break;
             case SET_STRENGTH:
                 try {

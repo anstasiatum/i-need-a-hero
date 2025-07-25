@@ -1,17 +1,22 @@
 package player.userinputhandler.commands.createnewhero;
 
+import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 
-import static player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator.generateCharacteristics;
 import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ROLLING_CHARACTERISTICS_METHOD;
 import static player.userinputhandler.enums.Steps.SET_STRENGTH;
 
+@AllArgsConstructor
 public class ChooseCharacteristicsSettingMethod {
-    public static Response chooseCharacteristicsSettingMethod(String userAnswer, DndCharacter dndCharacter) {
+
+    private final BaseCharacteristicsValuesGenerator generateCharacteristics;
+
+    public Response chooseCharacteristicsSettingMethod(String userAnswer, DndCharacter dndCharacter) {
         Response response;
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {
@@ -21,7 +26,7 @@ public class ChooseCharacteristicsSettingMethod {
             }
             case "roll for me, bot" -> {
                 newState = new State(CREATE_HERO, SET_STRENGTH, dndCharacter);
-                yield new Response(newState, "Here is your result: \n" + generateCharacteristics() + "\n Set strength:");
+                yield new Response(newState, "Here is your result: \n" + generateCharacteristics.generateCharacteristics() + "\n Set strength:");
             }
             default -> {
                 newState = new State(CREATE_HERO, CHOOSE_ROLLING_CHARACTERISTICS_METHOD, dndCharacter);

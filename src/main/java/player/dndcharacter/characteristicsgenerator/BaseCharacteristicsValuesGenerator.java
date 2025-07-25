@@ -9,7 +9,7 @@ import java.util.Random;
 public class BaseCharacteristicsValuesGenerator {
     private static final Random RANDOM = new Random();
 
-    public static List<CharacteristicsValues> generateCharacteristics() {
+    public List<CharacteristicsValues> generateCharacteristics() {
 
         List<CharacteristicsValues> characteristics = new ArrayList<>(6);
 
