@@ -18,6 +18,8 @@ import player.dndcharacter.dndclass.Warlock;
 import player.dndcharacter.dndclass.Wizard;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
+import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
+import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 
@@ -26,7 +28,6 @@ import java.util.Set;
 
 import static java.lang.String.format;
 import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
-import static player.userinputhandler.commands.createnewhero.IncreaseBaseCharacteristics.increaseBaseCharacteristics;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
@@ -145,8 +146,10 @@ import static player.userinputhandler.enums.Steps.SET_WISDOM;
 @AllArgsConstructor
 public class CreateNewHero {
     private final CharacterDao characterJpaDao;
-    private final BaseCharacteristicsValuesGenerator characteristicsValuesGeneratorMock = new BaseCharacteristicsValuesGenerator();
-    private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod = new ChooseCharacteristicsSettingMethod(characteristicsValuesGeneratorMock);
+    private final BaseCharacteristicsValuesGenerator characteristicsValuesGenerator = new BaseCharacteristicsValuesGenerator();
+    private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod = new ChooseCharacteristicsSettingMethod(characteristicsValuesGenerator);
+    private final IncrementAbility incrementAbility = new IncrementAbility();
+    private final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
 
     public Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());
@@ -258,16 +261,16 @@ public class CreateNewHero {
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF:
-                response = increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF, userAnswer);
+                response = increaseBaseCharacteristics.increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF, userAnswer);
                 break;
             case CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF:
-                response = increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, userAnswer);
+                response = increaseBaseCharacteristics.increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_SECOND_ABILITY_SCORE_FOR_HALF_ELF, userAnswer);
                 break;
             case CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN:
-                response = increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN, userAnswer);
+                response = increaseBaseCharacteristics.increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN, userAnswer);
                 break;
             case CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN:
-                response = increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, userAnswer);
+                response = increaseBaseCharacteristics.increaseBaseCharacteristics(state.getDndCharacter(), CHOOSE_SECOND_ABILITY_SCORE_FOR_VARIANT_HUMAN, userAnswer);
                 break;
             case CHOOSE_FIRST_SKILL_FOR_HALF_ELF:
                 try {

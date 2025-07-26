@@ -1,5 +1,8 @@
 package player.dndcharacter.dndcharacterenums;
 
+import lombok.Getter;
+
+@Getter
 public enum Characteristics {
     STRENGTH("Strength"),
     DEXTERITY("Dexterity"),
@@ -18,5 +21,20 @@ public enum Characteristics {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public static Characteristics fromString(String value) {
+        if (value == null || value.trim().isEmpty())
+            return null;
+
+        String normalizedInput = value.trim().toLowerCase();
+
+        for (Characteristics characteristics : Characteristics.values()) {
+            if (characteristics.displayName.toLowerCase().equals(normalizedInput)) {
+                return characteristics;
+            }
+        }
+
+        return null;
     }
 }
