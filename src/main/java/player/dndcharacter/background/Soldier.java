@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.SOLDIER;
-import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.INTIMIDATION;
+import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
+import static player.dndcharacter.dndcharacterenums.Skill.INTIMIDATION;
 
 public class Soldier extends Background {
     @Override

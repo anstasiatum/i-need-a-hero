@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -298,9 +298,9 @@ public class OptionTest {
     }
 
     @ParameterizedTest(name = "Get Skill Options: {0} is returned as a readable string when present in the incoming set")
-    @EnumSource(Skills.class)
-    void getSkillOptionsReturnSingleOptionTest(Skills skill) {
-        Set<Skills> availableSkills = EnumSet.of(skill);
+    @EnumSource(Skill.class)
+    void getSkillOptionsReturnSingleOptionTest(Skill skill) {
+        Set<Skill> availableSkills = EnumSet.of(skill);
         List<String> expectedResult = getSkillOptions(availableSkills);
         assertEquals(1, expectedResult.size());
         assertEquals(humanReadable(skill), expectedResult.getFirst());
@@ -309,11 +309,11 @@ public class OptionTest {
     @Test
     @DisplayName("Get Skill Options: Return all skills")
     void getSkillOptionsReturnAllSkillsTest() {
-        Set<Skills> availableSkills = EnumSet.allOf(Skills.class);
+        Set<Skill> availableSkills = EnumSet.allOf(Skill.class);
         List<String> expectedResult = getSkillOptions(availableSkills);
-        assertEquals(Skills.values().length, expectedResult.size());
+        assertEquals(Skill.values().length, expectedResult.size());
 
-        for (Skills skill : Skills.values()) {
+        for (Skill skill : Skill.values()) {
             String expected = humanReadable(skill);
             assertTrue(expectedResult.contains(expected));
         }

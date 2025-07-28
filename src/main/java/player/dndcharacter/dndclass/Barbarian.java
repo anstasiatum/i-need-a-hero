@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -11,14 +11,14 @@ import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
 
 public class Barbarian extends DndClass {
 
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ANIMAL_HANDLING,
-                Skills.ATHLETICS,
-                Skills.INTIMIDATION,
-                Skills.NATURE,
-                Skills.PERCEPTION,
-                Skills.SURVIVAL
+                Skill.ANIMAL_HANDLING,
+                Skill.ATHLETICS,
+                Skill.INTIMIDATION,
+                Skill.NATURE,
+                Skill.PERCEPTION,
+                Skill.SURVIVAL
         );
     }
 

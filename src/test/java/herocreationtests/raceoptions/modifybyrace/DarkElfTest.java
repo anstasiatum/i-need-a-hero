@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.race.elf.DarkElf;
 
 import java.util.HashSet;
@@ -13,10 +13,10 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 public class DarkElfTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {
@@ -87,7 +87,7 @@ public class DarkElfTest {
     @Test
     @DisplayName("Set Perception Proficiency")
     void setPerceptionProficiencyForDarkElf() {
-        Set<Skills> expectedResult = new HashSet<>(1);
+        Set<Skill> expectedResult = new HashSet<>(1);
         expectedResult.add(PERCEPTION);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());

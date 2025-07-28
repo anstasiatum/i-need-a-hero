@@ -1,5 +1,8 @@
 package player.dndcharacter.dndcharacterenums;
 
+import lombok.Getter;
+
+@Getter
 public enum CharacterClass {
     BARBARIAN("Barbarian"),
     BARD("Bard"),

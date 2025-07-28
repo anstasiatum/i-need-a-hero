@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
-import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
-import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
+import static player.dndcharacter.dndcharacterenums.Skill.MEDICINE;
+import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
 public class Hermit extends Background {
 

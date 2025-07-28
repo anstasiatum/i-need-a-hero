@@ -1,5 +1,8 @@
 package player.dndcharacter.dndcharacterenums;
 
+import lombok.Getter;
+
+@Getter
 public enum Race {
     HILL_DWARF("Hill Dwarf"),
     MOUNTAIN_DWARF("Mountain Dwarf"),

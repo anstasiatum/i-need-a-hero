@@ -12,7 +12,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DragonbornTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {

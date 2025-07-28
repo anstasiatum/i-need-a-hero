@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.KNIGHT;
-import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
-import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
+import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
+import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
 
 public class Knight extends Background{
     @Override

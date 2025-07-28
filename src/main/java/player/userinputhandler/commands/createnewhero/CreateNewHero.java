@@ -3,7 +3,7 @@ package player.userinputhandler.commands.createnewhero;
 import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
 import player.dndcharacter.dndclass.Cleric;
@@ -160,7 +160,7 @@ public class CreateNewHero {
         Response response;
         State newState;
         BuildAvailableProficiencySkillsWithoutApplied buildSkills = new BuildAvailableProficiencySkillsWithoutApplied();
-        Set<Skills> finalAvailableSkills;
+        Set<Skill> finalAvailableSkills;
 
 
         switch (state.getStepId()) {
@@ -275,7 +275,7 @@ public class CreateNewHero {
             case CHOOSE_FIRST_SKILL_FOR_HALF_ELF:
                 try {
                     if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
-                        finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skills.class));
+                        finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skill.class));
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
                     } else {
@@ -293,12 +293,12 @@ public class CreateNewHero {
                         newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
                         response = new Response(newState, chooseClass, getClassOptions());
                     } else {
-                        finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skills.class));
+                        finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skill.class));
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, state.getDndCharacter());
                         response = new Response(newState, alreadyHaveProficiencyInThisSkill, getSkillOptions(finalAvailableSkills));
                     }
                 } catch (IllegalArgumentException ex) {
-                    finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skills.class));
+                    finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skill.class));
                     newState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(finalAvailableSkills));
                 }

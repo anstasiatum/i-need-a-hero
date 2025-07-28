@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -10,19 +10,19 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.ROGUE;
 
 public class Rogue extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ACROBATICS,
-                Skills.ATHLETICS,
-                Skills.DECEPTION,
-                Skills.INSIGHT,
-                Skills.INTIMIDATION,
-                Skills.INVESTIGATION,
-                Skills.PERCEPTION,
-                Skills.PERFORMANCE,
-                Skills.PERSUASION,
-                Skills.SLEIGHT_OF_HAND,
-                Skills.STEALTH
+                Skill.ACROBATICS,
+                Skill.ATHLETICS,
+                Skill.DECEPTION,
+                Skill.INSIGHT,
+                Skill.INTIMIDATION,
+                Skill.INVESTIGATION,
+                Skill.PERCEPTION,
+                Skill.PERFORMANCE,
+                Skill.PERSUASION,
+                Skill.SLEIGHT_OF_HAND,
+                Skill.STEALTH
         );
     }
 

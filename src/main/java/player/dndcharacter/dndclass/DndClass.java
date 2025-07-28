@@ -3,7 +3,7 @@ package player.dndcharacter.dndclass;
 import lombok.Getter;
 import lombok.Setter;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.Set;
 
@@ -11,10 +11,10 @@ import java.util.Set;
 @Setter
 public abstract class DndClass {
 
-    Set<Skills> availableSkills;
+    Set<Skill> availableSkills;
     int numberOfAvailableSkills;
 
-    public DndClass(Set<Skills> availableSkills, int numberOfAvailableSkills) {
+    public DndClass(Set<Skill> availableSkills, int numberOfAvailableSkills) {
         this.availableSkills = availableSkills;
         this.numberOfAvailableSkills = numberOfAvailableSkills;
     }

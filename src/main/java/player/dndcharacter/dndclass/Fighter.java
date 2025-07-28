@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -10,16 +10,16 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.FIGHTER;
 
 public class Fighter extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ACROBATICS,
-                Skills.ANIMAL_HANDLING,
-                Skills.ATHLETICS,
-                Skills.HISTORY,
-                Skills.INSIGHT,
-                Skills.INTIMIDATION,
-                Skills.PERCEPTION,
-                Skills.SURVIVAL
+                Skill.ACROBATICS,
+                Skill.ANIMAL_HANDLING,
+                Skill.ATHLETICS,
+                Skill.HISTORY,
+                Skill.INSIGHT,
+                Skill.INTIMIDATION,
+                Skill.PERCEPTION,
+                Skill.SURVIVAL
         );
     }
 

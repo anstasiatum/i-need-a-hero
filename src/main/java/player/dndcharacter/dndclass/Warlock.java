@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import java.util.EnumSet;
@@ -11,15 +11,15 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.WARLOCK;
 
 public class Warlock extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ARCANA,
-                Skills.DECEPTION,
-                Skills.HISTORY,
-                Skills.INVESTIGATION,
-                Skills.INTIMIDATION,
-                Skills.NATURE,
-                Skills.RELIGION
+                Skill.ARCANA,
+                Skill.DECEPTION,
+                Skill.HISTORY,
+                Skill.INVESTIGATION,
+                Skill.INTIMIDATION,
+                Skill.NATURE,
+                Skill.RELIGION
         );
     }
 

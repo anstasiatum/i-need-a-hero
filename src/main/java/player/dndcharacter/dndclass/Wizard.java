@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import java.util.EnumSet;
@@ -12,14 +12,14 @@ import static player.dndcharacter.dndcharacterenums.CharacterClass.WIZARD;
 
 public class Wizard extends DndClass {
 
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ARCANA,
-                Skills.HISTORY,
-                Skills.INSIGHT,
-                Skills.INVESTIGATION,
-                Skills.MEDICINE,
-                Skills.RELIGION
+                Skill.ARCANA,
+                Skill.HISTORY,
+                Skill.INSIGHT,
+                Skill.INVESTIGATION,
+                Skill.MEDICINE,
+                Skill.RELIGION
         );
     }
 

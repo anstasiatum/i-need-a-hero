@@ -1,7 +1,7 @@
 package player.userinputhandler.commands.createnewhero;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
 import player.dndcharacter.dndclass.Cleric;
@@ -55,7 +55,7 @@ public class SelectClass {
                 Warlock
                 Wizard""";
         BuildAvailableProficiencySkillsWithoutApplied buildSkills = new BuildAvailableProficiencySkillsWithoutApplied();
-        Set<Skills> finalAvailableSkills;
+        Set<Skill> finalAvailableSkills;
         switch (userAnswer.toLowerCase().trim()) {
             case "barbarian" -> {
                 Barbarian barbarian = new Barbarian();

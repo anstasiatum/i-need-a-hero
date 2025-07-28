@@ -5,23 +5,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.Hermit;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
-import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.MEDICINE;
-import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
+import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
+import static player.dndcharacter.dndcharacterenums.Skill.MEDICINE;
+import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
 public class HermitTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {
-        Set<Skills> skills = new HashSet<>(1);
+        Set<Skill> skills = new HashSet<>(1);
         skills.add(ATHLETICS);
         dndCharacter.setSkillsWithProficiency(skills);
 
@@ -45,7 +45,7 @@ public class HermitTest {
     @Test
     @DisplayName("Set skills with proficiency")
     void setSkillsWithProficiencyForHermit() {
-        Set<Skills> expectedResult = new HashSet<>(3);
+        Set<Skill> expectedResult = new HashSet<>(3);
         expectedResult.add(ATHLETICS);
         expectedResult.add(MEDICINE);
         expectedResult.add(RELIGION);

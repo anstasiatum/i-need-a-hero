@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -10,16 +10,16 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.RANGER;
 
 public class Ranger extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ANIMAL_HANDLING,
-                Skills.ATHLETICS,
-                Skills.INSIGHT,
-                Skills.INVESTIGATION,
-                Skills.NATURE,
-                Skills.PERCEPTION,
-                Skills.STEALTH,
-                Skills.SURVIVAL
+                Skill.ANIMAL_HANDLING,
+                Skill.ATHLETICS,
+                Skill.INSIGHT,
+                Skill.INVESTIGATION,
+                Skill.NATURE,
+                Skill.PERCEPTION,
+                Skill.STEALTH,
+                Skill.SURVIVAL
         );
     }
 

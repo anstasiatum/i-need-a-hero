@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.CHARLATAN;
-import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
-import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
+import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
 
 public class Charlatan extends Background {
     @Override

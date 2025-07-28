@@ -16,7 +16,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_FEATURE_FOR_PIRATE;
 import static player.userinputhandler.enums.Steps.SET_PERSONALITY_TRAITS;
 
 public class PirateFeatureTest {
-    private DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
     private final String chooseTraits = "Type any personality traits you'd like to mention";
 
     @BeforeEach

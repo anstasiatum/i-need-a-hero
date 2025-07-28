@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.OUTLANDER;
-import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
+import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
+import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
 public class Outlander extends Background {
     @Override

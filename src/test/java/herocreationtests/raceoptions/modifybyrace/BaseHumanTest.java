@@ -10,7 +10,7 @@ import player.dndcharacter.race.human.BaseHuman;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BaseHumanTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {

@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import java.util.EnumSet;
@@ -11,16 +11,16 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.DRUID;
 
 public class Druid extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ARCANA,
-                Skills.ANIMAL_HANDLING,
-                Skills.INSIGHT,
-                Skills.MEDICINE,
-                Skills.NATURE,
-                Skills.PERCEPTION,
-                Skills.RELIGION,
-                Skills.SURVIVAL
+                Skill.ARCANA,
+                Skill.ANIMAL_HANDLING,
+                Skill.INSIGHT,
+                Skill.MEDICINE,
+                Skill.NATURE,
+                Skill.PERCEPTION,
+                Skill.RELIGION,
+                Skill.SURVIVAL
         );
     }
 

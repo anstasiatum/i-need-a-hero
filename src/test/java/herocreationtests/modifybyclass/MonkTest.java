@@ -15,7 +15,7 @@ import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.MONK;
 
 public class MonkTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {

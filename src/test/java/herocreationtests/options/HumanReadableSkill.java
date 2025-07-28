@@ -1,9 +1,9 @@
 package herocreationtests.options;
 
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 public class HumanReadableSkill {
-    public static String humanReadable(Skills skill) {
+    public static String humanReadable(Skill skill) {
         return switch (skill) {
             case SURVIVAL -> "Survival";
             case STEALTH -> "Stealth";

@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -10,14 +10,14 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.PALADIN;
 
 public class Paladin extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ATHLETICS,
-                Skills.INSIGHT,
-                Skills.INTIMIDATION,
-                Skills.MEDICINE,
-                Skills.PERSUASION,
-                Skills.RELIGION
+                Skill.ATHLETICS,
+                Skill.INSIGHT,
+                Skill.INTIMIDATION,
+                Skill.MEDICINE,
+                Skill.PERSUASION,
+                Skill.RELIGION
         );
     }
 

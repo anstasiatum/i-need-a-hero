@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.GUILD_MERCHANT;
-import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
-import static player.dndcharacter.dndcharacterenums.Skills.PERSUASION;
+import static player.dndcharacter.dndcharacterenums.Skill.INSIGHT;
+import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
 
 public class GuildMerchant extends Background {
     @Override

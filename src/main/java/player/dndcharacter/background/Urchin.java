@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.URCHIN;
-import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
-import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
+import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
+import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
 public class Urchin extends Background {
     @Override

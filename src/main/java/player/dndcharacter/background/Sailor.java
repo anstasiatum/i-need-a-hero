@@ -4,8 +4,8 @@ import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.background.Features.shipsPassageText;
 import static player.dndcharacter.dndcharacterenums.Background.SAILOR;
-import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.PERCEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
+import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 public class Sailor extends Background {
     @Override

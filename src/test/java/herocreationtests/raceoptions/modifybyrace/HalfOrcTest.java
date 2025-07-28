@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.race.halforc.HalfOrc;
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class HalfOrcTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {
@@ -86,8 +86,8 @@ public class HalfOrcTest {
     @Test
     @DisplayName("Set proficiency in Intimidation")
     void setProficiencyInIntimidationForHalfOrc() {
-        Set<Skills> expectedResult = new HashSet<>(1);
-        expectedResult.add(Skills.INTIMIDATION);
+        Set<Skill> expectedResult = new HashSet<>(1);
+        expectedResult.add(Skill.INTIMIDATION);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }

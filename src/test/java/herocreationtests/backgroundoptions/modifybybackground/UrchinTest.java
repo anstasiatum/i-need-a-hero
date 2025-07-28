@@ -5,23 +5,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.Urchin;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Background.URCHIN;
-import static player.dndcharacter.dndcharacterenums.Skills.ATHLETICS;
-import static player.dndcharacter.dndcharacterenums.Skills.SLEIGHT_OF_HAND;
-import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
+import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
+import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
+import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
 public class UrchinTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final  DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {
-        Set<Skills> skills = new HashSet<>(1);
+        Set<Skill> skills = new HashSet<>(1);
         skills.add(ATHLETICS);
         dndCharacter.setSkillsWithProficiency(skills);
 
@@ -45,7 +45,7 @@ public class UrchinTest {
     @Test
     @DisplayName("Set skills with proficiency")
     void setSkillsWithProficiencyForUrchin() {
-        Set<Skills> expectedResult = new HashSet<>(3);
+        Set<Skill> expectedResult = new HashSet<>(3);
         expectedResult.add(ATHLETICS);
         expectedResult.add(SLEIGHT_OF_HAND);
         expectedResult.add(STEALTH);

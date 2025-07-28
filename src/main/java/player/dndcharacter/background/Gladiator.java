@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.GLADIATOR;
-import static player.dndcharacter.dndcharacterenums.Skills.ACROBATICS;
-import static player.dndcharacter.dndcharacterenums.Skills.PERFORMANCE;
+import static player.dndcharacter.dndcharacterenums.Skill.ACROBATICS;
+import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
 
 public class Gladiator extends Background {
 

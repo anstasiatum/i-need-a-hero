@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.SAGE;
-import static player.dndcharacter.dndcharacterenums.Skills.ARCANA;
-import static player.dndcharacter.dndcharacterenums.Skills.HISTORY;
+import static player.dndcharacter.dndcharacterenums.Skill.ARCANA;
+import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
 
 public class Sage extends Background {
     @Override

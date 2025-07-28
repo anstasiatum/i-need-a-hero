@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.FOLK_HERO;
-import static player.dndcharacter.dndcharacterenums.Skills.ANIMAL_HANDLING;
-import static player.dndcharacter.dndcharacterenums.Skills.SURVIVAL;
+import static player.dndcharacter.dndcharacterenums.Skill.ANIMAL_HANDLING;
+import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
 public class FolkHero extends Background {
     @Override

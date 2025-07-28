@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.CRIMINAL;
-import static player.dndcharacter.dndcharacterenums.Skills.DECEPTION;
-import static player.dndcharacter.dndcharacterenums.Skills.STEALTH;
+import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
 public class Criminal extends Background {
     @Override

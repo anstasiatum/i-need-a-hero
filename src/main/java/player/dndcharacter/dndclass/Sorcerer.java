@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import java.util.EnumSet;
@@ -11,14 +11,14 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.SORCERER;
 
 public class Sorcerer extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ARCANA,
-                Skills.DECEPTION,
-                Skills.INSIGHT,
-                Skills.INTIMIDATION,
-                Skills.PERSUASION,
-                Skills.RELIGION
+                Skill.ARCANA,
+                Skill.DECEPTION,
+                Skill.INSIGHT,
+                Skill.INTIMIDATION,
+                Skill.PERSUASION,
+                Skill.RELIGION
         );
     }
 

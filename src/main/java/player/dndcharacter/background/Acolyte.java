@@ -3,8 +3,8 @@ package player.dndcharacter.background;
 import player.dndcharacter.DndCharacter;
 
 import static player.dndcharacter.dndcharacterenums.Background.ACOLYTE;
-import static player.dndcharacter.dndcharacterenums.Skills.INSIGHT;
-import static player.dndcharacter.dndcharacterenums.Skills.RELIGION;
+import static player.dndcharacter.dndcharacterenums.Skill.INSIGHT;
+import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
 public class Acolyte extends Background {
     @Override

@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -10,14 +10,14 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.MONK;
 
 public class Monk extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.ACROBATICS,
-                Skills.ATHLETICS,
-                Skills.HISTORY,
-                Skills.INSIGHT,
-                Skills.RELIGION,
-                Skills.STEALTH
+                Skill.ACROBATICS,
+                Skill.ATHLETICS,
+                Skill.HISTORY,
+                Skill.INSIGHT,
+                Skill.RELIGION,
+                Skill.STEALTH
         );
     }
 

@@ -3,7 +3,7 @@ package player.dndcharacter.race.halforc;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.race.Race;
 
 public class HalfOrc extends Race {
@@ -20,7 +20,7 @@ public class HalfOrc extends Race {
                 """
                 + Abilities.BASEDARKVISION);
         dndCharacter.getLanguages().add("Orc");
-        dndCharacter.getSkillsWithProficiency().add(Skills.INTIMIDATION);
+        dndCharacter.getSkillsWithProficiency().add(Skill.INTIMIDATION);
 
     }
 }

@@ -4,7 +4,7 @@ import player.dndcharacter.dndcharacterenums.Background;
 import player.dndcharacter.dndcharacterenums.CharacterClass;
 import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.Race;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.Arrays;
 import java.util.List;
@@ -144,8 +144,8 @@ public class Options {
     }
 
     public static List<String> getAllSkillOptions() {
-        return Arrays.stream(Skills.values())
-                .map(Skills::toString)
+        return Arrays.stream(Skill.values())
+                .map(Skill::toString)
                 .toList();
     }
 
@@ -168,10 +168,10 @@ public class Options {
         );
     }
 
-    public static List<String> getSkillOptions(Set<Skills> availableSkills) {
+    public static List<String> getSkillOptions(Set<Skill> availableSkills) {
 
         return availableSkills.stream()
-                .map(Skills::getDisplayName)  // custom string representation
+                .map(Skill::getDisplayName)  // custom string representation
                 .sorted()
                 .collect(Collectors.toList());
     }

@@ -8,7 +8,7 @@ import player.dndcharacter.dndcharacterenums.CharacterClass;
 import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.Race;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class DndCharacter {
 
     private int proficiencyBonus = 2;
 
-    private Set<Skills> skillsWithProficiency = EnumSet.noneOf(Skills.class);
+    private Set<Skill> skillsWithProficiency = EnumSet.noneOf(Skill.class);
     private Set<Characteristics> savingThrowsWithProficiency = EnumSet.noneOf(Characteristics.class);
 
     private Race race;
@@ -127,7 +127,7 @@ public class DndCharacter {
 
     @JsonIgnore
     public int getPassivePerception() {
-        return getSkillsWithProficiency().contains(Skills.PERCEPTION) ? 10 + getWisdomModifier() + proficiencyBonus : 10 + getWisdomModifier();
+        return getSkillsWithProficiency().contains(Skill.PERCEPTION) ? 10 + getWisdomModifier() + proficiencyBonus : 10 + getWisdomModifier();
     }
 
     @JsonIgnore
@@ -174,7 +174,7 @@ public class DndCharacter {
     }
 
     @JsonIgnore
-    public int getSkillModifier(Skills skill) {
+    public int getSkillModifier(Skill skill) {
         int baseSkillModifier = switch (skill) {
             case ACROBATICS, STEALTH, SLEIGHT_OF_HAND -> getDexterityModifier();
             case ANIMAL_HANDLING, INSIGHT, MEDICINE, PERCEPTION, SURVIVAL -> getWisdomModifier();

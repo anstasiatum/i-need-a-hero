@@ -1,7 +1,7 @@
 package herocreationtests;
 
 import org.junit.jupiter.api.Test;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.userinputhandler.commands.createnewhero.BuildAvailableProficiencySkillsWithoutApplied;
 
 import java.util.EnumSet;
@@ -15,72 +15,72 @@ public class BuildAvailableProficiencySkillsWithoutAppliedTest {
 
     @Test
     void testNoSkillsAppliedReturnsAllAvailable() {
-        Set<Skills> allAvailable = EnumSet.of(Skills.ARCANA, Skills.MEDICINE, Skills.HISTORY);
-        Set<Skills> applied = Set.of();
+        Set<Skill> allAvailable = EnumSet.of(Skill.ARCANA, Skill.MEDICINE, Skill.HISTORY);
+        Set<Skill> applied = Set.of();
 
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
         assertEquals(allAvailable, actualResult);
     }
 
     @Test
     void testSomeSkillsAppliedReturnsRemaining() {
-        Set<Skills> allAvailable = EnumSet.of(Skills.PERCEPTION, Skills.INTIMIDATION, Skills.DECEPTION);
-        Set<Skills> applied = Set.of(Skills.DECEPTION);
+        Set<Skill> allAvailable = EnumSet.of(Skill.PERCEPTION, Skill.INTIMIDATION, Skill.DECEPTION);
+        Set<Skill> applied = Set.of(Skill.DECEPTION);
 
-        Set<Skills> expected = Set.of(Skills.PERCEPTION, Skills.INTIMIDATION);
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
+        Set<Skill> expected = Set.of(Skill.PERCEPTION, Skill.INTIMIDATION);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
         assertEquals(expected, actualResult);
     }
 
     @Test
     void testAllSkillsAppliedReturnsEmptySet() {
-        Set<Skills> allAvailable = EnumSet.of(Skills.NATURE, Skills.SURVIVAL);
-        Set<Skills> applied = Set.of(Skills.NATURE, Skills.SURVIVAL);
+        Set<Skill> allAvailable = EnumSet.of(Skill.NATURE, Skill.SURVIVAL);
+        Set<Skill> applied = Set.of(Skill.NATURE, Skill.SURVIVAL);
 
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
         assertTrue(actualResult.isEmpty());
     }
 
     @Test
     void testAvailableSkillsIsEmptyReturnsEmptySet() {
-        Set<Skills> allAvailable = Set.of();
-        Set<Skills> applied = Set.of(Skills.HISTORY);
+        Set<Skill> allAvailable = Set.of();
+        Set<Skill> applied = Set.of(Skill.HISTORY);
 
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
         assertTrue(actualResult.isEmpty());
     }
 
     @Test
     void testAppliedSkillsNotInAvailableSkillsIgnoresThem() {
-        Set<Skills> allAvailable = Set.of(Skills.ACROBATICS);
-        Set<Skills> applied = Set.of(Skills.DECEPTION, Skills.STEALTH);
+        Set<Skill> allAvailable = Set.of(Skill.ACROBATICS);
+        Set<Skill> applied = Set.of(Skill.DECEPTION, Skill.STEALTH);
 
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
         assertEquals(allAvailable, actualResult);
     }
 
     @Test
     void testBothInputsEmptyReturnsEmpty() {
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(Set.of(), Set.of());
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(Set.of(), Set.of());
         assertTrue(actualResult.isEmpty());
     }
 
     @Test
     void testNullAvailableReturnsEmptySet() {
-        Set<Skills> applied = Set.of(Skills.PERFORMANCE);
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, null);
+        Set<Skill> applied = Set.of(Skill.PERFORMANCE);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, null);
 
         assertTrue(actualResult.isEmpty());
     }
 
     @Test
     void testBothNullReturnsEmptySet() {
-        Set<Skills> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(null, null);
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(null, null);
         assertTrue(actualResult.isEmpty());
     }
 }

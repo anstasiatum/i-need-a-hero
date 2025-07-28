@@ -3,7 +3,7 @@ package player.dndcharacter.dndcharacterenums;
 import lombok.Getter;
 
 @Getter
-public enum Skills {
+public enum Skill {
     SURVIVAL("Survival"),
     STEALTH("Stealth"),
     SLEIGHT_OF_HAND("Sleight Of Hand"),
@@ -25,7 +25,7 @@ public enum Skills {
 
     private final String displayName;
 
-    Skills(String displayName) {
+    Skill(String displayName) {
         this.displayName = displayName;
     }
 

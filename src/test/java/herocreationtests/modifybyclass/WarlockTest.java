@@ -19,7 +19,7 @@ import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.WARLOCK;
 
 public class WarlockTest {
-    DndCharacter dndCharacter = new DndCharacter();
+    private final  DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
     public void createCharacter() {

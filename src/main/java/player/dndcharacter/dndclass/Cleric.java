@@ -2,7 +2,7 @@ package player.dndcharacter.dndclass;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndcharacterenums.Skills;
+import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 
 import java.util.EnumSet;
@@ -11,13 +11,13 @@ import java.util.Set;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.CLERIC;
 
 public class Cleric extends DndClass {
-    public static Set<Skills> buildAvailableProficiencySkills() {
+    public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
-                Skills.HISTORY,
-                Skills.INSIGHT,
-                Skills.MEDICINE,
-                Skills.PERSUASION,
-                Skills.RELIGION
+                Skill.HISTORY,
+                Skill.INSIGHT,
+                Skill.MEDICINE,
+                Skill.PERSUASION,
+                Skill.RELIGION
         );
     }
 
