@@ -3,8 +3,11 @@ package player.userinputhandler.commands.createnewhero;
 import player.dndcharacter.dndcharacterenums.Background;
 import player.dndcharacter.dndcharacterenums.CharacterClass;
 import player.dndcharacter.dndcharacterenums.Characteristics;
+import player.dndcharacter.dndcharacterenums.DraconicAncestry;
 import player.dndcharacter.dndcharacterenums.Race;
 import player.dndcharacter.dndcharacterenums.Skill;
+import player.userinputhandler.enums.Alignment;
+import player.userinputhandler.enums.ArtisanTool;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,17 +39,9 @@ public class Options {
 
     public static List<String> getAlignmentOptions() {
 
-        return List.of(
-                "Lawful good",
-                "Neutral good",
-                "Chaotic good",
-                "Lawful neutral",
-                "True neutral",
-                "Chaotic neutral",
-                "Lawful evil",
-                "Neutral evil",
-                "Chaotic evil"
-        );
+        return Arrays.stream(Alignment.values())
+                .map(Alignment::toString)
+                .toList();
     }
 
     public static List<String> getBackgroundOptions() {
@@ -72,25 +67,9 @@ public class Options {
 
     public static List<String> getArtisanToolOptions() {
 
-        return List.of(
-                "Alchemist's supplies",
-                "Brewer's supplies",
-                "Calligrapher's supplies",
-                "Carpenter's tools",
-                "Cartographer's tools",
-                "Cobbler's tools",
-                "Cook's utensils",
-                "Glassblower's tools",
-                "Jeweler's tools",
-                "Leatherworker's tools",
-                "Mason's tools",
-                "Painter's supplies",
-                "Potter's tools",
-                "Smith's tools",
-                "Tinker's tools",
-                "Weaver's tools",
-                "Woodcarver's tools"
-        );
+        return Arrays.stream(ArtisanTool.values())
+                .map(ArtisanTool::toString)
+                .toList();
     }
 
     public static List<String> getPirateFeatureOptions() {
@@ -129,18 +108,9 @@ public class Options {
 
     public static List<String> getDraconicAncestryOptions() {
 
-        return List.of(
-                "Black",
-                "Blue",
-                "Brass",
-                "Bronze",
-                "Copper",
-                "Gold",
-                "Green",
-                "Red",
-                "Silver",
-                "White"
-        );
+        return Arrays.stream(DraconicAncestry.values())
+                .map(DraconicAncestry::toString)
+                .toList();
     }
 
     public static List<String> getAllSkillOptions() {
@@ -171,7 +141,7 @@ public class Options {
     public static List<String> getSkillOptions(Set<Skill> availableSkills) {
 
         return availableSkills.stream()
-                .map(Skill::getDisplayName)  // custom string representation
+                .map(Skill::getDisplayName)
                 .sorted()
                 .collect(Collectors.toList());
     }

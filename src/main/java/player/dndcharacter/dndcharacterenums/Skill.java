@@ -2,6 +2,9 @@ package player.dndcharacter.dndcharacterenums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Getter
 public enum Skill {
     SURVIVAL("Survival"),
@@ -32,6 +35,12 @@ public enum Skill {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public static String getAllSkills() {
+        return Arrays.stream(Skill.values())
+                .map(Skill::getDisplayName)
+                .collect(Collectors.joining("\n"));
     }
 }
 

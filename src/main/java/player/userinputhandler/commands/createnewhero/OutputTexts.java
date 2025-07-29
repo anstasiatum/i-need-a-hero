@@ -1,16 +1,14 @@
 package player.userinputhandler.commands.createnewhero;
 
-import player.dndcharacter.dndcharacterenums.Background;
-import player.dndcharacter.dndcharacterenums.CharacterClass;
-import player.dndcharacter.dndcharacterenums.Race;
-import player.dndcharacter.dndcharacterenums.Skill;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 import static java.lang.String.format;
 import static player.dndcharacter.background.Features.badReputationText;
 import static player.dndcharacter.background.Features.shipsPassageText;
+import static player.dndcharacter.dndcharacterenums.Background.getAllBackgrounds;
+import static player.dndcharacter.dndcharacterenums.CharacterClass.getAllClasses;
+import static player.dndcharacter.dndcharacterenums.Race.getAllRaces;
+import static player.dndcharacter.dndcharacterenums.Skill.getAllSkills;
+import static player.userinputhandler.enums.Alignment.getAllAlignments;
+import static player.userinputhandler.enums.ArtisanTool.getAllArtisanTools;
 
 public class OutputTexts {
     public static final String notANumberInput = "Please enter a number";
@@ -21,19 +19,8 @@ public class OutputTexts {
     public static final String chooseThirdSkill = "Enter the third skill your hero will be proficient in. Available ones:\n";
     public static final String wrongSkill = "Cannot understand your input. Please enter a skill";
     public static final String alreadyHaveProficiencyInThisSkill = "You already have proficiency in this skill. Choose another one";
-    public static final String chooseAlignment = """
-            Set your hero's alignment:
-            Lawful good
-            Neutral good
-            Chaotic good
-            Lawful neutral
-            True neutral
-            Chaotic neutral
-            Lawful evil
-            Neutral evil
-            Chaotic evil
-            """;
-    public static final String allBackgrounds =  getAllBackgrounds() + "Not that ustom editing for the Custom background is not supported yet, but you will be able to edit your character in the exported PDF file)";
+    public static final String chooseAlignment = "Set your hero's alignment\n" + getAllAlignments();
+    public static final String allBackgrounds = getAllBackgrounds() + "Not that ustom editing for the Custom background is not supported yet, but you will be able to edit your character in the exported PDF file)";
     public static final String chooseBackground = "Choose background from the following options:\n" + allBackgrounds;
     public static final String chooseGamingSet = "Enter a gaming set your hero will be proficient with";
     public static final String chooseSecondAbilityScore = "Enter another ability that will be increased by 1";
@@ -43,26 +30,7 @@ public class OutputTexts {
     public static final String wrongInput = "Sorry, I don't understand. Maybe there is a typo?";
     public static final String chooseSkillProficiency = "Enter a skill that your character will be proficient in: " + allSkills;
     public static final String chooseTraits = "Type any personality traits you'd like to mention";
-    public static final String allArtisansTools = """
-            Alchemist's supplies
-            Brewer's supplies
-            Calligrapher's supplies
-            Carpenter's tools
-            Cartographer's tools
-            Cobbler's tools
-            Cook's utensils
-            Glassblower's tools
-            Jeweler's tools
-            Leatherworker's tools
-            Mason's tools
-            Painter's supplies
-            Potter's tools
-            Smith's tools
-            Tinker's tools
-            Weaver's tools
-            Woodcarver's tools
-            """;
-    public static final String chooseArtisanTools = "Choose any artisan's tools your hero will be proficient with\n" + allArtisansTools;
+    public static final String chooseArtisanTools = "Choose any artisan's tools your hero will be proficient with\n" + getAllArtisanTools();
     public static final String chooseArtisanToolPossessionWithPreviousStep = "Choose a set of artisan's tools your hero will have. Might be the same as in the previous step";
     public static final String chooseLuckyCharm = "Choose your lucky charm (a rabbit foot, a small stone with a hole in the center, or any other trinket)";
     public static final String chooseMusicalInstrumentProficiency = "Choose a musical instrument your hero will be proficient with";
@@ -71,28 +39,4 @@ public class OutputTexts {
             You can choose between two features:
             1. %s2. %sWhich one do you prefer?
             """, shipsPassageText, badReputationText);
-
-    public static String getAllClasses() {
-        return Arrays.stream(CharacterClass.values())
-                .map(CharacterClass::getDisplayName)
-                .collect(Collectors.joining("\n"));
-    }
-
-    public static String getAllRaces() {
-        return Arrays.stream(Race.values())
-                .map(Race::getDisplayName)
-                .collect(Collectors.joining("\n"));
-    }
-
-    public static String getAllSkills() {
-        return Arrays.stream(Skill.values())
-                .map(Skill::getDisplayName)
-                .collect(Collectors.joining("\n"));
-    }
-
-    public static String getAllBackgrounds() {
-        return Arrays.stream(Background.values())
-                .map(Background::getDisplayName)
-                .collect(Collectors.joining("\n"));
-    }
 }

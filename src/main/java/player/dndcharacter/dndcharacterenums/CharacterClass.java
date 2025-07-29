@@ -2,6 +2,9 @@ package player.dndcharacter.dndcharacterenums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Getter
 public enum CharacterClass {
     BARBARIAN("Barbarian"),
@@ -26,5 +29,11 @@ public enum CharacterClass {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public static String getAllClasses() {
+        return Arrays.stream(CharacterClass.values())
+                .map(CharacterClass::getDisplayName)
+                .collect(Collectors.joining("\n"));
     }
 }

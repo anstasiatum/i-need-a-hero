@@ -2,6 +2,9 @@ package player.dndcharacter.dndcharacterenums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Getter
 public enum Background {
     ACOLYTE("Acolyte"),
@@ -32,5 +35,11 @@ public enum Background {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public static String getAllBackgrounds() {
+        return Arrays.stream(Background.values())
+                .map(Background::getDisplayName)
+                .collect(Collectors.joining("\n"));
     }
 }

@@ -34,6 +34,7 @@ import static player.userinputhandler.commands.createnewhero.Options.getArtisanT
 import static player.userinputhandler.commands.createnewhero.Options.getBackgroundOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getDraconicAncestryOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getPirateFeatureOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
@@ -70,6 +71,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_ARTISANS_TOOL_PROFICIEN
 import static player.userinputhandler.enums.Steps.CHOOSE_ARTISAN_TOOL_POSSESSIONS_FOR_GUILD_MERCHANT;
 import static player.userinputhandler.enums.Steps.CHOOSE_BACKGROUND;
 import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
+import static player.userinputhandler.enums.Steps.CHOOSE_DRACONIC_ANCESTRY;
 import static player.userinputhandler.enums.Steps.CHOOSE_FEATURE_FOR_PIRATE;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
@@ -246,9 +248,14 @@ public class CreateNewHero {
                 response = selectRace(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_DRACONIC_ANCESTRY:
-                state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + setDraconicAncestry(userAnswer, state.getDndCharacter()));
-                newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
-                response = new Response(newState, chooseClass, getClassOptions());
+                try {
+                    state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + setDraconicAncestry(userAnswer, state.getDndCharacter()));
+                    newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
+                    response = new Response(newState, chooseClass, getClassOptions());
+                } catch (IllegalArgumentException exception) {
+                    newState = new State(CREATE_HERO, CHOOSE_DRACONIC_ANCESTRY, state.getDndCharacter());
+                    response = new Response(newState, "Enter your draconic ancestry", getDraconicAncestryOptions());
+                }
                 break;
             case CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);

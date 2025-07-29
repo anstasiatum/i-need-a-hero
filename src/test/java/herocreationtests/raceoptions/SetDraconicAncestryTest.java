@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
 
 public class SetDraconicAncestryTest {
@@ -107,8 +108,7 @@ public class SetDraconicAncestryTest {
     @Test
     @DisplayName("Wrong input")
     void setAncestryWithWrongInput() {
-        String expectedResult = "Breath Weapon \nYou can use your action to exhale destructive energy: ERROR DURING CONFIGURATION The DC for this saving throw is 11. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. After you use your breath weapon, you can’t use it again until you complete a short or long rest.\n Damage Resistance \n You have resistance to error during configuration .";
-
-        assertEquals(expectedResult, setDraconicAncestry("test", dndCharacter));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> setDraconicAncestry("test", dndCharacter));
+        assertEquals("Invalid draconic ancestry option", exception.getMessage());
     }
 }

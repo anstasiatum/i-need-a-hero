@@ -2,6 +2,9 @@ package player.dndcharacter.dndcharacterenums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Getter
 public enum Race {
     HILL_DWARF("Hill Dwarf"),
@@ -29,6 +32,12 @@ public enum Race {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public static String getAllRaces() {
+        return Arrays.stream(Race.values())
+                .map(Race::getDisplayName)
+                .collect(Collectors.joining("\n"));
     }
 }
 
