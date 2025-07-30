@@ -148,10 +148,8 @@ import static player.userinputhandler.enums.Steps.SET_WISDOM;
 @AllArgsConstructor
 public class CreateNewHero {
     private final CharacterDao characterJpaDao;
-    private final BaseCharacteristicsValuesGenerator characteristicsValuesGenerator = new BaseCharacteristicsValuesGenerator();
-    private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod = new ChooseCharacteristicsSettingMethod(characteristicsValuesGenerator);
-    private final IncrementAbility incrementAbility = new IncrementAbility();
-    private final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
+    private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod;
+    private final IncreaseBaseCharacteristics increaseBaseCharacteristics;
 
     public Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());

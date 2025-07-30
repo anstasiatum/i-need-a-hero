@@ -6,10 +6,14 @@ import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
+import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.userinputhandler.BotAnswer;
 import player.userinputhandler.StateHolder;
 import player.userinputhandler.UserInputHandler;
+import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
+import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 import player.userinputhandler.commands.deletehero.DeleteHero;
@@ -20,9 +24,13 @@ public class Bot {
 
     public static void telegramBotListener(String botToken) {
         final StateHolder stateHolder = new StateHolder();
+        final BaseCharacteristicsValuesGenerator baseCharacteristicsValuesGenerator = new BaseCharacteristicsValuesGenerator();
+        final ChooseCharacteristicsSettingMethod characteristicsSettingMethod = new ChooseCharacteristicsSettingMethod(baseCharacteristicsValuesGenerator);
+        final IncrementAbility incrementAbility = new IncrementAbility();
+        final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
         final CharacterDao characterDao = new CharacterDaoImpl();
         final DeleteHero deleteHero = new DeleteHero(characterDao);
-        final CreateNewHero createHero = new CreateNewHero(characterDao);
+        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics);
         final PDFCreator createPDF = new PDFCreator(characterDao);
         final PrintHero printHero = new PrintHero(characterDao, createPDF);
 

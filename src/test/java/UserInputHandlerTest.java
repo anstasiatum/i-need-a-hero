@@ -6,7 +6,9 @@ import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.StateHolder;
 import player.userinputhandler.UserInputHandler;
+import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
 import player.userinputhandler.commands.deletehero.DeleteHero;
@@ -21,6 +23,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,8 +45,10 @@ public class UserInputHandlerTest {
     private final StateHolder mockStateHolder = mock(StateHolder.class);
     private final PrintHero mockPrintHero = mock(PrintHero.class);
     private final DeleteHero mockDeleteHero = mock(DeleteHero.class);
-    private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao), mockPrintHero);
-    private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao), mockPrintHero);
+    private final ChooseCharacteristicsSettingMethod characteristicsSettingMethodSpy = spy(ChooseCharacteristicsSettingMethod.class);
+    private final IncreaseBaseCharacteristics increaseBaseCharacteristicsSpy = spy(IncreaseBaseCharacteristics.class);
+    private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy), mockPrintHero);
+    private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy), mockPrintHero);
     private final DndCharacter dndCharacter = new DndCharacter();
 
     @Test
