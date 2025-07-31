@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class AddSkillProficiency {
 
-    public static boolean addSkillProficiency(DndCharacter dndCharacter, String userAnswer) {
+    public boolean addSkillProficiency(DndCharacter dndCharacter, String userAnswer) {
         Skill skill = skillFromUserInput(userAnswer)
                 .orElseThrow(() -> new IllegalArgumentException("Wrong input"));
 

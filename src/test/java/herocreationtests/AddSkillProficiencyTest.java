@@ -1,9 +1,11 @@
 package herocreationtests;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Skill;
+import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -30,17 +32,17 @@ import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
-import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 
 public class AddSkillProficiencyTest {
     private final DndCharacter dndCharacter = new DndCharacter();
+    private final AddSkillProficiency skillProficiency = new AddSkillProficiency();
 
     @Test
     @DisplayName("Add survival")
     void addSurvival() {
         Set<Skill> expectedResult = EnumSet.of(SURVIVAL);
 
-        assertTrue(addSkillProficiency(dndCharacter, "survival"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "survival"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -49,7 +51,7 @@ public class AddSkillProficiencyTest {
     void addStealth() {
         Set<Skill> expectedResult = EnumSet.of(STEALTH);
 
-        assertTrue(addSkillProficiency(dndCharacter, "stealth"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "stealth"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -58,7 +60,7 @@ public class AddSkillProficiencyTest {
     void addSleightOfHand() {
         Set<Skill> expectedResult = EnumSet.of(SLEIGHT_OF_HAND);
 
-        assertTrue(addSkillProficiency(dndCharacter, "sleight of hand"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "sleight of hand"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -67,7 +69,7 @@ public class AddSkillProficiencyTest {
     void addReligion() {
         Set<Skill> expectedResult = EnumSet.of(RELIGION);
 
-        assertTrue(addSkillProficiency(dndCharacter, "religion"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "religion"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -76,7 +78,7 @@ public class AddSkillProficiencyTest {
     void addPersuasion() {
         Set<Skill> expectedResult = EnumSet.of(PERSUASION);
 
-        assertTrue(addSkillProficiency(dndCharacter, "persuasion"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "persuasion"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -85,7 +87,7 @@ public class AddSkillProficiencyTest {
     void addPerformance() {
         Set<Skill> expectedResult = EnumSet.of(PERFORMANCE);
 
-        assertTrue(addSkillProficiency(dndCharacter, "performance"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "performance"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -94,7 +96,7 @@ public class AddSkillProficiencyTest {
     void addPerception() {
         Set<Skill> expectedResult = EnumSet.of(PERCEPTION);
 
-        assertTrue(addSkillProficiency(dndCharacter, "perception"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "perception"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -103,7 +105,7 @@ public class AddSkillProficiencyTest {
     void addNature() {
         Set<Skill> expectedResult = EnumSet.of(NATURE);
 
-        assertTrue(addSkillProficiency(dndCharacter, "nature"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "nature"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -112,7 +114,7 @@ public class AddSkillProficiencyTest {
     void addMedicine() {
         Set<Skill> expectedResult = EnumSet.of(MEDICINE);
 
-        assertTrue(addSkillProficiency(dndCharacter, "medicine"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "medicine"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -121,7 +123,7 @@ public class AddSkillProficiencyTest {
     void addInvestigation() {
         Set<Skill> expectedResult = EnumSet.of(INVESTIGATION);
 
-        assertTrue(addSkillProficiency(dndCharacter, "investigation"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "investigation"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -130,7 +132,7 @@ public class AddSkillProficiencyTest {
     void addIntimidation() {
         Set<Skill> expectedResult = EnumSet.of(INTIMIDATION);
 
-        assertTrue(addSkillProficiency(dndCharacter, "intimidation"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "intimidation"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -139,7 +141,7 @@ public class AddSkillProficiencyTest {
     void addInsight() {
         Set<Skill> expectedResult = EnumSet.of(INSIGHT);
 
-        assertTrue(addSkillProficiency(dndCharacter, "insight"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "insight"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -148,7 +150,7 @@ public class AddSkillProficiencyTest {
     void addHistory() {
         Set<Skill> expectedResult = EnumSet.of(HISTORY);
 
-        assertTrue(addSkillProficiency(dndCharacter, "history"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "history"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -157,7 +159,7 @@ public class AddSkillProficiencyTest {
     void addDeception() {
         Set<Skill> expectedResult = EnumSet.of(DECEPTION);
 
-        assertTrue(addSkillProficiency(dndCharacter, "deception"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "deception"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -166,7 +168,7 @@ public class AddSkillProficiencyTest {
     void addAthletics() {
         Set<Skill> expectedResult = EnumSet.of(ATHLETICS);
 
-        assertTrue(addSkillProficiency(dndCharacter, "athletics"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "athletics"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -175,7 +177,7 @@ public class AddSkillProficiencyTest {
     void addArcana() {
         Set<Skill> expectedResult = EnumSet.of(ARCANA);
 
-        assertTrue(addSkillProficiency(dndCharacter, "arcana"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "arcana"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -184,7 +186,7 @@ public class AddSkillProficiencyTest {
     void addAnimalHandling() {
         Set<Skill> expectedResult = EnumSet.of(ANIMAL_HANDLING);
 
-        assertTrue(addSkillProficiency(dndCharacter, "animal handling"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "animal handling"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -193,7 +195,7 @@ public class AddSkillProficiencyTest {
     void addAcrobatics() {
         Set<Skill> expectedResult = EnumSet.of(ACROBATICS);
 
-        assertTrue(addSkillProficiency(dndCharacter, "acrobatics"));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, "acrobatics"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -202,7 +204,7 @@ public class AddSkillProficiencyTest {
     void addSkillTrimTest() {
         Set<Skill> expectedResult = EnumSet.of(PERFORMANCE);
 
-        assertTrue(addSkillProficiency(dndCharacter, " Performance "));
+        assertTrue(skillProficiency.addSkillProficiency(dndCharacter, " Performance "));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -212,7 +214,7 @@ public class AddSkillProficiencyTest {
         Set<Skill> expectedResult = EnumSet.noneOf(Skill.class);
         String expectedMessage = "Wrong input";
 
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> assertFalse(addSkillProficiency(dndCharacter, "test")));
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "test")));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
         assertEquals(expectedMessage, illegalArgumentException.getMessage());
     }
@@ -223,7 +225,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(ACROBATICS);
         Set<Skill> expectedResult = EnumSet.of(ACROBATICS);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Acrobatics"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Acrobatics"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -233,7 +235,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(ANIMAL_HANDLING);
         Set<Skill> expectedResult = EnumSet.of(ANIMAL_HANDLING);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Animal handling"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Animal handling"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -243,7 +245,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(ARCANA);
         Set<Skill> expectedResult = EnumSet.of(ARCANA);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Arcana"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Arcana"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -253,7 +255,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
         Set<Skill> expectedResult = EnumSet.of(ATHLETICS);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Athletics"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Athletics"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -263,7 +265,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(DECEPTION);
         Set<Skill> expectedResult = EnumSet.of(DECEPTION);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Deception"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Deception"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -273,7 +275,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(HISTORY);
         Set<Skill> expectedResult = EnumSet.of(HISTORY);
 
-        assertFalse(addSkillProficiency(dndCharacter, "History"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "History"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -283,7 +285,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(INSIGHT);
         Set<Skill> expectedResult = EnumSet.of(INSIGHT);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Insight"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Insight"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -293,7 +295,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(INTIMIDATION);
         Set<Skill> expectedResult = EnumSet.of(INTIMIDATION);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Intimidation"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Intimidation"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -303,7 +305,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(INVESTIGATION);
         Set<Skill> expectedResult = EnumSet.of(INVESTIGATION);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Investigation"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Investigation"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -313,7 +315,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(MEDICINE);
         Set<Skill> expectedResult = EnumSet.of(MEDICINE);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Medicine"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Medicine"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -323,7 +325,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(NATURE);
         Set<Skill> expectedResult = EnumSet.of(NATURE);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Nature"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Nature"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -333,7 +335,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(PERCEPTION);
         Set<Skill> expectedResult = EnumSet.of(PERCEPTION);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Perception"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Perception"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -343,7 +345,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(PERFORMANCE);
         Set<Skill> expectedResult = EnumSet.of(PERFORMANCE);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Performance"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Performance"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -353,7 +355,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(PERSUASION);
         Set<Skill> expectedResult = EnumSet.of(PERSUASION);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Persuasion"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Persuasion"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -363,7 +365,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(RELIGION);
         Set<Skill> expectedResult = EnumSet.of(RELIGION);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Religion"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Religion"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -373,7 +375,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(SLEIGHT_OF_HAND);
         Set<Skill> expectedResult = EnumSet.of(SLEIGHT_OF_HAND);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Sleight of Hand"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Sleight of Hand"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -383,7 +385,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(STEALTH);
         Set<Skill> expectedResult = EnumSet.of(STEALTH);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Stealth"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Stealth"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 
@@ -394,7 +396,7 @@ public class AddSkillProficiencyTest {
         dndCharacter.getSkillsWithProficiency().add(SURVIVAL);
         Set<Skill> expectedResult = EnumSet.of(SURVIVAL);
 
-        assertFalse(addSkillProficiency(dndCharacter, "Survival"));
+        assertFalse(skillProficiency.addSkillProficiency(dndCharacter, "Survival"));
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
 }

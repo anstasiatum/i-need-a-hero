@@ -2,7 +2,6 @@ package player.userinputhandler.commands.createnewhero;
 
 import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndclass.Barbarian;
 import player.dndcharacter.dndclass.Bard;
@@ -19,7 +18,6 @@ import player.dndcharacter.dndclass.Wizard;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
-import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 
@@ -27,7 +25,6 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import static java.lang.String.format;
-import static player.userinputhandler.commands.createnewhero.AddSkillProficiency.addSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
@@ -58,7 +55,6 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseT
 import static player.userinputhandler.commands.createnewhero.OutputTexts.notANumberInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
-import static player.userinputhandler.commands.createnewhero.SelectRace.selectRace;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
@@ -150,6 +146,8 @@ public class CreateNewHero {
     private final CharacterDao characterJpaDao;
     private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod;
     private final IncreaseBaseCharacteristics increaseBaseCharacteristics;
+    private final SelectRace selectRace;
+    private final AddSkillProficiency addSkillProficiency;
 
     public Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());
@@ -243,7 +241,7 @@ public class CreateNewHero {
                         """ + allRaces, getRaceOptions());
                 break;
             case CHOOSE_RACE:
-                response = selectRace(userAnswer, state.getDndCharacter());
+                response = selectRace.selectRace(userAnswer, state.getDndCharacter());
                 break;
             case CHOOSE_DRACONIC_ANCESTRY:
                 try {
@@ -279,7 +277,7 @@ public class CreateNewHero {
                 break;
             case CHOOSE_FIRST_SKILL_FOR_HALF_ELF:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), EnumSet.allOf(Skill.class));
                         newState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -294,7 +292,7 @@ public class CreateNewHero {
                 break;
             case CHOOSE_SECOND_SKILL_FOR_HALF_ELF:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
                         response = new Response(newState, chooseClass, getClassOptions());
                     } else {
@@ -310,7 +308,7 @@ public class CreateNewHero {
                 break;
             case CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, CHOOSE_CLASS, state.getDndCharacter());
                         response = new Response(newState, chooseClass, getClassOptions());
                     } else {
@@ -332,7 +330,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_BARBARIAN:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Barbarian.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARBARIAN, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -349,7 +347,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_BARBARIAN:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -365,7 +363,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_BARD:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Bard.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -382,7 +380,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_BARD:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Bard.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_BARD, state.getDndCharacter());
                         response = new Response(newState, chooseThirdSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -399,7 +397,7 @@ public class CreateNewHero {
                 break;
             case ENTER_THIRD_SKILL_FOR_BARD:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_FIRST_MUSICAL_INSTRUMENT_FOR_BARD, state.getDndCharacter());
                         response = new Response(newState, "Enter the first musical instrument your bard will be proficient with");
                     } else {
@@ -430,7 +428,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_CLERIC:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Cleric.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_CLERIC, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -447,7 +445,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_CLERIC:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -463,7 +461,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_DRUID:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Druid.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -480,7 +478,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_DRUID:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -496,7 +494,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_FIGHTER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Fighter.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -513,7 +511,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_FIGHTER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -529,7 +527,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_MONK:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Monk.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -546,7 +544,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_MONK:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -562,7 +560,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_PALADIN:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Paladin.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_PALADIN, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -579,7 +577,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_PALADIN:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -595,7 +593,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_RANGER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Ranger.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_RANGER, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -612,7 +610,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_RANGER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Ranger.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, state.getDndCharacter());
                         response = new Response(newState, chooseThirdSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -629,7 +627,7 @@ public class CreateNewHero {
                 break;
             case ENTER_THIRD_SKILL_FOR_RANGER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -645,7 +643,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_ROGUE:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Rogue.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_ROGUE, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -662,7 +660,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_ROGUE:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Rogue.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_ROGUE, state.getDndCharacter());
                         response = new Response(newState, chooseThirdSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -679,7 +677,7 @@ public class CreateNewHero {
                 break;
             case ENTER_THIRD_SKILL_FOR_ROGUE:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Rogue.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, state.getDndCharacter());
                         response = new Response(newState, "Choose the fourth skill your rogue will be proficient in \n" + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -696,7 +694,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FOURTH_SKILL_FOR_ROGUE:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -712,7 +710,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_SORCERER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Sorcerer.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_SORCERER, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -729,7 +727,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_SORCERER:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -745,7 +743,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_WARLOCK:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Warlock.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WARLOCK, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -762,7 +760,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_WARLOCK:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
@@ -778,7 +776,7 @@ public class CreateNewHero {
                 break;
             case ENTER_FIRST_SKILL_FOR_WIZARD:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Wizard.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WIZARD, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
@@ -795,7 +793,7 @@ public class CreateNewHero {
                 break;
             case ENTER_SECOND_SKILL_FOR_WIZARD:
                 try {
-                    if (addSkillProficiency(state.getDndCharacter(), userAnswer)) {
+                    if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {

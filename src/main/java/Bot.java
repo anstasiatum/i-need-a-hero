@@ -10,8 +10,10 @@ import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGen
 import player.userinputhandler.BotAnswer;
 import player.userinputhandler.StateHolder;
 import player.userinputhandler.UserInputHandler;
+import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.createnewhero.SelectRace;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.CharacterDao;
@@ -30,7 +32,9 @@ public class Bot {
         final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
         final CharacterDao characterDao = new CharacterDaoImpl();
         final DeleteHero deleteHero = new DeleteHero(characterDao);
-        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics);
+        final SelectRace selectRace = new SelectRace();
+        final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
+        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency);
         final PDFCreator createPDF = new PDFCreator(characterDao);
         final PrintHero printHero = new PrintHero(characterDao, createPDF);
 
