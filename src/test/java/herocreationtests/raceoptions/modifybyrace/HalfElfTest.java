@@ -11,6 +11,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class HalfElfTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -29,8 +31,15 @@ public class HalfElfTest {
     }
 
     @Test
+    @DisplayName("Set race")
+    void setRaceForHalfElf() {
+
+        assertEquals(HALF_ELF, dndCharacter.getRace());
+    }
+
+    @Test
     @DisplayName("Change base characteristics")
-    void changeBaseCharacteristicsForRockGnome() {
+    void changeBaseCharacteristicsForHalfElf() {
 
         assertEquals(10, dndCharacter.getStrength());
         assertEquals(11, dndCharacter.getDexterity());
@@ -42,21 +51,21 @@ public class HalfElfTest {
 
     @Test
     @DisplayName("Set size")
-    void setSizeForRockGnome() {
+    void setSizeForHalfElf() {
 
         assertEquals(Size.MEDIUM, dndCharacter.getSize());
     }
 
     @Test
     @DisplayName("Set speed")
-    void setSpeedForRockGnome() {
+    void setSpeedForHalfElf() {
 
         assertEquals(30, dndCharacter.getSpeed());
     }
 
     @Test
     @DisplayName("Set language")
-    void setLanguageForRockGnome() {
+    void setLanguageForHalfElf() {
         Set<String> expectedResult = Set.of("Elvish");
 
         assertEquals(expectedResult, dndCharacter.getLanguages());
@@ -64,14 +73,14 @@ public class HalfElfTest {
 
     @Test
     @DisplayName("Set draconic ancestry damage")
-    void setDraconicAncestryDamageForRockGnome() {
+    void setDraconicAncestryDamageForHalfElf() {
 
         assertNull(dndCharacter.getDraconicAncestryDamage());
     }
 
     @Test
     @DisplayName("Set features and traits")
-    void setFeaturesAndTraitsForRockGnome() {
+    void setFeaturesAndTraitsForHalfElf() {
         String expectedResult =
                 """
                         Fey Ancestry. You have advantage on saving throws against being charmed, and magic can’t put you to sleep

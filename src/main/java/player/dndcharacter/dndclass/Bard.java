@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.BARD;
 
-public class Bard extends DndClass {
+public class Bard extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.allOf(Skill.class);
     }

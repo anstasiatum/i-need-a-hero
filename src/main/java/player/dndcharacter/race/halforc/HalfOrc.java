@@ -4,11 +4,14 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skill;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public class HalfOrc extends Race {
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ORC;
+
+public class HalfOrc extends RaceService {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
+        dndCharacter.setRace(HALF_ORC);
         dndCharacter.setStrength(dndCharacter.getStrength() + 2);
         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
         dndCharacter.setSize(Size.MEDIUM);

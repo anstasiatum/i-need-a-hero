@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.URCHIN;
 import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
-public class Urchin extends Background {
+public class Urchin extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(URCHIN);

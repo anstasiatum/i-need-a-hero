@@ -2,10 +2,13 @@ package player.dndcharacter.race.gnome;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Race.FOREST_GNOME;
+
 public class ForestGnome extends GnomeRace {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
         super.modifyByRace(dndCharacter);
+        dndCharacter.setRace(FOREST_GNOME);
         dndCharacter.setDexterity(dndCharacter.getDexterity() + 1);
         dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + """
                 Natural Illusionist. You know the minor illusion cantrip. Intelligence is your spellcasting ability for it. 

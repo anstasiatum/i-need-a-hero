@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
 import static player.dndcharacter.dndcharacterenums.Skill.MEDICINE;
 import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
-public class Hermit extends Background {
+public class Hermit extends BackgroundService {
 
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {

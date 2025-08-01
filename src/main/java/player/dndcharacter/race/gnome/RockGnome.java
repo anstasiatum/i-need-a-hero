@@ -2,10 +2,13 @@ package player.dndcharacter.race.gnome;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Race.ROCK_GNOME;
+
 public class RockGnome extends GnomeRace {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
         super.modifyByRace(dndCharacter);
+        dndCharacter.setRace(ROCK_GNOME);
         dndCharacter.setConstitution(dndCharacter.getConstitution() + 1);
         dndCharacter.setFeaturesAndTraits("""
                 Artificer’s Lore

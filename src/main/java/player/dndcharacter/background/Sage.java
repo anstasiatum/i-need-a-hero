@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.SAGE;
 import static player.dndcharacter.dndcharacterenums.Skill.ARCANA;
 import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
 
-public class Sage extends Background {
+public class Sage extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(SAGE);

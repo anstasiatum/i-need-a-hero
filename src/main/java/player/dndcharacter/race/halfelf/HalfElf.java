@@ -3,11 +3,14 @@ package player.dndcharacter.race.halfelf;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public class HalfElf extends Race {
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
+
+public class HalfElf extends RaceService {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
+        dndCharacter.setRace(HALF_ELF);
         dndCharacter.setCharisma(dndCharacter.getCharisma() + 2);
         dndCharacter.setSize(Size.MEDIUM);
         dndCharacter.setSpeed(30);

@@ -8,6 +8,8 @@ import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.race.human.VariantHuman;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.Race.VARIANT_HUMAN;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class VariantHumanTest {
     private final  DndCharacter dndCharacter = new DndCharacter();
@@ -23,6 +25,13 @@ public class VariantHumanTest {
 
         VariantHuman variantHuman = new VariantHuman();
         variantHuman.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForVariantHuman() {
+
+        assertEquals(VARIANT_HUMAN, dndCharacter.getRace());
     }
 
     @Test

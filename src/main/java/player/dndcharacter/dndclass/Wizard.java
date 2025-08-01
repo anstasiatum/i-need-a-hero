@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.WIZARD;
 
-public class Wizard extends DndClass {
+public class Wizard extends CharacterClassService {
 
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(

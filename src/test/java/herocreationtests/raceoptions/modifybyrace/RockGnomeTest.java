@@ -11,6 +11,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.ROCK_GNOME;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 class RockGnomeTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -26,6 +28,13 @@ class RockGnomeTest {
 
         RockGnome rockGnome = new RockGnome();
         rockGnome.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForRockGnome() {
+
+        assertEquals(ROCK_GNOME, dndCharacter.getRace());
     }
 
     @Test

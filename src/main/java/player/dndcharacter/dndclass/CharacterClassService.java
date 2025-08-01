@@ -9,12 +9,12 @@ import java.util.Set;
 
 @Getter
 @Setter
-public abstract class DndClass {
+public abstract class CharacterClassService {
 
     Set<Skill> availableSkills;
     int numberOfAvailableSkills;
 
-    public DndClass(Set<Skill> availableSkills, int numberOfAvailableSkills) {
+    public CharacterClassService(Set<Skill> availableSkills, int numberOfAvailableSkills) {
         this.availableSkills = availableSkills;
         this.numberOfAvailableSkills = numberOfAvailableSkills;
     }

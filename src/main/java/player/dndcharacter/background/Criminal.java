@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.CRIMINAL;
 import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
-public class Criminal extends Background {
+public class Criminal extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(CRIMINAL);

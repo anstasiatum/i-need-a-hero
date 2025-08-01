@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
 
-public class Barbarian extends DndClass {
+public class Barbarian extends CharacterClassService {
 
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(

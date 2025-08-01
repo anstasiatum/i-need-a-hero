@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.GUILD_ARTISAN;
 import static player.dndcharacter.dndcharacterenums.Skill.INSIGHT;
 import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
 
-public class GuildArtisan extends Background {
+public class GuildArtisan extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(GUILD_ARTISAN);

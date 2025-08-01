@@ -7,7 +7,7 @@ import static player.dndcharacter.dndcharacterenums.Background.SAILOR;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
-public class Sailor extends Background {
+public class Sailor extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(SAILOR);

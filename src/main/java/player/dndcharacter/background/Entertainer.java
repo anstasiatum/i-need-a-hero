@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.ENTERTAINER;
 import static player.dndcharacter.dndcharacterenums.Skill.ACROBATICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
 
-public class Entertainer extends Background {
+public class Entertainer extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(ENTERTAINER);

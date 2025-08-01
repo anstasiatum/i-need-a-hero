@@ -8,6 +8,8 @@ import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.race.human.BaseHuman;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.Race.BASE_HUMAN;
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
 
 public class BaseHumanTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -23,6 +25,14 @@ public class BaseHumanTest {
 
         BaseHuman baseHuman = new BaseHuman();
         baseHuman.modifyByRace(dndCharacter);
+    }
+
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForBaseHuman() {
+
+        assertEquals(BASE_HUMAN, dndCharacter.getRace());
     }
 
     @Test

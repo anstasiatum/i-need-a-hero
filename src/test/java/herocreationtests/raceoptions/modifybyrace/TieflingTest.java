@@ -11,6 +11,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.TIEFLING;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class TieflingTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -26,6 +28,13 @@ public class TieflingTest {
 
         Tiefling tiefling = new Tiefling();
         tiefling.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForTiefling() {
+
+        assertEquals(TIEFLING, dndCharacter.getRace());
     }
 
     @Test

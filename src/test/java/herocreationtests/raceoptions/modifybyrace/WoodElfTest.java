@@ -13,6 +13,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 public class WoodElfTest {
@@ -30,6 +31,14 @@ public class WoodElfTest {
         WoodElf woodElf = new WoodElf();
         woodElf.modifyByRace(dndCharacter);
 
+    }
+
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForWoodElf() {
+
+        assertEquals(WOOD_ELF, dndCharacter.getRace());
     }
 
     @Test

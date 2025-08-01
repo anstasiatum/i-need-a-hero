@@ -7,6 +7,7 @@ import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
+import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.BotAnswer;
 import player.userinputhandler.StateHolder;
 import player.userinputhandler.UserInputHandler;
@@ -32,7 +33,8 @@ public class Bot {
         final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
         final CharacterDao characterDao = new CharacterDaoImpl();
         final DeleteHero deleteHero = new DeleteHero(characterDao);
-        final SelectRace selectRace = new SelectRace();
+        final RaceFactory raceFactory = new RaceFactory();
+        final SelectRace selectRace = new SelectRace(raceFactory);
         final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
         final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency);
         final PDFCreator createPDF = new PDFCreator(characterDao);

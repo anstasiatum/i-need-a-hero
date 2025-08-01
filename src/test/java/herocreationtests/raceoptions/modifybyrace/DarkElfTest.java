@@ -13,6 +13,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.DARK_ELF;
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
 import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 public class DarkElfTest {
@@ -29,6 +31,13 @@ public class DarkElfTest {
 
         DarkElf darkElf = new DarkElf();
         darkElf.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForDarkElf() {
+
+        assertEquals(DARK_ELF, dndCharacter.getRace());
     }
 
     @Test

@@ -3,11 +3,14 @@ package player.dndcharacter.race.teifling;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public class Tiefling extends Race {
+import static player.dndcharacter.dndcharacterenums.Race.TIEFLING;
+
+public class Tiefling extends RaceService {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
+        dndCharacter.setRace(TIEFLING);
         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 1);
         dndCharacter.setCharisma(dndCharacter.getCharisma() + 2);
         dndCharacter.setSize(Size.MEDIUM);

@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.WARLOCK;
 
-public class Warlock extends DndClass {
+public class Warlock extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.ARCANA,

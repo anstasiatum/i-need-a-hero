@@ -13,6 +13,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ORC;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class HalfOrcTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -40,6 +42,13 @@ public class HalfOrcTest {
         assertEquals(13, dndCharacter.getIntelligence());
         assertEquals(14, dndCharacter.getWisdom());
         assertEquals(15, dndCharacter.getCharisma());
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForHalfOrc() {
+
+        assertEquals(HALF_ORC, dndCharacter.getRace());
     }
 
     @Test

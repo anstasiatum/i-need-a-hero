@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.DRUID;
 
-public class Druid extends DndClass {
+public class Druid extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.ARCANA,

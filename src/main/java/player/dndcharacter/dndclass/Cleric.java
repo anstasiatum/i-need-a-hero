@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.CLERIC;
 
-public class Cleric extends DndClass {
+public class Cleric extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.HISTORY,

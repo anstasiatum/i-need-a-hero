@@ -2,10 +2,13 @@ package player.dndcharacter.race.elf;
 
 import player.dndcharacter.DndCharacter;
 
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
+
 public class WoodElf extends ElfRace {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
         super.modifyByRace(dndCharacter);
+        dndCharacter.setRace(WOOD_ELF);
         dndCharacter.setWisdom(dndCharacter.getWisdom() + 1);
         dndCharacter.setSpeed(35);
         dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + """

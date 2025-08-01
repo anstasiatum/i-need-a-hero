@@ -3,9 +3,9 @@ package player.dndcharacter.race.elf;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skill;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public abstract class ElfRace extends Race {
+public abstract class ElfRace extends RaceService {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
         dndCharacter.setDexterity(dndCharacter.getDexterity() + 2);

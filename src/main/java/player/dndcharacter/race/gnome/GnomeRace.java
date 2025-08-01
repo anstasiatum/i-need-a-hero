@@ -3,9 +3,9 @@ package player.dndcharacter.race.gnome;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public class GnomeRace extends Race {
+public class GnomeRace extends RaceService {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
         dndCharacter.setIntelligence(dndCharacter.getIntelligence() + 2);

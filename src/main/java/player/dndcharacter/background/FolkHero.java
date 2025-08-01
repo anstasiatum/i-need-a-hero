@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.FOLK_HERO;
 import static player.dndcharacter.dndcharacterenums.Skill.ANIMAL_HANDLING;
 import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
-public class FolkHero extends Background {
+public class FolkHero extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(FOLK_HERO);

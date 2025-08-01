@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.RANGER;
 
-public class Ranger extends DndClass {
+public class Ranger extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.ANIMAL_HANDLING,

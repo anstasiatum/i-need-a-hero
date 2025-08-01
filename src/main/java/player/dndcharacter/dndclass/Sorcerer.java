@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.SORCERER;
 
-public class Sorcerer extends DndClass {
+public class Sorcerer extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.ARCANA,

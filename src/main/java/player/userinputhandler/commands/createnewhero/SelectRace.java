@@ -1,7 +1,9 @@
 package player.userinputhandler.commands.createnewhero;
 
+import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Race;
+import player.dndcharacter.race.RaceFactory;
 import player.dndcharacter.race.dragonborn.Dragonborn;
 import player.dndcharacter.race.dwarf.HillDwarf;
 import player.dndcharacter.race.dwarf.MountainDwarf;
@@ -52,7 +54,10 @@ import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_BASE_HUMAN
 import static player.userinputhandler.enums.Steps.CHOOSE_LANGUAGE_FOR_HIGH_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_RACE;
 
+@AllArgsConstructor
 public class SelectRace {
+    RaceFactory raceFactory;
+
     public Response selectRace(String userAnswer, DndCharacter dndCharacter) {
         Response response;
         State newState;
@@ -63,8 +68,8 @@ public class SelectRace {
         Race race;
 
         Response defaultResponse = new Response(new State(CREATE_HERO, CHOOSE_RACE, dndCharacter), """
-                    Sorry, I don't understand your input. Here is the list of available races:
-                    """ + allRaces, getRaceOptions());
+                Sorry, I don't understand your input. Here is the list of available races:
+                """ + allRaces, getRaceOptions());
 
         try {
             race = parseRace(userAnswer);
@@ -74,106 +79,91 @@ public class SelectRace {
 
         switch (race) {
             case DRAGONBORN:
-                dndCharacter.setRace(DRAGONBORN);
-                Dragonborn dragonborn = new Dragonborn();
+                Dragonborn dragonborn = (Dragonborn) raceFactory.createRaceFactory(DRAGONBORN);
                 dragonborn.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_DRACONIC_ANCESTRY, dndCharacter);
                 response = new Response(newState, "Enter your draconic ancestry", getDraconicAncestryOptions());
                 break;
             case HILL_DWARF:
-                dndCharacter.setRace(HILL_DWARF);
-                HillDwarf hillDwarf = new HillDwarf();
+                HillDwarf hillDwarf = (HillDwarf) raceFactory.createRaceFactory(HILL_DWARF);
                 hillDwarf.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF, dndCharacter);
                 response = new Response(newState, chooseArtisanToolProficiencyForDwarf, getDwarfArtisanToolOptions());
                 break;
             case MOUNTAIN_DWARF:
-                dndCharacter.setRace(MOUNTAIN_DWARF);
-                MountainDwarf mountainDwarf = new MountainDwarf();
+                MountainDwarf mountainDwarf = (MountainDwarf) raceFactory.createRaceFactory(MOUNTAIN_DWARF);
                 mountainDwarf.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF, dndCharacter);
                 response = new Response(newState, chooseArtisanToolProficiencyForDwarf, getDwarfArtisanToolOptions());
                 break;
             case DARK_ELF:
-                dndCharacter.setRace(DARK_ELF);
-                DarkElf darkElf = new DarkElf();
+                DarkElf darkElf = (DarkElf) raceFactory.createRaceFactory(DARK_ELF);
                 darkElf.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case HIGH_ELF:
-                dndCharacter.setRace(HIGH_ELF);
-                HighElf highElf = new HighElf();
+                HighElf highElf = (HighElf) raceFactory.createRaceFactory(HIGH_ELF);
                 highElf.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_HIGH_ELF, dndCharacter);
                 response = new Response(newState, "Enter an extra language your character will know");
                 break;
             case WOOD_ELF:
-                dndCharacter.setRace(WOOD_ELF);
-                WoodElf woodElf = new WoodElf();
+                WoodElf woodElf = (WoodElf) raceFactory.createRaceFactory(WOOD_ELF);
                 woodElf.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case FOREST_GNOME:
-                dndCharacter.setRace(FOREST_GNOME);
-                ForestGnome forestGnome = new ForestGnome();
+                ForestGnome forestGnome = (ForestGnome) raceFactory.createRaceFactory(FOREST_GNOME);
                 forestGnome.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case ROCK_GNOME:
-                dndCharacter.setRace(ROCK_GNOME);
-                RockGnome rockGnome = new RockGnome();
+                RockGnome rockGnome = (RockGnome) raceFactory.createRaceFactory(ROCK_GNOME);
                 rockGnome.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case HALF_ELF:
-                dndCharacter.setRace(HALF_ELF);
-                HalfElf halfElf = new HalfElf();
+                HalfElf halfElf = (HalfElf) raceFactory.createRaceFactory(HALF_ELF);
                 halfElf.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter);
                 response = new Response(newState, chooseFirstAbilityScore, getBasicAbilityOptions());
                 break;
             case LIGHTFOOT_HALFLING:
-                dndCharacter.setRace(LIGHTFOOT_HALFLING);
-                Lightfoot lightfoot = new Lightfoot();
+                Lightfoot lightfoot = (Lightfoot) raceFactory.createRaceFactory(LIGHTFOOT_HALFLING);
                 lightfoot.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case STOUT_HALFLING:
-                dndCharacter.setRace(STOUT_HALFLING);
-                Stout stout = new Stout();
+                Stout stout = (Stout) raceFactory.createRaceFactory(STOUT_HALFLING);
                 stout.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case HALF_ORC:
-                dndCharacter.setRace(HALF_ORC);
-                HalfOrc halfOrc = new HalfOrc();
+                HalfOrc halfOrc = (HalfOrc) raceFactory.createRaceFactory(HALF_ORC);
                 halfOrc.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case BASE_HUMAN:
-                dndCharacter.setRace(BASE_HUMAN);
-                BaseHuman baseHuman = new BaseHuman();
+                BaseHuman baseHuman = (BaseHuman) raceFactory.createRaceFactory(BASE_HUMAN);
                 baseHuman.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_BASE_HUMAN, dndCharacter);
                 response = new Response(newState, "Enter an additional language your character will know");
                 break;
             case VARIANT_HUMAN:
-                dndCharacter.setRace(VARIANT_HUMAN);
-                VariantHuman variantHuman = new VariantHuman();
+                VariantHuman variantHuman = (VariantHuman) raceFactory.createRaceFactory(VARIANT_HUMAN);
                 variantHuman.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter);
                 response = new Response(newState, chooseFirstAbilityScore, getBasicAbilityOptions());
                 break;
             case TIEFLING:
-                dndCharacter.setRace(TIEFLING);
-                Tiefling tiefling = new Tiefling();
+                Tiefling tiefling = (Tiefling) raceFactory.createRaceFactory(TIEFLING);
                 tiefling.modifyByRace(dndCharacter);
                 newState = new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter);
                 response = new Response(newState, chooseClass, getClassOptions());

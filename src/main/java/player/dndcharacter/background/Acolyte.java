@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.ACOLYTE;
 import static player.dndcharacter.dndcharacterenums.Skill.INSIGHT;
 import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
-public class Acolyte extends Background {
+public class Acolyte extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(ACOLYTE);

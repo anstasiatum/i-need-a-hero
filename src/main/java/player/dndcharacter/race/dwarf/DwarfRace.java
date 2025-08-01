@@ -3,9 +3,9 @@ package player.dndcharacter.race.dwarf;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public abstract class DwarfRace extends Race {
+public abstract class DwarfRace extends RaceService {
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
         dndCharacter.setConstitution(dndCharacter.getConstitution() + 2);

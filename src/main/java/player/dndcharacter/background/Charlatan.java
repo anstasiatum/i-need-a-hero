@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.CHARLATAN;
 import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
 
-public class Charlatan extends Background {
+public class Charlatan extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(CHARLATAN);

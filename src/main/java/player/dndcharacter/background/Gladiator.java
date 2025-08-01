@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.GLADIATOR;
 import static player.dndcharacter.dndcharacterenums.Skill.ACROBATICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
 
-public class Gladiator extends Background {
+public class Gladiator extends BackgroundService {
 
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {

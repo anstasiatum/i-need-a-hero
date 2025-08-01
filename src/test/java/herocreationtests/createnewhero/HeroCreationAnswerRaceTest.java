@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
+import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
@@ -52,7 +53,8 @@ public class HeroCreationAnswerRaceTest {
     private final ChooseCharacteristicsSettingMethod characteristicsSettingMethod = new ChooseCharacteristicsSettingMethod(baseCharacteristicsValuesGenerator);
     private final IncrementAbility incrementAbility = new IncrementAbility();
     private final IncreaseBaseCharacteristics increaseBaseCharacteristicsSpy = spy(new IncreaseBaseCharacteristics(incrementAbility));
-    private final SelectRace selectRace = new SelectRace();
+    private final RaceFactory raceFactory = new RaceFactory();
+    private final SelectRace selectRace = new SelectRace(raceFactory);
     private final SelectRace selectRaceSpy = spy(selectRace);
     private final AddSkillProficiency addSkillProficiencySpy = spy(new AddSkillProficiency());
     private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristicsSpy, selectRaceSpy, addSkillProficiencySpy);

@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
+import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.BotAnswer;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
@@ -53,7 +54,8 @@ public class UserInputHandlerTest {
     private final ChooseCharacteristicsSettingMethod characteristicsSettingMethodSpy = spy(new ChooseCharacteristicsSettingMethod(baseCharacteristicsValuesGenerator));
     private final IncrementAbility incrementAbility = new IncrementAbility();
     private final IncreaseBaseCharacteristics increaseBaseCharacteristicsSpy = spy(new IncreaseBaseCharacteristics(incrementAbility));
-    private final SelectRace selectRace = new SelectRace();
+    private final RaceFactory raceFactory = new RaceFactory();
+    private final SelectRace selectRace = new SelectRace(raceFactory);
     private final AddSkillProficiency skillProficiency = new AddSkillProficiency();
     private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency), mockPrintHero);
     private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency), mockPrintHero);

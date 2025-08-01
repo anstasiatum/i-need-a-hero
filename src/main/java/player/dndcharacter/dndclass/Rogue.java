@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.ROGUE;
 
-public class Rogue extends DndClass {
+public class Rogue extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.ACROBATICS,

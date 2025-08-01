@@ -10,6 +10,8 @@ import player.dndcharacter.race.dragonborn.Dragonborn;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static player.dndcharacter.dndcharacterenums.Race.DRAGONBORN;
+import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
 
 class DragonbornTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -25,6 +27,13 @@ class DragonbornTest {
 
         Dragonborn dragonborn = new Dragonborn();
         dragonborn.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForDragonborn() {
+
+        assertEquals(DRAGONBORN, dndCharacter.getRace());
     }
 
     @Test

@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.OUTLANDER;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
-public class Outlander extends Background {
+public class Outlander extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(OUTLANDER);

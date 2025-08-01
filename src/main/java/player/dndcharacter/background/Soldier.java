@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.SOLDIER;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.INTIMIDATION;
 
-public class Soldier extends Background {
+public class Soldier extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(SOLDIER);

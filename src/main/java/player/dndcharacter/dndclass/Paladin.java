@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static player.dndcharacter.dndcharacterenums.CharacterClass.PALADIN;
 
-public class Paladin extends DndClass {
+public class Paladin extends CharacterClassService {
     public static Set<Skill> buildAvailableProficiencySkills() {
         return EnumSet.of(
                 Skill.ATHLETICS,

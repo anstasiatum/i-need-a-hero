@@ -11,6 +11,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.LIGHTFOOT_HALFLING;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class LightfootHalflingTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -26,6 +28,13 @@ public class LightfootHalflingTest {
 
         Lightfoot lightfoot = new Lightfoot();
         lightfoot.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForLightfootHalfling() {
+
+        assertEquals(LIGHTFOOT_HALFLING, dndCharacter.getRace());
     }
 
     @Test

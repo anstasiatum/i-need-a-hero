@@ -12,6 +12,8 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.Race.HILL_DWARF;
+import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class HillDwarfTest {
     private final DndCharacter dndCharacter = new DndCharacter();
@@ -27,6 +29,13 @@ public class HillDwarfTest {
 
         HillDwarf hillDwarf = new HillDwarf();
         hillDwarf.modifyByRace(dndCharacter);
+    }
+
+    @Test
+    @DisplayName("Set race")
+    void setRaceForHillDwarf() {
+
+        assertEquals(HILL_DWARF, dndCharacter.getRace());
     }
 
     @Test

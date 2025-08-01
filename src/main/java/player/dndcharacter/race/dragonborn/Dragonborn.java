@@ -2,12 +2,15 @@ package player.dndcharacter.race.dragonborn;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.race.Race;
+import player.dndcharacter.race.RaceService;
 
-public class Dragonborn extends Race {
+import static player.dndcharacter.dndcharacterenums.Race.DRAGONBORN;
+
+public class Dragonborn extends RaceService {
 
     @Override
     public void modifyByRace(DndCharacter dndCharacter) {
+        dndCharacter.setRace(DRAGONBORN);
         dndCharacter.setStrength(dndCharacter.getStrength() + 2);
         dndCharacter.setCharisma(dndCharacter.getCharisma() + 1);
         dndCharacter.setSize(Size.MEDIUM);

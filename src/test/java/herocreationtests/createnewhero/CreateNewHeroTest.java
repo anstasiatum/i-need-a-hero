@@ -3,6 +3,7 @@ package herocreationtests.createnewhero;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
+import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.Response;
 import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
@@ -27,7 +28,8 @@ public class CreateNewHeroTest {
     private final IncrementAbility incrementAbility = new IncrementAbility();
     private final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
     private final IncreaseBaseCharacteristics increaseBaseCharacteristicsSpy = spy(increaseBaseCharacteristics);
-    private final SelectRace selectRace = new SelectRace();
+    private final RaceFactory raceFactory = new RaceFactory();
+    private final SelectRace selectRace = new SelectRace(raceFactory);
     private final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
     private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, addSkillProficiency);
 

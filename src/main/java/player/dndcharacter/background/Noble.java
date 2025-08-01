@@ -6,7 +6,7 @@ import static player.dndcharacter.dndcharacterenums.Background.NOBLE;
 import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
 import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
 
-public class Noble extends Background {
+public class Noble extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(NOBLE);
