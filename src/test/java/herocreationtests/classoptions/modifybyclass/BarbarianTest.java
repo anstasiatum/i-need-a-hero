@@ -1,11 +1,11 @@
-package herocreationtests.modifybyclass;
+package herocreationtests.classoptions.modifybyclass;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndclass.Barbarian;
+import player.dndcharacter.characterclass.characterclasses.Barbarian;
 
 import java.util.HashSet;
 import java.util.Set;

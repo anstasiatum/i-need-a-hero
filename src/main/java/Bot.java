@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
+import player.dndcharacter.characterclass.CharacterClassFactory;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.BotAnswer;
@@ -14,6 +15,7 @@ import player.userinputhandler.UserInputHandler;
 import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.createnewhero.SelectClass;
 import player.userinputhandler.commands.createnewhero.SelectRace;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
@@ -36,7 +38,9 @@ public class Bot {
         final RaceFactory raceFactory = new RaceFactory();
         final SelectRace selectRace = new SelectRace(raceFactory);
         final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
-        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency);
+        final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
+        final SelectClass selectClass = new SelectClass(characterClassFactory);
+        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency, selectClass);
         final PDFCreator createPDF = new PDFCreator(characterDao);
         final PrintHero printHero = new PrintHero(characterDao, createPDF);
 

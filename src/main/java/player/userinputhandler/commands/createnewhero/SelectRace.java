@@ -56,7 +56,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_RACE;
 
 @AllArgsConstructor
 public class SelectRace {
-    RaceFactory raceFactory;
+    private final RaceFactory raceFactory;
 
     public Response selectRace(String userAnswer, DndCharacter dndCharacter) {
         Response response;

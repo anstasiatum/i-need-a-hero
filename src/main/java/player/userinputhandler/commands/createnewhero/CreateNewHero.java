@@ -2,19 +2,19 @@ package player.userinputhandler.commands.createnewhero;
 
 import lombok.AllArgsConstructor;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characterclass.characterclasses.Barbarian;
+import player.dndcharacter.characterclass.characterclasses.Bard;
+import player.dndcharacter.characterclass.characterclasses.Cleric;
+import player.dndcharacter.characterclass.characterclasses.Druid;
+import player.dndcharacter.characterclass.characterclasses.Fighter;
+import player.dndcharacter.characterclass.characterclasses.Monk;
+import player.dndcharacter.characterclass.characterclasses.Paladin;
+import player.dndcharacter.characterclass.characterclasses.Ranger;
+import player.dndcharacter.characterclass.characterclasses.Rogue;
+import player.dndcharacter.characterclass.characterclasses.Sorcerer;
+import player.dndcharacter.characterclass.characterclasses.Warlock;
+import player.dndcharacter.characterclass.characterclasses.Wizard;
 import player.dndcharacter.dndcharacterenums.Skill;
-import player.dndcharacter.dndclass.Barbarian;
-import player.dndcharacter.dndclass.Bard;
-import player.dndcharacter.dndclass.Cleric;
-import player.dndcharacter.dndclass.Druid;
-import player.dndcharacter.dndclass.Fighter;
-import player.dndcharacter.dndclass.Monk;
-import player.dndcharacter.dndclass.Paladin;
-import player.dndcharacter.dndclass.Ranger;
-import player.dndcharacter.dndclass.Rogue;
-import player.dndcharacter.dndclass.Sorcerer;
-import player.dndcharacter.dndclass.Warlock;
-import player.dndcharacter.dndclass.Wizard;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
@@ -54,7 +54,6 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseT
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.notANumberInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
-import static player.userinputhandler.commands.createnewhero.SelectClass.selectClass;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant.choosePossessionsForGuildMerchant;
 import static player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant.chooseProficiencyForGuildMerchant;
@@ -148,6 +147,7 @@ public class CreateNewHero {
     private final IncreaseBaseCharacteristics increaseBaseCharacteristics;
     private final SelectRace selectRace;
     private final AddSkillProficiency addSkillProficiency;
+    private final SelectClass selectClass;
 
     public Response createNewHero() {
         State newState = new State(CREATE_HERO, ENTER_NAME, new DndCharacter());
@@ -326,7 +326,7 @@ public class CreateNewHero {
                 response = new Response(newState, chooseClass, getClassOptions());
                 break;
             case CHOOSE_CLASS:
-                response = selectClass(userAnswer, state.getDndCharacter());
+                response = selectClass.selectClass(userAnswer, state.getDndCharacter());
                 break;
             case ENTER_FIRST_SKILL_FOR_BARBARIAN:
                 try {
@@ -402,12 +402,12 @@ public class CreateNewHero {
                         response = new Response(newState, "Enter the first musical instrument your bard will be proficient with");
                     } else {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Bard.buildAvailableProficiencySkills());
-                        newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
+                        newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_BARD, state.getDndCharacter());
                         response = new Response(newState, alreadyHaveProficiencyInThisSkill, getSkillOptions(finalAvailableSkills));
                     }
                 } catch (IllegalArgumentException ex) {
                     finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Bard.buildAvailableProficiencySkills());
-                    newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, state.getDndCharacter());
+                    newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_BARD, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(finalAvailableSkills));
                 }
                 break;
@@ -516,12 +516,12 @@ public class CreateNewHero {
                         response = new Response(newState, chooseAlignment, getAlignmentOptions());
                     } else {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Fighter.buildAvailableProficiencySkills());
-                        newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, state.getDndCharacter());
+                        newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
                         response = new Response(newState, alreadyHaveProficiencyInThisSkill, getSkillOptions(finalAvailableSkills));
                     }
                 } catch (IllegalArgumentException ex) {
                     finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Fighter.buildAvailableProficiencySkills());
-                    newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, state.getDndCharacter());
+                    newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(finalAvailableSkills));
                 }
                 break;
@@ -529,7 +529,7 @@ public class CreateNewHero {
                 try {
                     if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Monk.buildAvailableProficiencySkills());
-                        newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, state.getDndCharacter());
+                        newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_MONK, state.getDndCharacter());
                         response = new Response(newState, chooseSecondSkill + finalAvailableSkills, getSkillOptions(finalAvailableSkills));
                     } else {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Monk.buildAvailableProficiencySkills());
@@ -943,12 +943,12 @@ public class CreateNewHero {
             case SET_BONDS:
                 state.getDndCharacter().setBonds(userAnswer);
                 newState = new State(CREATE_HERO, SET_AGE, state.getDndCharacter());
-                response = new Response(newState, "Time to describe your character's appearance. What is their age?");
+                response = new Response(newState, "What is their age?");
                 break;
             case SET_AGE:
                 state.getDndCharacter().setAge(userAnswer);
                 newState = new State(CREATE_HERO, SET_HEIGHT, state.getDndCharacter());
-                response = new Response(newState, "What is their height?");
+                response = new Response(newState, "Time to describe your character's appearance. What is their height?");
                 break;
             case SET_HEIGHT:
                 state.getDndCharacter().setHeight(userAnswer);

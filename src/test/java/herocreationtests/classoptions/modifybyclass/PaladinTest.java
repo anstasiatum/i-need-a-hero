@@ -1,20 +1,19 @@
-package herocreationtests.modifybyclass;
+package herocreationtests.classoptions.modifybyclass;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndclass.Fighter;
+import player.dndcharacter.characterclass.characterclasses.Paladin;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.FIGHTER;
+import static player.dndcharacter.dndcharacterenums.CharacterClass.PALADIN;
 
-public class FighterTest {
+public class PaladinTest {
     private final DndCharacter dndCharacter = new DndCharacter();
 
     @BeforeEach
@@ -30,34 +29,34 @@ public class FighterTest {
         dndCharacter.getWeaponProficiency().add("test weapon");
         dndCharacter.setFeaturesAndTraits("test feature\n");
 
-        Fighter fighter = new Fighter();
-        fighter.modifyByClass(dndCharacter);
+        Paladin paladin = new Paladin();
+        paladin.modifyByClass(dndCharacter);
     }
 
     @Test
     @DisplayName("Set Class Name")
-    void setClassNameForFighter() {
+    void setClassNameForPaladin() {
 
-        assertEquals(FIGHTER, dndCharacter.getCharacterClass());
+        assertEquals(PALADIN, dndCharacter.getCharacterClass());
     }
 
     @Test
     @DisplayName("Set Hit Points")
-    void setHitPointsForFighter() {
+    void setHitPointsForPaladin() {
 
         assertEquals(11, dndCharacter.getHitPoints());
     }
 
     @Test
     @DisplayName("Set Armour Class")
-    void setArmourClassForFighter() {
+    void setArmourClassForPaladin() {
 
         assertEquals(11, dndCharacter.getArmourClass());
     }
 
     @Test
     @DisplayName("Set Languages")
-    void setLanguagesForFighter() {
+    void setLanguagesForPaladin() {
         Set<String> expectedResult = new HashSet<>(2);
         expectedResult.add("Elvish");
         expectedResult.add("Common");
@@ -67,21 +66,21 @@ public class FighterTest {
 
     @Test
     @DisplayName("Set Hit Dice")
-    void setHitDiceForFighter() {
+    void setHitDiceForPaladin() {
 
         assertEquals(10, dndCharacter.getHitDice());
     }
 
     @Test
     @DisplayName("Set Gold Modifier")
-    void setStartGoldModifierForFighter() {
+    void setStartGoldModifierForPaladin() {
 
         assertEquals(5, dndCharacter.getStartGoldModifier());
     }
 
     @Test
     @DisplayName("Set Armour Proficiency")
-    void setArmourProficiencyForFighter() {
+    void setArmourProficiencyForPaladin() {
         Set<String> expectedResult = new HashSet<>(5);
         expectedResult.add("test armour");
         expectedResult.add("Light Armour");
@@ -94,7 +93,7 @@ public class FighterTest {
 
     @Test
     @DisplayName("Set Weapon Proficiency")
-    void setWeaponProficiencyForFighter() {
+    void setWeaponProficiencyForPaladin() {
         Set<String> expectedResult = new HashSet<>(3);
         expectedResult.add("test weapon");
         expectedResult.add("Simple Weapons");
@@ -105,28 +104,27 @@ public class FighterTest {
 
     @Test
     @DisplayName("Set Saving Throws With Proficiency")
-    void setSavingThrowsWithProficiencyForFighter() {
+    void setSavingThrowsWithProficiencyForPaladin() {
         Set<Characteristics> expectedResult = new HashSet<>(2);
-        expectedResult.add(Characteristics.STRENGTH);
-        expectedResult.add(Characteristics.CONSTITUTION);
+        expectedResult.add(Characteristics.WISDOM);
+        expectedResult.add(Characteristics.CHARISMA);
 
         assertEquals(expectedResult, dndCharacter.getSavingThrowsWithProficiency());
     }
 
     @Test
     @DisplayName("Set Features And Proficiencies")
-    void setFeaturesAndTraitsForFighter() {
+    void setFeaturesAndTraitsForPaladin() {
         String expectedResult = """
                 test feature
-                Great Weapon Fighting
-                When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.
-                Protection
-                When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield..
-                Two-Weapon Fighting
-                When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.
-                Second Wind
-                You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.                
-                Once you use this feature, you must finish a short or long rest before you can use it again.
+                Divine Sense
+                The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the hallow spell.
+                You can use this feature a number of times equal to 3. When you finish a long rest, you regain all expended uses.
+                Lay on hands
+                Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level x 5.
+                As an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.
+                Alternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one. 
+                This feature has no effect on undead and constructs.
                 """;
 
         assertEquals(expectedResult, dndCharacter.getFeaturesAndTraits());

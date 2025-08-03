@@ -1,6 +1,7 @@
-package player.dndcharacter.dndclass;
+package player.dndcharacter.characterclass.characterclasses;
 
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characterclass.CharacterClassService;
 import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;

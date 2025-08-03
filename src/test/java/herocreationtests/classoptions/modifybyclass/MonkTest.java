@@ -1,17 +1,16 @@
-package herocreationtests.modifybyclass;
+package herocreationtests.classoptions.modifybyclass;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
-import player.dndcharacter.dndclass.Monk;
+import player.dndcharacter.characterclass.characterclasses.Monk;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.MONK;
 
 public class MonkTest {

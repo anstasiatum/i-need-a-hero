@@ -64,12 +64,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_RACE;
 public class SelectRaceTest {
     private final DndCharacter dndCharacter = new DndCharacter();
     private Response actualResponse;
-    private State incomingState;
     private Response expectedResponse;
-    private final Faker faker = new Faker();
-    private final String userAnswerWithSpecialSymbols = "! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : ' \" , . / ? \\ | £ $ ¥ ¢ € + - * / = < > ≤ ≥ ± ∓ © ® ™ § ° é à ç ö ♥ 1";
-    private final String userAnswerNumeric = String.valueOf(faker.number().numberBetween(3, 18));
-    private final String userAnswerText = faker.harryPotter().quote();
     private final RaceFactory raceFactoryMock = mock(RaceFactory.class);
     private final SelectRace selectRace = new SelectRace(raceFactoryMock);
     private final Dragonborn dragonbornMock = mock(Dragonborn.class);
@@ -89,7 +84,7 @@ public class SelectRaceTest {
     private final Tiefling tieflingMock = mock(Tiefling.class);
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Dragonborn")
+    @DisplayName("selectRace(): Dragonborn")
     void selectRaceDragonborn() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_DRACONIC_ANCESTRY, dndCharacter), "Enter your draconic ancestry", getDraconicAncestryOptions());
         when(raceFactoryMock.createRaceFactory(DRAGONBORN)).thenReturn(dragonbornMock);
@@ -101,7 +96,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Hill Dwarf")
+    @DisplayName("selectRace(): Hill Dwarf")
     void selectRaceHillDwarf() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF, dndCharacter), "Which artisan tool would you like to be proficient with? Smith’s tools, brewer’s supplies, or mason’s tools.", getDwarfArtisanToolOptions());
         when(raceFactoryMock.createRaceFactory(HILL_DWARF)).thenReturn(hillDwarfMock);
@@ -113,7 +108,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Mountain Dwarf")
+    @DisplayName("selectRace(): Mountain Dwarf")
     void selectRaceMountainDwarf() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_ARTISANS_TOOL_PROFICIENCY_FOR_DWARF, dndCharacter), "Which artisan tool would you like to be proficient with? Smith’s tools, brewer’s supplies, or mason’s tools.", getDwarfArtisanToolOptions());
         when(raceFactoryMock.createRaceFactory(MOUNTAIN_DWARF)).thenReturn(mountainDwarfMock);
@@ -125,7 +120,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Dark Elf")
+    @DisplayName("selectRace(): Dark Elf")
     void selectRaceDarkElf() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(DARK_ELF)).thenReturn(darkElfMock);
@@ -137,7 +132,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): High Elf")
+    @DisplayName("selectRace(): High Elf")
     void selectRaceHighElf() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_HIGH_ELF, dndCharacter), "Enter an extra language your character will know");
         when(raceFactoryMock.createRaceFactory(HIGH_ELF)).thenReturn(highElfMock);
@@ -149,7 +144,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Wood Elf")
+    @DisplayName("selectRace(): Wood Elf")
     void selectRaceWoodElf() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(WOOD_ELF)).thenReturn(woodElfMock);
@@ -161,7 +156,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Forest Gnome")
+    @DisplayName("selectRace(): Forest Gnome")
     void selectRaceForestGnome() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(FOREST_GNOME)).thenReturn(forestGnomeMock);
@@ -173,7 +168,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Rock Gnome")
+    @DisplayName("selectRace(): Rock Gnome")
     void selectRaceRockGnome() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(ROCK_GNOME)).thenReturn(rockGnomeMock);
@@ -185,7 +180,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Half Elf")
+    @DisplayName("selectRace(): Half Elf")
     void selectRaceHalfElf() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF, dndCharacter), "Enter an ability that will be increased by 1 (Dexterity, Intelligence etc)", getBasicAbilityOptions());
         when(raceFactoryMock.createRaceFactory(HALF_ELF)).thenReturn(halfElfMock);
@@ -197,7 +192,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Lightfoot Halfling")
+    @DisplayName("selectRace(): Lightfoot Halfling")
     void selectRaceLightfootHalfling() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(LIGHTFOOT_HALFLING)).thenReturn(lightfootMock);
@@ -209,7 +204,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Stout Halfling")
+    @DisplayName("selectRace(): Stout Halfling")
     void selectRaceStoutHalfling() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(STOUT_HALFLING)).thenReturn(stoutMock);
@@ -221,7 +216,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Half Orc")
+    @DisplayName("selectRace(): Half Orc")
     void selectRaceHalfOrc() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(HALF_ORC)).thenReturn(halfOrcMock);
@@ -233,7 +228,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Base Human")
+    @DisplayName("selectRace(): Base Human")
     void selectRaceBaseHuman() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_LANGUAGE_FOR_BASE_HUMAN, dndCharacter), "Enter an additional language your character will know");
         when(raceFactoryMock.createRaceFactory(BASE_HUMAN)).thenReturn(baseHumanMock);
@@ -245,7 +240,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Variant Human")
+    @DisplayName("selectRace(): Variant Human")
     void selectRaceVariantHuman() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN, dndCharacter), "Enter an ability that will be increased by 1 (Dexterity, Intelligence etc)", getBasicAbilityOptions());
         when(raceFactoryMock.createRaceFactory(VARIANT_HUMAN)).thenReturn(variantHumanMock);
@@ -257,7 +252,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Tiefling")
+    @DisplayName("selectRace(): Tiefling")
     void selectRaceTiefling() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(TIEFLING)).thenReturn(tieflingMock);
@@ -269,7 +264,7 @@ public class SelectRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_RACE -> starts selectRace(): Trim test")
+    @DisplayName("selectRace(): Trim test")
     void selectRaceTrimTest() {
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), "Choose your class:\n " + getAllClasses(), getClassOptions());
         when(raceFactoryMock.createRaceFactory(TIEFLING)).thenReturn(tieflingMock);

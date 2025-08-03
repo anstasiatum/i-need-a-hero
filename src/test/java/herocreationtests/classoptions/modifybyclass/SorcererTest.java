@@ -1,4 +1,4 @@
-package herocreationtests.modifybyclass;
+package herocreationtests.classoptions.modifybyclass;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
-import player.dndcharacter.dndclass.Sorcerer;
+import player.dndcharacter.characterclass.characterclasses.Sorcerer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static player.dndcharacter.dndcharacterenums.CharacterClass.BARBARIAN;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.SORCERER;
 
 public class SorcererTest {

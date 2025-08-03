@@ -1,4 +1,4 @@
-package player.dndcharacter.dndclass;
+package player.dndcharacter.characterclass;
 
 import lombok.Getter;
 import lombok.Setter;

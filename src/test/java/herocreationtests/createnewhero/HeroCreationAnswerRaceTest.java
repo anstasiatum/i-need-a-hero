@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characterclass.CharacterClassFactory;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.Response;
@@ -11,6 +12,7 @@ import player.userinputhandler.State;
 import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.createnewhero.SelectClass;
 import player.userinputhandler.commands.createnewhero.SelectRace;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
@@ -57,7 +59,9 @@ public class HeroCreationAnswerRaceTest {
     private final SelectRace selectRace = new SelectRace(raceFactory);
     private final SelectRace selectRaceSpy = spy(selectRace);
     private final AddSkillProficiency addSkillProficiencySpy = spy(new AddSkillProficiency());
-    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristicsSpy, selectRaceSpy, addSkillProficiencySpy);
+    private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
+    private final SelectClass selectClass = new SelectClass(characterClassFactory);
+    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristicsSpy, selectRaceSpy, addSkillProficiencySpy, selectClass);
     private final DndCharacter dndCharacter = new DndCharacter();
     private Response actualResponse;
     private State incomingState;
@@ -259,7 +263,7 @@ public class HeroCreationAnswerRaceTest {
     }
 
     @Test
-    @DisplayName("CHOOSE_SECOND_SKILL_FOR_HALF_ELF -> CHOOSE_SECOND_SKILL_FOR_HALF_ELF when the skill is valid")
+    @DisplayName("CHOOSE_SECOND_SKILL_FOR_HALF_ELF -> CHOOSE_CLASS when the skill is valid")
     void heroCreationAnswer_chooseSecondSkillForHalfElf() {
         incomingState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, dndCharacter);
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_CLASS, dndCharacter), chooseClass, getClassOptions());

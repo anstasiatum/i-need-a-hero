@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characterclass.CharacterClassFactory;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.BotAnswer;
@@ -11,6 +12,7 @@ import player.userinputhandler.UserInputHandler;
 import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
+import player.userinputhandler.commands.createnewhero.SelectClass;
 import player.userinputhandler.commands.createnewhero.SelectRace;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
@@ -57,8 +59,10 @@ public class UserInputHandlerTest {
     private final RaceFactory raceFactory = new RaceFactory();
     private final SelectRace selectRace = new SelectRace(raceFactory);
     private final AddSkillProficiency skillProficiency = new AddSkillProficiency();
-    private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency), mockPrintHero);
-    private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency), mockPrintHero);
+    private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
+    private final SelectClass selectClass = new SelectClass(characterClassFactory);
+    private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency, selectClass), mockPrintHero);
+    private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency, selectClass), mockPrintHero);
     private final DndCharacter dndCharacter = new DndCharacter();
 
     @Test
