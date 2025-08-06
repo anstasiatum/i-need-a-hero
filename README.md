@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="readmemedia/iNeedAHeroLogo.png" width="200" alt="I need a hero logo">
+    <img src="readmemedia/iNeedAHeroLogo.png" width="500" alt="I need a hero logo">
 </p>
 
 # I Need A Hero
