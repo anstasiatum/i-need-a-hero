@@ -1,6 +1,5 @@
 package herocreationtests.raceoptions;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;

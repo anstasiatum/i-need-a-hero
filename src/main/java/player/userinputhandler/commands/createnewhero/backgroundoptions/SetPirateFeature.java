@@ -14,7 +14,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_FEATURE_FOR_PIRATE;
 import static player.userinputhandler.enums.Steps.SET_PERSONALITY_TRAITS;
 
 public class SetPirateFeature {
-    public static Response setPirateFeature(String userAnswer, DndCharacter dndCharacter) {
+    public Response setPirateFeature(String userAnswer, DndCharacter dndCharacter) {
         Response response;
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {

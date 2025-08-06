@@ -1,6 +1,7 @@
-package player.dndcharacter.background;
+package player.dndcharacter.background.backgrounds;
 
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
 import static player.dndcharacter.dndcharacterenums.Skill.MEDICINE;

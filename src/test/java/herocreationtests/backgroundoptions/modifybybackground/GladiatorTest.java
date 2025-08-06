@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.Gladiator;
+import player.dndcharacter.background.backgrounds.Gladiator;
 import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.HashSet;

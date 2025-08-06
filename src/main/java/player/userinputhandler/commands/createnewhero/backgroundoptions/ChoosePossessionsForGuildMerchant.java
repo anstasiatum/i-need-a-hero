@@ -15,7 +15,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_POSSESSIONS_FOR_GUILD_M
 import static player.userinputhandler.enums.Steps.SET_PERSONALITY_TRAITS;
 
 public class ChoosePossessionsForGuildMerchant {
-    public static Response choosePossessionsForGuildMerchant(String userAnswer, DndCharacter dndCharacter) {
+    public Response choosePossessionsForGuildMerchant(String userAnswer, DndCharacter dndCharacter) {
         Response response;
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {

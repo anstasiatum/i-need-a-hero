@@ -8,7 +8,7 @@ import static player.userinputhandler.commands.createnewhero.Options.getArtisanT
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseArtisanTools;
-import static player.userinputhandler.commands.createnewhero.OutputTexts.choosePossessionsForGuildMerchant;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.choosePossessionsForGuildMerchantText;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.CHOOSE_ADDITIONAL_LANGUAGE_FOR_GUILD_MERCHANT;
@@ -17,7 +17,7 @@ import static player.userinputhandler.enums.Steps.CHOOSE_POSSESSIONS_FOR_GUILD_M
 import static player.userinputhandler.enums.Steps.CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT;
 
 public class ChooseProficiencyForGuildMerchant {
-    public static Response chooseProficiencyForGuildMerchant(String userAnswer, DndCharacter dndCharacter) {
+    public Response chooseProficiencyForGuildMerchant(String userAnswer, DndCharacter dndCharacter) {
         Response response;
         State newState;
         response = switch (userAnswer.toLowerCase().trim()) {
@@ -30,7 +30,7 @@ public class ChooseProficiencyForGuildMerchant {
             case "navigator's tools":
                 dndCharacter.getToolProficiency().add("Navigator's tools");
                 newState = new State(CREATE_HERO, CHOOSE_POSSESSIONS_FOR_GUILD_MERCHANT, dndCharacter);
-                yield new Response(newState, choosePossessionsForGuildMerchant, getPossessionsForGuildMerchantOptions());
+                yield new Response(newState, choosePossessionsForGuildMerchantText, getPossessionsForGuildMerchantOptions());
             default:
                 newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, dndCharacter);
                 yield new Response(newState, wrongInput, getProficienciesForGuildMerchantOptions());

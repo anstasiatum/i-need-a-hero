@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.background.BackgroundFactory;
 import player.dndcharacter.characterclass.CharacterClassFactory;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.race.RaceFactory;
@@ -14,6 +15,10 @@ import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSetti
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
 import player.userinputhandler.commands.createnewhero.SelectRace;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.SetBackground;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.SetPirateFeature;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.CharacterDao;
@@ -61,8 +66,13 @@ public class UserInputHandlerTest {
     private final AddSkillProficiency skillProficiency = new AddSkillProficiency();
     private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
     private final SelectClass selectClass = new SelectClass(characterClassFactory);
-    private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency, selectClass), mockPrintHero);
-    private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency, selectClass), mockPrintHero);
+    private final BackgroundFactory backgroundFactory = new BackgroundFactory();
+    private final SetBackground setBackground = new SetBackground(backgroundFactory);
+    private final SetPirateFeature setPirateFeature = new SetPirateFeature();
+    private final ChoosePossessionsForGuildMerchant choosePossessionsForGuildMerchant = new ChoosePossessionsForGuildMerchant();
+    private final ChooseProficiencyForGuildMerchant chooseProficiencyForGuildMerchant = new ChooseProficiencyForGuildMerchant();
+    private final UserInputHandler handleUserInput = new UserInputHandler(mockStateHolder, new DeleteHero(characterDao), new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant), mockPrintHero);
+    private final UserInputHandler handleUserInputWithMockedDeletion = new UserInputHandler(mockStateHolder, mockDeleteHero, new CreateNewHero(characterDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, skillProficiency, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant), mockPrintHero);
     private final DndCharacter dndCharacter = new DndCharacter();
 
     @Test

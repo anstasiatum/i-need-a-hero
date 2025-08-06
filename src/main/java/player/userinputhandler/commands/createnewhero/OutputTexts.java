@@ -34,7 +34,7 @@ public class OutputTexts {
     public static final String chooseArtisanToolPossessionWithPreviousStep = "Choose a set of artisan's tools your hero will have. Might be the same as in the previous step";
     public static final String chooseLuckyCharm = "Choose your lucky charm (a rabbit foot, a small stone with a hole in the center, or any other trinket)";
     public static final String chooseMusicalInstrumentProficiency = "Choose a musical instrument your hero will be proficient with";
-    public static final String choosePossessionsForGuildMerchant = "Would you like to start with artisan's tools of your choice or with a mule and a cart?";
+    public static final String choosePossessionsForGuildMerchantText = "Would you like to start with artisan's tools of your choice or with a mule and a cart?";
     public static final String chooseFeatureForPirate = format("""
             You can choose between two features:
             1. %s2. %sWhich one do you prefer?

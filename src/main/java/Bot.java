@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
+import player.dndcharacter.background.BackgroundFactory;
 import player.dndcharacter.characterclass.CharacterClassFactory;
 import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGenerator;
 import player.dndcharacter.race.RaceFactory;
@@ -17,6 +18,10 @@ import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSetti
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
 import player.userinputhandler.commands.createnewhero.SelectRace;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.ChoosePossessionsForGuildMerchant;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.ChooseProficiencyForGuildMerchant;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.SetBackground;
+import player.userinputhandler.commands.createnewhero.backgroundoptions.SetPirateFeature;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncreaseBaseCharacteristics;
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.CharacterDao;
@@ -40,7 +45,12 @@ public class Bot {
         final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
         final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
         final SelectClass selectClass = new SelectClass(characterClassFactory);
-        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency, selectClass);
+        final BackgroundFactory backgroundFactory = new BackgroundFactory();
+        final SetBackground setBackground = new SetBackground(backgroundFactory);
+        final SetPirateFeature setPirateFeature = new SetPirateFeature();
+        final ChoosePossessionsForGuildMerchant choosePossessionsForGuildMerchant = new ChoosePossessionsForGuildMerchant();
+        final ChooseProficiencyForGuildMerchant chooseProficiencyForGuildMerchant = new ChooseProficiencyForGuildMerchant();
+        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
         final PDFCreator createPDF = new PDFCreator(characterDao);
         final PrintHero printHero = new PrintHero(characterDao, createPDF);
 

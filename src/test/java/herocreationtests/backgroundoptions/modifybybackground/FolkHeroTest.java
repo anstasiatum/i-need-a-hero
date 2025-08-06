@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.FolkHero;
+import player.dndcharacter.background.backgrounds.FolkHero;
 import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.HashSet;

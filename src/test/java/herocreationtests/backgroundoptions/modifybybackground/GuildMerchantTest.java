@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.background.GuildMerchant;
+import player.dndcharacter.background.backgrounds.GuildMerchant;
 import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.HashSet;
