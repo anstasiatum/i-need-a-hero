@@ -140,4 +140,4 @@ java
 I would love to get your contribution, whether it's in form of bug reports, Requests for Enhancement (RFE), documentation, or code patches. Any feedback is more than welcome!
 
 ## 🧙 Acknowledgements
-Big thanks to Oleg Rekin for guiding me through the process of building this bot!
+Big thanks to Oleg Rekin for guiding me through the process of building this bot and to my friends for providing feedback!
