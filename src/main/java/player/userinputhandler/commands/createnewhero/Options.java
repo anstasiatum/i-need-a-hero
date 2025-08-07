@@ -145,4 +145,51 @@ public class Options {
                 .sorted()
                 .collect(Collectors.toList());
     }
+
+    public static List<String> getFavouredEnemyOptions() {
+
+        return List.of(
+                "Abberations",
+                "Beasts",
+                "Celestials",
+                "Constructs",
+                "Dragons",
+                "Elementals",
+                "Fey",
+                "Fiends",
+                "Giants",
+                "Monstrosities",
+                "Oozes",
+                "Plants",
+                "Undead"
+        );
+    }
+
+    public static List<String> getFavouredTerrainOptions() {
+
+        return List.of(
+                "Arctic",
+                "Coast",
+                "Desert",
+                "Forest",
+                "Grassland",
+                "Mountain",
+                "Swamp",
+                "Underdark"
+        );
+    }
+
+    public static List<String> getLeaveEmptyOption() {
+
+        return List.of("Leave empty");
+    }
+
+    public static List<String> secondProficiencyForRogueOptions(Set<Skill> availableSkills) {
+        List<String> availableOptions = availableSkills.stream()
+                .map(Skill::getDisplayName)
+                .sorted()
+                .collect(Collectors.toList());
+        availableOptions.add("Thief's tools");
+        return availableOptions;
+    }
 }

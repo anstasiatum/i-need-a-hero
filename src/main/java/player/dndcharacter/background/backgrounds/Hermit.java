@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.HERMIT;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.MEDICINE;
 import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
@@ -13,8 +14,8 @@ public class Hermit extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(HERMIT);
 
-        dndCharacter.getSkillsWithProficiency().add(MEDICINE);
-        dndCharacter.getSkillsWithProficiency().add(RELIGION);
+        dndCharacter.getSkillsWithProficiency().put(MEDICINE, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(RELIGION, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Herbalism Kit");
 

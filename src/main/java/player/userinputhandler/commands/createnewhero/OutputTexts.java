@@ -39,4 +39,5 @@ public class OutputTexts {
             You can choose between two features:
             1. %s2. %sWhich one do you prefer?
             """, shipsPassageText, badReputationText);
+    public static final String couldNotUpgradeProficiency = "Couldn't upgrade your skill proficiency to expert. Your here is either not proficient with this skill or already an expert. Here is the list of skills available for upgrading";
 }

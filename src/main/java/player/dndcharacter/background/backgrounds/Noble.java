@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.NOBLE;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
 import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
 
@@ -12,8 +13,8 @@ public class Noble extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(NOBLE);
 
-        dndCharacter.getSkillsWithProficiency().add(HISTORY);
-        dndCharacter.getSkillsWithProficiency().add(PERSUASION);
+        dndCharacter.getSkillsWithProficiency().put(HISTORY, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(PERSUASION, PROFICIENT);
 
         dndCharacter.setGold(dndCharacter.getGold() + 25);
 

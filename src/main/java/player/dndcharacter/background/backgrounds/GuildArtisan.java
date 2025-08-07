@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.GUILD_ARTISAN;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.INSIGHT;
 import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
 
@@ -11,8 +12,8 @@ public class GuildArtisan extends BackgroundService {
     @Override
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(GUILD_ARTISAN);
-        dndCharacter.getSkillsWithProficiency().add(INSIGHT);
-        dndCharacter.getSkillsWithProficiency().add(PERSUASION);
+        dndCharacter.getSkillsWithProficiency().put(INSIGHT, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(PERSUASION, PROFICIENT);
 
         dndCharacter.setGold(dndCharacter.getGold() + 15);
 

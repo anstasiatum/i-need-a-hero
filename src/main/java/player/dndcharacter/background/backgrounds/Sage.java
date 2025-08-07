@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.SAGE;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ARCANA;
 import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
 
@@ -12,8 +13,8 @@ public class Sage extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(SAGE);
 
-        dndCharacter.getSkillsWithProficiency().add(ARCANA);
-        dndCharacter.getSkillsWithProficiency().add(HISTORY);
+        dndCharacter.getSkillsWithProficiency().put(ARCANA, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(HISTORY, PROFICIENT);
 
         dndCharacter.setGold(dndCharacter.getGold() + 10);
 

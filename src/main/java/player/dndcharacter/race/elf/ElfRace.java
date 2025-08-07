@@ -2,8 +2,10 @@ package player.dndcharacter.race.elf;
 
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.Size;
-import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.race.RaceService;
+
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
+import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 public abstract class ElfRace extends RaceService {
     @Override
@@ -11,7 +13,7 @@ public abstract class ElfRace extends RaceService {
         dndCharacter.setDexterity(dndCharacter.getDexterity() + 2);
         dndCharacter.setSize(Size.MEDIUM);
         dndCharacter.setSpeed(30);
-        dndCharacter.getSkillsWithProficiency().add(Skill.PERCEPTION);
+        dndCharacter.getSkillsWithProficiency().put(PERCEPTION, PROFICIENT);
         dndCharacter.getLanguages().add("Elvish");
         dndCharacter.setFeaturesAndTraits(dndCharacter.getFeaturesAndTraits() + """
                 Trance: Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.

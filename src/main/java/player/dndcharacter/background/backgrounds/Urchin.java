@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.URCHIN;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
@@ -12,8 +13,8 @@ public class Urchin extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(URCHIN);
 
-        dndCharacter.getSkillsWithProficiency().add(SLEIGHT_OF_HAND);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(SLEIGHT_OF_HAND, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Disguise Kit");
         dndCharacter.getToolProficiency().add("Thieves' Tools");

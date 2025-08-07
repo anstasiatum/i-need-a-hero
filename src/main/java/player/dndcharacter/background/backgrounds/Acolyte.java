@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.ACOLYTE;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.INSIGHT;
 import static player.dndcharacter.dndcharacterenums.Skill.RELIGION;
 
@@ -12,8 +13,8 @@ public class Acolyte extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(ACOLYTE);
 
-        dndCharacter.getSkillsWithProficiency().add(INSIGHT);
-        dndCharacter.getSkillsWithProficiency().add(RELIGION);
+        dndCharacter.getSkillsWithProficiency().put(INSIGHT, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(RELIGION, PROFICIENT);
 
         dndCharacter.setGold(dndCharacter.getGold() + 15);
 

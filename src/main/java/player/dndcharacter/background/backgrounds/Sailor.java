@@ -5,6 +5,7 @@ import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.background.Features.shipsPassageText;
 import static player.dndcharacter.dndcharacterenums.Background.SAILOR;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
@@ -13,8 +14,8 @@ public class Sailor extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(SAILOR);
 
-        dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
-        dndCharacter.getSkillsWithProficiency().add(PERCEPTION);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(PERCEPTION, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Navigator's tools");
         dndCharacter.getToolProficiency().add("Vehicles (water)");

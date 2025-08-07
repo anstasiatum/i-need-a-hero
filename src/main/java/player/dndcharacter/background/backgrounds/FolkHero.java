@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.FOLK_HERO;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ANIMAL_HANDLING;
 import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
@@ -12,8 +13,8 @@ public class FolkHero extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(FOLK_HERO);
 
-        dndCharacter.getSkillsWithProficiency().add(ANIMAL_HANDLING);
-        dndCharacter.getSkillsWithProficiency().add(SURVIVAL);
+        dndCharacter.getSkillsWithProficiency().put(ANIMAL_HANDLING, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(SURVIVAL, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Vehicles (land)");
 

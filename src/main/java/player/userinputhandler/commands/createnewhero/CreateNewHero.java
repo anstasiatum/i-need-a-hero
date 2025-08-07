@@ -26,9 +26,12 @@ import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
 
 import java.util.EnumSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
@@ -36,12 +39,16 @@ import static player.userinputhandler.commands.createnewhero.Options.getBackgrou
 import static player.userinputhandler.commands.createnewhero.Options.getCharacteristicsRollingMethodOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getDraconicAncestryOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getFavouredEnemyOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getFavouredTerrainOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getLeaveEmptyOption;
 import static player.userinputhandler.commands.createnewhero.Options.getPirateFeatureOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
+import static player.userinputhandler.commands.createnewhero.Options.secondProficiencyForRogueOptions;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allBackgrounds;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.allRaces;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.alreadyHaveProficiencyInThisSkill;
@@ -56,6 +63,7 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseS
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSecondSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseThirdSkill;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseTraits;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.couldNotUpgradeProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.notANumberInput;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.commands.createnewhero.SetDraconicAncestry.setDraconicAncestry;
@@ -93,7 +101,11 @@ import static player.userinputhandler.enums.Steps.DESCRIBE_SKIN;
 import static player.userinputhandler.enums.Steps.ENTER_ALIGNMENT;
 import static player.userinputhandler.enums.Steps.ENTER_ALLIES_AND_ORGANIZATIONS;
 import static player.userinputhandler.enums.Steps.ENTER_CHARACTER_BACKSTORY;
+import static player.userinputhandler.enums.Steps.ENTER_FAVOURED_ENEMY_FOR_RANGER;
+import static player.userinputhandler.enums.Steps.ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER;
+import static player.userinputhandler.enums.Steps.ENTER_FAVOURED_TERRAIN_FOR_RANGER;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_MUSICAL_INSTRUMENT_FOR_BARD;
+import static player.userinputhandler.enums.Steps.ENTER_FIRST_PROFICIENCY_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_CLERIC;
@@ -108,7 +120,9 @@ import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WARLOCK;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WIZARD;
 import static player.userinputhandler.enums.Steps.ENTER_FOURTH_SKILL_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_NAME;
+import static player.userinputhandler.enums.Steps.ENTER_PROFICIENCY_FOR_MONK;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_MUSICAL_INSTRUMENT_FOR_BARD;
+import static player.userinputhandler.enums.Steps.ENTER_SECOND_PROFICIENCY_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_CLERIC;
@@ -163,6 +177,7 @@ public class CreateNewHero {
         State newState;
         BuildAvailableProficiencySkillsWithoutApplied buildSkills = new BuildAvailableProficiencySkillsWithoutApplied();
         Set<Skill> finalAvailableSkills;
+        String featuresAndTraitsUpdate;
 
 
         switch (state.getStepId()) {
@@ -425,7 +440,7 @@ public class CreateNewHero {
                 newState = new State(CREATE_HERO, ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD, state.getDndCharacter());
                 response = new Response(newState, "Enter the third musical instrument your bard will be proficient with");
                 break;
-            case ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD:
+            case ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD, ENTER_PROFICIENCY_FOR_MONK:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
                 response = new Response(newState, chooseAlignment, getAlignmentOptions());
@@ -549,8 +564,8 @@ public class CreateNewHero {
             case ENTER_SECOND_SKILL_FOR_MONK:
                 try {
                     if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
-                        newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                        response = new Response(newState, chooseAlignment, getAlignmentOptions());
+                        newState = new State(CREATE_HERO, ENTER_PROFICIENCY_FOR_MONK, state.getDndCharacter());
+                        response = new Response(newState, "Your monk can be proficient with any one type of artisan's tools or any one musical instrument of your choice. Enter the musical instrument or select the artisan's tool option", getArtisanToolOptions());
                     } else {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Monk.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_MONK, state.getDndCharacter());
@@ -632,8 +647,8 @@ public class CreateNewHero {
             case ENTER_THIRD_SKILL_FOR_RANGER:
                 try {
                     if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
-                        newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                        response = new Response(newState, chooseAlignment, getAlignmentOptions());
+                        newState = new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_FOR_RANGER, state.getDndCharacter());
+                        response = new Response(newState, "Let's set the favoured enemy of your ranger. You can enter two races of humanoid (such as gnolls and orcs) or choose one option from the list below", getFavouredEnemyOptions());
                     } else {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Ranger.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, state.getDndCharacter());
@@ -644,6 +659,38 @@ public class CreateNewHero {
                     newState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(finalAvailableSkills));
                 }
+                break;
+            case ENTER_FAVOURED_ENEMY_FOR_RANGER:
+                featuresAndTraitsUpdate = format("""
+                        Favoured Enemy
+                        Your favoured enemies are: %1$s. You have advantage on Wisdom (Survival) checks to track them, as well as on Intelligence checks to recall information about them.
+                        """, userAnswer);
+                state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + featuresAndTraitsUpdate);
+                newState = new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER, state.getDndCharacter());
+                response = new Response(newState, "You also learn a language of your choice that is spoken by your favored enemies, enter this language. Or choose \"Leave empty\" if they speak none.", getLeaveEmptyOption());
+                break;
+            case ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER:
+                newState = new State(CREATE_HERO, ENTER_FAVOURED_TERRAIN_FOR_RANGER, state.getDndCharacter());
+                response = new Response(newState, "Choose the favoured terrain of your ranger", getFavouredTerrainOptions());
+                if (!userAnswer.trim().equalsIgnoreCase("leave empty")) {
+                    state.getDndCharacter().getLanguages().add(userAnswer);
+                }
+                break;
+            case ENTER_FAVOURED_TERRAIN_FOR_RANGER:
+                featuresAndTraitsUpdate = format("""
+                        Natural Explorer
+                        You are particularly familiar with %1$s and are adept at traveling and surviving in such regions. When you make an Intelligence or Wisdom check related to %1$s, your proficiency bonus is doubled if you are using a skill that you're proficient in.
+                        While traveling for an hour or more in %1$s, you gain the following benefits:
+                        Difficult terrain doesn't slow your group's travel.
+                        Your group can't become lost except by magical means.
+                        Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.
+                        If you are traveling alone, you can move stealthily at a normal pace.
+                        When you forage, you find twice as much food as you normally would.
+                        While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.
+                        """, userAnswer.toLowerCase());
+                state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + featuresAndTraitsUpdate);
+                newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
+                response = new Response(newState, chooseAlignment, getAlignmentOptions());
                 break;
             case ENTER_FIRST_SKILL_FOR_ROGUE:
                 try {
@@ -699,8 +746,8 @@ public class CreateNewHero {
             case ENTER_FOURTH_SKILL_FOR_ROGUE:
                 try {
                     if (addSkillProficiency.addSkillProficiency(state.getDndCharacter(), userAnswer)) {
-                        newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
-                        response = new Response(newState, chooseAlignment, getAlignmentOptions());
+                        newState = new State(CREATE_HERO, ENTER_FIRST_PROFICIENCY_FOR_ROGUE, state.getDndCharacter());
+                        response = new Response(newState, "Let's set rogue expertise. Choose a skill, your hero's proficiency bonus will be doubled for any ability check that uses it", getSkillOptions(state.getDndCharacter().getSkillsWithProficiency().keySet()));
                     } else {
                         finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Rogue.buildAvailableProficiencySkills());
                         newState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, state.getDndCharacter());
@@ -710,6 +757,46 @@ public class CreateNewHero {
                     finalAvailableSkills = buildSkills.buildAvailableProficiencySkillsWithoutApplied(state.getDndCharacter().getSkillsWithProficiency(), Rogue.buildAvailableProficiencySkills());
                     newState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, state.getDndCharacter());
                     response = new Response(newState, wrongSkill, getSkillOptions(finalAvailableSkills));
+                }
+                break;
+            case ENTER_FIRST_PROFICIENCY_FOR_ROGUE:
+                try {
+                    if (addSkillProficiency.addSkillExpertise(state.getDndCharacter(), userAnswer)) {
+                        Set<Skill> skillsAvailableForExpertise = state.getDndCharacter().getSkillsWithProficiency().entrySet().stream().filter(entry -> entry.getValue().equals(PROFICIENT)).map(Map.Entry::getKey).collect(Collectors.toSet());
+                        newState = new State(CREATE_HERO, ENTER_SECOND_PROFICIENCY_FOR_ROGUE, state.getDndCharacter());
+                        response = new Response(newState, "Your hero can also be expert with another skill or with thief's tools. Choose your option", secondProficiencyForRogueOptions(skillsAvailableForExpertise));
+                    } else {
+                        newState = new State(CREATE_HERO, ENTER_FIRST_PROFICIENCY_FOR_ROGUE, state.getDndCharacter());
+                        response = new Response(newState, couldNotUpgradeProficiency, getSkillOptions(state.getDndCharacter().getSkillsWithProficiency().keySet()));
+                    }
+                } catch (IllegalArgumentException ex) {
+                    newState = new State(CREATE_HERO, ENTER_FIRST_PROFICIENCY_FOR_ROGUE, state.getDndCharacter());
+                    response = new Response(newState, wrongSkill, getSkillOptions(state.getDndCharacter().getSkillsWithProficiency().keySet()));
+                }
+                break;
+            case ENTER_SECOND_PROFICIENCY_FOR_ROGUE:
+                Set<Skill> skillsAvailableForExpertise = state.getDndCharacter().getSkillsWithProficiency().entrySet().stream().filter(entry -> entry.getValue().equals(PROFICIENT)).map(Map.Entry::getKey).collect(Collectors.toSet());
+                if (userAnswer.trim().equalsIgnoreCase("thief's tools")) {
+                    String thiefsToolsExpertise = """
+                            Expertise
+                            Your proficiency bonus is doubled for any ability check you make that uses thief's tools.
+                            """;
+                    state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + thiefsToolsExpertise);
+                    newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
+                    response = new Response(newState, chooseAlignment, getAlignmentOptions());
+                } else {
+                    try {
+                        if (addSkillProficiency.addSkillExpertise(state.getDndCharacter(), userAnswer)) {
+                            newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
+                            response = new Response(newState, chooseAlignment, getAlignmentOptions());
+                        } else {
+                            newState = new State(CREATE_HERO, ENTER_SECOND_PROFICIENCY_FOR_ROGUE, state.getDndCharacter());
+                            response = new Response(newState, couldNotUpgradeProficiency, secondProficiencyForRogueOptions(skillsAvailableForExpertise));
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        newState = new State(CREATE_HERO, ENTER_SECOND_PROFICIENCY_FOR_ROGUE, state.getDndCharacter());
+                        response = new Response(newState, wrongSkill, secondProficiencyForRogueOptions(skillsAvailableForExpertise));
+                    }
                 }
                 break;
             case ENTER_FIRST_SKILL_FOR_SORCERER:
@@ -827,7 +914,7 @@ public class CreateNewHero {
             case CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, state.getDndCharacter());
-                response = new Response(newState, "Enter your prayer item (a book, a wheel, etc.)");
+                response = new Response(newState, "Enter your prayer item (a book, a wheel, etc.) your hero will possess");
                 break;
             case CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, CHOOSE_ARTISANS_TOOL_POSSESSION_FOR_FOLK_HERO,
                  CHOOSE_GAMING_SET_POSSESSION_FOR_SOLDIER, CHOOSE_LUCKY_CHARM_FOR_SAILOR,
@@ -879,7 +966,7 @@ public class CreateNewHero {
             case CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER:
                 state.getDndCharacter().getToolProficiency().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_TROPHY_FOR_SOLDIER, state.getDndCharacter());
-                response = new Response(newState, "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner)");
+                response = new Response(newState, "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner) your hero will possess");
                 break;
             case CHOOSE_LUCKY_CHARM_FOR_PIRATE:
                 state.getDndCharacter().setEquipment(state.getDndCharacter().getEquipment() + " " + userAnswer);
@@ -897,7 +984,7 @@ public class CreateNewHero {
             case CHOOSE_LANGUAGE_FOR_GUILD_MERCHANT:
                 state.getDndCharacter().getLanguages().add(userAnswer);
                 newState = new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, state.getDndCharacter());
-                response = new Response(newState, "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
+                response = new Response(newState, "Would you like for your hero to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
                 break;
             case CHOOSE_LANGUAGE_FOR_GUILD_ARTISAN:
                 state.getDndCharacter().getLanguages().add(userAnswer);

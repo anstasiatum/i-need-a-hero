@@ -6,6 +6,7 @@ import lombok.Setter;
 import player.dndcharacter.dndcharacterenums.Background;
 import player.dndcharacter.dndcharacterenums.CharacterClass;
 import player.dndcharacter.dndcharacterenums.Characteristics;
+import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Race;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skill;
@@ -14,9 +15,14 @@ import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.PrimitiveIterator;
 import java.util.Set;
+
+import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 @Getter
 @Setter
@@ -53,7 +59,7 @@ public class DndCharacter {
 
     private int proficiencyBonus = 2;
 
-    private Set<Skill> skillsWithProficiency = EnumSet.noneOf(Skill.class);
+    private Map<Skill, ProficiencyLevel> skillsWithProficiency = new HashMap<>();
     private Set<Characteristics> savingThrowsWithProficiency = EnumSet.noneOf(Characteristics.class);
 
     private Race race;
@@ -127,7 +133,13 @@ public class DndCharacter {
 
     @JsonIgnore
     public int getPassivePerception() {
-        return getSkillsWithProficiency().contains(Skill.PERCEPTION) ? 10 + getWisdomModifier() + proficiencyBonus : 10 + getWisdomModifier();
+        ProficiencyLevel level = skillsWithProficiency.get(PERCEPTION);
+        int proficiencyBonus = switch (level) {
+            case PROFICIENT -> getProficiencyBonus();
+            case EXPERTISE -> getProficiencyBonus() * 2;
+            case null -> 0;
+        };
+        return 10 + getWisdomModifier() + proficiencyBonus;
     }
 
     @JsonIgnore
@@ -182,7 +194,16 @@ public class DndCharacter {
             case ATHLETICS -> getStrengthModifier();
             case DECEPTION, INTIMIDATION, PERFORMANCE, PERSUASION -> getCharismaModifier();
         };
-        return getSkillsWithProficiency().contains(skill) ? baseSkillModifier + getProficiencyBonus() : baseSkillModifier;
+
+        ProficiencyLevel level = skillsWithProficiency.get(skill);
+
+        int proficiencyBonus = switch (level) {
+            case PROFICIENT -> getProficiencyBonus();
+            case EXPERTISE -> getProficiencyBonus() * 2;
+            case null -> 0;
+        };
+
+        return baseSkillModifier + proficiencyBonus;
     }
 
     @JsonIgnore

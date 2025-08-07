@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.ENTERTAINER;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ACROBATICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
 
@@ -12,8 +13,8 @@ public class Entertainer extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(ENTERTAINER);
 
-        dndCharacter.getSkillsWithProficiency().add(ACROBATICS);
-        dndCharacter.getSkillsWithProficiency().add(PERFORMANCE);
+        dndCharacter.getSkillsWithProficiency().put(ACROBATICS, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(PERFORMANCE, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Disguise Kit");
 

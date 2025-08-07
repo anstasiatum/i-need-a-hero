@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.OUTLANDER;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
@@ -12,8 +13,8 @@ public class Outlander extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(OUTLANDER);
 
-        dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
-        dndCharacter.getSkillsWithProficiency().add(SURVIVAL);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(SURVIVAL, PROFICIENT);
 
         dndCharacter.setGold(dndCharacter.getGold() + 10);
 

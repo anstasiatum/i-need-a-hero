@@ -78,13 +78,13 @@ public class PDFCreator {
         characterName.setValue(dndCharacter.getCharacterName());
 
         PDField classLevel = acroForm.getField("ClassLevel");
-        classLevel.setValue(getClassForPDF(dndCharacter.getCharacterClass()));
+        classLevel.setValue(dndCharacter.getCharacterClass().getDisplayName());
 
         PDField background = acroForm.getField("Background");
         background.setValue(dndCharacter.getBackground().getDisplayName());
 
         PDField race = acroForm.getField("Race ");
-        race.setValue(getRaceForPDF(dndCharacter.getRace()));
+        race.setValue(dndCharacter.getRace().getDisplayName());
 
         PDField alignment = acroForm.getField("Alignment");
         alignment.setValue(dndCharacter.getAlignment());
@@ -231,92 +231,92 @@ public class PDFCreator {
         survival.setValue(String.valueOf(dndCharacter.getSkillModifier(SURVIVAL)));
 
         PDField acrobaticsCheckBox = acroForm.getField("Check Box 23");
-        if (dndCharacter.getSkillsWithProficiency().contains(ACROBATICS)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(ACROBATICS)) {
             acrobaticsCheckBox.setValue("Yes");
         }
 
         PDField animalHandlingCheckBox = acroForm.getField("Check Box 24");
-        if (dndCharacter.getSkillsWithProficiency().contains(ANIMAL_HANDLING)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(ANIMAL_HANDLING)) {
             animalHandlingCheckBox.setValue("Yes");
         }
 
         PDField arcanaCheckBox = acroForm.getField("Check Box 25");
-        if (dndCharacter.getSkillsWithProficiency().contains(ARCANA)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(ARCANA)) {
             arcanaCheckBox.setValue("Yes");
         }
 
         PDField athleticsCheckBox = acroForm.getField("Check Box 26");
-        if (dndCharacter.getSkillsWithProficiency().contains(ATHLETICS)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(ATHLETICS)) {
             athleticsCheckBox.setValue("Yes");
         }
 
         PDField deceptionCheckBox = acroForm.getField("Check Box 27");
-        if (dndCharacter.getSkillsWithProficiency().contains(DECEPTION)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(DECEPTION)) {
             deceptionCheckBox.setValue("Yes");
         }
 
         PDField historyCheckBox = acroForm.getField("Check Box 28");
-        if (dndCharacter.getSkillsWithProficiency().contains(HISTORY)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(HISTORY)) {
             historyCheckBox.setValue("Yes");
         }
 
         PDField insightCheckBox = acroForm.getField("Check Box 29");
-        if (dndCharacter.getSkillsWithProficiency().contains(INSIGHT)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(INSIGHT)) {
             insightCheckBox.setValue("Yes");
         }
 
         PDField intimidationCheckBox = acroForm.getField("Check Box 30");
-        if (dndCharacter.getSkillsWithProficiency().contains(INTIMIDATION)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(INTIMIDATION)) {
             intimidationCheckBox.setValue("Yes");
         }
 
         PDField investigationCheckBox = acroForm.getField("Check Box 31");
-        if (dndCharacter.getSkillsWithProficiency().contains(INVESTIGATION)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(INVESTIGATION)) {
             investigationCheckBox.setValue("Yes");
         }
 
         PDField medicineCheckBox = acroForm.getField("Check Box 32");
-        if (dndCharacter.getSkillsWithProficiency().contains(MEDICINE)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(MEDICINE)) {
             medicineCheckBox.setValue("Yes");
         }
 
         PDField natureCheckBox = acroForm.getField("Check Box 33");
-        if (dndCharacter.getSkillsWithProficiency().contains(NATURE)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(NATURE)) {
             natureCheckBox.setValue("Yes");
         }
 
         PDField perceptionCheckBox = acroForm.getField("Check Box 34");
-        if (dndCharacter.getSkillsWithProficiency().contains(PERCEPTION)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(PERCEPTION)) {
             perceptionCheckBox.setValue("Yes");
         }
 
         PDField performanceCheckBox = acroForm.getField("Check Box 35");
-        if (dndCharacter.getSkillsWithProficiency().contains(PERFORMANCE)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(PERFORMANCE)) {
             performanceCheckBox.setValue("Yes");
         }
 
         PDField persuasionCheckBox = acroForm.getField("Check Box 36");
-        if (dndCharacter.getSkillsWithProficiency().contains(PERSUASION)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(PERSUASION)) {
             persuasionCheckBox.setValue("Yes");
         }
 
         PDField religionCheckBox = acroForm.getField("Check Box 37");
-        if (dndCharacter.getSkillsWithProficiency().contains(RELIGION)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(RELIGION)) {
             religionCheckBox.setValue("Yes");
         }
 
         PDField sleightOfHandCheckBox = acroForm.getField("Check Box 38");
-        if (dndCharacter.getSkillsWithProficiency().contains(SLEIGHT_OF_HAND)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(SLEIGHT_OF_HAND)) {
             sleightOfHandCheckBox.setValue("Yes");
         }
 
         PDField stealthCheckBox = acroForm.getField("Check Box 39");
-        if (dndCharacter.getSkillsWithProficiency().contains(STEALTH)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(STEALTH)) {
             stealthCheckBox.setValue("Yes");
         }
 
         PDField survivalCheckBox = acroForm.getField("Check Box 40");
-        if (dndCharacter.getSkillsWithProficiency().contains(SURVIVAL)) {
+        if (dndCharacter.getSkillsWithProficiency().containsKey(SURVIVAL)) {
             survivalCheckBox.setValue("Yes");
         }
 
@@ -402,11 +402,11 @@ public class PDFCreator {
 
         // Third page
         PDField spellcastingClass = acroForm.getField("Spellcasting Class 2");
-        spellcastingClass.setValue(getClassForPDF(dndCharacter.getCharacterClass()));
+        spellcastingClass.setValue(dndCharacter.getCharacterClass().getDisplayName());
 
         PDField spellcastingAbility = acroForm.getField("SpellcastingAbility 2");
         if (dndCharacter.getSpellcastingAbility() != null) {
-            spellcastingAbility.setValue(getSpellcastingAbilityForPDF(dndCharacter.getSpellcastingAbility()));
+            spellcastingAbility.setValue(dndCharacter.getSpellcastingAbility().getDisplayName());
         }
 
         PDField spellSaveDc = acroForm.getField("SpellSaveDC  2");
@@ -418,52 +418,5 @@ public class PDFCreator {
         if (dndCharacter.getSpellAttackBonus() != null) {
             spellAttackBonus.setValue(String.valueOf(dndCharacter.getSpellAttackBonus()));
         }
-    }
-
-    public static String getClassForPDF(CharacterClass characterClass) {
-        return switch (characterClass) {
-            case BARBARIAN -> "Barbarian";
-            case BARD -> "Bard";
-            case CLERIC -> "Cleric";
-            case DRUID -> "Druid";
-            case FIGHTER -> "Fighter";
-            case MONK -> "Monk";
-            case PALADIN -> "Paladin";
-            case RANGER -> "Ranger";
-            case ROGUE -> "Rogue";
-            case SORCERER -> "Sorcerer";
-            case WARLOCK -> "Warlock";
-            case WIZARD -> "Wizard";
-        };
-    }
-
-    public static String getRaceForPDF(Race race) {
-        return switch (race) {
-            case HILL_DWARF -> "Hill Dwarf";
-            case MOUNTAIN_DWARF -> "Mountain Dwarf";
-            case DARK_ELF -> "Dark Elf";
-            case WOOD_ELF -> "Wood Elf";
-            case HIGH_ELF -> "High Elf";
-            case LIGHTFOOT_HALFLING -> "Lightfoot Halfling";
-            case STOUT_HALFLING -> "Stout Halfling";
-            case BASE_HUMAN, VARIANT_HUMAN -> "Human";
-            case DRAGONBORN -> "Dragonborn";
-            case FOREST_GNOME -> "Forest Gnome";
-            case ROCK_GNOME -> "Rock Gnome";
-            case HALF_ELF -> "Half Elf";
-            case HALF_ORC -> "Half Orc";
-            case TIEFLING -> "Tiefling";
-        };
-    }
-
-    public static String getSpellcastingAbilityForPDF(SpellcastingAbility spellcastingAbility) {
-        return switch (spellcastingAbility) {
-            case STRENGTH -> "Strength";
-            case DEXTERITY -> "Dexterity";
-            case CONSTITUTION -> "Constitution";
-            case INTELLIGENCE -> "Intelligence";
-            case WISDOM -> "Wisdom";
-            case CHARISMA -> "Charisma";
-        };
     }
 }

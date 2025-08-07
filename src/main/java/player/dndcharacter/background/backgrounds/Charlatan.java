@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.CHARLATAN;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skill.SLEIGHT_OF_HAND;
 
@@ -12,8 +13,8 @@ public class Charlatan extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(CHARLATAN);
 
-        dndCharacter.getSkillsWithProficiency().add(DECEPTION);
-        dndCharacter.getSkillsWithProficiency().add(SLEIGHT_OF_HAND);
+        dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(SLEIGHT_OF_HAND, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Disguise Kit");
         dndCharacter.getToolProficiency().add("Forgery Kit");

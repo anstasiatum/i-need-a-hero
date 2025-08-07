@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.SOLDIER;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.INTIMIDATION;
 
@@ -12,8 +13,8 @@ public class Soldier extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(SOLDIER);
 
-        dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
-        dndCharacter.getSkillsWithProficiency().add(INTIMIDATION);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(INTIMIDATION, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Vehicles (land)");
 

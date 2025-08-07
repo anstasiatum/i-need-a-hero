@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.PIRATE;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
@@ -12,8 +13,8 @@ public class Pirate extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(PIRATE);
 
-        dndCharacter.getSkillsWithProficiency().add(ATHLETICS);
-        dndCharacter.getSkillsWithProficiency().add(PERCEPTION);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(PERCEPTION, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Navigator's tools");
         dndCharacter.getToolProficiency().add("Vehicles (water)");

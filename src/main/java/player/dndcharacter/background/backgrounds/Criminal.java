@@ -4,6 +4,7 @@ import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundService;
 
 import static player.dndcharacter.dndcharacterenums.Background.CRIMINAL;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 
@@ -12,8 +13,8 @@ public class Criminal extends BackgroundService {
     public void modifyByBackground(DndCharacter dndCharacter) {
         dndCharacter.setBackground(CRIMINAL);
 
-        dndCharacter.getSkillsWithProficiency().add(DECEPTION);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
 
         dndCharacter.getToolProficiency().add("Thieves' tools");
 
