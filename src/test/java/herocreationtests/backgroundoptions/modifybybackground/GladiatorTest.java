@@ -5,13 +5,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.backgrounds.Gladiator;
+import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Skill;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Background.GLADIATOR;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ACROBATICS;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
@@ -21,9 +25,7 @@ public class GladiatorTest {
 
     @BeforeEach
     public void createCharacter() {
-        Set<Skill> skills = new HashSet<>();
-        skills.add(ATHLETICS);
-        dndCharacter.setSkillsWithProficiency(skills);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
 
         dndCharacter.setGold(10);
 
@@ -45,10 +47,10 @@ public class GladiatorTest {
     @Test
     @DisplayName("Set skills with proficiency")
     void setSkillsWithProficiencyForGladiator() {
-        Set<Skill> expectedResult = new HashSet<>(3);
-        expectedResult.add(ATHLETICS);
-        expectedResult.add(ACROBATICS);
-        expectedResult.add(PERFORMANCE);
+        Map<Skill, ProficiencyLevel> expectedResult = new HashMap(3);
+        expectedResult.put(ATHLETICS, PROFICIENT);
+        expectedResult.put(ACROBATICS, PROFICIENT);
+        expectedResult.put(PERFORMANCE, PROFICIENT);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }

@@ -4,17 +4,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Size;
 import player.dndcharacter.dndcharacterenums.Skill;
 import player.dndcharacter.race.elf.HighElf;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Race.HIGH_ELF;
-import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
 
 public class HighElfTest {
@@ -98,8 +101,8 @@ public class HighElfTest {
     @Test
     @DisplayName("Set Perception Proficiency")
     void setArmourProficiencyForHighElf() {
-        Set<Skill> expectedResult = new HashSet<>(1);
-        expectedResult.add(PERCEPTION);
+        Map<Skill, ProficiencyLevel> expectedResult = new HashMap<>(1);
+        expectedResult.put(PERCEPTION, PROFICIENT);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }

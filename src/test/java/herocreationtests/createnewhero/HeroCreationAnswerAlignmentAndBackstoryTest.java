@@ -154,7 +154,7 @@ public class HeroCreationAnswerAlignmentAndBackstoryTest {
     void heroCreationAnswer_chooseSecondLanguageForAcolyte() {
         incomingState = new State(CREATE_HERO, CHOOSE_SECOND_LANGUAGE_FOR_ACOLYTE, dndCharacter);
         dndCharacter.getLanguages().add("Common");
-        expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, dndCharacter), "Enter your prayer item (a book, a wheel, etc.)");
+        expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_PRAYER_ITEM_FOR_ACOLYTE, dndCharacter), "Enter your prayer item (a book, a wheel, etc.) your hero will possess");
         userAnswer = "Infernal";
         Set<String> expectedLanguages = Set.of("Common", "Infernal");
 
@@ -293,7 +293,7 @@ public class HeroCreationAnswerAlignmentAndBackstoryTest {
     void heroCreationAnswer_chooseGamingSetProficiencyForSoldier() {
         incomingState = new State(CREATE_HERO, CHOOSE_GAMING_SET_PROFICIENCY_FOR_SOLDIER, dndCharacter);
         dndCharacter.getToolProficiency().add("Dice");
-        expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_TROPHY_FOR_SOLDIER, dndCharacter), "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner)");
+        expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_TROPHY_FOR_SOLDIER, dndCharacter), "Describe a trophy taken from a fallen enemy (e.g. a dagger, broken blade, or piece of a banner) your hero will possess");
         userAnswer = "Cards";
         Set<String> expectedToolProficiencies = Set.of("Dice", "Cards");
 
@@ -354,7 +354,7 @@ public class HeroCreationAnswerAlignmentAndBackstoryTest {
         dndCharacter.getLanguages().add("Celestial");
         userAnswer = "Elvish";
         Set<String> expectedLanguages = Set.of("Celestial", "Elvish");
-        expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, dndCharacter), "Would you like to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
+        expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_PROFICIENCY_FOR_GUILD_MERCHANT, dndCharacter), "Would you like for your hero to learn an additional language, be proficient in navigator's tools or in one type of artisan's tools?", getProficienciesForGuildMerchantOptions());
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswer);
 

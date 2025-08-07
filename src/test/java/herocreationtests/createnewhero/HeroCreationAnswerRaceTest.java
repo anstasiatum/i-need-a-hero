@@ -33,6 +33,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static player.dndcharacter.dndcharacterenums.CharacterClass.getAllClasses;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ARCANA;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
@@ -251,7 +252,7 @@ public class HeroCreationAnswerRaceTest {
     @DisplayName("CHOOSE_FIRST_SKILL_FOR_HALF_ELF -> CHOOSE_FIRST_SKILL_FOR_HALF_ELF when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForHalfElfSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(ARCANA);
+        dndCharacter.getSkillsWithProficiency().put(ARCANA, PROFICIENT);
         expectedResponse = new Response(new State(CREATE_HERO, CHOOSE_FIRST_SKILL_FOR_HALF_ELF, dndCharacter), "You already have proficiency in this skill. Choose another one", getAllSkillOptions());
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
@@ -288,7 +289,7 @@ public class HeroCreationAnswerRaceTest {
     @DisplayName("CHOOSE_SECOND_SKILL_FOR_HALF_ELF -> CHOOSE_SECOND_SKILL_FOR_HALF_ELF when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForHalfElfSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(ARCANA);
+        dndCharacter.getSkillsWithProficiency().put(ARCANA, PROFICIENT);
         expectedState = new State(CREATE_HERO, CHOOSE_SECOND_SKILL_FOR_HALF_ELF, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
@@ -328,7 +329,7 @@ public class HeroCreationAnswerRaceTest {
     @DisplayName("CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN -> CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN when the skill is already applied")
     void heroCreationAnswer_chooseOneSkillForVariantHumanSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(ARCANA);
+        dndCharacter.getSkillsWithProficiency().put(ARCANA, PROFICIENT);
         expectedState = new State(CREATE_HERO, CHOOSE_ONE_SKILL_FOR_VARIANT_HUMAN, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);

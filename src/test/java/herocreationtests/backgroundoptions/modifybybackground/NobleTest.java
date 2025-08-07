@@ -5,13 +5,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.backgrounds.Noble;
+import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Skill;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Background.NOBLE;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
 import static player.dndcharacter.dndcharacterenums.Skill.PERSUASION;
@@ -21,9 +25,7 @@ public class NobleTest {
 
     @BeforeEach
     public void createCharacter() {
-        Set<Skill> skills = new HashSet<>(1);
-        skills.add(ATHLETICS);
-        dndCharacter.setSkillsWithProficiency(skills);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
 
         dndCharacter.setGold(10);
 
@@ -44,10 +46,10 @@ public class NobleTest {
     @Test
     @DisplayName("Set skills with proficiency")
     void setSkillsWithProficiencyForNoble() {
-        Set<Skill> expectedResult = new HashSet<>(3);
-        expectedResult.add(ATHLETICS);
-        expectedResult.add(HISTORY);
-        expectedResult.add(PERSUASION);
+        Map<Skill, ProficiencyLevel> expectedResult = new HashMap(3);
+        expectedResult.put(ATHLETICS, PROFICIENT);
+        expectedResult.put(HISTORY, PROFICIENT);
+        expectedResult.put(PERSUASION, PROFICIENT);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }

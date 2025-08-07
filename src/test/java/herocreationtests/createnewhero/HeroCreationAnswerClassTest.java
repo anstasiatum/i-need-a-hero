@@ -32,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.enums.Alignment.getAllAlignments;
@@ -118,7 +119,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_BARBARIAN -> ENTER_FIRST_SKILL_FOR_BARBARIAN when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForBarbarianSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARBARIAN, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARBARIAN, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -159,7 +160,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_BARBARIAN -> ENTER_SECOND_SKILL_FOR_BARBARIAN when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForBarbarianSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARBARIAN, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARBARIAN, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -202,7 +203,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_BARD -> ENTER_FIRST_SKILL_FOR_BARD when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForBardSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARD, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_BARD, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -245,7 +246,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_BARD -> ENTER_SECOND_SKILL_FOR_BARD when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForBardSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_BARD, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -288,7 +289,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_THIRD_SKILL_FOR_BARD -> ENTER_THIRD_SKILL_FOR_BARD when the skill is already applied")
     void heroCreationAnswer_chooseThirdSkillForBardSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_BARD, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_BARD, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -373,7 +374,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_CLERIC -> ENTER_FIRST_SKILL_FOR_CLERIC when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForClericSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_CLERIC, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_CLERIC, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -414,7 +415,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_CLERIC -> ENTER_SECOND_SKILL_FOR_CLERIC when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForClericSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_CLERIC, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_CLERIC, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -457,7 +458,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_DRUID -> ENTER_FIRST_SKILL_FOR_DRUID when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForDruidSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_DRUID, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_DRUID, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -498,7 +499,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_DRUID -> ENTER_SECOND_SKILL_FOR_DRUID when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForDruidSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_DRUID, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -541,7 +542,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_FIGHTER -> ENTER_FIRST_SKILL_FOR_FIGHTER when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForFighterSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_FIGHTER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_FIGHTER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -582,7 +583,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_FIGHTER -> ENTER_SECOND_SKILL_FOR_FIGHTER when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForFighterSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -625,7 +626,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_MONK -> ENTER_FIRST_SKILL_FOR_MONK when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForMonkSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_MONK, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_MONK, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -666,7 +667,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_MONK -> ENTER_SECOND_SKILL_FOR_MONK when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForMonkSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_MONK, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_MONK, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -709,7 +710,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_PALADIN -> ENTER_FIRST_SKILL_FOR_MONK when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForPaladinSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_PALADIN, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_PALADIN, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -750,7 +751,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_PALADIN -> ENTER_SECOND_SKILL_FOR_PALADIN when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForPaladinSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_PALADIN, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_PALADIN, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -793,7 +794,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_RANGER -> ENTER_FIRST_SKILL_FOR_RANGER when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForRangerSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_RANGER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_RANGER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -836,7 +837,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_RANGER -> ENTER_SECOND_SKILL_FOR_RANGER when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForRangerSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_RANGER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_RANGER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -877,7 +878,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_THIRD_SKILL_FOR_RANGER -> ENTER_THIRD_SKILL_FOR_RANGER when the skill is already applied")
     void heroCreationAnswer_chooseThirdSkillForRangerSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -920,7 +921,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_ROGUE -> ENTER_FIRST_SKILL_FOR_ROGUE when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForRogueSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_ROGUE, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_ROGUE, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -963,7 +964,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_ROGUE -> ENTER_SECOND_SKILL_FOR_ROGUE when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForRogueSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_ROGUE, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_ROGUE, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1006,7 +1007,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_THIRD_SKILL_FOR_ROGUE -> ENTER_THIRD_SKILL_FOR_ROGUE when the skill is already applied")
     void heroCreationAnswer_chooseThirdSkillForRogueSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_ROGUE, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_ROGUE, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1047,7 +1048,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FOURTH_SKILL_FOR_ROGUE -> ENTER_FOURTH_SKILL_FOR_ROGUE when the skill is already applied")
     void heroCreationAnswer_chooseFourthSkillForRogueSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1090,7 +1091,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_SORCERER -> ENTER_FIRST_SKILL_FOR_SORCERER when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForSorcererSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_SORCERER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_SORCERER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1131,7 +1132,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_SORCERER -> ENTER_SECOND_SKILL_FOR_SORCERER when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForSorcererSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_SORCERER, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_SORCERER, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1174,7 +1175,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_WARLOCK -> ENTER_FIRST_SKILL_FOR_WARLOCK when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForWarlockSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WARLOCK, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WARLOCK, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1215,7 +1216,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_WARLOCK -> ENTER_SECOND_SKILL_FOR_WARLOCK when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForWarlockSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WARLOCK, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WARLOCK, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1258,7 +1259,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_SKILL_FOR_WIZARD -> ENTER_FIRST_SKILL_FOR_WIZARD when the skill is already applied")
     void heroCreationAnswer_chooseFirstSkillForWizardSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WIZARD, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_FIRST_SKILL_FOR_WIZARD, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
@@ -1299,7 +1300,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_SECOND_SKILL_FOR_WIZARD -> ENTER_SECOND_SKILL_FOR_WIZARD when the skill is already applied")
     void heroCreationAnswer_chooseSecondSkillForWizardSkillAlreadyApplied() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WIZARD, dndCharacter);
-        dndCharacter.getSkillsWithProficiency().add(STEALTH);
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         expectedState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_WIZARD, dndCharacter);
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);

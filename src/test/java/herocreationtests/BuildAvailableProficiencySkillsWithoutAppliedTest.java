@@ -1,22 +1,38 @@
 package herocreationtests;
 
 import org.junit.jupiter.api.Test;
+import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Skill;
 import player.userinputhandler.commands.createnewhero.BuildAvailableProficiencySkillsWithoutApplied;
 
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
+import static player.dndcharacter.dndcharacterenums.Skill.ACROBATICS;
+import static player.dndcharacter.dndcharacterenums.Skill.ARCANA;
+import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.HISTORY;
+import static player.dndcharacter.dndcharacterenums.Skill.INTIMIDATION;
+import static player.dndcharacter.dndcharacterenums.Skill.MEDICINE;
+import static player.dndcharacter.dndcharacterenums.Skill.NATURE;
+import static player.dndcharacter.dndcharacterenums.Skill.PERCEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
+import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
+import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
 public class BuildAvailableProficiencySkillsWithoutAppliedTest {
     private final BuildAvailableProficiencySkillsWithoutApplied buildSkills = new BuildAvailableProficiencySkillsWithoutApplied();
 
     @Test
     void testNoSkillsAppliedReturnsAllAvailable() {
-        Set<Skill> allAvailable = EnumSet.of(Skill.ARCANA, Skill.MEDICINE, Skill.HISTORY);
-        Set<Skill> applied = Set.of();
+        Set<Skill> allAvailable = EnumSet.of(ARCANA, MEDICINE, HISTORY);
+        Map<Skill, ProficiencyLevel> applied = Collections.emptyMap();
 
         Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
@@ -25,10 +41,11 @@ public class BuildAvailableProficiencySkillsWithoutAppliedTest {
 
     @Test
     void testSomeSkillsAppliedReturnsRemaining() {
-        Set<Skill> allAvailable = EnumSet.of(Skill.PERCEPTION, Skill.INTIMIDATION, Skill.DECEPTION);
-        Set<Skill> applied = Set.of(Skill.DECEPTION);
+        Set<Skill> allAvailable = EnumSet.of(PERCEPTION, INTIMIDATION, DECEPTION);
+        Map<Skill, ProficiencyLevel> applied = new HashMap<>(1);
+        applied.put(DECEPTION, PROFICIENT);
 
-        Set<Skill> expected = Set.of(Skill.PERCEPTION, Skill.INTIMIDATION);
+        Set<Skill> expected = Set.of(PERCEPTION, INTIMIDATION);
         Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
         assertEquals(expected, actualResult);
@@ -36,8 +53,10 @@ public class BuildAvailableProficiencySkillsWithoutAppliedTest {
 
     @Test
     void testAllSkillsAppliedReturnsEmptySet() {
-        Set<Skill> allAvailable = EnumSet.of(Skill.NATURE, Skill.SURVIVAL);
-        Set<Skill> applied = Set.of(Skill.NATURE, Skill.SURVIVAL);
+        Set<Skill> allAvailable = EnumSet.of(NATURE, SURVIVAL);
+        Map<Skill, ProficiencyLevel> applied = new HashMap<>(2);
+        applied.put(NATURE, PROFICIENT);
+        applied.put(SURVIVAL, PROFICIENT);
 
         Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
@@ -47,7 +66,8 @@ public class BuildAvailableProficiencySkillsWithoutAppliedTest {
     @Test
     void testAvailableSkillsIsEmptyReturnsEmptySet() {
         Set<Skill> allAvailable = Set.of();
-        Set<Skill> applied = Set.of(Skill.HISTORY);
+        Map<Skill, ProficiencyLevel> applied = new HashMap<>(1);
+        applied.put(HISTORY, PROFICIENT);
 
         Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
@@ -56,8 +76,10 @@ public class BuildAvailableProficiencySkillsWithoutAppliedTest {
 
     @Test
     void testAppliedSkillsNotInAvailableSkillsIgnoresThem() {
-        Set<Skill> allAvailable = Set.of(Skill.ACROBATICS);
-        Set<Skill> applied = Set.of(Skill.DECEPTION, Skill.STEALTH);
+        Set<Skill> allAvailable = Set.of(ACROBATICS);
+        Map<Skill, ProficiencyLevel> applied = new HashMap<>(2);
+        applied.put(DECEPTION, PROFICIENT);
+        applied.put(STEALTH, PROFICIENT);
 
         Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, allAvailable);
 
@@ -66,13 +88,14 @@ public class BuildAvailableProficiencySkillsWithoutAppliedTest {
 
     @Test
     void testBothInputsEmptyReturnsEmpty() {
-        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(Set.of(), Set.of());
+        Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(Collections.emptyMap(), Set.of());
         assertTrue(actualResult.isEmpty());
     }
 
     @Test
     void testNullAvailableReturnsEmptySet() {
-        Set<Skill> applied = Set.of(Skill.PERFORMANCE);
+        Map<Skill, ProficiencyLevel> applied = new HashMap<>(1);
+        applied.put(PERFORMANCE, PROFICIENT);
         Set<Skill> actualResult = buildSkills.buildAvailableProficiencySkillsWithoutApplied(applied, null);
 
         assertTrue(actualResult.isEmpty());

@@ -5,13 +5,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.backgrounds.Criminal;
+import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Skill;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Background.CRIMINAL;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 import static player.dndcharacter.dndcharacterenums.Skill.ATHLETICS;
 import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
@@ -21,9 +25,7 @@ public class CriminalTest {
 
     @BeforeEach
     public void createCharacter() {
-        Set<Skill> skills = new HashSet<>(1);
-        skills.add(ATHLETICS);
-        dndCharacter.setSkillsWithProficiency(skills);
+        dndCharacter.getSkillsWithProficiency().put(ATHLETICS, PROFICIENT);
 
         dndCharacter.setGold(10);
 
@@ -44,10 +46,10 @@ public class CriminalTest {
     @Test
     @DisplayName("Set skills with proficiency")
     void setSkillsWithProficiencyForCriminal() {
-        Set<Skill> expectedResult = new HashSet<>(3);
-        expectedResult.add(ATHLETICS);
-        expectedResult.add(DECEPTION);
-        expectedResult.add(STEALTH);
+        Map<Skill, ProficiencyLevel> expectedResult = new HashMap<>(3);
+        expectedResult.put(ATHLETICS, PROFICIENT);
+        expectedResult.put(DECEPTION, PROFICIENT);
+        expectedResult.put(STEALTH, PROFICIENT);
 
         assertEquals(expectedResult, dndCharacter.getSkillsWithProficiency());
     }
