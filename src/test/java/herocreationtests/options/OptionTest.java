@@ -17,6 +17,8 @@ import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
+import static player.dndcharacter.dndcharacterenums.Skill.PERFORMANCE;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
@@ -28,11 +30,15 @@ import static player.userinputhandler.commands.createnewhero.Options.getCharlata
 import static player.userinputhandler.commands.createnewhero.Options.getClassOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getDraconicAncestryOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getDwarfArtisanToolOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getFavouredEnemyOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getFavouredTerrainOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getGamingSetOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getLeaveEmptyOption;
 import static player.userinputhandler.commands.createnewhero.Options.getPossessionsForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getProficienciesForGuildMerchantOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getRaceOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getSkillOptions;
+import static player.userinputhandler.commands.createnewhero.Options.secondExpertiseForRogueOptions;
 
 public class OptionTest {
     @Test
@@ -324,5 +330,68 @@ public class OptionTest {
     void getSkillOptionsReturnNoSkill() {
         List<String> result = getSkillOptions(emptySet());
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Get Favoured Enemy Options Test")
+    void getFavouredEnemyOptionsTest() {
+        List<String> expectedResult = List.of(
+                "Abberations",
+                "Beasts",
+                "Celestials",
+                "Constructs",
+                "Dragons",
+                "Elementals",
+                "Fey",
+                "Fiends",
+                "Giants",
+                "Monstrosities",
+                "Oozes",
+                "Plants",
+                "Undead"
+        );
+
+        assertEquals(expectedResult, getFavouredEnemyOptions());
+    }
+
+    @Test
+    @DisplayName("Get Favoured Terrain Options Test")
+    void getFavouredTerrainOptionsTest() {
+        List<String> expectedResult = List.of(
+                "Arctic",
+                "Coast",
+                "Desert",
+                "Forest",
+                "Grassland",
+                "Mountain",
+                "Swamp",
+                "Underdark"
+        );
+
+        assertEquals(expectedResult, getFavouredTerrainOptions());
+    }
+
+    @Test
+    @DisplayName("Get Leave Empty Option Test")
+    void getLeaveEmptyOptionTest() {
+        List<String> expectedResult = List.of("Leave empty");
+
+        assertEquals(expectedResult, getLeaveEmptyOption());
+    }
+
+    @Test
+    @DisplayName("Get Second Expertise For Rogue Test")
+    void getSecondExpertiseOptionsTest() {
+        List<String> expectedResult = List.of("Deception", "Performance", "Thieves' tools");
+
+        assertEquals(expectedResult, secondExpertiseForRogueOptions(Set.of(DECEPTION, PERFORMANCE)));
+    }
+
+    @Test
+    @DisplayName("Get Second Expertise For Rogue With Empty Skill Set Test")
+    void getSecondExpertiseOptionsEmptySetTest() {
+        List<String> expectedResult = List.of("Thieves' tools");
+
+        assertEquals(expectedResult, secondExpertiseForRogueOptions(Set.of()));
     }
 }

@@ -10,7 +10,7 @@ import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.StateHolder;
 import player.userinputhandler.UserInputHandler;
-import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
+import player.userinputhandler.commands.createnewhero.AddSkill;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
@@ -63,7 +63,7 @@ public class UserInputHandlerTest {
     private final IncreaseBaseCharacteristics increaseBaseCharacteristicsSpy = spy(new IncreaseBaseCharacteristics(incrementAbility));
     private final RaceFactory raceFactory = new RaceFactory();
     private final SelectRace selectRace = new SelectRace(raceFactory);
-    private final AddSkillProficiency skillProficiency = new AddSkillProficiency();
+    private final AddSkill skillProficiency = new AddSkill();
     private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
     private final SelectClass selectClass = new SelectClass(characterClassFactory);
     private final BackgroundFactory backgroundFactory = new BackgroundFactory();

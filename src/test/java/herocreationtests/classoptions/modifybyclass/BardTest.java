@@ -4,9 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
+import player.dndcharacter.characterclass.characterclasses.Bard;
 import player.dndcharacter.dndcharacterenums.Characteristics;
 import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
-import player.dndcharacter.characterclass.characterclasses.Bard;
 
 import java.util.ArrayList;
 import java.util.Collections;

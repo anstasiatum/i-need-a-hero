@@ -1,8 +1,8 @@
 package player.dndcharacter.race.teifling;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
+import player.dndcharacter.race.Abilities;
 import player.dndcharacter.race.RaceService;
 
 import static player.dndcharacter.dndcharacterenums.Race.TIEFLING;

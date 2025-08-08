@@ -5,7 +5,6 @@ import player.userinputhandler.Response;
 import player.userinputhandler.State;
 import player.userinputhandler.commands.db.Character;
 import player.userinputhandler.commands.db.CharacterDao;
-import player.userinputhandler.commands.db.CharacterDaoImpl;
 
 import java.util.List;
 

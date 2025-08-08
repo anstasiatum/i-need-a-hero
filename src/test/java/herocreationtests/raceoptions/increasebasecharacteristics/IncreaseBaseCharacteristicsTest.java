@@ -20,7 +20,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static player.dndcharacter.dndcharacterenums.Characteristics.DEXTERITY;
 import static player.userinputhandler.commands.createnewhero.Options.getAllSkillOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getBasicAbilityOptions;
 import static player.userinputhandler.commands.createnewhero.Options.getBasicAbilityOptionsWithoutSpecified;
@@ -28,7 +27,6 @@ import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseS
 import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseSkillProficiency;
 import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongInput;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
-import static player.userinputhandler.enums.Steps.CHOOSE_CLASS;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_HALF_ELF;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_ABILITY_SCORE_FOR_VARIANT_HUMAN;
 import static player.userinputhandler.enums.Steps.CHOOSE_FIRST_SKILL_FOR_HALF_ELF;

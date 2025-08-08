@@ -10,7 +10,7 @@ import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGen
 import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
-import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
+import player.userinputhandler.commands.createnewhero.AddSkill;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
@@ -53,7 +53,7 @@ public class HeroCreationAnswerNameRollingAndCharacteristicsTest {
     private final IncreaseBaseCharacteristics increaseBaseCharacteristicsSpy = spy(increaseBaseCharacteristics);
     private final RaceFactory raceFactory = new RaceFactory();
     private final SelectRace selectRace = new SelectRace(raceFactory);
-    private final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
+    private final AddSkill addSkill = new AddSkill();
     private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
     private final SelectClass selectClass = new SelectClass(characterClassFactory);
     private final BackgroundFactory backgroundFactory = new BackgroundFactory();
@@ -61,7 +61,7 @@ public class HeroCreationAnswerNameRollingAndCharacteristicsTest {
     private final SetPirateFeature setPirateFeature = new SetPirateFeature();
     private final ChoosePossessionsForGuildMerchant choosePossessionsForGuildMerchant = new ChoosePossessionsForGuildMerchant();
     private final ChooseProficiencyForGuildMerchant chooseProficiencyForGuildMerchant = new ChooseProficiencyForGuildMerchant();
-    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, addSkillProficiency, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
+    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethodSpy, increaseBaseCharacteristicsSpy, selectRace, addSkill, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
     private final DndCharacter dndCharacter = new DndCharacter();
     private Response actualResponse;
     private State incomingState;

@@ -1,8 +1,8 @@
 package player.dndcharacter.race.dwarf;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.race.Abilities;
 import player.dndcharacter.dndcharacterenums.Size;
+import player.dndcharacter.race.Abilities;
 import player.dndcharacter.race.RaceService;
 
 public abstract class DwarfRace extends RaceService {

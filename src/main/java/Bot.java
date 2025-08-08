@@ -13,7 +13,7 @@ import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.BotAnswer;
 import player.userinputhandler.StateHolder;
 import player.userinputhandler.UserInputHandler;
-import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
+import player.userinputhandler.commands.createnewhero.AddSkill;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
@@ -42,7 +42,7 @@ public class Bot {
         final DeleteHero deleteHero = new DeleteHero(characterDao);
         final RaceFactory raceFactory = new RaceFactory();
         final SelectRace selectRace = new SelectRace(raceFactory);
-        final AddSkillProficiency addSkillProficiency = new AddSkillProficiency();
+        final AddSkill addSkill = new AddSkill();
         final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
         final SelectClass selectClass = new SelectClass(characterClassFactory);
         final BackgroundFactory backgroundFactory = new BackgroundFactory();
@@ -50,7 +50,7 @@ public class Bot {
         final SetPirateFeature setPirateFeature = new SetPirateFeature();
         final ChoosePossessionsForGuildMerchant choosePossessionsForGuildMerchant = new ChoosePossessionsForGuildMerchant();
         final ChooseProficiencyForGuildMerchant chooseProficiencyForGuildMerchant = new ChooseProficiencyForGuildMerchant();
-        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiency, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
+        final CreateNewHero createHero = new CreateNewHero(characterDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkill, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
         final PDFCreator createPDF = new PDFCreator(characterDao);
         final PrintHero printHero = new PrintHero(characterDao, createPDF);
 

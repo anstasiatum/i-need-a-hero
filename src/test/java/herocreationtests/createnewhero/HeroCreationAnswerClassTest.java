@@ -2,6 +2,8 @@ package herocreationtests.createnewhero;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.background.BackgroundFactory;
 import player.dndcharacter.characterclass.CharacterClassFactory;
@@ -9,7 +11,7 @@ import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGen
 import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
-import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
+import player.userinputhandler.commands.createnewhero.AddSkill;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
@@ -22,6 +24,7 @@ import player.userinputhandler.commands.createnewhero.increasebasecharacteristic
 import player.userinputhandler.commands.createnewhero.increasebasecharacteristics.IncrementAbility;
 import player.userinputhandler.commands.db.CharacterDao;
 import player.userinputhandler.commands.db.CharacterDaoImpl;
+import player.userinputhandler.enums.Steps;
 
 import java.util.List;
 import java.util.Set;
@@ -32,12 +35,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.EXPERTISE;
 import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
+import static player.dndcharacter.dndcharacterenums.Skill.ANIMAL_HANDLING;
+import static player.dndcharacter.dndcharacterenums.Skill.ARCANA;
+import static player.dndcharacter.dndcharacterenums.Skill.DECEPTION;
 import static player.dndcharacter.dndcharacterenums.Skill.STEALTH;
 import static player.userinputhandler.commands.createnewhero.Options.getAlignmentOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getArtisanToolOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getFavouredEnemyOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getFavouredTerrainOptions;
+import static player.userinputhandler.commands.createnewhero.Options.getLeaveEmptyOption;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.chooseAlignment;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.couldNotUpgradeProficiency;
+import static player.userinputhandler.commands.createnewhero.OutputTexts.wrongSkill;
 import static player.userinputhandler.enums.Alignment.getAllAlignments;
 import static player.userinputhandler.enums.Processes.CREATE_HERO;
 import static player.userinputhandler.enums.Steps.ENTER_ALIGNMENT;
+import static player.userinputhandler.enums.Steps.ENTER_FAVOURED_ENEMY_FOR_RANGER;
+import static player.userinputhandler.enums.Steps.ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER;
+import static player.userinputhandler.enums.Steps.ENTER_FAVOURED_TERRAIN_FOR_RANGER;
+import static player.userinputhandler.enums.Steps.ENTER_FIRST_EXPERTISE_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_MUSICAL_INSTRUMENT_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_BARD;
@@ -52,6 +70,8 @@ import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_SORCERER
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WARLOCK;
 import static player.userinputhandler.enums.Steps.ENTER_FIRST_SKILL_FOR_WIZARD;
 import static player.userinputhandler.enums.Steps.ENTER_FOURTH_SKILL_FOR_ROGUE;
+import static player.userinputhandler.enums.Steps.ENTER_PROFICIENCY_FOR_MONK;
+import static player.userinputhandler.enums.Steps.ENTER_SECOND_EXPERTISE_FOR_ROGUE;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_MUSICAL_INSTRUMENT_FOR_BARD;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_BARBARIAN;
 import static player.userinputhandler.enums.Steps.ENTER_SECOND_SKILL_FOR_BARD;
@@ -78,7 +98,7 @@ public class HeroCreationAnswerClassTest {
     private final IncreaseBaseCharacteristics increaseBaseCharacteristics = new IncreaseBaseCharacteristics(incrementAbility);
     private final RaceFactory raceFactory = new RaceFactory();
     private final SelectRace selectRace = new SelectRace(raceFactory);
-    private final AddSkillProficiency addSkillProficiencySpy = spy(new AddSkillProficiency());
+    private final AddSkill addSkillSpy = spy(new AddSkill());
     private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
     private final SelectClass selectClass = new SelectClass(characterClassFactory);
     private final BackgroundFactory backgroundFactory = new BackgroundFactory();
@@ -86,7 +106,7 @@ public class HeroCreationAnswerClassTest {
     private final SetPirateFeature setPirateFeature = new SetPirateFeature();
     private final ChoosePossessionsForGuildMerchant choosePossessionsForGuildMerchant = new ChoosePossessionsForGuildMerchant();
     private final ChooseProficiencyForGuildMerchant chooseProficiencyForGuildMerchant = new ChooseProficiencyForGuildMerchant();
-    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillProficiencySpy, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
+    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristics, selectRace, addSkillSpy, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
     private State incomingState;
     private State expectedState;
     private Response expectedResponse;
@@ -109,7 +129,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -124,7 +144,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -138,7 +158,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -152,7 +172,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -165,7 +185,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -179,7 +199,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -193,7 +213,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -208,7 +228,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -222,7 +242,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -236,7 +256,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseThirdSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -251,7 +271,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -265,7 +285,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -279,7 +299,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains("Enter the first musical instrument your bard will be proficient with"));
         assertEquals(List.of(), actualResponse.getOptionTexts());
@@ -294,7 +314,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -308,7 +328,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -342,10 +362,14 @@ public class HeroCreationAnswerClassTest {
         assertEquals(expectedToolProficiency, dndCharacter.getToolProficiency());
     }
 
-    @Test
-    @DisplayName("ENTER_SECOND_MUSICAL_INSTRUMENT_FOR_BARD -> ENTER_ALIGNMENT")
-    void heroCreationAnswer_chooseThirdMusicalInstrumentForBard() {
-        incomingState = new State(CREATE_HERO, ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD, dndCharacter);
+
+    @ParameterizedTest(name = "{0} -> ENTER_ALIGNMENT")
+    @EnumSource(value = Steps.class, names = {
+            "ENTER_THIRD_MUSICAL_INSTRUMENT_FOR_BARD",
+            "ENTER_PROFICIENCY_FOR_MONK"
+    })
+    void heroCreationAnswer_chooseThirdMusicalInstrumentForBard(Steps step) {
+        incomingState = new State(CREATE_HERO, step, dndCharacter);
         expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignmentTextAnswer, getAlignmentOptions());
         dndCharacter.getToolProficiency().add("Cello");
         Set<String> expectedToolProficiency = Set.of("Cello", "Violin");
@@ -364,7 +388,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -379,7 +403,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -393,7 +417,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -407,7 +431,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -420,7 +444,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -434,7 +458,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -448,7 +472,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -463,7 +487,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -477,7 +501,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -491,7 +515,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -504,7 +528,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -518,7 +542,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -532,7 +556,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -547,7 +571,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -561,7 +585,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -575,7 +599,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -588,7 +612,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -602,7 +626,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -616,7 +640,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -631,7 +655,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -645,21 +669,21 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
     }
 
     @Test
-    @DisplayName("ENTER_SECOND_SKILL_FOR_MONK -> ENTER_ALIGNMENT when the skill is valid")
+    @DisplayName("ENTER_SECOND_SKILL_FOR_MONK -> ENTER_PROFICIENCY_FOR_MONK when the skill is valid")
     void heroCreationAnswer_chooseSecondSkillForMonk() {
-        incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_FIGHTER, dndCharacter);
-        expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignmentTextAnswer, getAlignmentOptions());
+        incomingState = new State(CREATE_HERO, ENTER_SECOND_SKILL_FOR_MONK, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_PROFICIENCY_FOR_MONK, dndCharacter), "Your monk can be proficient with any one type of artisan's tools or any one musical instrument of your choice. Enter the musical instrument or select the artisan's tool option", getArtisanToolOptions());
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -672,7 +696,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -686,7 +710,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -700,7 +724,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -715,7 +739,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -729,7 +753,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -743,7 +767,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -756,7 +780,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -770,7 +794,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -784,7 +808,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -799,7 +823,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -813,7 +837,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -827,7 +851,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseThirdSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -842,7 +866,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -856,21 +880,21 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
     }
 
     @Test
-    @DisplayName("ENTER_THIRD_SKILL_FOR_RANGER -> ENTER_ALIGNMENT when the skill is valid")
+    @DisplayName("ENTER_THIRD_SKILL_FOR_RANGER -> ENTER_FAVOURED_ENEMY_FOR_RANGER when the skill is valid")
     void heroCreationAnswer_chooseThirdSkillForRanger() {
         incomingState = new State(CREATE_HERO, ENTER_THIRD_SKILL_FOR_RANGER, dndCharacter);
-        expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignmentTextAnswer, getAlignmentOptions());
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_FOR_RANGER, dndCharacter), "Let's set the favoured enemy of your ranger. You can enter two races of humanoid (such as gnolls and orcs) or choose one option from the list below", getFavouredEnemyOptions());
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -883,7 +907,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -897,10 +921,81 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
+    }
+
+    @Test
+    @DisplayName("ENTER_FAVOURED_ENEMY_FOR_RANGER -> ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER when the skill is valid")
+    void heroCreationAnswer_chooseFavouredEnemyForRanger() {
+        incomingState = new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_FOR_RANGER, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER, dndCharacter), "You also learn a language of your choice that is spoken by your favored enemies, enter this language. Or choose \"Leave empty\" if they speak none.", getLeaveEmptyOption());
+        dndCharacter.setFeaturesAndTraits("test\n");
+        String expectedFeaturesAndTraits = """
+                        test
+                        Favoured Enemy
+                        Your favoured enemies are: oozes. You have advantage on Wisdom (Survival) checks to track them, as well as on Intelligence checks to recall information about them.
+                        """;
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "oozes");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedFeaturesAndTraits, dndCharacter.getFeaturesAndTraits());
+    }
+
+    @Test
+    @DisplayName("ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER -> ENTER_FAVOURED_TERRAIN_FOR_RANGER when a language is entered")
+    void heroCreationAnswer_chooseFavouredEnemyLanguageForRanger() {
+        incomingState = new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FAVOURED_TERRAIN_FOR_RANGER, dndCharacter), "Choose the favoured terrain of your ranger", getFavouredTerrainOptions());
+        dndCharacter.getLanguages().add("Elvish");
+        Set<String> expectedlanguages = Set.of("Elvish", "Celestial");
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "Celestial");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedlanguages, dndCharacter.getLanguages());
+    }
+
+    @Test
+    @DisplayName("ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER -> ENTER_FAVOURED_TERRAIN_FOR_RANGER when no language is entered")
+    void heroCreationAnswer_chooseFavouredEnemyLanguageForRangerSkip() {
+        incomingState = new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FAVOURED_TERRAIN_FOR_RANGER, dndCharacter), "Choose the favoured terrain of your ranger", getFavouredTerrainOptions());
+        dndCharacter.getLanguages().add("Elvish");
+        Set<String> expectedLanguages = Set.of("Elvish");
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "Leave empty ");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedLanguages, dndCharacter.getLanguages());
+    }
+
+    @Test
+    @DisplayName("ENTER_FAVOURED_TERRAIN_FOR_RANGER -> ENTER_ALIGNMENT when the skill is valid")
+    void heroCreationAnswer_chooseFavouredTerrainForRanger() {
+        incomingState = new State(CREATE_HERO, ENTER_FAVOURED_TERRAIN_FOR_RANGER, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignment, getAlignmentOptions());
+        dndCharacter.setFeaturesAndTraits("test\n");
+        String expectedFeaturesAndTraits = """
+                        test
+                        Natural Explorer
+                        You are particularly familiar with swamp and are adept at traveling and surviving in such regions. When you make an Intelligence or Wisdom check related to swamp, your proficiency bonus is doubled if you are using a skill that you're proficient in.
+                        While traveling for an hour or more in swamp, you gain the following benefits:
+                        Difficult terrain doesn't slow your group's travel.
+                        Your group can't become lost except by magical means.
+                        Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.
+                        If you are traveling alone, you can move stealthily at a normal pace.
+                        When you forage, you find twice as much food as you normally would.
+                        While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.
+                        """;
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "Swamp");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedFeaturesAndTraits, dndCharacter.getFeaturesAndTraits());
     }
 
     @Test
@@ -911,7 +1006,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -926,7 +1021,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -940,7 +1035,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -954,7 +1049,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseThirdSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -969,7 +1064,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -983,7 +1078,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -997,7 +1092,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains("Choose the fourth skill your rogue will be proficient in \n"));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1012,7 +1107,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1026,7 +1121,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1036,11 +1131,11 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FOURTH_SKILL_FOR_ROGUE -> ENTER_ALIGNMENT when the skill is valid")
     void heroCreationAnswer_chooseFourthSkillForRogue() {
         incomingState = new State(CREATE_HERO, ENTER_FOURTH_SKILL_FOR_ROGUE, dndCharacter);
-        expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignmentTextAnswer, getAlignmentOptions());
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter), "Let's set rogue expertise. Choose a skill, your hero's proficiency bonus will be doubled for any ability check that uses it", List.of("Stealth"));
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -1053,7 +1148,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1067,10 +1162,111 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
+    }
+
+    @Test
+    @DisplayName("ENTER_FIRST_EXPERTISE_FOR_ROGUE -> ENTER_SECOND_EXPERTISE_FOR_ROGUE when the skill is valid")
+    void heroCreationAnswer_chooseFirstExpertiseForRogue() {
+        incomingState = new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), "Your hero can also be expert with another skill or with thief's tools. Choose your option", List.of("Arcana", "Thief's tools"));
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(ARCANA, PROFICIENT);
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
+
+        verify(addSkillSpy, times(1)).addSkillExpertise(dndCharacter, userAnswerStealth);
+        assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    @DisplayName("ENTER_FIRST_EXPERTISE_FOR_ROGUE -> ENTER_FIRST_EXPERTISE_FOR_ROGUE when hero is not proficient with the skill")
+    void heroCreationAnswer_chooseFirstExpertiseForRogueNotProficient() {
+        incomingState = new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter);
+        dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter), couldNotUpgradeProficiency, List.of("Deception"));
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
+
+        verify(addSkillSpy, times(1)).addSkillExpertise(dndCharacter, userAnswerStealth);
+        assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    @DisplayName("ENTER_FIRST_EXPERTISE_FOR_ROGUE -> ENTER_FIRST_EXPERTISE_FOR_ROGUE when the skill is invalid")
+    void heroCreationAnswer_chooseFirstExpertiseForRogueInvalidSkill() {
+        incomingState = new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter);
+        dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter), wrongSkill, List.of("Deception"));
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
+
+        verify(addSkillSpy, times(1)).addSkillExpertise(dndCharacter, userAnswerSkill);
+        assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    @DisplayName("ENTER_SECOND_EXPERTISE_FOR_ROGUE -> ENTER_ALIGNMENT when Thief`s tools are chosen")
+    void heroCreationAnswer_chooseSecondExpertiseForRogueThiefsTools() {
+        incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignment, getAlignmentOptions());
+        dndCharacter.setFeaturesAndTraits("test");
+        String expectedFeaturesAndTraits = """
+                test
+                Expertise
+                Your proficiency bonus is doubled for any ability check you make that uses thief's tools.
+                """;
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "Thief's tools ");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedFeaturesAndTraits, dndCharacter.getFeaturesAndTraits());
+
+    }
+
+
+    @Test
+    @DisplayName("ENTER_SECOND_EXPERTISE_FOR_ROGUE -> ENTER_ALIGNMENT when the skill is valid")
+    void heroCreationAnswer_chooseSecondExpertiseForRogueSkill() {
+        incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignment, getAlignmentOptions());
+        dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
+
+        verify(addSkillSpy, times(1)).addSkillExpertise(dndCharacter, userAnswerStealth);
+        assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    @DisplayName("ENTER_SECOND_EXPERTISE_FOR_ROGUE -> ENTER_SECOND_EXPERTISE_FOR_ROGUE when hero is not proficient with the skill")
+    void heroCreationAnswer_chooseSecondExpertiseForRogueNotProficient() {
+        incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
+        dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(ANIMAL_HANDLING, EXPERTISE);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), couldNotUpgradeProficiency, List.of("Deception", "Thief's tools"));
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
+
+        verify(addSkillSpy, times(1)).addSkillExpertise(dndCharacter, userAnswerStealth);
+        assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    @DisplayName("ENTER_SECOND_EXPERTISE_FOR_ROGUE -> ENTER_SECOND_EXPERTISE_FOR_ROGUE when the skill is invalid")
+    void heroCreationAnswer_chooseSecondExpertiseForRogueInvalidSkill() {
+        incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
+        dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
+        dndCharacter.getSkillsWithProficiency().put(ANIMAL_HANDLING, EXPERTISE);
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), wrongSkill, List.of("Deception", "Thief's tools"));
+
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
+
+        verify(addSkillSpy, times(1)).addSkillExpertise(dndCharacter, userAnswerSkill);
+        assertEquals(expectedResponse, actualResponse);
     }
 
     @Test
@@ -1081,7 +1277,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1096,7 +1292,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1110,7 +1306,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1124,7 +1320,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -1137,7 +1333,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1151,7 +1347,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1165,7 +1361,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1180,7 +1376,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1194,7 +1390,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1208,7 +1404,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -1221,7 +1417,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1235,7 +1431,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1249,7 +1445,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(chooseSecondSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1264,7 +1460,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1278,7 +1474,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1292,7 +1488,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -1305,7 +1501,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerStealth);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(alreadyHaveProficiencyInThisSkillTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());
@@ -1319,7 +1515,7 @@ public class HeroCreationAnswerClassTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerSkill);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains(wrongInputTextAnswer));
         assertNotNull(actualResponse.getOptionTexts());

@@ -8,9 +8,6 @@ import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.dndcharacterenums.CharacterClass;
-import player.dndcharacter.dndcharacterenums.Race;
-import player.dndcharacter.dndcharacterenums.SpellcastingAbility;
 import player.userinputhandler.commands.db.CharacterDao;
 
 import java.io.File;

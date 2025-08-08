@@ -1,7 +1,6 @@
 package player.userinputhandler.commands.createnewhero;
 
 import player.dndcharacter.DndCharacter;
-import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Skill;
 
 import java.util.Arrays;
@@ -10,7 +9,7 @@ import java.util.Optional;
 import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.EXPERTISE;
 import static player.dndcharacter.dndcharacterenums.ProficiencyLevel.PROFICIENT;
 
-public class AddSkillProficiency {
+public class AddSkill {
 
     public boolean addSkillProficiency(DndCharacter dndCharacter, String userAnswer) {
         Skill skill = skillFromUserInput(userAnswer)

@@ -1,17 +1,15 @@
-package herocreationtests;
+package herocreationtests.addskill;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.dndcharacter.DndCharacter;
 import player.dndcharacter.dndcharacterenums.ProficiencyLevel;
 import player.dndcharacter.dndcharacterenums.Skill;
-import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
+import player.userinputhandler.commands.createnewhero.AddSkill;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -39,7 +37,7 @@ import static player.dndcharacter.dndcharacterenums.Skill.SURVIVAL;
 
 public class AddSkillProficiencyTest {
     private final DndCharacter dndCharacter = new DndCharacter();
-    private final AddSkillProficiency skillProficiency = new AddSkillProficiency();
+    private final AddSkill skillProficiency = new AddSkill();
     private Map<Skill, ProficiencyLevel> expectedResult = new HashMap<>();
 
     @Test

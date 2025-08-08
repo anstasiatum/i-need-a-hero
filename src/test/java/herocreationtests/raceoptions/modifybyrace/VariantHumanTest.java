@@ -9,7 +9,6 @@ import player.dndcharacter.race.human.VariantHuman;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Race.VARIANT_HUMAN;
-import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class VariantHumanTest {
     private final  DndCharacter dndCharacter = new DndCharacter();

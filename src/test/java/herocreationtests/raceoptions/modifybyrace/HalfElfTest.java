@@ -12,7 +12,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
-import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class HalfElfTest {
     private final DndCharacter dndCharacter = new DndCharacter();

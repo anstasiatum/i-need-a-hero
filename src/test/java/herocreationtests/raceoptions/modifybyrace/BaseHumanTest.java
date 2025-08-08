@@ -9,7 +9,6 @@ import player.dndcharacter.race.human.BaseHuman;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static player.dndcharacter.dndcharacterenums.Race.BASE_HUMAN;
-import static player.dndcharacter.dndcharacterenums.Race.HALF_ELF;
 
 public class BaseHumanTest {
     private final DndCharacter dndCharacter = new DndCharacter();

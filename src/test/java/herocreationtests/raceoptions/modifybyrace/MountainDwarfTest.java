@@ -13,7 +13,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static player.dndcharacter.dndcharacterenums.Race.MOUNTAIN_DWARF;
-import static player.dndcharacter.dndcharacterenums.Race.WOOD_ELF;
 
 public class MountainDwarfTest {
     private final DndCharacter dndCharacter = new DndCharacter();

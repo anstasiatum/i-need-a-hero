@@ -184,12 +184,12 @@ public class Options {
         return List.of("Leave empty");
     }
 
-    public static List<String> secondProficiencyForRogueOptions(Set<Skill> availableSkills) {
+    public static List<String> secondExpertiseForRogueOptions(Set<Skill> availableSkills) {
         List<String> availableOptions = availableSkills.stream()
                 .map(Skill::getDisplayName)
                 .sorted()
                 .collect(Collectors.toList());
-        availableOptions.add("Thief's tools");
+        availableOptions.add("Thieves' tools");
         return availableOptions;
     }
 }

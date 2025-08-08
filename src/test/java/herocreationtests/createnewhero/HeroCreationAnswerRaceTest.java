@@ -10,7 +10,7 @@ import player.dndcharacter.characteristicsgenerator.BaseCharacteristicsValuesGen
 import player.dndcharacter.race.RaceFactory;
 import player.userinputhandler.Response;
 import player.userinputhandler.State;
-import player.userinputhandler.commands.createnewhero.AddSkillProficiency;
+import player.userinputhandler.commands.createnewhero.AddSkill;
 import player.userinputhandler.commands.createnewhero.ChooseCharacteristicsSettingMethod;
 import player.userinputhandler.commands.createnewhero.CreateNewHero;
 import player.userinputhandler.commands.createnewhero.SelectClass;
@@ -64,7 +64,7 @@ public class HeroCreationAnswerRaceTest {
     private final RaceFactory raceFactory = new RaceFactory();
     private final SelectRace selectRace = new SelectRace(raceFactory);
     private final SelectRace selectRaceSpy = spy(selectRace);
-    private final AddSkillProficiency addSkillProficiencySpy = spy(new AddSkillProficiency());
+    private final AddSkill addSkillSpy = spy(new AddSkill());
     private final CharacterClassFactory characterClassFactory = new CharacterClassFactory();
     private final SelectClass selectClass = new SelectClass(characterClassFactory);
     private final BackgroundFactory backgroundFactory = new BackgroundFactory();
@@ -72,7 +72,7 @@ public class HeroCreationAnswerRaceTest {
     private final SetPirateFeature setPirateFeature = new SetPirateFeature();
     private final ChoosePossessionsForGuildMerchant choosePossessionsForGuildMerchant = new ChoosePossessionsForGuildMerchant();
     private final ChooseProficiencyForGuildMerchant chooseProficiencyForGuildMerchant = new ChooseProficiencyForGuildMerchant();
-    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristicsSpy, selectRaceSpy, addSkillProficiencySpy, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
+    private final CreateNewHero createNewHero = new CreateNewHero(characterJpaDao, characteristicsSettingMethod, increaseBaseCharacteristicsSpy, selectRaceSpy, addSkillSpy, selectClass, setBackground, setPirateFeature, choosePossessionsForGuildMerchant, chooseProficiencyForGuildMerchant);
     private final DndCharacter dndCharacter = new DndCharacter();
     private Response actualResponse;
     private State incomingState;
@@ -242,7 +242,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
         assertEquals(expectedState, actualResponse.getState());
         assertTrue(actualResponse.getTextAnswer().contains("Enter the second skill your hero will be proficient in. Available ones:\n"));
         assertNotNull(actualResponse.getOptionTexts());
@@ -257,7 +257,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -269,7 +269,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerClimbing);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerClimbing);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerClimbing);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -281,7 +281,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -294,7 +294,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
         assertEquals(expectedState, actualResponse.getState());
         assertEquals("You already have proficiency in this skill. Choose another one", actualResponse.getTextAnswer());
         assertNotNull(actualResponse.getOptionTexts());
@@ -308,7 +308,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerClimbing);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerClimbing);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerClimbing);
         assertEquals("Cannot understand your input. Please enter a skill", actualResponse.getTextAnswer());
         assertNotNull(actualResponse.getOptionTexts());
     }
@@ -321,7 +321,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
         assertEquals(expectedResponse, actualResponse);
     }
 
@@ -334,7 +334,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerArcana);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerArcana);
         assertEquals(expectedState, actualResponse.getState());
         assertEquals("You already have proficiency in this skill. Choose another one", actualResponse.getTextAnswer());
         assertNotNull(actualResponse.getOptionTexts());
@@ -348,7 +348,7 @@ public class HeroCreationAnswerRaceTest {
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerClimbing);
 
-        verify(addSkillProficiencySpy, times(1)).addSkillProficiency(dndCharacter, userAnswerClimbing);
+        verify(addSkillSpy, times(1)).addSkillProficiency(dndCharacter, userAnswerClimbing);
         assertEquals("Cannot understand your input. Please enter a skill", actualResponse.getTextAnswer());
         assertNotNull(actualResponse.getOptionTexts());
     }
