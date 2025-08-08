@@ -663,7 +663,7 @@ public class CreateNewHero {
             case ENTER_FAVOURED_ENEMY_FOR_RANGER:
                 featuresAndTraitsUpdate = format("""
                         Favoured Enemy
-                        Your favoured enemies are: %1$s. You have advantage on Wisdom (Survival) checks to track them, as well as on Intelligence checks to recall information about them.\n
+                        Your favoured enemies are: %1$s. You have advantage on Wisdom (Survival) checks to track them, as well as on Intelligence checks to recall information about them.
                         """, userAnswer);
                 state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + featuresAndTraitsUpdate);
                 newState = new State(CREATE_HERO, ENTER_FAVOURED_ENEMY_LANGUAGE_FOR_RANGER, state.getDndCharacter());
@@ -686,7 +686,7 @@ public class CreateNewHero {
                         Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.
                         If you are traveling alone, you can move stealthily at a normal pace.
                         When you forage, you find twice as much food as you normally would.
-                        While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.\n
+                        While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.
                         """, userAnswer.toLowerCase());
                 state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + featuresAndTraitsUpdate);
                 newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());
@@ -779,7 +779,7 @@ public class CreateNewHero {
                 if (userAnswer.trim().equalsIgnoreCase("thieves' tools")) {
                     String thievesToolsExpertise = """
                             Expertise
-                            Your proficiency bonus is doubled for any ability check you make that uses thieves' tools.\n
+                            Your proficiency bonus is doubled for any ability check you make that uses thieves' tools.
                             """;
                     state.getDndCharacter().setFeaturesAndTraits(state.getDndCharacter().getFeaturesAndTraits() + thievesToolsExpertise);
                     newState = new State(CREATE_HERO, ENTER_ALIGNMENT, state.getDndCharacter());

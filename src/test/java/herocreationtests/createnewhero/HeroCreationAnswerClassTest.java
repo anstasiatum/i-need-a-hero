@@ -1172,7 +1172,7 @@ public class HeroCreationAnswerClassTest {
     @DisplayName("ENTER_FIRST_EXPERTISE_FOR_ROGUE -> ENTER_SECOND_EXPERTISE_FOR_ROGUE when the skill is valid")
     void heroCreationAnswer_chooseFirstExpertiseForRogue() {
         incomingState = new State(CREATE_HERO, ENTER_FIRST_EXPERTISE_FOR_ROGUE, dndCharacter);
-        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), "Your hero can also be expert with another skill or with thief's tools. Choose your option", List.of("Arcana", "Thief's tools"));
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), "Your hero can also be expert with another skill or with thieves' tools. Choose your option", List.of("Arcana", "Thieves' tools"));
         dndCharacter.getSkillsWithProficiency().put(STEALTH, PROFICIENT);
         dndCharacter.getSkillsWithProficiency().put(ARCANA, PROFICIENT);
 
@@ -1210,17 +1210,17 @@ public class HeroCreationAnswerClassTest {
 
     @Test
     @DisplayName("ENTER_SECOND_EXPERTISE_FOR_ROGUE -> ENTER_ALIGNMENT when Thief`s tools are chosen")
-    void heroCreationAnswer_chooseSecondExpertiseForRogueThiefsTools() {
+    void heroCreationAnswer_chooseSecondExpertiseForRogueThievesTools() {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
         expectedResponse = new Response(new State(CREATE_HERO, ENTER_ALIGNMENT, dndCharacter), chooseAlignment, getAlignmentOptions());
-        dndCharacter.setFeaturesAndTraits("test");
+        dndCharacter.setFeaturesAndTraits("test\n");
         String expectedFeaturesAndTraits = """
                 test
                 Expertise
-                Your proficiency bonus is doubled for any ability check you make that uses thief's tools.
+                Your proficiency bonus is doubled for any ability check you make that uses thieves' tools.
                 """;
 
-        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "Thief's tools ");
+        actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, "Thieves' tools ");
 
         assertEquals(expectedResponse, actualResponse);
         assertEquals(expectedFeaturesAndTraits, dndCharacter.getFeaturesAndTraits());
@@ -1247,7 +1247,7 @@ public class HeroCreationAnswerClassTest {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
         dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
         dndCharacter.getSkillsWithProficiency().put(ANIMAL_HANDLING, EXPERTISE);
-        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), couldNotUpgradeProficiency, List.of("Deception", "Thief's tools"));
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), couldNotUpgradeProficiency, List.of("Deception", "Thieves' tools"));
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerStealth);
 
@@ -1261,7 +1261,7 @@ public class HeroCreationAnswerClassTest {
         incomingState = new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter);
         dndCharacter.getSkillsWithProficiency().put(DECEPTION, PROFICIENT);
         dndCharacter.getSkillsWithProficiency().put(ANIMAL_HANDLING, EXPERTISE);
-        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), wrongSkill, List.of("Deception", "Thief's tools"));
+        expectedResponse = new Response(new State(CREATE_HERO, ENTER_SECOND_EXPERTISE_FOR_ROGUE, dndCharacter), wrongSkill, List.of("Deception", "Thieves' tools"));
 
         actualResponse = createNewHero.heroCreationAnswer(incomingState, chatID, userAnswerSkill);
 
