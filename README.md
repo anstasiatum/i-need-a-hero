@@ -12,13 +12,13 @@
 - [Acknowledgements](#-acknowledgements)
 
 ## 🧙‍♀️ About
-"I Need A Hero" is a Telegram bot that supports a step-by-step creation of DnD characters. It asks users questions and generates heroes based on the answers. In the end, player gets an editable PDF of their character. 
+"I Need A Hero" is a Telegram bot that supports the step-by-step creation of DnD characters. It asks users questions and generates heroes based on the answers. In the end, the player gets an editable PDF of their character. 
 
 ## 📚 Stack
 <div align="center">
   <table>
     <tr>
-      <!-- Первая строка -->
+      <!-- First line -->
       <td align="center" width="110">
         <a href="https://www.java.com" target="_blank">
           <img src="readmemedia/java-original-wordmark.svg" width="48" height="48" alt="Java" />
@@ -45,7 +45,7 @@
       </td>
     </tr>
     <tr>
-      <!-- Вторая строка -->
+      <!-- Second line -->
       <td align="center" width="110">
         <a href="https://web.telegram.org/" target="_blank">
           <img src="readmemedia/Telegram.svg" width="48" height="48" alt="Telegram" />
@@ -74,19 +74,19 @@ Additional libraries:
 - Apache pdf box
 - Jackson Mapper
 
-## ✨Funcitonality
+## ✨Functionality
 
 #### Create
-To start the hero creation process use the `/newhero` command. The bot generates a character based on the user's answers. It can automatically roll for basic hero characteristics or use the dice values entered by the player. It also modifies the character by race, class, and backstory selected by the user.
+To start the hero creation process, use the `/newhero` command. The bot generates a character based on the user's answers. It can automatically roll for basic hero characteristics or use the dice values entered by the player. It also modifies the character by race, class, and backstory selected by the user.
 
 #### Read
-All player's characters are stored in the DB and can be accessed anytime using the `/printhero` command. It sends the PDF charcater sheet to the user.
+All player's characters are stored in the DB and can be accessed anytime using the `/printhero` command. It sends the PDF character sheet to the user.
 
 #### Update
 Unfortunately, custom editing is not supported for now
 
 #### Delete
-Player can delete their hero anytime using the `/dismisshero` command.
+Users can delete their heroes anytime using the `/dismisshero` command.
 
 #### Limitations
 However, there are some *limitations* as to what the bot can do:
@@ -98,7 +98,7 @@ However, there are some *limitations* as to what the bot can do:
 ## 🏃‍♀️ Run
 
 #### 1. Bot creation
-Follow the instructions to create your Telegram bot 👉[here](https://core.telegram.org/bots/features#creating-a-new-bot). In the end, you should get your bot token (Example: `110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw`). Make sure to save it, you will need it for fututre steps. *Keep your token secure and store it safely, it can be used by anyone to control your bot*.
+Follow the instructions to create your Telegram bot 👉[here](https://core.telegram.org/bots/features#creating-a-new-bot). In the end, you should get your bot token (Example: `110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw`). Make sure to save it, you will need it for future steps. *Keep your token secure and store it safely, it can be used by anyone to control your bot*.
 
 #### 2. Database setup
 1. Run Postrgres 17
@@ -137,7 +137,7 @@ java
 <img src="readmemedia/IntelliJConfiguration.PNG" width="600" alt="IntelliJ Setup">
 
 ## ✍️ Contribute
-I would love to get your contribution, whether it's in form of bug reports, Requests for Enhancement (RFE), documentation, or code patches. Any feedback is more than welcome!
+I would love to get your contributions, whether it's in the form of bug reports, suggestions for improvements, documentation or code patches. Any feedback is more than welcome!
 
 ## 🧙 Acknowledgements
 Big thanks to Oleg Rekin for guiding me through the process of building this bot and to my friends for providing feedback!
